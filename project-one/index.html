@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The NBRH — Club Partner Package</title>
+    <meta name="description" content="Join The NBRH as a founding pilot partner. Built for clubs like yours.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Young+Serif&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --accent: #FF1B6E;
+            --accent-dim: rgba(255, 27, 110, 0.12);
+            --accent-mid: rgba(255, 27, 110, 0.3);
+            --text: #ffffff;
+            --text-muted: rgba(255,255,255,0.65);
+            --text-faint: rgba(255,255,255,0.35);
+            --bg: #1B1B1B;
+            --bg-subtle: #242424;
+            --bg-card: #222222;
+            --border: rgba(255,255,255,0.09);
+            --border-hover: rgba(255, 27, 110, 0.4);
+            --nav-bg: rgba(27, 27, 27, 0.96);
+            --font-serif: 'Young Serif', Georgia, serif;
+            --font-sans: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            --max: 1000px;
+            --r: 4px;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+            html { scroll-behavior: auto; }
+        }
+
+        html { scroll-behavior: smooth; font-size: 16px; }
+
+        body {
+            font-family: var(--font-sans);
+            color: var(--text);
+            background: var(--bg);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        .scroll-bar {
+            position: fixed; top: 0; left: 0;
+            height: 2px; background: var(--accent);
+            z-index: 2000; width: 0%;
+            transition: width 0.08s linear;
+        }
+
+        nav {
+            position: sticky; top: 0;
+            background: var(--nav-bg);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+            z-index: 999;
+        }
+        .nav-inner {
+            max-width: var(--max); margin: 0 auto;
+            padding: 0.9rem 1.5rem;
+            display: flex; align-items: center; justify-content: space-between; gap: 2rem;
+        }
+        .nav-brand img { height: 30px; width: auto; display: block; object-fit: contain; }
+        .nav-links { display: flex; gap: 1.5rem; list-style: none; overflow-x: auto; }
+        .nav-links::-webkit-scrollbar { display: none; }
+        .nav-links a {
+            color: var(--text-muted); text-decoration: none;
+            font-size: 0.8125rem; white-space: nowrap; letter-spacing: 0.01em;
+            transition: color 0.2s;
+        }
+        .nav-links a:hover, .nav-links a.active { color: var(--accent); }
+
+        .wrap { max-width: var(--max); margin: 0 auto; padding: 0 1.5rem; }
+
+        .reveal {
+            opacity: 0; transform: translateY(24px);
+            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+        }
+        .reveal.in { opacity: 1; transform: none; }
+
+        section { padding: 5.5rem 0; }
+        @media (max-width: 768px) { section { padding: 3.5rem 0; } }
+
+        .eyebrow {
+            font-size: 0.75rem; font-weight: 600;
+            text-transform: uppercase; letter-spacing: 0.12em;
+            color: var(--accent); margin-bottom: 0.75rem;
+        }
+        h1, h2, h3 { font-family: var(--font-serif); font-weight: 400; }
+        h1 { font-size: clamp(2.6rem, 6vw, 4rem); line-height: 1.08; letter-spacing: -0.02em; }
+        h2 { font-size: clamp(1.7rem, 4vw, 2.6rem); line-height: 1.15; letter-spacing: -0.015em; }
+        h3 { font-size: 1.2rem; line-height: 1.3; }
+
+        .section-head { text-align: center; margin-bottom: 3rem; }
+        .section-head h2 { margin-bottom: 0.75rem; }
+        .section-head .sub { font-size: 1rem; color: var(--text-muted); font-style: italic; max-width: 55ch; margin: 0 auto; }
+
+        .hero { position: relative; overflow: hidden; text-align: center; padding: 0; }
+        .hero-bg {
+            position: absolute; inset: 0;
+            background-image: url('https://images.unsplash.com/photo-1574623452334-1e0ac2b3ccb4?q=80&w=3387&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+            background-size: cover; background-position: center; opacity: 0.18;
+        }
+        .hero-bg::after {
+            content: ''; position: absolute; inset: 0;
+            background: linear-gradient(to bottom, rgba(27,27,27,0.2) 0%, rgba(27,27,27,0.95) 100%);
+        }
+        .hero-content { position: relative; z-index: 1; padding: 8rem 1.5rem 6rem; }
+        @media (max-width: 768px) { .hero-content { padding: 5rem 1.5rem 4rem; } }
+
+        .logo-lockup {
+            display: flex; align-items: center; justify-content: center;
+            gap: 1.5rem; margin-bottom: 2.5rem; flex-wrap: wrap;
+        }
+        .logo-lockup img { height: 48px; width: auto; max-width: 160px; object-fit: contain; display: block; }
+        .logo-divider { font-size: 1.5rem; color: var(--text-faint); font-weight: 300; line-height: 1; flex-shrink: 0; user-select: none; }
+
+        .hero h1 { margin-bottom: 0.5rem; }
+        .hero .club-name {
+            font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+            color: var(--accent); font-style: italic; font-family: var(--font-serif);
+            margin-bottom: 1.5rem; opacity: 0.9;
+        }
+        .hero p.lead { font-size: clamp(1rem, 2vw, 1.2rem); color: var(--text-muted); max-width: 48ch; margin: 0 auto 2.5rem; }
+        .pill-row { display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap; margin-bottom: 3rem; }
+        .pill {
+            display: inline-flex; align-items: center; gap: 0.4rem;
+            background: var(--accent-dim); border: 1px solid var(--accent-mid);
+            color: var(--text); padding: 0.4rem 1rem;
+            border-radius: 100px; font-size: 0.8125rem; font-weight: 500;
+        }
+        .pill span { color: var(--accent); font-weight: 700; }
+        .btn-row { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+        .btn {
+            display: inline-flex; align-items: center; gap: 0.4rem;
+            padding: 0.85rem 1.75rem; font-size: 0.9375rem; font-weight: 500;
+            text-decoration: none; border-radius: var(--r);
+            transition: all 0.2s; border: none; cursor: pointer; font-family: inherit;
+        }
+        .btn-primary { background: var(--accent); color: #fff; }
+        .btn-primary:hover { opacity: 0.88; transform: translateY(-1px); }
+        .btn-ghost { background: transparent; color: var(--text); border: 1px solid var(--border); }
+        .btn-ghost:hover { background: var(--bg-subtle); border-color: var(--text-faint); }
+
+        .pain-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.25rem; margin-top: 2.5rem; }
+        .pain-card {
+            background: var(--bg-card); border: 1px solid var(--border);
+            border-radius: var(--r); padding: 1.75rem;
+            transition: border-color 0.25s, transform 0.25s;
+        }
+        .pain-card:hover { border-color: var(--border-hover); transform: translateY(-2px); }
+        .pain-icon {
+            width: 36px; height: 36px; border-radius: 50%;
+            background: var(--accent-dim); border: 1px solid var(--accent-mid);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1rem; margin-bottom: 1rem;
+        }
+        .pain-card h3 { font-size: 1.05rem; margin-bottom: 0.5rem; }
+        .pain-card p { font-size: 0.9rem; color: var(--text-muted); }
+        .pain-solution {
+            margin-top: 0.85rem; padding-top: 0.85rem;
+            border-top: 1px solid var(--border);
+            font-size: 0.8125rem; color: var(--text);
+        }
+        .pain-solution strong {
+            display: block; font-size: 0.7rem; text-transform: uppercase;
+            letter-spacing: 0.08em; margin-bottom: 0.25rem; color: var(--accent);
+        }
+
+        .promise-band { background: var(--accent); padding: 2.5rem 1.5rem; text-align: center; }
+        .promise-band h2 { font-size: clamp(1.5rem, 3vw, 2rem); color: #fff; margin-bottom: 0.5rem; }
+        .promise-band p { color: rgba(255,255,255,0.88); font-size: 1rem; max-width: 60ch; margin: 0 auto; }
+
+        .tab-nav { display: flex; gap: 0.5rem; flex-wrap: wrap; justify-content: center; margin-bottom: 2.5rem; }
+        .tab-btn {
+            background: var(--bg-card); border: 1px solid var(--border);
+            color: var(--text-muted); padding: 0.55rem 1.25rem;
+            border-radius: 100px; font-size: 0.8125rem; font-weight: 500;
+            cursor: pointer; transition: all 0.2s; font-family: inherit;
+        }
+        .tab-btn:hover { border-color: var(--accent-mid); color: var(--text); }
+        .tab-btn.active { background: var(--accent); border-color: var(--accent); color: #fff; }
+        .tab-panel { display: none; }
+        .tab-panel.active { display: block; }
+
+        .pkg-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1rem; }
+        .pkg-item {
+            background: var(--bg-card); border: 1px solid var(--border);
+            border-radius: var(--r); padding: 1.25rem 1.5rem;
+            display: flex; align-items: flex-start; gap: 0.75rem;
+            transition: border-color 0.2s;
+        }
+        .pkg-item:hover { border-color: var(--border-hover); }
+        .pkg-check {
+            width: 18px; height: 18px; flex-shrink: 0;
+            background: var(--accent-dim); border: 1px solid var(--accent-mid);
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            margin-top: 1px; font-size: 0.65rem; color: var(--accent); font-weight: 700;
+        }
+        .pkg-item-text strong { display: block; font-size: 0.875rem; color: var(--text); margin-bottom: 0.15rem; }
+        .pkg-item-text span { font-size: 0.8rem; color: var(--text-muted); }
+        .pkg-item-text .price-row { display: flex; gap: 0.5rem; align-items: center; margin-top: 0.35rem; flex-wrap: wrap; }
+        .price-full { font-size: 0.75rem; color: var(--text-faint); text-decoration: line-through; }
+        .price-yours { font-size: 0.8rem; color: var(--accent); font-weight: 600; }
+
+        .add-on-label {
+            display: inline-block; font-size: 0.7rem; font-weight: 600;
+            text-transform: uppercase; letter-spacing: 0.08em;
+            padding: 0.2rem 0.6rem; border-radius: 2px; margin-bottom: 1.25rem;
+        }
+        .label-paid { background: rgba(255,200,0,0.1); color: #FFCC00; border: 1px solid rgba(255,200,0,0.3); }
+        .label-optional { background: var(--accent-dim); color: var(--accent); border: 1px solid var(--accent-mid); }
+        .label-longterm { background: rgba(100,200,255,0.08); color: rgba(100,200,255,0.85); border: 1px solid rgba(100,200,255,0.2); }
+
+        .partner-split { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 2.5rem; }
+        .partner-col { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--r); padding: 2rem; }
+        .partner-col h3 { font-size: 1.1rem; margin-bottom: 0.5rem; padding-bottom: 0.75rem; border-bottom: 2px solid var(--accent); }
+        .partner-list { list-style: none; margin-top: 1.25rem; }
+        .partner-list li {
+            padding: 0.55rem 0; border-bottom: 1px solid var(--border);
+            font-size: 0.9rem; color: var(--text-muted);
+            display: flex; align-items: flex-start; gap: 0.5rem;
+        }
+        .partner-list li:last-child { border-bottom: none; }
+        .partner-list li::before { content: '\2192'; color: var(--accent); font-size: 0.8rem; flex-shrink: 0; margin-top: 0.15rem; }
+
+        .bonus-strip { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.25rem; margin-top: 2rem; }
+        .bonus-card {
+            background: var(--accent-dim); border: 1px solid var(--accent-mid);
+            border-radius: var(--r); padding: 1.5rem;
+            display: flex; gap: 1rem; align-items: flex-start;
+        }
+        .bonus-num { font-family: var(--font-serif); font-size: 2rem; color: var(--accent); line-height: 1; flex-shrink: 0; }
+        .bonus-card h3 { font-size: 0.9375rem; margin-bottom: 0.35rem; color: var(--text); }
+        .bonus-card p { font-size: 0.85rem; color: var(--text-muted); }
+
+        .journey { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; margin-top: 2.5rem; position: relative; }
+        .journey::before {
+            content: ''; position: absolute; top: 26px; left: 0; right: 0; height: 1px;
+            background: linear-gradient(to right, transparent, var(--accent-mid) 20%, var(--accent-mid) 80%, transparent);
+        }
+        @media (max-width: 640px) { .journey::before { display: none; } }
+        .j-step { text-align: center; padding: 0 0.5rem; }
+        .j-num {
+            width: 52px; height: 52px; border-radius: 50%;
+            background: var(--bg); border: 2px solid var(--accent);
+            display: flex; align-items: center; justify-content: center;
+            margin: 0 auto 1rem; font-family: var(--font-serif); font-size: 1.25rem; color: var(--accent);
+            position: relative; z-index: 1;
+        }
+        .j-step h3 { font-size: 1rem; margin-bottom: 0.4rem; }
+        .j-step p { font-size: 0.875rem; color: var(--text-muted); }
+
+        .why-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1rem; margin-top: 2.5rem; }
+        .why-item {
+            background: var(--bg-card); border: 1px solid var(--border);
+            border-radius: var(--r); padding: 1.25rem 1.5rem;
+            font-size: 0.9rem; color: var(--text-muted);
+            display: flex; gap: 0.75rem; align-items: flex-start;
+            transition: border-color 0.2s, color 0.2s;
+        }
+        .why-item:hover { border-color: var(--border-hover); color: var(--text); }
+        .why-arrow { color: var(--accent); font-size: 0.85rem; flex-shrink: 0; margin-top: 0.15rem; }
+
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 1.25rem; margin-top: 2.5rem; }
+        .stat-card {
+            background: var(--bg-card); border: 1px solid var(--border);
+            border-radius: var(--r); padding: 1.5rem 1.25rem; text-align: center;
+            transition: border-color 0.2s;
+        }
+        .stat-card:hover { border-color: var(--border-hover); }
+        .stat-num { font-family: var(--font-serif); font-size: clamp(1.75rem, 4vw, 2.5rem); color: var(--accent); line-height: 1; margin-bottom: 0.4rem; }
+        .stat-label { font-size: 0.8125rem; color: var(--text-muted); }
+
+        .final { position: relative; overflow: hidden; text-align: center; padding: 0; border-top: 1px solid var(--border); }
+        .final-bg {
+            position: absolute; inset: 0;
+            background-image: url('https://images.unsplash.com/photo-1627627256672-027a4613d028?q=80&w=2674&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+            background-size: cover; background-position: center; opacity: 0.45;
+        }
+        .final-bg::after {
+            content: ''; position: absolute; inset: 0;
+            background: linear-gradient(to bottom, rgba(27,27,27,0.6) 0%, rgba(27,27,27,0.92) 100%);
+        }
+        .final-content { position: relative; z-index: 1; padding: 6rem 1.5rem; }
+        .final-content h2 { margin-bottom: 1rem; }
+        .final-content p { color: var(--text-muted); font-size: 1.0625rem; max-width: 48ch; margin: 0 auto 2.5rem; }
+
+        footer { border-top: 1px solid var(--border); padding: 2.5rem 0 2rem; }
+        .footer-inner {
+            max-width: var(--max); margin: 0 auto; padding: 0 1.5rem;
+            display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 1.5rem;
+        }
+        .footer-inner img { height: 24px; width: auto; opacity: 0.7; }
+        .footer-links { display: flex; gap: 1.5rem; flex-wrap: wrap; }
+        .footer-links a { font-size: 0.8125rem; color: var(--text-muted); text-decoration: none; }
+        .footer-links a:hover { color: var(--accent); }
+        .footer-legal { width: 100%; text-align: center; font-size: 0.75rem; color: var(--text-faint); padding-top: 1.5rem; border-top: 1px solid var(--border); margin-top: 0.5rem; }
+
+        .divider { height: 1px; background: var(--border); }
+
+        .addons-cta {
+            margin-top: 2.5rem;
+            padding: 1.5rem 2rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--r);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+        .addons-cta-text strong {
+            display: block;
+            font-size: 0.9375rem;
+            color: var(--text);
+            margin-bottom: 0.2rem;
+        }
+        .addons-cta-text span {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+        .btn-store {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: transparent;
+            color: var(--accent);
+            border: 1px solid var(--accent-mid);
+            padding: 0.65rem 1.4rem;
+            border-radius: var(--r);
+            font-size: 0.875rem;
+            font-weight: 500;
+            text-decoration: none;
+            white-space: nowrap;
+            transition: background 0.2s, border-color 0.2s, transform 0.2s;
+            font-family: var(--font-sans);
+        }
+        .btn-store:hover {
+            background: var(--accent-dim);
+            border-color: var(--accent);
+            transform: translateY(-1px);
+        }
+        .btn-store-arrow { transition: transform 0.2s; display: inline-block; }
+        .btn-store:hover .btn-store-arrow { transform: translateX(3px); }
+
+        .live-pages {
+            margin-top: 2.5rem;
+            padding: 1.75rem 2rem;
+            background: var(--bg-subtle);
+            border: 1px solid var(--border);
+            border-radius: var(--r);
+        }
+        .live-pages-header {
+            display: flex; align-items: center; gap: 0.75rem;
+            margin-bottom: 1.25rem;
+        }
+        .live-dot {
+            width: 8px; height: 8px; border-radius: 50%;
+            background: #22c55e;
+            box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.2);
+            animation: pulse-dot 2s ease-in-out infinite;
+            flex-shrink: 0;
+        }
+        @keyframes pulse-dot {
+            0%, 100% { box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.2); }
+            50% { box-shadow: 0 0 0 6px rgba(34, 197, 94, 0.08); }
+        }
+        .live-pages-header-text strong {
+            display: block; font-size: 0.875rem; color: var(--text); font-family: var(--font-sans);
+        }
+        .live-pages-header-text span {
+            font-size: 0.8rem; color: var(--text-muted);
+        }
+        .live-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1rem;
+        }
+        .live-card {
+            display: flex; align-items: center; justify-content: space-between;
+            gap: 1rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--r);
+            padding: 1.1rem 1.35rem;
+            text-decoration: none;
+            transition: border-color 0.2s, transform 0.2s, background 0.2s;
+        }
+        .live-card:hover {
+            border-color: var(--accent-mid);
+            background: var(--accent-dim);
+            transform: translateY(-2px);
+        }
+        .live-card-text strong {
+            display: block; font-size: 0.875rem; color: var(--text);
+            margin-bottom: 0.15rem;
+        }
+        .live-card-text span {
+            font-size: 0.775rem; color: var(--text-muted);
+        }
+        .live-card-icon {
+            width: 34px; height: 34px; border-radius: 50%;
+            background: var(--accent-dim); border: 1px solid var(--accent-mid);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 0.85rem; flex-shrink: 0; color: var(--accent);
+            transition: background 0.2s, color 0.2s, border-color 0.2s;
+        }
+        .live-card:hover .live-card-icon {
+            background: var(--accent);
+            color: #fff;
+            border-color: var(--accent);
+        }
+
+        @media (max-width: 640px) {
+            .pkg-grid { grid-template-columns: 1fr; }
+            .journey { grid-template-columns: 1fr 1fr; row-gap: 2rem; }
+            .addons-cta { flex-direction: column; align-items: flex-start; }
+            .live-pages { padding: 1.25rem; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="scroll-bar" id="scrollBar"></div>
+
+<nav>
+    <div class="nav-inner">
+        <a href="https://www.thenbrh.co.uk/" class="nav-brand">
+            <img src="https://images.squarespace-cdn.com/content/6718416feaa24175e29324d4/9d6e6464-e1e5-4dde-9ae0-03df420cbd77/NBRH+Logo.png?content-type=image%2Fpng" alt="The NBRH">
+        </a>
+        <ul class="nav-links">
+            <li><a href="#pain">Your Goals</a></li>
+            <li><a href="#package">The Package</a></li>
+            <li><a href="#partnership">Partnership</a></li>
+            <li><a href="#how">How It Works</a></li>
+            <li><a href="#why">Why Us</a></li>
+            <li><a href="#stats">Our Impact</a></li>
+        </ul>
+    </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero" class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-content">
+        <div class="wrap">
+            <div class="logo-lockup">
+                <img src="https://images.squarespace-cdn.com/content/6718416feaa24175e29324d4/1c4ba72a-4530-4863-beb8-4c271e019f94/ae56ee41-8b3f-42e5-9057-8cb9fe919993.JPG?content-type=image%2Fjpeg" alt="OT Basketball">
+                <span class="logo-divider">&times;</span>
+                <img src="https://images.squarespace-cdn.com/content/6718416feaa24175e29324d4/9d6e6464-e1e5-4dde-9ae0-03df420cbd77/NBRH+Logo.png?content-type=image%2Fpng" alt="The NBRH">
+            </div>
+            <p class="eyebrow">Club Partner Package</p>
+            <h1>Welcome to The NBRH,<br>OT Basketball!</h1>
+            <p class="club-name">A tailored pilot for your club.</p>
+            <p class="lead">Two months. Free of charge. We handle the heavy lifting so you can carry on doing what you do best.</p>
+            <div class="pill-row">
+                <div class="pill"><span>&#10003;</span> Free Pilot &mdash; No Fees</div>
+                <div class="pill"><span>&#10003;</span> No Changes to Your Routine</div>
+                <div class="pill"><span>&#10003;</span> Built Around Your Goals</div>
+            </div>
+            <div class="btn-row">
+                <a href="#package" class="btn btn-primary">See What&rsquo;s Included</a>
+                <a href="#live-pages" class="btn btn-ghost">See Your Pages Live &#8594;</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- YOUR GOALS -->
+<section id="pain" class="reveal">
+    <div class="wrap">
+        <div class="section-head">
+            <p class="eyebrow">We Get It</p>
+            <h2>The challenges you&rsquo;re already facing</h2>
+            <p class="sub">Before we talk about what we offer, here&rsquo;s what we&rsquo;re here to solve.</p>
+        </div>
+        <div class="pain-grid">
+            <div class="pain-card">
+                <div class="pain-icon">&#127936;</div>
+                <h3>Constant supply of players to fill sessions</h3>
+                <p>Sometimes, not all the sessions fill. And that can be really annoying, especially with a group chat with people that aren&rsquo;t always active.</p>
+                <div class="pain-solution"><strong>Our Solution</strong>We will use our marketing, network and outreach to find more players near east London, broadening the range of players that would be interested in your sessions. And if you&rsquo;re ever looking for last minute players, we will reach out to our networks, social media and users to fill those last spots.</div>
+            </div>
+            <div class="pain-card">
+                <div class="pain-icon">&#128203;</div>
+                <h3>Less booking admin</h3>
+                <p>Having to run several sessions a week must be really time consuming. Having to track everything, write up all the sessions, handle all the comms. It must take so much time in your week.</p>
+                <div class="pain-solution"><strong>Our Solution</strong>We&rsquo;ll create a booking page &amp; workflow that houses all of your sessions and handles bookings for weeks ahead. We&rsquo;ll monitor these bookings, but you will have admin privileges. We&rsquo;ll handle the grunt work to save you time each week. You tell us what to do, and we&rsquo;ll get it done.</div>
+            </div>
+            <div class="pain-card">
+                <div class="pain-icon">&#128201;</div>
+                <h3>Understanding my audience</h3>
+                <p>Sometimes, it can be a bit of guesswork trying to understand why things are working or who is interested. Without the right tools from various channels, there&rsquo;s no way to create a growth plan.</p>
+                <div class="pain-solution"><strong>Our Solution</strong>Via our booking tools, social tracking &amp; platform tools, we can build a better picture of who is attending your sessions, who is interested and research to help you improve sessions. We&rsquo;ll provide these findings to you in an easy and simple report. We can even run reports that you can use to attract future players.</div>
+            </div>
+            <div class="pain-card">
+                <div class="pain-icon">&#127915;</div>
+                <h3>Flexible pricing tools</h3>
+                <p>You should be able to run &amp; price sessions as you wish. Without having to create a new event.</p>
+                <div class="pain-solution"><strong>Our Solution</strong>With our booking platform, we are able to create special discount codes that you can share with your players. Or give us the word and we can quickly change the prices of sessions. We can create different ticket types, bundles &amp; even early bird tickets for your most keen players. We give you more control over your bookings.</div>
+            </div>
+        </div>
+        <p style="text-align:center;margin-top:2rem;color:var(--text-muted);font-style:italic;font-size:0.9375rem;">We&rsquo;ll agree on your KPIs together &mdash; and if you want any changes, additions, or extra clarity, just say the word.</p>
+    </div>
+</section>
+
+<!-- PROMISE BAND -->
+<div class="promise-band reveal">
+    <div class="wrap">
+        <h2>Here&rsquo;s our promise.</h2>
+        <p>We will push your club in front of more eyes and get the right people interested. We will be an extra pair of hands to support your growth. And we will use our platform to increase your digital capabilities.</p>
+    </div>
+</div>
+
+<!-- THE PACKAGE -->
+<section id="package" class="reveal">
+    <div class="wrap">
+        <div class="section-head">
+            <p class="eyebrow">The Package</p>
+            <h2>Everything that&rsquo;s included &mdash; and then some.</h2>
+            <p class="sub">The full standard package is free throughout your two-month pilot. Optional extras are available to add at any point.</p>
+        </div>
+        <div class="tab-nav" id="tabNav">
+            <button class="tab-btn active" data-tab="platform">Platform</button>
+            <button class="tab-btn" data-tab="instagram">Instagram</button>
+            <button class="tab-btn" data-tab="outreach">Outreach</button>
+            <button class="tab-btn" data-tab="support">Support</button>
+            <button class="tab-btn" data-tab="content">Content Add-Ons</button>
+            <button class="tab-btn" data-tab="addons">Club Add-Ons</button>
+            <button class="tab-btn" data-tab="monetisation">Monetisation</button>
+        </div>
+
+        <div class="tab-panel active" id="tab-platform">
+            <div class="pkg-grid">
+                <div class="pkg-item"><div class="pkg-check">&#10003;</div><div class="pkg-item-text"><strong>Full Club Hub Page</strong><span>Ongoing &mdash; your permanent home on The NBRH</span></div></div>
+                <div class="pkg-item"><div class="pkg-check">&#10003;</div><div class="pkg-item-text"><strong>Custom Booking Page</strong><span>Ongoing &mdash; branded for your club</span></div></div>
+                <div class="pkg-item"><div class="pkg-check">&#10003;</div><div class="pkg-item-text"><strong>Club House Access <em style="font-size:0.7rem;opacity:0.6;">(BETA)</em></strong><span>Ongoing &mdash; your club support tool (coming soon)</span></div></div>
+                <div class="pkg-item"><div class="pkg-check">&#10003;</div><div class="pkg-item-text"><strong>x1 Premium NBRH Account</strong><span>Full access for your club lead</span></div></div>
+                <div class="pkg-item"><div class="pkg-check">&#10003;</div><div class="pkg-item-text"><strong>x1 Data Migration</strong><span>We move your existing session data across</span></div></div>
+                <div class="pkg-item"><div class="pkg-check">&#10003;</div><div class="pkg-item-text"><strong>x1 Sponsored Session Placement</strong><span>Featured spot to drive new bookings</span></div></div>
+                <div class="pkg-item"><div class="pkg-check">&#10003;</div><div class="pkg-item-text"><strong>Up to 5 Listed Sessions</strong><span>All your regular sessions, live on the platform</span></div></div>
+            </div>
+
+            <div class="live-pages" id="live-pages">
+                <div class="live-pages-header">
+                    <div class="live-dot"></div>
+                    <div class="live-pages-header-text">
+                        <strong>Your pages are already live.</strong>
+                        <span>We&rsquo;ve built these for you &mdash; take a look and let us know what you think.</span>
+                    </div>
+                </div>
+                <div class="live-cards">
+                    <a href="https://club-directory-v2.vercel.app/club/0008" target="_blank" rel="noopener noreferrer" class="live-card">
+                        <div class="live-card-text">
+                            <strong>Club Hub Page</strong>
+                            <span>Your dedicated home on The NBRH platform</span>
+                        </div>
+                        <div class="live-card-icon">&#8599;</div>
+                    </a>
+                    <a href="https://www.tickettailor.com/events/thenbrh" target="_blank" rel="noopener noreferrer" class="live-card">
+                        <div class="live-card-text">
+                            <strong>Booking Page</strong>
+                            <span>Ready to take bookings for your sessions</span>
+                        </div>
+                        <div class="live-card-icon">&#8599;</div>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="tab-panel" id="tab-instagram">
+            <div class="pkg-grid">
+                <div class="pkg-item"><div class="pkg-check">&#10003;</div><div class="pkg-item-text"><strong>Instagram Stories Highlights Placement</strong><span>Ongoing &mdash; your club featured in NBRH Instagram highlights and stories</span></div></div>
+                <div class="pkg-item"><div class="pkg-check">&#10003;</div><div class="pkg-item-text"><strong>x1 Targeted Boosted Sessions Reel per month</strong><span>Paid promotion to reach new audiences</span></div></div>
+                <div class="pkg-item"><div class="pkg-check">&#10003;</div><div class="pkg-item-text"><strong>x1 Boosted Club Awareness Reel per month</strong><span>Spotlight your club to the wider community</span></div></div>
+            </div>
+        </div>
+
+        <div class="tab-panel" id="tab-outreach">
+            <div class="pkg-grid">
+                <div class="pkg-item"><div class="pkg-check">&#10003;</div><div class="pkg-item-text"><strong>x2 Session Filler Outreach</strong><span>Per month &mdash; targeted messaging to fill your sessions</span></div></div>
+                <div class="pkg-item"><div class="pkg-check">&#10003;</div><div class="pkg-item-text"><strong>x1 Cold Outreach &mdash; Online Groups</strong><span>Reaching 3 relevant online communities on your behalf</span></div></div>
+            </div>
+        </div>
+
+        <div class="tab-panel" id="tab-support">
+            <div class="pkg-grid">
+                <div class="pkg-item"><div class="pkg-check">&#10003;</div><div class="pkg-item-text"><strong>Check-Ins Every Two Weeks</strong><span>Ongoing &mdash; we stay close throughout the pilot</span></div></div>
+                <div class="pkg-item"><div class="pkg-check">&#10003;</div><div class="pkg-item-text"><strong>Priority Support</strong><span>You&rsquo;re not just a ticket number</span></div></div>
+                <div class="pkg-item"><div class="pkg-check">&#10003;</div><div class="pkg-item-text"><strong>Monthly Booking &amp; Session Insights</strong><span>Real data on how your sessions are performing</span></div></div>
+                <div class="pkg-item"><div class="pkg-check">&#10003;</div><div class="pkg-item-text"><strong>Consultative Marketing Support</strong><span>Ongoing advice from someone who does this professionally</span></div></div>
+                <div class="pkg-item"><div class="pkg-check">&#10003;</div><div class="pkg-item-text"><strong>Marketing Materials &mdash; Launch</strong><span>Assets to help you announce your NBRH presence</span></div></div>
+            </div>
+        </div>
+
+        <div class="tab-panel" id="tab-content">
+            <div style="margin-bottom:1.5rem;"><span class="add-on-label label-paid">Optional Paid Extras</span></div>
+            <div class="pkg-grid">
+                <div class="pkg-item"><div class="pkg-check">&#10003;</div><div class="pkg-item-text"><strong>Club Blog Post</strong><span>About your club, founder, or sessions</span><div class="price-row"><span class="price-full">&#163;60.00</span><span class="price-yours">Your Price: &#163;35.00</span></div></div></div>
+                <div class="pkg-item"><div class="pkg-check">&#10003;</div><div class="pkg-item-text"><strong>Original Video Content</strong><span>Shot at one of your sessions</span><div class="price-row"><span class="price-full">&#163;120.00</span><span class="price-yours">Your Price: &#163;80.00</span></div></div></div>
+                <div class="pkg-item"><div class="pkg-check">&#10003;</div><div class="pkg-item-text"><strong>Deep Search Marketing Report</strong><span>In-depth analysis of your market and opportunities</span><div class="price-row"><span class="price-full">&#163;60.00</span><span class="price-yours">Your Price: &#163;40.00</span></div></div></div>
+                <div class="pkg-item"><div class="pkg-check">&#10003;</div><div class="pkg-item-text"><strong>Evidence Book</strong><span>We create a PDF that showcases all the stats and stories</span><div class="price-row"><span class="price-full">&#163;60.00</span><span class="price-yours">Your Price: &#163;40.00</span></div></div></div>
+            </div>
+        </div>
+
+        <div class="tab-panel" id="tab-addons">
+            <div style="margin-bottom:1.5rem;"><span class="add-on-label label-optional">Optional &mdash; Earn Free Add-Ons Via Partnership Milestones</span></div>
+            <div class="pkg-grid">
+                <div class="pkg-item"><div class="pkg-check">&#10003;</div><div class="pkg-item-text"><strong>Additional Sponsored Session</strong><span>Extra featured placement</span><div class="price-row"><span class="price-full">&#163;35.00</span><span class="price-yours">Your Price: &#163;20.00</span></div></div></div>
+                <div class="pkg-item"><div class="pkg-check">&#10003;</div><div class="pkg-item-text"><strong>Additional Session Listing</strong><span>List beyond the 5-session pilot limit</span><div class="price-row"><span class="price-full">&#163;15.00</span><span class="price-yours">Your Price: &#163;8.00</span></div></div></div>
+                <div class="pkg-item"><div class="pkg-check">&#10003;</div><div class="pkg-item-text"><strong>7-Day Pinned Instagram Post</strong><span>Pinned at the top of our NBRH Instagram page</span><div class="price-row"><span class="price-full">&#163;30.00</span><span class="price-yours">Your Price: &#163;20.00</span></div></div></div>
+                <div class="pkg-item"><div class="pkg-check">&#10003;</div><div class="pkg-item-text"><strong>Targeted Boosted Sessions Reel</strong><span>Additional paid Instagram promotion</span><div class="price-row"><span class="price-full">&#163;40.00 + Ad Spend</span><span class="price-yours">Your Price: &#163;25.00 + Ad Spend</span></div></div></div>
+                <div class="pkg-item"><div class="pkg-check">&#10003;</div><div class="pkg-item-text"><strong>Boosted Club Awareness Reel</strong><span>Additional club spotlight</span><div class="price-row"><span class="price-full">&#163;40.00 + Ad Spend</span><span class="price-yours">Your Price: &#163;25.00 + Ad Spend</span></div></div></div>
+                <div class="pkg-item"><div class="pkg-check">&#10003;</div><div class="pkg-item-text"><strong>Additional Cold Outreach</strong><span>3 additional online groups</span><div class="price-row"><span class="price-full">&#163;40.00</span><span class="price-yours">Your Price: &#163;25.00</span></div></div></div>
+                <div class="pkg-item"><div class="pkg-check">&#10003;</div><div class="pkg-item-text"><strong>Session Filler Outreach</strong><span>1 extra targeted fill campaign</span><div class="price-row"><span class="price-full">&#163;25.00</span><span class="price-yours">Your Price: &#163;15.00</span></div></div></div>
+                <div class="pkg-item"><div class="pkg-check">&#10003;</div><div class="pkg-item-text"><strong>Fund Finder</strong><span>We search for funding opportunities for your club</span><div class="price-row"><span class="price-full">&#163;75.00</span><span class="price-yours">Your Price: &#163;50.00</span></div></div></div>
+                <div class="pkg-item"><div class="pkg-check">&#10003;</div><div class="pkg-item-text"><strong>Marketing / Branding Project</strong><span>A bespoke creative project for your club</span><div class="price-row"><span class="price-full">&#163;100.00</span><span class="price-yours">Your Price: &#163;70.00</span></div></div></div>
+            </div>
+        </div>
+
+        <div class="tab-panel" id="tab-monetisation">
+            <div style="margin-bottom:1.5rem;"><span class="add-on-label label-longterm">Longer-Term Opportunities</span></div>
+            <div class="pkg-grid">
+                <div class="pkg-item"><div class="pkg-check">&#10003;</div><div class="pkg-item-text"><strong>Club Store Collaboration</strong><span>Sell your merchandise through The NBRH</span></div></div>
+                <div class="pkg-item"><div class="pkg-check">&#10003;</div><div class="pkg-item-text"><strong>Loyalty Programme Setup</strong><span>Reward your most committed members</span></div></div>
+                <div class="pkg-item"><div class="pkg-check">&#10003;</div><div class="pkg-item-text"><strong>Revenue Share</strong><span>When we grow together, we split it</span></div></div>
+                <div class="pkg-item"><div class="pkg-check">&#10003;</div><div class="pkg-item-text"><strong>Locked-In Pricing</strong><span>Your rate stays fixed post-pilot</span></div></div>
+                <div class="pkg-item"><div class="pkg-check">&#10003;</div><div class="pkg-item-text"><strong>3rd Party Brand Perks</strong><span>Exclusive partner benefits for your club</span></div></div>
+                <div class="pkg-item"><div class="pkg-check">&#10003;</div><div class="pkg-item-text"><strong>Member Perks Programme</strong><span>Signed-on members get exclusive rewards</span></div></div>
+            </div>
+        </div>
+
+        <div class="addons-cta">
+            <div class="addons-cta-text">
+                <strong>Want to browse all available add-ons?</strong>
+                <span>Visit the NBRH Add-Ons Store to see the full range and place an order directly.</span>
+            </div>
+            <a href="https://www.thenbrh.co.uk/add-ons-store" target="_blank" rel="noopener noreferrer" class="btn-store">
+                Browse the Add-Ons Store <span class="btn-store-arrow">&#8594;</span>
+            </a>
+        </div>
+
+    </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- THE PARTNERSHIP -->
+<section id="partnership" class="reveal">
+    <div class="wrap">
+        <div class="section-head">
+            <p class="eyebrow">The Partnership</p>
+            <h2>This works both ways.</h2>
+            <p class="sub">We&rsquo;re putting everything into this. Here&rsquo;s what we&rsquo;re asking in return &mdash; and what you get when you go above and beyond.</p>
+        </div>
+        <div class="partner-split">
+            <div class="partner-col">
+                <h3>Your Commitments</h3>
+                <ul class="partner-list">
+                    <li>At least 20 NBRH user sign-ups from your community</li>
+                    <li>At least 25 mutual Instagram followers between your club and The NBRH</li>
+                    <li>At least one NBRH promotion in your WhatsApp group</li>
+                </ul>
+            </div>
+            <div class="partner-col">
+                <h3>What You Get Back</h3>
+                <ul class="partner-list">
+                    <li>20 years of sporting experience</li>
+                    <li>10 years of digital marketing experience</li>
+                    <li>Priority support throughout the pilot</li>
+                    <li>Data, insights, and recommendations</li>
+                    <li>Club-friendly pricing</li>
+                    <li>All included elements &mdash; delivered</li>
+                    <li>Paid awareness on Instagram</li>
+                </ul>
+            </div>
+        </div>
+        <div class="bonus-strip">
+            <div class="bonus-card">
+                <div class="bonus-num">+20</div>
+                <div>
+                    <h3>Every 20 additional user sign-ups</h3>
+                    <p>Earns your club one free add-on from the Club Add-Ons list. No limit on milestone rewards.</p>
+                </div>
+            </div>
+            <div class="bonus-card">
+                <div class="bonus-num">+10</div>
+                <div>
+                    <h3>Every 10 additional mutual followers</h3>
+                    <p>Earns your club one free add-on. Keep growing, keep earning. No limit on milestone rewards.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- HOW IT WORKS -->
+<section id="how" class="reveal">
+    <div class="wrap">
+        <div class="section-head">
+            <p class="eyebrow">How It Works</p>
+            <h2>Simple from day one.</h2>
+            <p class="sub">No upheaval. No learning curve. We slot in around you.</p>
+        </div>
+        <div class="journey">
+            <div class="j-step">
+                <div class="j-num">1</div>
+                <h3>Pitch Agreement</h3>
+                <p>We discuss our partnership, agree on what success looks like, explore any additional add-ons, and get aligned before anything else.</p>
+            </div>
+            <div class="j-step">
+                <div class="j-num">2</div>
+                <h3>Onboarding</h3>
+                <p>We build your Club Hub, list your sessions, set up your booking page, and prepare your promotional content &mdash; with clear timelines for everything.</p>
+            </div>
+            <div class="j-step">
+                <div class="j-num">3</div>
+                <h3>Launch</h3>
+                <p>We begin showcasing your club and start working towards your goals.</p>
+            </div>
+            <div class="j-step">
+                <div class="j-num">4</div>
+                <h3>Check-Ins</h3>
+                <p>Every two weeks we review together. You&rsquo;ll always know what&rsquo;s happening and what&rsquo;s coming next.</p>
+            </div>
+            <div class="j-step">
+                <div class="j-num">5</div>
+                <h3>Month 1 Report</h3>
+                <p>Full insights on bookings, sessions, and reach. Real data, plain language.</p>
+            </div>
+            <div class="j-step">
+                <div class="j-num">6</div>
+                <h3>Post-Pilot Review</h3>
+                <p>We sit down, review the full pilot together, and decide what&rsquo;s next &mdash; no pressure, no obligation.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- WHY US -->
+<section id="why" class="reveal">
+    <div class="wrap">
+        <div class="section-head">
+            <p class="eyebrow">Why Should You Work With Us?</p>
+            <h2>We aim to save you time, effort, and money.</h2>
+            <p class="sub">Yes, you could run ads, build a website, manage bookings, analyse data, create content, chase no-shows, optimise pricing, and grow your audience yourself. Or, you could let 20 years of sporting experience and 10 years of digital marketing expertise make your life a whole lot easier.</p>
+        </div>
+        <div class="why-grid">
+            <div class="why-item"><span class="why-arrow">&#8594;</span>We are a growth engine, not just a listing site. We actively drive awareness, bookings, and repeat players.</div>
+            <div class="why-item"><span class="why-arrow">&#8594;</span>We save you time. Marketing, bookings, promotion, analytics, and discovery &mdash; all in one ecosystem.</div>
+            <div class="why-item"><span class="why-arrow">&#8594;</span>We save you money. No wasted ad spend guessing what works. We&rsquo;ve already tested it.</div>
+            <div class="why-item"><span class="why-arrow">&#8594;</span>We bring you players you don&rsquo;t already have. Your next 50 members might not follow your Instagram yet.</div>
+            <div class="why-item"><span class="why-arrow">&#8594;</span>Data you can actually use. Which days fill fastest. What price points work. We turn noise into decisions.</div>
+            <div class="why-item"><span class="why-arrow">&#8594;</span>Built-in monetisation opportunities. Revenue share, brand collaborations, and featured placements. We grow together.</div>
+            <div class="why-item"><span class="why-arrow">&#8594;</span>You focus on delivery. We handle growth. You build community. We handle the engine underneath.</div>
+        </div>
+    </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- OUR STATS -->
+<section id="stats" class="reveal">
+    <div class="wrap">
+        <div class="section-head">
+            <p class="eyebrow">Our Digital Impact</p>
+            <h2>We&rsquo;ve been up and running for about two months &mdash; and we&rsquo;re growing.</h2>
+            <p class="sub">These are humble numbers, but here&rsquo;s what we&rsquo;ve achieved in that time.</p>
+        </div>
+        <div class="stats-grid">
+            <div class="stat-card"><div class="stat-num">1000+</div><div class="stat-label">Website Visits</div></div>
+            <div class="stat-card"><div class="stat-num">1,200+</div><div class="stat-label">Website Pageviews</div></div>
+            <div class="stat-card"><div class="stat-num">31,000+</div><div class="stat-label">Instagram Views</div></div>
+            <div class="stat-card"><div class="stat-num">500+</div><div class="stat-label">Instagram Followers</div></div>
+            <div class="stat-card"><div class="stat-num">2,000+</div><div class="stat-label">Instagram Interactions</div></div>
+            <div class="stat-card"><div class="stat-num">13,700+</div><div class="stat-label">Accounts Reached</div></div>
+        </div>
+    </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final reveal">
+    <div class="final-bg"></div>
+    <div class="final-content">
+        <div class="wrap">
+            <p class="eyebrow" style="margin-bottom:0.75rem;">Ready?</p>
+            <h2>Let&rsquo;s build something special in The NBRH.</h2>
+            <p>Let&rsquo;s make it official and get your club in front of the people who&rsquo;ve been looking for it.</p>
+            <div class="btn-row">
+                <a href="https://forms.gle/PL4YC5t7rBKbDJW48" class="btn btn-primary">Secure Your Place</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <div class="footer-inner">
+        <img src="https://images.squarespace-cdn.com/content/6718416feaa24175e29324d4/9d6e6464-e1e5-4dde-9ae0-03df420cbd77/NBRH+Logo.png?content-type=image%2Fpng" alt="The NBRH">
+        <div class="footer-links">
+            <a href="https://www.thenbrh.co.uk">Platform</a>
+            <a href="https://www.instagram.com/the_nbrh/">Instagram</a>
+            <a href="mailto:thenbrh@gmail.com">thenbrh&#64;gmail.com</a>
+        </div>
+        <div class="footer-legal">&copy; 2026 The NBRH (Neighbourhood). All rights reserved.</div>
+    </div>
+</footer>
+
+<script>
+    var bar = document.getElementById('scrollBar');
+    window.addEventListener('scroll', function() {
+        var pct = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight) * 100;
+        bar.style.width = pct + '%';
+    });
+
+    var reveals = document.querySelectorAll('.reveal');
+    var ro = new IntersectionObserver(function(entries) {
+        entries.forEach(function(e) { if (e.isIntersecting) e.target.classList.add('in'); });
+    }, { threshold: 0.08, rootMargin: '0px 0px -5% 0px' });
+    reveals.forEach(function(el) { ro.observe(el); });
+
+    var navAs = document.querySelectorAll('.nav-links a');
+    var secs = document.querySelectorAll('section[id]');
+    window.addEventListener('scroll', function() {
+        var sy = window.scrollY;
+        secs.forEach(function(s) {
+            if (sy >= s.offsetTop - 120 && sy < s.offsetTop + s.offsetHeight - 120) {
+                navAs.forEach(function(a) {
+                    a.classList.toggle('active', a.getAttribute('href') === '#' + s.id);
+                });
+            }
+        });
+    });
+
+    document.getElementById('tabNav').addEventListener('click', function(e) {
+        var btn = e.target.closest('.tab-btn');
+        if (!btn) return;
+        var tab = btn.dataset.tab;
+        document.querySelectorAll('.tab-btn').forEach(function(b) { b.classList.remove('active'); });
+        document.querySelectorAll('.tab-panel').forEach(function(p) { p.classList.remove('active'); });
+        btn.classList.add('active');
+        document.getElementById('tab-' + tab).classList.add('active');
+    });
+</script>
+</body>
+</html>
