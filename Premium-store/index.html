@@ -68,23 +68,29 @@
         .hero-content { position: relative; z-index: 1; padding: 6rem 1.5rem 4rem; }
         @media (max-width: 768px) { .hero-content { padding: 4rem 1.5rem 3rem; } }
         .store-badge { display: inline-flex; align-items: center; gap: 0.5rem; background: var(--accent-dim); border: 1px solid var(--accent-mid); border-radius: 100px; padding: 0.35rem 1rem; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); margin-bottom: 1.5rem; }
-        .store-badge::before { content: ''; font-size: 0.5rem; }
         .hero h1 { margin-bottom: 1rem; max-width: 18ch; margin-left: auto; margin-right: auto; }
         .hero p.lead { font-size: clamp(1rem, 2vw, 1.15rem); color: var(--text-muted); max-width: 50ch; margin: 0 auto 2rem; }
         .hero-stats { display: flex; gap: 2.5rem; justify-content: center; flex-wrap: wrap; margin-top: 2.5rem; padding-top: 2rem; border-top: 1px solid var(--border); }
         .hero-stat { text-align: center; }
         .hero-stat-num { font-family: var(--font-serif); font-size: 1.6rem; color: var(--accent); display: block; line-height: 1; }
         .hero-stat-label { font-size: 0.78rem; color: var(--text-faint); margin-top: 0.35rem; }
-        .audience-toggle { display: flex; justify-content: center; margin-bottom: 3rem; background: var(--bg-card); border: 1px solid var(--border); border-radius: 100px; padding: 0.25rem; width: fit-content; margin-left: auto; margin-right: auto; }
-        .audience-btn { padding: 0.6rem 1.5rem; border-radius: 100px; border: none; font-family: var(--font-sans); font-size: 0.875rem; font-weight: 500; cursor: pointer; transition: all 0.2s; color: var(--text-muted); background: transparent; }
+        .audience-toggle { display: flex; justify-content: center; margin-bottom: 3rem; background: var(--bg-card); border: 1px solid var(--border); border-radius: 100px; padding: 0.25rem; width: fit-content; margin-left: auto; margin-right: auto; flex-wrap: wrap; gap: 0.15rem; }
+        .audience-btn { padding: 0.6rem 1.25rem; border-radius: 100px; border: none; font-family: var(--font-sans); font-size: 0.875rem; font-weight: 500; cursor: pointer; transition: all 0.2s; color: var(--text-muted); background: transparent; }
         .audience-btn.active-players { background: var(--accent); color: #fff; }
         .audience-btn.active-clubs { background: var(--blue); color: #fff; }
-        .plans-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; align-items: start; }
-        @media (max-width: 700px) { .plans-grid { grid-template-columns: 1fr; } }
+
+        /* Three-column grid for both/clubs views */
+        .plans-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1.5rem; align-items: start; }
+        @media (max-width: 900px) { .plans-grid { grid-template-columns: 1fr 1fr; } }
+        @media (max-width: 600px) { .plans-grid { grid-template-columns: 1fr; } }
+
         .plan-view { display: none; }
         .plan-view.active { display: block; animation: fadeIn 0.3s ease; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
         .single-plan-wrap { max-width: 600px; margin: 0 auto; }
+        .two-plan-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; align-items: start; }
+        @media (max-width: 700px) { .two-plan-wrap { grid-template-columns: 1fr; } }
+
         .plan-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--r); overflow: hidden; display: flex; flex-direction: column; }
         .plan-card.plan-users { border-top: 3px solid var(--accent); }
         .plan-card.plan-clubs { border-top: 3px solid var(--blue); }
@@ -96,13 +102,18 @@
         .plan-users .plan-name { color: var(--accent); }
         .plan-clubs .plan-name { color: var(--blue); }
         .plan-audience { font-size: 0.825rem; color: var(--text-faint); margin-bottom: 1rem; }
-        .plan-price-row { display: flex; align-items: baseline; gap: 0.4rem; }
+        .plan-price-row { display: flex; align-items: baseline; gap: 0.4rem; flex-wrap: wrap; }
         .plan-price { font-family: var(--font-serif); font-size: 2.4rem; line-height: 1; }
         .plan-users .plan-price { color: var(--accent); }
         .plan-clubs .plan-price { color: var(--blue); }
         .plan-period { font-size: 0.875rem; color: var(--text-faint); }
         .plan-pitch { font-size: 0.9rem; color: var(--text-muted); line-height: 1.65; margin-top: 1rem; }
         .plan-body { padding: 1.5rem 1.75rem; flex: 1; }
+
+        /* Section headers within perk list */
+        .perks-section-label { font-size: 0.68rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-faint); margin: 1.1rem 0 0.6rem; padding-bottom: 0.4rem; border-bottom: 1px solid var(--border); }
+        .perks-section-label:first-child { margin-top: 0; }
+
         .expand-all-row { display: flex; justify-content: flex-end; margin-bottom: 1rem; }
         .expand-all-btn { background: none; border: none; cursor: pointer; font-family: var(--font-sans); font-size: 0.775rem; font-weight: 500; color: var(--text-faint); transition: color 0.15s; padding: 0; }
         .expand-all-btn:hover { color: var(--text-muted); }
@@ -141,6 +152,7 @@
         .compare-table thead th { font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-faint); }
         .compare-table thead th:nth-child(2) { color: var(--accent); }
         .compare-table thead th:nth-child(3) { color: var(--blue); }
+        .compare-table thead th:nth-child(4) { color: var(--blue); }
         .compare-table tbody tr:hover td { background: var(--bg-subtle); }
         .compare-table td:first-child { color: var(--text-muted); }
         .compare-table td:not(:first-child) { text-align: center; }
@@ -195,12 +207,12 @@
                     <span class="hero-stat-label">NBRH+ for players</span>
                 </div>
                 <div class="hero-stat">
-                    <span class="hero-stat-num">&pound;25.00</span>
-                    <span class="hero-stat-label">Club House for clubs</span>
+                    <span class="hero-stat-num">&pound;50</span>
+                    <span class="hero-stat-label">Club House Support</span>
                 </div>
                 <div class="hero-stat">
-                    <span class="hero-stat-num">2</span>
-                    <span class="hero-stat-label">Plans. No fluff.</span>
+                    <span class="hero-stat-num">&pound;1</span>
+                    <span class="hero-stat-label">Club House Growth (per booking)</span>
                 </div>
             </div>
         </div>
@@ -214,22 +226,25 @@
         <div class="section-head">
             <p class="eyebrow">Upgrade</p>
             <h2>Pick your plan.</h2>
-            <p class="sub">Filter by who you are, or see both side by side.</p>
+            <p class="sub">Filter by who you are, or see all plans side by side.</p>
         </div>
 
         <div class="audience-toggle" id="audienceToggle" role="group" aria-label="Filter plans by audience">
-            <button class="audience-btn active-players" data-view="both">Both</button>
+            <button class="audience-btn active-players" data-view="both">All Plans</button>
             <button class="audience-btn" data-view="players">For Players</button>
             <button class="audience-btn" data-view="clubs">For Clubs</button>
         </div>
 
+        <!-- ALL PLANS VIEW -->
         <div class="plan-view active" id="view-both">
             <div class="plans-grid">
+
+                <!-- NBRH+ -->
                 <div class="plan-card plan-users">
                     <div class="plan-header">
                         <span class="plan-label">For Players</span>
                         <div class="plan-name">NBRH+</div>
-                        <div class="plan-audience">Everything you need to play better.</div>
+                        <div class="plan-audience">Everything you need to play smarter.</div>
                         <div class="plan-price-row">
                             <span class="plan-price">&pound;4.99</span>
                             <span class="plan-period">/ month</span>
@@ -303,77 +318,200 @@
                     </div>
                 </div>
 
+                <!-- Club House Support -->
                 <div class="plan-card plan-clubs">
                     <div class="plan-header">
                         <span class="plan-label">For Clubs</span>
-                        <div class="plan-name">Club House</div>
-                        <div class="plan-audience">Tools, support and growth for your club</div>
+                        <div class="plan-name">Club House Support</div>
+                        <div class="plan-audience">For clubs that are already running well and just want more visibility</div>
                         <div class="plan-price-row">
-                            <span class="plan-price">&pound;25.00</span>
+                            <span class="plan-price">&pound;50</span>
                             <span class="plan-period">/ month</span>
                         </div>
-                        <p class="plan-pitch">Platform access, discounted services, and an extra pair of hands. Includes everything in NBRH+, so you can play and grow in one plan.</p>
+                        <p class="plan-pitch">You&rsquo;ve got your systems. You&rsquo;ve got players. You don&rsquo;t need to rebuild anything. You just want more eyes, more reach, and a bit of backup when needed.</p>
                     </div>
                     <div class="plan-body">
                         <div class="expand-all-row">
-                            <button class="expand-all-btn" data-card="clubs-both">Show all details</button>
+                            <button class="expand-all-btn" data-card="support-both">Show all details</button>
                         </div>
-                        <div class="perks-summary" id="perks-clubs-both">
+                        <div class="perks-summary" id="perks-support-both">
+                            <div class="perks-section-label">Visibility &amp; Growth</div>
+                            <div class="perk-item">
+                                <div class="perk-icon">&#128247;</div>
+                                <div class="perk-content">
+                                    <div class="perk-title">Paid Advertising on Instagram</div>
+                                    <div class="perk-short">Targeted reach, every month</div>
+                                    <div class="perk-detail">Monthly paid Instagram promotion to grow your club&rsquo;s visibility and attract new players in your area.</div>
+                                    <button class="perk-toggle-btn" aria-expanded="false">+ More detail</button>
+                                </div>
+                            </div>
+                            <div class="perk-item">
+                                <div class="perk-icon">&#128226;</div>
+                                <div class="perk-content">
+                                    <div class="perk-title">Direct Outreach</div>
+                                    <div class="perk-short">We spread the word for you</div>
+                                    <div class="perk-detail">We actively promote your club through our network, outreach campaigns, and platform channels &mdash; getting you in front of the right people.</div>
+                                    <button class="perk-toggle-btn" aria-expanded="false">+ More detail</button>
+                                </div>
+                            </div>
                             <div class="perk-item">
                                 <div class="perk-icon">&#127381;</div>
                                 <div class="perk-content">
-                                    <div class="perk-title">Everything in NBRH+ Included</div>
-                                    <div class="perk-short">All player benefits, on top of club tools</div>
+                                    <div class="perk-title">Priority Promotion on The NBRH</div>
+                                    <div class="perk-short">Front of the queue on the platform</div>
+                                    <div class="perk-detail">Your club gets priority placement in session listings, recommendations, and platform features &mdash; more eyes on your sessions.</div>
+                                    <button class="perk-toggle-btn" aria-expanded="false">+ More detail</button>
+                                </div>
+                            </div>
+                            <div class="perks-section-label">Your Presence on The NBRH</div>
+                            <div class="perk-item">
+                                <div class="perk-icon">&#127968;</div>
+                                <div class="perk-content">
+                                    <div class="perk-title">Full Club Hub Page</div>
+                                    <div class="perk-short">Your home on the platform</div>
+                                    <div class="perk-detail">A dedicated club page on The NBRH showcasing your sessions, story, and community &mdash; making it easy for players to find and follow you.</div>
+                                    <button class="perk-toggle-btn" aria-expanded="false">+ More detail</button>
+                                </div>
+                            </div>
+                            <div class="perk-item">
+                                <div class="perk-icon">&#127381;</div>
+                                <div class="perk-content">
+                                    <div class="perk-title">NBRH Premium Account</div>
+                                    <div class="perk-short">All NBRH+ player benefits included</div>
                                     <div class="perk-detail">Club House members automatically get all NBRH+ benefits &mdash; lower transaction fees, early bird access, merch discounts, personalised recommendations, 3rd party perks, and free sessions when available.</div>
+                                    <button class="perk-toggle-btn" aria-expanded="false">+ More detail</button>
+                                </div>
+                            </div>
+                            <div class="perks-section-label">Light Support, When You Need It</div>
+                            <div class="perk-item">
+                                <div class="perk-icon">&#9889;</div>
+                                <div class="perk-content">
+                                    <div class="perk-title">Priority Support</div>
+                                    <div class="perk-short">We&rsquo;re in your corner</div>
+                                    <div class="perk-detail">Get priority access to our team when you need help, advice, or a quick turnaround on anything platform-related.</div>
                                     <button class="perk-toggle-btn" aria-expanded="false">+ More detail</button>
                                 </div>
                             </div>
                             <div class="perk-item">
                                 <div class="perk-icon">&#128295;</div>
                                 <div class="perk-content">
-                                    <div class="perk-title">Platform Access: Tools, Data &amp; Marketing</div>
-                                    <div class="perk-short">Everything in one place</div>
-                                    <div class="perk-detail">Full access to the Club House search engine, session sorter, NBRH analytics dashboard, platform marketing tools, and Instagram paid marketing. Real insights. Real reach.</div>
+                                    <div class="perk-title">Club House Dashboard</div>
+                                    <div class="perk-short">Your tools, all in one place</div>
+                                    <div class="perk-detail">Full access to the Club House dashboard &mdash; including the Club House search engine, session sorter, NBRH analytics, and platform marketing tools.</div>
                                     <button class="perk-toggle-btn" aria-expanded="false">+ More detail</button>
                                 </div>
                             </div>
                             <div class="perk-item">
                                 <div class="perk-icon">&#128201;</div>
                                 <div class="perk-content">
-                                    <div class="perk-title">Discount on Growth Services</div>
+                                    <div class="perk-title">Discount on Services</div>
                                     <div class="perk-short">Double-digit savings on add-ons</div>
-                                    <div class="perk-detail">Significant discounts on all Club House add-on services &mdash; including marketing support, content creation, branding, advertising, custom digital solutions, and expert consultation on your club.</div>
+                                    <div class="perk-detail">Significant discounts on all Club House add-on services &mdash; including marketing support, content creation, branding, advertising, custom digital solutions, and expert consultation.</div>
+                                    <button class="perk-toggle-btn" aria-expanded="false">+ More detail</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="plan-footer">
+                        <a href="https://www.thenbrh.co.uk/club-house-sign-up-page" class="plan-cta">Join Club House Support &rarr;</a>
+                    </div>
+                </div>
+
+                <!-- Club House Growth -->
+                <div class="plan-card plan-clubs">
+                    <div class="plan-header">
+                        <span class="plan-label">For Clubs</span>
+                        <div class="plan-name">Club House Growth</div>
+                        <div class="plan-audience">For clubs that need better systems, structure, and a way to grow properly</div>
+                        <div class="plan-price-row">
+                            <span class="plan-price">&pound;1</span>
+                            <span class="plan-period">platform fee per booking</span>
+                        </div>
+                        <p class="plan-pitch">If your bookings are messy, your systems don&rsquo;t talk to each other, or you&rsquo;re relying on DMs and spreadsheets &mdash; this is for you. We don&rsquo;t just promote you. We help run the engine.</p>
+                    </div>
+                    <div class="plan-body">
+                        <div class="expand-all-row">
+                            <button class="expand-all-btn" data-card="growth-both">Show all details</button>
+                        </div>
+                        <div class="perks-summary" id="perks-growth-both">
+                            <div class="perks-section-label">Everything in Support, plus&hellip;</div>
+                            <div class="perk-item">
+                                <div class="perk-icon">&#128203;</div>
+                                <div class="perk-content">
+                                    <div class="perk-title">Custom Booking Page</div>
+                                    <div class="perk-short">Your sessions, fully integrated</div>
+                                    <div class="perk-detail">We build and manage a custom booking workflow for your sessions on The NBRH &mdash; giving players a seamless experience and you a reliable system that actually works.</div>
                                     <button class="perk-toggle-btn" aria-expanded="false">+ More detail</button>
                                 </div>
                             </div>
                             <div class="perk-item">
-                                <div class="perk-icon">&#9203;</div>
+                                <div class="perk-icon">&#128257;</div>
                                 <div class="perk-content">
-                                    <div class="perk-title">Time, Effort &amp; Money Saved</div>
-                                    <div class="perk-short">We act as your extra pair of hands</div>
-                                    <div class="perk-detail">We take out the guesswork and use our expertise to meet your goals. We help you manage, create, and market &mdash; so you can focus on your community and your sessions.</div>
+                                    <div class="perk-title">Data Migration</div>
+                                    <div class="perk-short">We handle the move for you</div>
+                                    <div class="perk-detail">We migrate your existing session data, player records, and booking history into The NBRH system &mdash; no disruption, no spreadsheet nightmares.</div>
+                                    <button class="perk-toggle-btn" aria-expanded="false">+ More detail</button>
+                                </div>
+                            </div>
+                            <div class="perks-section-label">Growth Engine</div>
+                            <div class="perk-item">
+                                <div class="perk-icon">&#127916;</div>
+                                <div class="perk-content">
+                                    <div class="perk-title">Content Creation</div>
+                                    <div class="perk-short">We create it. You post it.</div>
+                                    <div class="perk-detail">We create platform-ready content for your club &mdash; from session graphics and social copy to promotional assets that actually reflect your community.</div>
                                     <button class="perk-toggle-btn" aria-expanded="false">+ More detail</button>
                                 </div>
                             </div>
                             <div class="perk-item">
                                 <div class="perk-icon">&#128200;</div>
                                 <div class="perk-content">
-                                    <div class="perk-title">If We Win, You Win</div>
+                                    <div class="perk-title">Monetisation Opportunities</div>
                                     <div class="perk-short">Growth that benefits everyone</div>
-                                    <div class="perk-detail">As The NBRH scales, Club House members benefit too. We plan to implement revenue shares, brand partnerships, greater marketing power, merch collaborations, and monetisation opportunities for clubs who grow with us.</div>
+                                    <div class="perk-detail">As The NBRH scales, Growth members unlock revenue share opportunities, brand partnerships, merch collaborations, and other monetisation routes we build together.</div>
+                                    <button class="perk-toggle-btn" aria-expanded="false">+ More detail</button>
+                                </div>
+                            </div>
+                            <div class="perks-section-label">Ongoing Optimisation</div>
+                            <div class="perk-item">
+                                <div class="perk-icon">&#128202;</div>
+                                <div class="perk-content">
+                                    <div class="perk-title">Insights &amp; Data</div>
+                                    <div class="perk-short">Know what&rsquo;s working</div>
+                                    <div class="perk-detail">Access to detailed booking and engagement analytics so you can see exactly what&rsquo;s performing, what&rsquo;s not, and where the opportunities are.</div>
+                                    <button class="perk-toggle-btn" aria-expanded="false">+ More detail</button>
+                                </div>
+                            </div>
+                            <div class="perk-item">
+                                <div class="perk-icon">&#128197;</div>
+                                <div class="perk-content">
+                                    <div class="perk-title">Regular Check-ins</div>
+                                    <div class="perk-short">We stay in the loop with you</div>
+                                    <div class="perk-detail">Scheduled check-ins to review performance, address issues, and plan ahead &mdash; so things don&rsquo;t slip through the cracks.</div>
+                                    <button class="perk-toggle-btn" aria-expanded="false">+ More detail</button>
+                                </div>
+                            </div>
+                            <div class="perk-item">
+                                <div class="perk-icon">&#128172;</div>
+                                <div class="perk-content">
+                                    <div class="perk-title">Consultative Support</div>
+                                    <div class="perk-short">We take out the guesswork</div>
+                                    <div class="perk-detail">We use our expertise to help you make better decisions for your club &mdash; from managing sessions to growing your community &mdash; so you can focus on what matters.</div>
                                     <button class="perk-toggle-btn" aria-expanded="false">+ More detail</button>
                                 </div>
                             </div>
                         </div>
-                        <div class="availability-note">&#9432; Revenue shares and brand partnership perks are roadmap features &mdash; timelines shared as we grow.</div>
+                        <div class="availability-note">&#9432; Monetisation and revenue share features are roadmap items &mdash; timelines shared as we grow.</div>
                     </div>
                     <div class="plan-footer">
-                        <a href="https://www.thenbrh.co.uk/club-house-sign-up-page" class="plan-cta">Join Club House &rarr;</a>
+                        <a href="https://www.thenbrh.co.uk/club-house-sign-up-page" class="plan-cta">Join Club House Growth &rarr;</a>
                     </div>
                 </div>
+
             </div>
         </div>
 
+        <!-- PLAYERS ONLY VIEW -->
         <div class="plan-view" id="view-players">
             <div class="single-plan-wrap">
                 <div class="plan-card plan-users">
@@ -456,76 +594,206 @@
             </div>
         </div>
 
+        <!-- CLUBS ONLY VIEW -->
         <div class="plan-view" id="view-clubs">
-            <div class="single-plan-wrap">
+            <div class="two-plan-wrap">
+
+                <!-- Club House Support solo -->
                 <div class="plan-card plan-clubs">
                     <div class="plan-header">
                         <span class="plan-label">For Clubs</span>
-                        <div class="plan-name">Club House</div>
-                        <div class="plan-audience">Tools, support and growth for your club</div>
+                        <div class="plan-name">Club House Support</div>
+                        <div class="plan-audience">For clubs that are already running well and just want more visibility</div>
                         <div class="plan-price-row">
-                            <span class="plan-price">&pound;25.00</span>
+                            <span class="plan-price">&pound;50</span>
                             <span class="plan-period">/ month</span>
                         </div>
-                        <p class="plan-pitch">Platform access, discounted services, and an extra pair of hands. Includes everything in NBRH+ &mdash; so you can play and grow in one plan.</p>
+                        <p class="plan-pitch">You&rsquo;ve got your systems. You&rsquo;ve got players. You don&rsquo;t need to rebuild anything. You just want more eyes, more reach, and a bit of backup when needed.</p>
                     </div>
                     <div class="plan-body">
                         <div class="expand-all-row">
-                            <button class="expand-all-btn" data-card="clubs-solo">Show all details</button>
+                            <button class="expand-all-btn" data-card="support-solo">Show all details</button>
                         </div>
-                        <div class="perks-summary" id="perks-clubs-solo">
+                        <div class="perks-summary" id="perks-support-solo">
+                            <div class="perks-section-label">Visibility &amp; Growth</div>
+                            <div class="perk-item">
+                                <div class="perk-icon">&#128247;</div>
+                                <div class="perk-content">
+                                    <div class="perk-title">Paid Advertising on Instagram</div>
+                                    <div class="perk-short">Targeted reach, every month</div>
+                                    <div class="perk-detail">Monthly paid Instagram promotion to grow your club&rsquo;s visibility and attract new players in your area.</div>
+                                    <button class="perk-toggle-btn" aria-expanded="false">+ More detail</button>
+                                </div>
+                            </div>
+                            <div class="perk-item">
+                                <div class="perk-icon">&#128226;</div>
+                                <div class="perk-content">
+                                    <div class="perk-title">Direct Outreach</div>
+                                    <div class="perk-short">We spread the word for you</div>
+                                    <div class="perk-detail">We actively promote your club through our network, outreach campaigns, and platform channels &mdash; getting you in front of the right people.</div>
+                                    <button class="perk-toggle-btn" aria-expanded="false">+ More detail</button>
+                                </div>
+                            </div>
                             <div class="perk-item">
                                 <div class="perk-icon">&#127381;</div>
                                 <div class="perk-content">
-                                    <div class="perk-title">Everything in NBRH+ Included</div>
-                                    <div class="perk-short">All player benefits, on top of club tools</div>
+                                    <div class="perk-title">Priority Promotion on The NBRH</div>
+                                    <div class="perk-short">Front of the queue on the platform</div>
+                                    <div class="perk-detail">Your club gets priority placement in session listings, recommendations, and platform features.</div>
+                                    <button class="perk-toggle-btn" aria-expanded="false">+ More detail</button>
+                                </div>
+                            </div>
+                            <div class="perks-section-label">Your Presence on The NBRH</div>
+                            <div class="perk-item">
+                                <div class="perk-icon">&#127968;</div>
+                                <div class="perk-content">
+                                    <div class="perk-title">Full Club Hub Page</div>
+                                    <div class="perk-short">Your home on the platform</div>
+                                    <div class="perk-detail">A dedicated club page on The NBRH showcasing your sessions, story, and community.</div>
+                                    <button class="perk-toggle-btn" aria-expanded="false">+ More detail</button>
+                                </div>
+                            </div>
+                            <div class="perk-item">
+                                <div class="perk-icon">&#127381;</div>
+                                <div class="perk-content">
+                                    <div class="perk-title">NBRH Premium Account</div>
+                                    <div class="perk-short">All NBRH+ player benefits included</div>
                                     <div class="perk-detail">Club House members automatically get all NBRH+ benefits &mdash; lower transaction fees, early bird access, merch discounts, personalised recommendations, 3rd party perks, and free sessions when available.</div>
+                                    <button class="perk-toggle-btn" aria-expanded="false">+ More detail</button>
+                                </div>
+                            </div>
+                            <div class="perks-section-label">Light Support, When You Need It</div>
+                            <div class="perk-item">
+                                <div class="perk-icon">&#9889;</div>
+                                <div class="perk-content">
+                                    <div class="perk-title">Priority Support</div>
+                                    <div class="perk-short">We&rsquo;re in your corner</div>
+                                    <div class="perk-detail">Get priority access to our team when you need help, advice, or a quick turnaround on anything platform-related.</div>
                                     <button class="perk-toggle-btn" aria-expanded="false">+ More detail</button>
                                 </div>
                             </div>
                             <div class="perk-item">
                                 <div class="perk-icon">&#128295;</div>
                                 <div class="perk-content">
-                                    <div class="perk-title">Platform Access: Tools, Data &amp; Marketing</div>
-                                    <div class="perk-short">Everything in one place</div>
-                                    <div class="perk-detail">Full access to the Club House search engine, session sorter, NBRH analytics dashboard, platform marketing tools, and Instagram paid marketing. Real insights. Real reach.</div>
+                                    <div class="perk-title">Club House Dashboard</div>
+                                    <div class="perk-short">Your tools, all in one place</div>
+                                    <div class="perk-detail">Full access to the Club House dashboard &mdash; search engine, session sorter, analytics, and platform marketing tools.</div>
                                     <button class="perk-toggle-btn" aria-expanded="false">+ More detail</button>
                                 </div>
                             </div>
                             <div class="perk-item">
                                 <div class="perk-icon">&#128201;</div>
                                 <div class="perk-content">
-                                    <div class="perk-title">Discount on Growth Services</div>
+                                    <div class="perk-title">Discount on Services</div>
                                     <div class="perk-short">Double-digit savings on add-ons</div>
-                                    <div class="perk-detail">Significant discounts on all Club House add-on services &mdash; including marketing support, content creation, branding, advertising, custom digital solutions, and expert consultation on your club.</div>
+                                    <div class="perk-detail">Significant discounts on all Club House add-on services &mdash; including marketing support, content creation, branding, advertising, and custom digital solutions.</div>
+                                    <button class="perk-toggle-btn" aria-expanded="false">+ More detail</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="plan-footer">
+                        <a href="https://www.thenbrh.co.uk/club-house-sign-up-page" class="plan-cta">Join Club House Support &rarr;</a>
+                    </div>
+                </div>
+
+                <!-- Club House Growth solo -->
+                <div class="plan-card plan-clubs">
+                    <div class="plan-header">
+                        <span class="plan-label">For Clubs</span>
+                        <div class="plan-name">Club House Growth</div>
+                        <div class="plan-audience">For clubs that need better systems, structure, and a way to grow properly</div>
+                        <div class="plan-price-row">
+                            <span class="plan-price">&pound;1</span>
+                            <span class="plan-period">platform fee per booking</span>
+                        </div>
+                        <p class="plan-pitch">If your bookings are messy, your systems don&rsquo;t talk to each other, or you&rsquo;re relying on DMs and spreadsheets &mdash; this is for you. We don&rsquo;t just promote you. We help run the engine.</p>
+                    </div>
+                    <div class="plan-body">
+                        <div class="expand-all-row">
+                            <button class="expand-all-btn" data-card="growth-solo">Show all details</button>
+                        </div>
+                        <div class="perks-summary" id="perks-growth-solo">
+                            <div class="perks-section-label">Everything in Support, plus&hellip;</div>
+                            <div class="perk-item">
+                                <div class="perk-icon">&#128203;</div>
+                                <div class="perk-content">
+                                    <div class="perk-title">Custom Booking Page</div>
+                                    <div class="perk-short">Your sessions, fully integrated</div>
+                                    <div class="perk-detail">We build and manage a custom booking workflow for your sessions on The NBRH &mdash; giving players a seamless experience and you a system that actually works.</div>
                                     <button class="perk-toggle-btn" aria-expanded="false">+ More detail</button>
                                 </div>
                             </div>
                             <div class="perk-item">
-                                <div class="perk-icon">&#9203;</div>
+                                <div class="perk-icon">&#128257;</div>
                                 <div class="perk-content">
-                                    <div class="perk-title">Time, Effort &amp; Money Saved</div>
-                                    <div class="perk-short">We act as your extra pair of hands</div>
-                                    <div class="perk-detail">We take out the guesswork and use our expertise to meet your goals. We help you manage, create, and market &mdash; so you can focus on your community and your sessions.</div>
+                                    <div class="perk-title">Data Migration</div>
+                                    <div class="perk-short">We handle the move for you</div>
+                                    <div class="perk-detail">We migrate your existing session data, player records, and booking history into The NBRH system &mdash; no disruption, no spreadsheet nightmares.</div>
+                                    <button class="perk-toggle-btn" aria-expanded="false">+ More detail</button>
+                                </div>
+                            </div>
+                            <div class="perks-section-label">Growth Engine</div>
+                            <div class="perk-item">
+                                <div class="perk-icon">&#127916;</div>
+                                <div class="perk-content">
+                                    <div class="perk-title">Content Creation</div>
+                                    <div class="perk-short">We create it. You post it.</div>
+                                    <div class="perk-detail">We create platform-ready content for your club &mdash; from session graphics and social copy to promotional assets that actually reflect your community.</div>
                                     <button class="perk-toggle-btn" aria-expanded="false">+ More detail</button>
                                 </div>
                             </div>
                             <div class="perk-item">
                                 <div class="perk-icon">&#128200;</div>
                                 <div class="perk-content">
-                                    <div class="perk-title">If We Win, You Win</div>
+                                    <div class="perk-title">Monetisation Opportunities</div>
                                     <div class="perk-short">Growth that benefits everyone</div>
-                                    <div class="perk-detail">As The NBRH scales, Club House members benefit too. We plan to implement revenue shares, brand partnerships, greater marketing power, merch collaborations, and monetisation opportunities for clubs who grow with us.</div>
+                                    <div class="perk-detail">As The NBRH scales, Growth members unlock revenue share opportunities, brand partnerships, merch collaborations, and other monetisation routes we build together.</div>
+                                    <button class="perk-toggle-btn" aria-expanded="false">+ More detail</button>
+                                </div>
+                            </div>
+                            <div class="perks-section-label">Ongoing Optimisation</div>
+                            <div class="perk-item">
+                                <div class="perk-icon">&#128202;</div>
+                                <div class="perk-content">
+                                    <div class="perk-title">Insights &amp; Data</div>
+                                    <div class="perk-short">Know what&rsquo;s working</div>
+                                    <div class="perk-detail">Access to detailed booking and engagement analytics so you can see exactly what&rsquo;s performing and where the opportunities are.</div>
+                                    <button class="perk-toggle-btn" aria-expanded="false">+ More detail</button>
+                                </div>
+                            </div>
+                            <div class="perk-item">
+                                <div class="perk-icon">&#128197;</div>
+                                <div class="perk-content">
+                                    <div class="perk-title">Regular Check-ins</div>
+                                    <div class="perk-short">We stay in the loop with you</div>
+                                    <div class="perk-detail">Scheduled check-ins to review performance, address issues, and plan ahead &mdash; so things don&rsquo;t slip through the cracks.</div>
+                                    <button class="perk-toggle-btn" aria-expanded="false">+ More detail</button>
+                                </div>
+                            </div>
+                            <div class="perk-item">
+                                <div class="perk-icon">&#128172;</div>
+                                <div class="perk-content">
+                                    <div class="perk-title">Consultative Support</div>
+                                    <div class="perk-short">We take out the guesswork</div>
+                                    <div class="perk-detail">We use our expertise to help you make better decisions for your club &mdash; from managing sessions to growing your community.</div>
                                     <button class="perk-toggle-btn" aria-expanded="false">+ More detail</button>
                                 </div>
                             </div>
                         </div>
-                        <div class="availability-note">&#9432; Revenue shares and brand partnership perks are roadmap features &mdash; timelines shared as we grow.</div>
+                        <div class="availability-note">&#9432; Monetisation and revenue share features are roadmap items &mdash; timelines shared as we grow.</div>
                     </div>
                     <div class="plan-footer">
-                        <a href="https://www.thenbrh.co.uk/club-house-sign-up-page" class="plan-cta">Join Club House &rarr;</a>
+                        <a href="https://www.thenbrh.co.uk/club-house-sign-up-page" class="plan-cta">Join Club House Growth &rarr;</a>
                     </div>
                 </div>
+
+            </div>
+
+            <!-- Why two models explainer -->
+            <div style="margin-top: 2rem; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--r); padding: 1.5rem 1.75rem;">
+                <p class="eyebrow" style="margin-bottom: 0.5rem;">Why two different pricing models?</p>
+                <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.7;">Clubs don&rsquo;t all operate the same way. If you already have your own systems, a simple monthly plan gives you extra reach without changing how you run things. If you need better structure and want to grow bookings, the per-booking model keeps costs low up front and scales with your activity.</p>
             </div>
         </div>
 
@@ -564,7 +832,8 @@
                     <tr>
                         <th scope="col">Feature</th>
                         <th scope="col">NBRH+ &mdash; &pound;4.99/mo</th>
-                        <th scope="col">Club House &mdash; &pound;19.99/mo</th>
+                        <th scope="col">Club House Support &mdash; &pound;50/mo</th>
+                        <th scope="col">Club House Growth &mdash; &pound;1/booking</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -572,49 +841,89 @@
                         <td>Session booking &amp; discovery</td>
                         <td><span class="check-yes" aria-label="Included">&#10003;</span></td>
                         <td><span class="check-blue" aria-label="Included">&#10003;</span></td>
+                        <td><span class="check-blue" aria-label="Included">&#10003;</span></td>
                     </tr>
                     <tr>
                         <td>Lower transaction fees</td>
                         <td><span class="check-yes" aria-label="Included">&#10003;</span></td>
+                        <td><span class="check-blue" aria-label="Included">&#10003;</span></td>
                         <td><span class="check-blue" aria-label="Included">&#10003;</span></td>
                     </tr>
                     <tr>
                         <td>Early bird access + discounts</td>
                         <td><span class="check-yes" aria-label="Included">&#10003;</span></td>
                         <td><span class="check-blue" aria-label="Included">&#10003;</span></td>
+                        <td><span class="check-blue" aria-label="Included">&#10003;</span></td>
                     </tr>
                     <tr>
                         <td>Merch discounts</td>
                         <td><span class="check-yes" aria-label="Included">&#10003;</span></td>
+                        <td><span class="check-blue" aria-label="Included">&#10003;</span></td>
                         <td><span class="check-blue" aria-label="Included">&#10003;</span></td>
                     </tr>
                     <tr>
                         <td>Personalised recommendations</td>
                         <td><span class="check-yes" aria-label="Included">&#10003;</span></td>
                         <td><span class="check-blue" aria-label="Included">&#10003;</span></td>
+                        <td><span class="check-blue" aria-label="Included">&#10003;</span></td>
                     </tr>
                     <tr>
                         <td>3rd party perks &amp; free sessions</td>
                         <td><span class="check-yes" aria-label="Included when available">&#10003; <span class="compare-note">when available</span></span></td>
                         <td><span class="check-blue" aria-label="Included when available">&#10003; <span class="compare-note">when available</span></span></td>
+                        <td><span class="check-blue" aria-label="Included when available">&#10003; <span class="compare-note">when available</span></span></td>
                     </tr>
                     <tr>
-                        <td>Club House platform tools &amp; analytics</td>
+                        <td>Paid Instagram advertising</td>
                         <td><span class="check-no" aria-label="Not included">&mdash;</span></td>
+                        <td><span class="check-blue" aria-label="Included">&#10003;</span></td>
+                        <td><span class="check-blue" aria-label="Included">&#10003;</span></td>
+                    </tr>
+                    <tr>
+                        <td>Priority promotion on The NBRH</td>
+                        <td><span class="check-no" aria-label="Not included">&mdash;</span></td>
+                        <td><span class="check-blue" aria-label="Included">&#10003;</span></td>
+                        <td><span class="check-blue" aria-label="Included">&#10003;</span></td>
+                    </tr>
+                    <tr>
+                        <td>Club Hub page &amp; dashboard access</td>
+                        <td><span class="check-no" aria-label="Not included">&mdash;</span></td>
+                        <td><span class="check-blue" aria-label="Included">&#10003;</span></td>
                         <td><span class="check-blue" aria-label="Included">&#10003;</span></td>
                     </tr>
                     <tr>
                         <td>Discount on growth &amp; marketing services</td>
                         <td><span class="check-no" aria-label="Not included">&mdash;</span></td>
                         <td><span class="check-blue" aria-label="Included">&#10003;</span></td>
+                        <td><span class="check-blue" aria-label="Included">&#10003;</span></td>
                     </tr>
                     <tr>
-                        <td>Operational &amp; marketing support</td>
+                        <td>Custom booking page</td>
+                        <td><span class="check-no" aria-label="Not included">&mdash;</span></td>
                         <td><span class="check-no" aria-label="Not included">&mdash;</span></td>
                         <td><span class="check-blue" aria-label="Included">&#10003;</span></td>
                     </tr>
                     <tr>
-                        <td>Revenue share &amp; brand partnership upside</td>
+                        <td>Data migration</td>
+                        <td><span class="check-no" aria-label="Not included">&mdash;</span></td>
+                        <td><span class="check-no" aria-label="Not included">&mdash;</span></td>
+                        <td><span class="check-blue" aria-label="Included">&#10003;</span></td>
+                    </tr>
+                    <tr>
+                        <td>Content creation</td>
+                        <td><span class="check-no" aria-label="Not included">&mdash;</span></td>
+                        <td><span class="check-no" aria-label="Not included">&mdash;</span></td>
+                        <td><span class="check-blue" aria-label="Included">&#10003;</span></td>
+                    </tr>
+                    <tr>
+                        <td>Insights, data &amp; regular check-ins</td>
+                        <td><span class="check-no" aria-label="Not included">&mdash;</span></td>
+                        <td><span class="check-no" aria-label="Not included">&mdash;</span></td>
+                        <td><span class="check-blue" aria-label="Included">&#10003;</span></td>
+                    </tr>
+                    <tr>
+                        <td>Revenue share &amp; monetisation upside</td>
+                        <td><span class="check-no" aria-label="Not included">&mdash;</span></td>
                         <td><span class="check-no" aria-label="Not included">&mdash;</span></td>
                         <td><span class="check-blue" aria-label="Roadmap feature">&#10003; <span class="compare-note">roadmap</span></span></td>
                     </tr>
