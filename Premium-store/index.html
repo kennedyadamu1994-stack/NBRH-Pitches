@@ -190,6 +190,29 @@
         .svc-book-btn { display: flex; align-items: center; justify-content: center; gap: 0.4rem; width: 100%; padding: 0.7rem 1rem; background: var(--accent); color: #fff; border: none; border-radius: var(--r); font-family: var(--font-sans); font-size: 0.84rem; font-weight: 500; text-decoration: none; cursor: pointer; transition: opacity 0.2s, transform 0.2s; }
         .svc-book-btn:hover { opacity: 0.88; transform: translateY(-1px); }
 
+        /* Delivery Add-ons */
+        .delivery-block { margin-top: 1.1rem; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--r); overflow: hidden; }
+        .delivery-header { display: flex; align-items: flex-start; gap: 0.85rem; padding: 1.1rem 1.25rem; border-bottom: 1px solid var(--border); }
+        .delivery-icon { font-size: 1.05rem; flex-shrink: 0; margin-top: 0.1rem; }
+        .delivery-title { font-size: 0.9375rem; font-weight: 500; color: var(--text); margin-bottom: 0.15rem; }
+        .delivery-sub { font-size: 0.79rem; color: var(--text-faint); line-height: 1.5; }
+        .delivery-options { display: flex; flex-direction: column; }
+        .delivery-option { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 1rem 1.25rem; border-bottom: 1px solid var(--border); flex-wrap: wrap; }
+        .delivery-option:last-child { border-bottom: none; }
+        .delivery-option-left { display: flex; align-items: flex-start; gap: 0.75rem; flex: 1; min-width: 0; }
+        .delivery-option-icon { font-size: 1rem; flex-shrink: 0; margin-top: 0.1rem; }
+        .delivery-option-name { font-size: 0.875rem; font-weight: 500; color: var(--text); margin-bottom: 0.1rem; }
+        .delivery-option-desc { font-size: 0.775rem; color: var(--text-faint); line-height: 1.45; }
+        .delivery-option-right { display: flex; align-items: stretch; background: var(--bg-subtle); border: 1px solid var(--border); border-radius: var(--r); overflow: hidden; flex-shrink: 0; }
+        .delivery-price-col { display: flex; flex-direction: column; padding: 0.5rem 0.85rem; gap: 0.06rem; }
+        .delivery-price-label { font-size: 0.6rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-faint); white-space: nowrap; }
+        .delivery-price-value { font-size: 0.9rem; font-weight: 500; color: var(--text-muted); white-space: nowrap; }
+        .delivery-price-col.ch { background: var(--accent-dim); }
+        .delivery-price-col.ch .delivery-price-label { color: var(--accent); }
+        .delivery-price-col.ch .delivery-price-value { font-family: var(--font-serif); font-size: 1rem; color: var(--accent); font-weight: 400; }
+        .delivery-divider { width: 1px; background: var(--border); flex-shrink: 0; }
+        .delivery-note { font-size: 0.75rem; color: var(--text-faint); font-style: italic; padding: 0.65rem 1.25rem; background: var(--bg-subtle); border-top: 1px solid var(--border); line-height: 1.55; }
+
         .tier2-note { margin-top: 1.1rem; padding: 1.1rem 1.25rem; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--r); font-size: 0.875rem; color: var(--text-muted); line-height: 1.75; }
         .tier2-note strong { color: var(--text); font-weight: 500; }
 
@@ -245,7 +268,7 @@
         <div class="wrap">
             <div class="store-badge">Plans &amp; Pricing</div>
             <h1>Two ways to work with us.</h1>
-            <p class="lead">Whether you need us running the engine or just targeted support in the right places — there&rsquo;s a model that fits.</p>
+            <p class="lead">Whether you need us running the engine or just targeted support in the right places &mdash; there&rsquo;s a model that fits.</p>
             <div class="hero-stats">
                 <div class="hero-stat">
                     <span class="hero-stat-num">&pound;50</span>
@@ -257,7 +280,7 @@
                 </div>
                 <div class="hero-stat">
                     <span class="hero-stat-num">8</span>
-                    <span class="hero-stat-label">À La Carte services</span>
+                    <span class="hero-stat-label">&Agrave; La Carte services</span>
                 </div>
             </div>
         </div>
@@ -476,8 +499,8 @@
                                         <div class="svc-includes">
                                             <span class="svc-includes-label">What&rsquo;s Included</span>
                                             <ul>
-                                                <li>Targeted Boosted Sessions Reel — a paid Instagram Reel built around your sessions, targeted to users in your area who match your ideal player profile</li>
-                                                <li>Boosted Club Awareness Reel — a brand-building Reel focused on growing your following and name recognition in the right areas</li>
+                                                <li>Targeted Boosted Sessions Reel &mdash; a paid Instagram Reel built around your sessions, targeted to users in your area who match your ideal player profile</li>
+                                                <li>Boosted Club Awareness Reel &mdash; a brand-building Reel focused on growing your following and name recognition in the right areas</li>
                                                 <li>Creative production, targeting and reporting handled by us</li>
                                                 <li>Ad spend budget agreed with you separately</li>
                                             </ul>
@@ -577,9 +600,9 @@
                                         <div class="svc-includes">
                                             <span class="svc-includes-label">What&rsquo;s Included</span>
                                             <ul>
-                                                <li>Cold Outreach — we identify and reach out to relevant online communities (Facebook groups, Reddit, WhatsApp, Discord) with natural, non-spammy messaging introducing your sessions</li>
+                                                <li>Cold Outreach &mdash; we identify and reach out to relevant online communities (Facebook groups, Reddit, WhatsApp, Discord) with natural, non-spammy messaging introducing your sessions</li>
                                                 <li>3 communities targeted on your behalf per campaign</li>
-                                                <li>Session Filler Outreach — a focused campaign targeting NBRH users who match your session&rsquo;s sport, location and availability</li>
+                                                <li>Session Filler Outreach &mdash; a focused campaign targeting NBRH users who match your session&rsquo;s sport, location and availability</li>
                                                 <li>Ideal for last-minute gaps, new slots, or sessions consistently running below capacity</li>
                                             </ul>
                                         </div>
@@ -624,9 +647,9 @@
                                         <div class="svc-includes">
                                             <span class="svc-includes-label">What&rsquo;s Included</span>
                                             <ul>
-                                                <li>Sponsored Session — featured, high-visibility placement of one of your sessions on The NBRH platform, surfaced prominently to users browsing your sport and area</li>
-                                                <li>Additional Session Listing — a fully set-up session page beyond your standard allocation, complete with booking, description and discovery</li>
-                                                <li>7-Day Pinned Post on Instagram — your most important message pinned at the top of our Instagram page for a full seven days</li>
+                                                <li>Sponsored Session &mdash; featured, high-visibility placement of one of your sessions on The NBRH platform, surfaced prominently to users browsing your sport and area</li>
+                                                <li>Additional Session Listing &mdash; a fully set-up session page beyond your standard allocation, complete with booking, description and discovery</li>
+                                                <li>7-Day Pinned Post on Instagram &mdash; your most important message pinned at the top of our Instagram page for a full seven days</li>
                                                 <li>Ideal for new session launches, promo pushes, or time-sensitive announcements</li>
                                             </ul>
                                         </div>
@@ -671,9 +694,9 @@
                                         <div class="svc-includes">
                                             <span class="svc-includes-label">What&rsquo;s Included</span>
                                             <ul>
-                                                <li>Club Blog Post — an 800–1,200 word SEO-optimised article telling your club&rsquo;s story, published on The NBRH platform and LinkedIn with a shareable link</li>
-                                                <li>Original Video Content — on-location filming at one of your sessions, edited into a Reel (30–60 sec) plus a longer cut for your website or YouTube, delivered within 7 days</li>
-                                                <li>Evidence Book — a branded PDF showcasing your club&rsquo;s stats, reviews, data and stories — useful for discovery, funding applications and sponsorship</li>
+                                                <li>Club Blog Post &mdash; an 800&ndash;1,200 word SEO-optimised article telling your club&rsquo;s story, published on The NBRH platform and LinkedIn with a shareable link</li>
+                                                <li>Original Video Content &mdash; on-location filming at one of your sessions, edited into a Reel (30&ndash;60 sec) plus a longer cut for your website or YouTube, delivered within 7 days</li>
+                                                <li>Evidence Book &mdash; a branded PDF showcasing your club&rsquo;s stats, reviews, data and stories &mdash; useful for discovery, funding applications and sponsorship</li>
                                                 <li>All assets are yours to use across your own channels</li>
                                             </ul>
                                         </div>
@@ -718,7 +741,7 @@
                                         <div class="svc-includes">
                                             <span class="svc-includes-label">What&rsquo;s Included</span>
                                             <ul>
-                                                <li>Deep Search Marketing Report — a research-led report mapping your competitive landscape, identifying audiences you&rsquo;re missing, and surfacing the channels and tactics most likely to drive growth</li>
+                                                <li>Deep Search Marketing Report &mdash; a research-led report mapping your competitive landscape, identifying audiences you&rsquo;re missing, and surfacing the channels and tactics most likely to drive growth</li>
                                                 <li>Competitor audit (local and digital)</li>
                                                 <li>Audience and demand analysis specific to your sport and location</li>
                                                 <li>Channel recommendations with rationale</li>
@@ -766,10 +789,10 @@
                                         <div class="svc-includes">
                                             <span class="svc-includes-label">What&rsquo;s Included</span>
                                             <ul>
-                                                <li>Fund Finder — we search for funding opportunities on your behalf, help craft applications, and manage the entire process. If we secure funding, you keep 100% of it</li>
-                                                <li>Marketing / Branding Project — a fully bespoke creative deliverable built around a specific goal: a rebrand, campaign identity, template pack, social media content kit, kit design, or event assets</li>
+                                                <li>Fund Finder &mdash; we search for funding opportunities on your behalf, help craft applications, and manage the entire process. If we secure funding, you keep 100% of it</li>
+                                                <li>Marketing / Branding Project &mdash; a fully bespoke creative deliverable built around a specific goal: a rebrand, campaign identity, template pack, social media content kit, kit design, or event assets</li>
                                                 <li>Scoped with you upfront so you know exactly what you&rsquo;re getting</li>
-                                                <li>No generic outputs — built for your club, from scratch</li>
+                                                <li>No generic outputs &mdash; built for your club, from scratch</li>
                                             </ul>
                                         </div>
                                         <div class="svc-pricing">
@@ -792,6 +815,60 @@
                             </div>
                         </div>
 
+                    </div>
+
+                    <!-- Delivery Add-ons -->
+                    <div class="delivery-block">
+                        <div class="delivery-header">
+                            <span class="delivery-icon">&#9889;</span>
+                            <div>
+                                <div class="delivery-title">Need it faster?</div>
+                                <div class="delivery-sub">Add a delivery upgrade to any service at checkout. Applies to all À La Carte options.</div>
+                            </div>
+                        </div>
+                        <div class="delivery-options">
+                            <div class="delivery-option">
+                                <div class="delivery-option-left">
+                                    <span class="delivery-option-icon">&#128293;</span>
+                                    <div>
+                                        <div class="delivery-option-name">24-Hour Delivery</div>
+                                        <div class="delivery-option-desc">Turned around within one business day of all assets and information received</div>
+                                    </div>
+                                </div>
+                                <div class="delivery-option-right">
+                                    <div class="delivery-price-col">
+                                        <span class="delivery-price-label">Full Price</span>
+                                        <span class="delivery-price-value">&pound;50</span>
+                                    </div>
+                                    <div class="delivery-divider"></div>
+                                    <div class="delivery-price-col ch">
+                                        <span class="delivery-price-label">Club House</span>
+                                        <span class="delivery-price-value">&pound;40</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="delivery-option">
+                                <div class="delivery-option-left">
+                                    <span class="delivery-option-icon">&#9193;</span>
+                                    <div>
+                                        <div class="delivery-option-name">Express Delivery</div>
+                                        <div class="delivery-option-desc">Completed within 3 business days of all assets and information received</div>
+                                    </div>
+                                </div>
+                                <div class="delivery-option-right">
+                                    <div class="delivery-price-col">
+                                        <span class="delivery-price-label">Full Price</span>
+                                        <span class="delivery-price-value">&pound;25</span>
+                                    </div>
+                                    <div class="delivery-divider"></div>
+                                    <div class="delivery-price-col ch">
+                                        <span class="delivery-price-label">Club House</span>
+                                        <span class="delivery-price-value">&pound;20</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="delivery-note">&#9432; Standard delivery timelines vary by service. Delivery upgrades are contingent on receiving all required assets and information promptly. Club House members save 20% on both options.</div>
                     </div>
 
                     <div class="tier2-note">
@@ -884,6 +961,11 @@
                         <td>Monetisation strategy</td>
                         <td><span class="check-yes">&#10003; <span class="compare-note-inline">add-on, 20% off</span></span></td>
                         <td><span class="check-yes">&#10003; <span class="compare-note-inline">&pound;120</span></span></td>
+                    </tr>
+                    <tr>
+                        <td>Express / 24-hour delivery</td>
+                        <td><span class="check-yes">&#10003; <span class="compare-note-inline">add-on, 20% off</span></span></td>
+                        <td><span class="check-yes">&#10003; <span class="compare-note-inline">&pound;25&ndash;&pound;50</span></span></td>
                     </tr>
                     <tr>
                         <td>Commitment</td>
