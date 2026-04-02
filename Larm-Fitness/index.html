@@ -176,6 +176,7 @@
         .promise-band h2 { font-size: clamp(1.5rem, 3vw, 2rem); color: #fff; margin-bottom: 0.5rem; }
         .promise-band p { color: rgba(255,255,255,0.88); font-size: 1rem; max-width: 60ch; margin: 0 auto; }
 
+        /* ── Tab nav ── */
         .tab-nav { display: flex; gap: 0.5rem; flex-wrap: wrap; justify-content: center; margin-bottom: 2.5rem; }
         .tab-btn {
             background: var(--bg-card); border: 1px solid var(--border);
@@ -186,8 +187,10 @@
         .tab-btn:hover { border-color: var(--accent-mid); color: var(--text); }
         .tab-btn.active { background: var(--accent); border-color: var(--accent); color: #fff; }
         .tab-panel { display: none; }
-        .tab-panel.active { display: block; }
+        .tab-panel.active { display: block; animation: fadeIn 0.28s ease; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
 
+        /* ── Pkg grid (free inclusions) ── */
         .pkg-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1rem; }
         .pkg-item {
             background: var(--bg-card); border: 1px solid var(--border);
@@ -208,15 +211,137 @@
         .price-full { font-size: 0.75rem; color: var(--text-faint); text-decoration: line-through; }
         .price-yours { font-size: 0.8rem; color: var(--accent); font-weight: 600; }
 
+        /* ── Service accordion cards ── */
+        .services-grid { display: flex; flex-direction: column; gap: 1rem; }
+
+        .svc-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--r); overflow: hidden; transition: border-color 0.2s; }
+        .svc-card:hover { border-color: rgba(255,27,110,0.3); }
+
+        .svc-trigger { width: 100%; background: none; border: none; cursor: pointer; font-family: var(--font-sans); color: var(--text); padding: 1.1rem 1.25rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; text-align: left; }
+        .svc-trigger-left { display: flex; align-items: center; gap: 0.85rem; flex: 1; min-width: 0; }
+        .svc-trigger-icon { font-size: 1.1rem; flex-shrink: 0; }
+        .svc-trigger-text { flex: 1; min-width: 0; }
+        .svc-trigger-name { font-size: 0.9375rem; font-weight: 500; color: var(--text); display: block; }
+        .svc-trigger-desc { font-size: 0.79rem; color: var(--text-faint); margin-top: 0.1rem; display: block; }
+        .svc-trigger-right { display: flex; align-items: center; gap: 1rem; flex-shrink: 0; }
+        .svc-price-pill { font-family: var(--font-serif); font-size: 1.05rem; color: var(--accent); white-space: nowrap; }
+        .svc-chevron { font-size: 0.75rem; color: var(--text-faint); transition: transform 0.28s ease, color 0.2s; flex-shrink: 0; }
+        .svc-card.open .svc-chevron { transform: rotate(180deg); color: var(--accent); }
+        .svc-trigger:hover .svc-trigger-name { color: var(--accent); }
+
+        .svc-body { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 0.32s ease; }
+        .svc-card.open .svc-body { grid-template-rows: 1fr; }
+        .svc-body-inner { overflow: hidden; }
+        .svc-body-content { border-top: 1px solid var(--border); padding: 1.25rem; display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; align-items: start; }
+        @media (max-width: 640px) { .svc-body-content { grid-template-columns: 1fr; } }
+
+        .svc-includes-label { font-size: 0.67rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.09em; color: var(--accent); display: block; margin-bottom: 0.6rem; }
+        .svc-includes ul { list-style: none; display: flex; flex-direction: column; gap: 0.35rem; }
+        .svc-includes ul li { font-size: 0.8rem; color: var(--text-muted); display: flex; align-items: flex-start; gap: 0.4rem; line-height: 1.45; }
+        .svc-includes ul li::before { content: '›'; color: var(--accent); flex-shrink: 0; margin-top: 0.05rem; }
+
+        .svc-pricing { display: flex; flex-direction: column; gap: 0.65rem; }
+        .svc-price-row { display: flex; align-items: stretch; background: var(--bg-subtle); border: 1px solid var(--border); border-radius: var(--r); overflow: hidden; }
+        .svc-price-cell { display: flex; flex-direction: column; flex: 1; padding: 0.55rem 0.85rem; gap: 0.08rem; }
+        .svc-price-cell-label { font-size: 0.61rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-faint); white-space: nowrap; }
+        .svc-price-cell-value { font-size: 0.9rem; font-weight: 500; color: var(--text-muted); white-space: nowrap; }
+        .svc-price-divider { width: 1px; background: var(--border); flex-shrink: 0; }
+        .svc-price-cell.pilot-price { background: var(--accent-dim); }
+        .svc-price-cell.pilot-price .svc-price-cell-label { color: var(--accent); }
+        .svc-price-cell.pilot-price .svc-price-cell-value { font-family: var(--font-serif); font-size: 1rem; color: var(--accent); font-weight: 400; }
+        .svc-saving { font-size: 0.72rem; color: var(--text-faint); font-style: italic; }
+        .svc-saving strong { color: var(--accent); font-style: normal; font-weight: 500; }
+        .svc-book-btn { display: flex; align-items: center; justify-content: center; gap: 0.4rem; width: 100%; padding: 0.7rem 1rem; background: var(--accent); color: #fff; border: none; border-radius: var(--r); font-family: var(--font-sans); font-size: 0.84rem; font-weight: 500; text-decoration: none; cursor: pointer; transition: opacity 0.2s, transform 0.2s; }
+        .svc-book-btn:hover { opacity: 0.88; transform: translateY(-1px); }
+
+        /* ── Delivery add-ons ── */
+        .delivery-block { margin-top: 1.1rem; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--r); overflow: hidden; }
+        .delivery-header { display: flex; align-items: flex-start; gap: 0.85rem; padding: 1.1rem 1.25rem; border-bottom: 1px solid var(--border); }
+        .delivery-icon { font-size: 1.05rem; flex-shrink: 0; margin-top: 0.1rem; }
+        .delivery-title { font-size: 0.9375rem; font-weight: 500; color: var(--text); margin-bottom: 0.15rem; }
+        .delivery-sub { font-size: 0.79rem; color: var(--text-faint); line-height: 1.5; }
+        .delivery-options { display: flex; flex-direction: column; }
+        .delivery-option { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 1rem 1.25rem; border-bottom: 1px solid var(--border); flex-wrap: wrap; }
+        .delivery-option:last-child { border-bottom: none; }
+        .delivery-option-left { display: flex; align-items: flex-start; gap: 0.75rem; flex: 1; min-width: 0; }
+        .delivery-option-icon { font-size: 1rem; flex-shrink: 0; margin-top: 0.1rem; }
+        .delivery-option-name { font-size: 0.875rem; font-weight: 500; color: var(--text); margin-bottom: 0.1rem; }
+        .delivery-option-desc { font-size: 0.775rem; color: var(--text-faint); line-height: 1.45; }
+        .delivery-option-right { display: flex; align-items: stretch; background: var(--bg-subtle); border: 1px solid var(--border); border-radius: var(--r); overflow: hidden; flex-shrink: 0; }
+        .delivery-price-col { display: flex; flex-direction: column; padding: 0.5rem 0.85rem; gap: 0.06rem; }
+        .delivery-price-label { font-size: 0.6rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-faint); white-space: nowrap; }
+        .delivery-price-value { font-size: 0.9rem; font-weight: 500; color: var(--text-muted); white-space: nowrap; }
+        .delivery-price-col.pilot { background: var(--accent-dim); }
+        .delivery-price-col.pilot .delivery-price-label { color: var(--accent); }
+        .delivery-price-col.pilot .delivery-price-value { font-family: var(--font-serif); font-size: 1rem; color: var(--accent); font-weight: 400; }
+        .delivery-divider { width: 1px; background: var(--border); flex-shrink: 0; }
+        .delivery-note { font-size: 0.75rem; color: var(--text-faint); font-style: italic; padding: 0.65rem 1.25rem; background: var(--bg-subtle); border-top: 1px solid var(--border); line-height: 1.55; }
+
+        /* ── Labels ── */
         .add-on-label {
             display: inline-block; font-size: 0.7rem; font-weight: 600;
             text-transform: uppercase; letter-spacing: 0.08em;
             padding: 0.2rem 0.6rem; border-radius: 2px; margin-bottom: 1.25rem;
         }
         .label-paid { background: rgba(255,200,0,0.1); color: #FFCC00; border: 1px solid rgba(255,200,0,0.3); }
-        .label-optional { background: var(--accent-dim); color: var(--accent); border: 1px solid var(--accent-mid); }
         .label-longterm { background: rgba(100,200,255,0.08); color: rgba(100,200,255,0.85); border: 1px solid rgba(100,200,255,0.2); }
 
+        /* ── Addons CTA ── */
+        .addons-cta {
+            margin-top: 2.5rem; padding: 1.5rem 2rem;
+            background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--r);
+            display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; flex-wrap: wrap;
+        }
+        .addons-cta-text strong { display: block; font-size: 0.9375rem; color: var(--text); margin-bottom: 0.2rem; }
+        .addons-cta-text span { font-size: 0.85rem; color: var(--text-muted); }
+        .btn-store {
+            display: inline-flex; align-items: center; gap: 0.5rem;
+            background: transparent; color: var(--accent); border: 1px solid var(--accent-mid);
+            padding: 0.65rem 1.4rem; border-radius: var(--r);
+            font-size: 0.875rem; font-weight: 500; text-decoration: none; white-space: nowrap;
+            transition: background 0.2s, border-color 0.2s, transform 0.2s; font-family: var(--font-sans);
+        }
+        .btn-store:hover { background: var(--accent-dim); border-color: var(--accent); transform: translateY(-1px); }
+        .btn-store-arrow { transition: transform 0.2s; display: inline-block; }
+        .btn-store:hover .btn-store-arrow { transform: translateX(3px); }
+
+        /* ── Live pages ── */
+        .live-pages {
+            margin-top: 2.5rem; padding: 1.75rem 2rem;
+            background: var(--bg-subtle); border: 1px solid var(--border); border-radius: var(--r);
+        }
+        .live-pages-header { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1.25rem; }
+        .live-dot {
+            width: 8px; height: 8px; border-radius: 50%; background: #22c55e;
+            box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.2);
+            animation: pulse-dot 2s ease-in-out infinite; flex-shrink: 0;
+        }
+        @keyframes pulse-dot {
+            0%, 100% { box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.2); }
+            50% { box-shadow: 0 0 0 6px rgba(34, 197, 94, 0.08); }
+        }
+        .live-pages-header-text strong { display: block; font-size: 0.875rem; color: var(--text); font-family: var(--font-sans); }
+        .live-pages-header-text span { font-size: 0.8rem; color: var(--text-muted); }
+        .live-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1rem; }
+        .live-card {
+            display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+            background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--r);
+            padding: 1.1rem 1.35rem; text-decoration: none;
+            transition: border-color 0.2s, transform 0.2s, background 0.2s;
+        }
+        .live-card:hover { border-color: var(--accent-mid); background: var(--accent-dim); transform: translateY(-2px); }
+        .live-card-text strong { display: block; font-size: 0.875rem; color: var(--text); margin-bottom: 0.15rem; }
+        .live-card-text span { font-size: 0.775rem; color: var(--text-muted); }
+        .live-card-icon {
+            width: 34px; height: 34px; border-radius: 50%;
+            background: var(--accent-dim); border: 1px solid var(--accent-mid);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 0.85rem; flex-shrink: 0; color: var(--accent);
+            transition: background 0.2s, color 0.2s, border-color 0.2s;
+        }
+        .live-card:hover .live-card-icon { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+        /* ── Partnership ── */
         .partner-split { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 2.5rem; }
         .partner-col { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--r); padding: 2rem; }
         .partner-col h3 { font-size: 1.1rem; margin-bottom: 0.5rem; padding-bottom: 0.75rem; border-bottom: 2px solid var(--accent); }
@@ -239,6 +364,7 @@
         .bonus-card h3 { font-size: 0.9375rem; margin-bottom: 0.35rem; color: var(--text); }
         .bonus-card p { font-size: 0.85rem; color: var(--text-muted); }
 
+        /* ── Journey ── */
         .journey { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; margin-top: 2.5rem; position: relative; }
         .journey::before {
             content: ''; position: absolute; top: 26px; left: 0; right: 0; height: 1px;
@@ -256,6 +382,7 @@
         .j-step h3 { font-size: 1rem; margin-bottom: 0.4rem; }
         .j-step p { font-size: 0.875rem; color: var(--text-muted); }
 
+        /* ── Why ── */
         .why-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1rem; margin-top: 2.5rem; }
         .why-item {
             background: var(--bg-card); border: 1px solid var(--border);
@@ -267,6 +394,7 @@
         .why-item:hover { border-color: var(--border-hover); color: var(--text); }
         .why-arrow { color: var(--accent); font-size: 0.85rem; flex-shrink: 0; margin-top: 0.15rem; }
 
+        /* ── Stats ── */
         .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 1.25rem; margin-top: 2.5rem; }
         .stat-card {
             background: var(--bg-card); border: 1px solid var(--border);
@@ -277,6 +405,7 @@
         .stat-num { font-family: var(--font-serif); font-size: clamp(1.75rem, 4vw, 2.5rem); color: var(--accent); line-height: 1; margin-bottom: 0.4rem; }
         .stat-label { font-size: 0.8125rem; color: var(--text-muted); }
 
+        /* ── Final CTA ── */
         .final { position: relative; overflow: hidden; text-align: center; padding: 0; border-top: 1px solid var(--border); }
         .final-bg {
             position: absolute; inset: 0;
@@ -303,120 +432,6 @@
         .footer-legal { width: 100%; text-align: center; font-size: 0.75rem; color: var(--text-faint); padding-top: 1.5rem; border-top: 1px solid var(--border); margin-top: 0.5rem; }
 
         .divider { height: 1px; background: var(--border); }
-
-        .addons-cta {
-            margin-top: 2.5rem;
-            padding: 1.5rem 2rem;
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: var(--r);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 1.5rem;
-            flex-wrap: wrap;
-        }
-        .addons-cta-text strong {
-            display: block;
-            font-size: 0.9375rem;
-            color: var(--text);
-            margin-bottom: 0.2rem;
-        }
-        .addons-cta-text span {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-        }
-        .btn-store {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            background: transparent;
-            color: var(--accent);
-            border: 1px solid var(--accent-mid);
-            padding: 0.65rem 1.4rem;
-            border-radius: var(--r);
-            font-size: 0.875rem;
-            font-weight: 500;
-            text-decoration: none;
-            white-space: nowrap;
-            transition: background 0.2s, border-color 0.2s, transform 0.2s;
-            font-family: var(--font-sans);
-        }
-        .btn-store:hover {
-            background: var(--accent-dim);
-            border-color: var(--accent);
-            transform: translateY(-1px);
-        }
-        .btn-store-arrow { transition: transform 0.2s; display: inline-block; }
-        .btn-store:hover .btn-store-arrow { transform: translateX(3px); }
-
-        .live-pages {
-            margin-top: 2.5rem;
-            padding: 1.75rem 2rem;
-            background: var(--bg-subtle);
-            border: 1px solid var(--border);
-            border-radius: var(--r);
-        }
-        .live-pages-header {
-            display: flex; align-items: center; gap: 0.75rem;
-            margin-bottom: 1.25rem;
-        }
-        .live-dot {
-            width: 8px; height: 8px; border-radius: 50%;
-            background: #22c55e;
-            box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.2);
-            animation: pulse-dot 2s ease-in-out infinite;
-            flex-shrink: 0;
-        }
-        @keyframes pulse-dot {
-            0%, 100% { box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.2); }
-            50% { box-shadow: 0 0 0 6px rgba(34, 197, 94, 0.08); }
-        }
-        .live-pages-header-text strong {
-            display: block; font-size: 0.875rem; color: var(--text); font-family: var(--font-sans);
-        }
-        .live-pages-header-text span {
-            font-size: 0.8rem; color: var(--text-muted);
-        }
-        .live-cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 1rem;
-        }
-        .live-card {
-            display: flex; align-items: center; justify-content: space-between;
-            gap: 1rem;
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: var(--r);
-            padding: 1.1rem 1.35rem;
-            text-decoration: none;
-            transition: border-color 0.2s, transform 0.2s, background 0.2s;
-        }
-        .live-card:hover {
-            border-color: var(--accent-mid);
-            background: var(--accent-dim);
-            transform: translateY(-2px);
-        }
-        .live-card-text strong {
-            display: block; font-size: 0.875rem; color: var(--text);
-            margin-bottom: 0.15rem;
-        }
-        .live-card-text span {
-            font-size: 0.775rem; color: var(--text-muted);
-        }
-        .live-card-icon {
-            width: 34px; height: 34px; border-radius: 50%;
-            background: var(--accent-dim); border: 1px solid var(--accent-mid);
-            display: flex; align-items: center; justify-content: center;
-            font-size: 0.85rem; flex-shrink: 0; color: var(--accent);
-            transition: background 0.2s, color 0.2s, border-color 0.2s;
-        }
-        .live-card:hover .live-card-icon {
-            background: var(--accent);
-            color: #fff;
-            border-color: var(--accent);
-        }
 
         @media (max-width: 640px) {
             .pkg-grid { grid-template-columns: 1fr; }
@@ -446,7 +461,7 @@
     </div>
 </nav>
 
-<!-- HERO -->
+<!-- HERO — unchanged -->
 <section id="hero" class="hero">
     <div class="hero-bg"></div>
     <div class="hero-content">
@@ -475,7 +490,7 @@
 
 <div class="divider"></div>
 
-<!-- YOUR GOALS -->
+<!-- YOUR GOALS — unchanged -->
 <section id="pain" class="reveal">
     <div class="wrap">
         <div class="section-head">
@@ -507,7 +522,7 @@
     </div>
 </section>
 
-<!-- PROMISE BAND -->
+<!-- PROMISE BAND — unchanged -->
 <div class="promise-band reveal">
     <div class="wrap">
         <h2>Here&rsquo;s our promise.</h2>
@@ -515,24 +530,25 @@
     </div>
 </div>
 
-<!-- THE PACKAGE -->
+<!-- THE PACKAGE — updated -->
 <section id="package" class="reveal">
     <div class="wrap">
         <div class="section-head">
             <p class="eyebrow">The Package</p>
             <h2>Everything that&rsquo;s included &mdash; and then some.</h2>
-            <p class="sub">The full standard package is free throughout your two-month pilot. Optional extras are available to add at any point.</p>
+            <p class="sub">The full standard package is free throughout your two-month pilot. Add-on services are available at exclusive pilot partner pricing.</p>
         </div>
+
         <div class="tab-nav" id="tabNav">
             <button class="tab-btn active" data-tab="platform">Platform</button>
             <button class="tab-btn" data-tab="instagram">Instagram</button>
             <button class="tab-btn" data-tab="outreach">Outreach</button>
             <button class="tab-btn" data-tab="support">Support</button>
-            <button class="tab-btn" data-tab="content">Content Add-Ons</button>
-            <button class="tab-btn" data-tab="addons">Club Add-Ons</button>
+            <button class="tab-btn" data-tab="addons">Add-On Services</button>
             <button class="tab-btn" data-tab="monetisation">Monetisation</button>
         </div>
 
+        <!-- Platform — unchanged -->
         <div class="tab-panel active" id="tab-platform">
             <div class="pkg-grid">
                 <div class="pkg-item"><div class="pkg-check">&#10003;</div><div class="pkg-item-text"><strong>Full Club Hub Page</strong><span>Ongoing &mdash; your permanent home on The NBRH</span></div></div>
@@ -571,6 +587,7 @@
             </div>
         </div>
 
+        <!-- Instagram — unchanged -->
         <div class="tab-panel" id="tab-instagram">
             <div class="pkg-grid">
                 <div class="pkg-item"><div class="pkg-check">&#10003;</div><div class="pkg-item-text"><strong>Instagram Stories Highlights Placement</strong><span>Ongoing &mdash; your club featured in NBRH Instagram highlights and stories</span></div></div>
@@ -579,6 +596,7 @@
             </div>
         </div>
 
+        <!-- Outreach — unchanged -->
         <div class="tab-panel" id="tab-outreach">
             <div class="pkg-grid">
                 <div class="pkg-item"><div class="pkg-check">&#10003;</div><div class="pkg-item-text"><strong>x2 Session Filler Outreach</strong><span>Per month &mdash; targeted messaging to fill your sessions</span></div></div>
@@ -586,6 +604,7 @@
             </div>
         </div>
 
+        <!-- Support — unchanged -->
         <div class="tab-panel" id="tab-support">
             <div class="pkg-grid">
                 <div class="pkg-item"><div class="pkg-check">&#10003;</div><div class="pkg-item-text"><strong>Check-Ins Every Two Weeks</strong><span>Ongoing &mdash; we stay close throughout the pilot</span></div></div>
@@ -596,31 +615,419 @@
             </div>
         </div>
 
-        <div class="tab-panel" id="tab-content">
-            <div style="margin-bottom:1.5rem;"><span class="add-on-label label-paid">Optional Paid Extras</span></div>
-            <div class="pkg-grid">
-                <div class="pkg-item"><div class="pkg-check">&#10003;</div><div class="pkg-item-text"><strong>Club Blog Post</strong><span>About your club, founder, or sessions</span><div class="price-row"><span class="price-full">&#163;60.00</span><span class="price-yours">Your Price: &#163;35.00</span></div></div></div>
-                <div class="pkg-item"><div class="pkg-check">&#10003;</div><div class="pkg-item-text"><strong>Original Video Content</strong><span>Shot at one of your sessions</span><div class="price-row"><span class="price-full">&#163;120.00</span><span class="price-yours">Your Price: &#163;80.00</span></div></div></div>
-                <div class="pkg-item"><div class="pkg-check">&#10003;</div><div class="pkg-item-text"><strong>Deep Search Marketing Report</strong><span>In-depth analysis of your market and opportunities</span><div class="price-row"><span class="price-full">&#163;60.00</span><span class="price-yours">Your Price: &#163;40.00</span></div></div></div>
-                <div class="pkg-item"><div class="pkg-check">&#10003;</div><div class="pkg-item-text"><strong>Evidence Book</strong><span>We create a PDF that showcases all the stats and stories</span><div class="price-row"><span class="price-full">&#163;60.00</span><span class="price-yours">Your Price: &#163;40.00</span></div></div></div>
-            </div>
-        </div>
-
+        <!-- Add-On Services — UPDATED -->
         <div class="tab-panel" id="tab-addons">
-            <div style="margin-bottom:1.5rem;"><span class="add-on-label label-optional">Optional &mdash; Earn Free Add-Ons Via Partnership Milestones</span></div>
-            <div class="pkg-grid">
-                <div class="pkg-item"><div class="pkg-check">&#10003;</div><div class="pkg-item-text"><strong>Additional Sponsored Session</strong><span>Extra featured placement</span><div class="price-row"><span class="price-full">&#163;35.00</span><span class="price-yours">Your Price: &#163;20.00</span></div></div></div>
-                <div class="pkg-item"><div class="pkg-check">&#10003;</div><div class="pkg-item-text"><strong>Additional Session Listing</strong><span>List beyond the 5-session pilot limit</span><div class="price-row"><span class="price-full">&#163;15.00</span><span class="price-yours">Your Price: &#163;8.00</span></div></div></div>
-                <div class="pkg-item"><div class="pkg-check">&#10003;</div><div class="pkg-item-text"><strong>7-Day Pinned Instagram Post</strong><span>Pinned at the top of our NBRH Instagram page</span><div class="price-row"><span class="price-full">&#163;30.00</span><span class="price-yours">Your Price: &#163;20.00</span></div></div></div>
-                <div class="pkg-item"><div class="pkg-check">&#10003;</div><div class="pkg-item-text"><strong>Targeted Boosted Sessions Reel</strong><span>Additional paid Instagram promotion</span><div class="price-row"><span class="price-full">&#163;20.00 + Ad Spend</span><span class="price-yours">Your Price: &#163;15.00 + Ad Spend</span></div></div></div>
-                <div class="pkg-item"><div class="pkg-check">&#10003;</div><div class="pkg-item-text"><strong>Boosted Club Awareness Reel</strong><span>Additional club spotlight</span><div class="price-row"><span class="price-full">&#163;20.00 + Ad Spend</span><span class="price-yours">Your Price: &#163;15.00 + Ad Spend</span></div></div></div>
-                <div class="pkg-item"><div class="pkg-check">&#10003;</div><div class="pkg-item-text"><strong>Additional Cold Outreach</strong><span>3 additional online groups</span><div class="price-row"><span class="price-full">&#163;40.00</span><span class="price-yours">Your Price: &#163;25.00</span></div></div></div>
-                <div class="pkg-item"><div class="pkg-check">&#10003;</div><div class="pkg-item-text"><strong>Session Filler Outreach</strong><span>1 extra targeted fill campaign</span><div class="price-row"><span class="price-full">&#163;25.00</span><span class="price-yours">Your Price: &#163;15.00</span></div></div></div>
-                <div class="pkg-item"><div class="pkg-check">&#10003;</div><div class="pkg-item-text"><strong>Fund Finder</strong><span>We search for funding opportunities for your club</span><div class="price-row"><span class="price-full">&#163;75.00</span><span class="price-yours">Your Price: &#163;50.00</span></div></div></div>
-                <div class="pkg-item"><div class="pkg-check">&#10003;</div><div class="pkg-item-text"><strong>Marketing / Branding Project</strong><span>A bespoke creative project for your club</span><div class="price-row"><span class="price-full">&#163;100.00</span><span class="price-yours">Your Price: &#163;70.00</span></div></div></div>
+            <div style="margin-bottom:1.5rem;">
+                <span class="add-on-label label-paid">Optional Paid Extras &mdash; Pilot Partner Pricing</span>
+            </div>
+
+            <div class="services-grid">
+
+                <!-- Social Media -->
+                <div class="svc-card">
+                    <button class="svc-trigger" aria-expanded="false">
+                        <div class="svc-trigger-left">
+                            <span class="svc-trigger-icon">&#128247;</span>
+                            <div class="svc-trigger-text">
+                                <span class="svc-trigger-name">Social Media</span>
+                                <span class="svc-trigger-desc">Boosted reels, creative production and Instagram targeting</span>
+                            </div>
+                        </div>
+                        <div class="svc-trigger-right">
+                            <span class="svc-price-pill">&pound;65</span>
+                            <span class="svc-chevron">&#9660;</span>
+                        </div>
+                    </button>
+                    <div class="svc-body">
+                        <div class="svc-body-inner">
+                            <div class="svc-body-content">
+                                <div class="svc-includes">
+                                    <span class="svc-includes-label">What&rsquo;s Included</span>
+                                    <ul>
+                                        <li>Targeted Boosted Sessions Reel &mdash; a paid Instagram Reel built around your sessions, targeted to users in your area who match your ideal member profile</li>
+                                        <li>Boosted Club Awareness Reel &mdash; a brand-building Reel focused on growing your following and name recognition in the right areas</li>
+                                        <li>Creative production, targeting and reporting handled by us</li>
+                                        <li>Ad spend budget agreed with you separately</li>
+                                    </ul>
+                                </div>
+                                <div class="svc-pricing">
+                                    <div class="svc-price-row">
+                                        <div class="svc-price-cell">
+                                            <span class="svc-price-cell-label">Full Price</span>
+                                            <span class="svc-price-cell-value">&pound;100</span>
+                                        </div>
+                                        <div class="svc-price-divider"></div>
+                                        <div class="svc-price-cell pilot-price">
+                                            <span class="svc-price-cell-label">Pilot Partner Price</span>
+                                            <span class="svc-price-cell-value">&pound;65</span>
+                                        </div>
+                                    </div>
+                                    <div class="svc-saving">Pilot partners save <strong>&pound;35</strong> (35% off)</div>
+                                    <a href="https://www.thenbrh.co.uk/ao-targeted-boosted-sessions-reel" class="svc-book-btn">Book this Service &rarr;</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- League -->
+                <div class="svc-card">
+                    <button class="svc-trigger" aria-expanded="false">
+                        <div class="svc-trigger-left">
+                            <span class="svc-trigger-icon">&#127942;</span>
+                            <div class="svc-trigger-text">
+                                <span class="svc-trigger-name">League</span>
+                                <span class="svc-trigger-desc">Full-service league infrastructure, built and managed for the season</span>
+                            </div>
+                        </div>
+                        <div class="svc-trigger-right">
+                            <span class="svc-price-pill">&pound;100 / season</span>
+                            <span class="svc-chevron">&#9660;</span>
+                        </div>
+                    </button>
+                    <div class="svc-body">
+                        <div class="svc-body-inner">
+                            <div class="svc-body-content">
+                                <div class="svc-includes">
+                                    <span class="svc-includes-label">What&rsquo;s Included</span>
+                                    <ul>
+                                        <li>Dynamic league table updated after every round of fixtures</li>
+                                        <li>Full fixture list with results, dates, and venues</li>
+                                        <li>Individual club and team profile pages</li>
+                                        <li>Outreach to recruit new players and teams</li>
+                                        <li>Custom branding and additions to your league page</li>
+                                        <li>Data, insights and performance reporting</li>
+                                        <li>Support with marketing and paid promotion of the league</li>
+                                        <li>Content creation and branding support</li>
+                                        <li>League rules, format and FAQ section</li>
+                                        <li>Season-long page management by The NBRH team</li>
+                                        <li>Shareable league link for players, clubs and social media</li>
+                                    </ul>
+                                </div>
+                                <div class="svc-pricing">
+                                    <div class="svc-price-row">
+                                        <div class="svc-price-cell">
+                                            <span class="svc-price-cell-label">Full Price</span>
+                                            <span class="svc-price-cell-value">&pound;155 / season</span>
+                                        </div>
+                                        <div class="svc-price-divider"></div>
+                                        <div class="svc-price-cell pilot-price">
+                                            <span class="svc-price-cell-label">Pilot Partner Price</span>
+                                            <span class="svc-price-cell-value">&pound;100 / season</span>
+                                        </div>
+                                    </div>
+                                    <div class="svc-saving">Pilot partners save <strong>&pound;55</strong> (35% off). Can be paid in monthly instalments.</div>
+                                    <a href="https://www.thenbrh.co.uk/ao-league-management" class="svc-book-btn">Book this Service &rarr;</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Outreach -->
+                <div class="svc-card">
+                    <button class="svc-trigger" aria-expanded="false">
+                        <div class="svc-trigger-left">
+                            <span class="svc-trigger-icon">&#128226;</span>
+                            <div class="svc-trigger-text">
+                                <span class="svc-trigger-name">Outreach</span>
+                                <span class="svc-trigger-desc">Targeted member acquisition and community outreach campaigns</span>
+                            </div>
+                        </div>
+                        <div class="svc-trigger-right">
+                            <span class="svc-price-pill">&pound;80</span>
+                            <span class="svc-chevron">&#9660;</span>
+                        </div>
+                    </button>
+                    <div class="svc-body">
+                        <div class="svc-body-inner">
+                            <div class="svc-body-content">
+                                <div class="svc-includes">
+                                    <span class="svc-includes-label">What&rsquo;s Included</span>
+                                    <ul>
+                                        <li>Cold Outreach &mdash; we identify and reach out to relevant online communities (Facebook groups, Reddit, WhatsApp, Discord) with natural, non-spammy messaging introducing your sessions</li>
+                                        <li>3 communities targeted on your behalf per campaign</li>
+                                        <li>Session Filler Outreach &mdash; a focused campaign targeting NBRH users who match your session&rsquo;s activity, location and availability</li>
+                                        <li>Ideal for last-minute gaps, new slots, or sessions consistently running below capacity</li>
+                                    </ul>
+                                </div>
+                                <div class="svc-pricing">
+                                    <div class="svc-price-row">
+                                        <div class="svc-price-cell">
+                                            <span class="svc-price-cell-label">Full Price</span>
+                                            <span class="svc-price-cell-value">&pound;120</span>
+                                        </div>
+                                        <div class="svc-price-divider"></div>
+                                        <div class="svc-price-cell pilot-price">
+                                            <span class="svc-price-cell-label">Pilot Partner Price</span>
+                                            <span class="svc-price-cell-value">&pound;80</span>
+                                        </div>
+                                    </div>
+                                    <div class="svc-saving">Pilot partners save <strong>&pound;40</strong> (33% off)</div>
+                                    <a href="https://www.thenbrh.co.uk/ao-additional-cold-outreach" class="svc-book-btn">Book this Service &rarr;</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Discovery -->
+                <div class="svc-card">
+                    <button class="svc-trigger" aria-expanded="false">
+                        <div class="svc-trigger-left">
+                            <span class="svc-trigger-icon">&#128269;</span>
+                            <div class="svc-trigger-text">
+                                <span class="svc-trigger-name">Discovery</span>
+                                <span class="svc-trigger-desc">Platform visibility, pinned promotion and session discoverability</span>
+                            </div>
+                        </div>
+                        <div class="svc-trigger-right">
+                            <span class="svc-price-pill">&pound;55</span>
+                            <span class="svc-chevron">&#9660;</span>
+                        </div>
+                    </button>
+                    <div class="svc-body">
+                        <div class="svc-body-inner">
+                            <div class="svc-body-content">
+                                <div class="svc-includes">
+                                    <span class="svc-includes-label">What&rsquo;s Included</span>
+                                    <ul>
+                                        <li>Sponsored Session &mdash; featured, high-visibility placement of one of your sessions on The NBRH platform, surfaced prominently to users browsing your activity type and area</li>
+                                        <li>Additional Session Listing &mdash; a fully set-up session page beyond your standard allocation, complete with booking, description and discovery</li>
+                                        <li>7-Day Pinned Post on Instagram &mdash; your most important message pinned at the top of our Instagram page for a full seven days</li>
+                                        <li>Ideal for new session launches, promo pushes, or time-sensitive announcements</li>
+                                    </ul>
+                                </div>
+                                <div class="svc-pricing">
+                                    <div class="svc-price-row">
+                                        <div class="svc-price-cell">
+                                            <span class="svc-price-cell-label">Full Price</span>
+                                            <span class="svc-price-cell-value">&pound;80</span>
+                                        </div>
+                                        <div class="svc-price-divider"></div>
+                                        <div class="svc-price-cell pilot-price">
+                                            <span class="svc-price-cell-label">Pilot Partner Price</span>
+                                            <span class="svc-price-cell-value">&pound;55</span>
+                                        </div>
+                                    </div>
+                                    <div class="svc-saving">Pilot partners save <strong>&pound;25</strong> (31% off)</div>
+                                    <a href="https://www.thenbrh.co.uk/ao-additional-sponsored-session" class="svc-book-btn">Book this Service &rarr;</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Content -->
+                <div class="svc-card">
+                    <button class="svc-trigger" aria-expanded="false">
+                        <div class="svc-trigger-left">
+                            <span class="svc-trigger-icon">&#9999;&#65039;</span>
+                            <div class="svc-trigger-text">
+                                <span class="svc-trigger-name">Content</span>
+                                <span class="svc-trigger-desc">Written content, video production and promotional assets</span>
+                            </div>
+                        </div>
+                        <div class="svc-trigger-right">
+                            <span class="svc-price-pill">&pound;140</span>
+                            <span class="svc-chevron">&#9660;</span>
+                        </div>
+                    </button>
+                    <div class="svc-body">
+                        <div class="svc-body-inner">
+                            <div class="svc-body-content">
+                                <div class="svc-includes">
+                                    <span class="svc-includes-label">What&rsquo;s Included</span>
+                                    <ul>
+                                        <li>Club Blog Post &mdash; an 800&ndash;1,200 word SEO-optimised article telling your club&rsquo;s story, published on The NBRH platform and LinkedIn with a shareable link</li>
+                                        <li>Original Video Content &mdash; on-location filming at one of your sessions, edited into a Reel (30&ndash;60 sec) plus a longer cut for your website or YouTube, delivered within 7 days</li>
+                                        <li>Evidence Book &mdash; a branded PDF showcasing your club&rsquo;s stats, reviews, data and stories &mdash; useful for discovery, funding applications and sponsorship</li>
+                                        <li>All assets are yours to use across your own channels</li>
+                                    </ul>
+                                </div>
+                                <div class="svc-pricing">
+                                    <div class="svc-price-row">
+                                        <div class="svc-price-cell">
+                                            <span class="svc-price-cell-label">Full Price</span>
+                                            <span class="svc-price-cell-value">&pound;215</span>
+                                        </div>
+                                        <div class="svc-price-divider"></div>
+                                        <div class="svc-price-cell pilot-price">
+                                            <span class="svc-price-cell-label">Pilot Partner Price</span>
+                                            <span class="svc-price-cell-value">&pound;140</span>
+                                        </div>
+                                    </div>
+                                    <div class="svc-saving">Pilot partners save <strong>&pound;75</strong> (35% off)</div>
+                                    <a href="https://www.thenbrh.co.uk/ao-club-blog-post" class="svc-book-btn">Book this Service &rarr;</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Data & Insights -->
+                <div class="svc-card">
+                    <button class="svc-trigger" aria-expanded="false">
+                        <div class="svc-trigger-left">
+                            <span class="svc-trigger-icon">&#128201;</span>
+                            <div class="svc-trigger-text">
+                                <span class="svc-trigger-name">Data &amp; Insights</span>
+                                <span class="svc-trigger-desc">Market research, analytics, reporting and performance review</span>
+                            </div>
+                        </div>
+                        <div class="svc-trigger-right">
+                            <span class="svc-price-pill">&pound;65</span>
+                            <span class="svc-chevron">&#9660;</span>
+                        </div>
+                    </button>
+                    <div class="svc-body">
+                        <div class="svc-body-inner">
+                            <div class="svc-body-content">
+                                <div class="svc-includes">
+                                    <span class="svc-includes-label">What&rsquo;s Included</span>
+                                    <ul>
+                                        <li>Deep Search Marketing Report &mdash; a research-led report mapping your competitive landscape, identifying audiences you&rsquo;re missing, and surfacing the channels and tactics most likely to drive growth</li>
+                                        <li>Competitor audit (local and digital)</li>
+                                        <li>Audience and demand analysis specific to your activity type and location</li>
+                                        <li>Channel recommendations with rationale</li>
+                                        <li>Quick-win action plan with clear priorities</li>
+                                    </ul>
+                                </div>
+                                <div class="svc-pricing">
+                                    <div class="svc-price-row">
+                                        <div class="svc-price-cell">
+                                            <span class="svc-price-cell-label">Full Price</span>
+                                            <span class="svc-price-cell-value">&pound;100</span>
+                                        </div>
+                                        <div class="svc-price-divider"></div>
+                                        <div class="svc-price-cell pilot-price">
+                                            <span class="svc-price-cell-label">Pilot Partner Price</span>
+                                            <span class="svc-price-cell-value">&pound;65</span>
+                                        </div>
+                                    </div>
+                                    <div class="svc-saving">Pilot partners save <strong>&pound;35</strong> (35% off)</div>
+                                    <a href="https://www.thenbrh.co.uk/ao-deep-search-marketing-report" class="svc-book-btn">Book this Service &rarr;</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Monetisation -->
+                <div class="svc-card">
+                    <button class="svc-trigger" aria-expanded="false">
+                        <div class="svc-trigger-left">
+                            <span class="svc-trigger-icon">&#128200;</span>
+                            <div class="svc-trigger-text">
+                                <span class="svc-trigger-name">Monetisation</span>
+                                <span class="svc-trigger-desc">Revenue strategy, funding support, partnerships and new income streams</span>
+                            </div>
+                        </div>
+                        <div class="svc-trigger-right">
+                            <span class="svc-price-pill">&pound;80</span>
+                            <span class="svc-chevron">&#9660;</span>
+                        </div>
+                    </button>
+                    <div class="svc-body">
+                        <div class="svc-body-inner">
+                            <div class="svc-body-content">
+                                <div class="svc-includes">
+                                    <span class="svc-includes-label">What&rsquo;s Included</span>
+                                    <ul>
+                                        <li>Fund Finder &mdash; we search for funding opportunities on your behalf, help craft applications, and manage the entire process. If we secure funding, you keep 100% of it</li>
+                                        <li>Marketing / Branding Project &mdash; a fully bespoke creative deliverable built around a specific goal: a rebrand, campaign identity, template pack, social media content kit, or event assets</li>
+                                        <li>Scoped with you upfront so you know exactly what you&rsquo;re getting</li>
+                                        <li>No generic outputs &mdash; built for your club, from scratch</li>
+                                    </ul>
+                                </div>
+                                <div class="svc-pricing">
+                                    <div class="svc-price-row">
+                                        <div class="svc-price-cell">
+                                            <span class="svc-price-cell-label">Full Price</span>
+                                            <span class="svc-price-cell-value">&pound;120</span>
+                                        </div>
+                                        <div class="svc-price-divider"></div>
+                                        <div class="svc-price-cell pilot-price">
+                                            <span class="svc-price-cell-label">Pilot Partner Price</span>
+                                            <span class="svc-price-cell-value">&pound;80</span>
+                                        </div>
+                                    </div>
+                                    <div class="svc-saving">Pilot partners save <strong>&pound;40</strong> (33% off)</div>
+                                    <a href="https://www.thenbrh.co.uk/ao-fund-finder" class="svc-book-btn">Book this Service &rarr;</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Delivery add-ons -->
+            <div class="delivery-block">
+                <div class="delivery-header">
+                    <span class="delivery-icon">&#9889;</span>
+                    <div>
+                        <div class="delivery-title">Need it faster?</div>
+                        <div class="delivery-sub">Add a delivery upgrade to any service at checkout. Available on all add-on services above.</div>
+                    </div>
+                </div>
+                <div class="delivery-options">
+                    <div class="delivery-option">
+                        <div class="delivery-option-left">
+                            <span class="delivery-option-icon">&#128293;</span>
+                            <div>
+                                <div class="delivery-option-name">24-Hour Delivery</div>
+                                <div class="delivery-option-desc">Turned around within one business day of all assets and information received</div>
+                            </div>
+                        </div>
+                        <div class="delivery-option-right">
+                            <div class="delivery-price-col">
+                                <span class="delivery-price-label">Full Price</span>
+                                <span class="delivery-price-value">&pound;50</span>
+                            </div>
+                            <div class="delivery-divider"></div>
+                            <div class="delivery-price-col pilot">
+                                <span class="delivery-price-label">Pilot Partner</span>
+                                <span class="delivery-price-value">&pound;35</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="delivery-option">
+                        <div class="delivery-option-left">
+                            <span class="delivery-option-icon">&#9193;</span>
+                            <div>
+                                <div class="delivery-option-name">Express Delivery</div>
+                                <div class="delivery-option-desc">Completed within 3 business days of all assets and information received</div>
+                            </div>
+                        </div>
+                        <div class="delivery-option-right">
+                            <div class="delivery-price-col">
+                                <span class="delivery-price-label">Full Price</span>
+                                <span class="delivery-price-value">&pound;25</span>
+                            </div>
+                            <div class="delivery-divider"></div>
+                            <div class="delivery-price-col pilot">
+                                <span class="delivery-price-label">Pilot Partner</span>
+                                <span class="delivery-price-value">&pound;18</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="delivery-note">&#9432; Standard delivery timelines vary by service. Delivery upgrades are contingent on receiving all required assets and information promptly. Pilot partners save approx. 30% on both options.</div>
+            </div>
+
+            <div class="addons-cta">
+                <div class="addons-cta-text">
+                    <strong>Want to browse all available add-ons?</strong>
+                    <span>Visit the NBRH Add-Ons Store to see the full range and place an order directly.</span>
+                </div>
+                <a href="https://add-ons-chi.vercel.app" target="_blank" rel="noopener noreferrer" class="btn-store">
+                    Browse the Add-Ons Store <span class="btn-store-arrow">&#8594;</span>
+                </a>
             </div>
         </div>
 
+        <!-- Monetisation — unchanged -->
         <div class="tab-panel" id="tab-monetisation">
             <div style="margin-bottom:1.5rem;"><span class="add-on-label label-longterm">Longer-Term Opportunities</span></div>
             <div class="pkg-grid">
@@ -633,22 +1040,12 @@
             </div>
         </div>
 
-        <div class="addons-cta">
-            <div class="addons-cta-text">
-                <strong>Want to browse all available add-ons?</strong>
-                <span>Visit the NBRH Add-Ons Store to see the full range and place an order directly.</span>
-            </div>
-            <a href="https://add-ons-chi.vercel.app" target="_blank" rel="noopener noreferrer" class="btn-store">
-                Browse the Add-Ons Store <span class="btn-store-arrow">&#8594;</span>
-            </a>
-        </div>
-
     </div>
 </section>
 
 <div class="divider"></div>
 
-<!-- THE PARTNERSHIP -->
+<!-- THE PARTNERSHIP — milestone wording updated -->
 <section id="partnership" class="reveal">
     <div class="wrap">
         <div class="section-head">
@@ -683,14 +1080,14 @@
                 <div class="bonus-num">+20</div>
                 <div>
                     <h3>Every 20 additional user sign-ups</h3>
-                    <p>Earns your club one free add-on from the Club Add-Ons list. No limit on milestone rewards.</p>
+                    <p>Earns your club one free add-on service from our Add-On Services menu. No limit on milestone rewards.</p>
                 </div>
             </div>
             <div class="bonus-card">
                 <div class="bonus-num">+10</div>
                 <div>
                     <h3>Every 10 additional mutual followers</h3>
-                    <p>Earns your club one free add-on. Keep growing, keep earning. No limit on milestone rewards.</p>
+                    <p>Earns your club one free add-on service. Keep growing, keep earning. No limit on milestone rewards.</p>
                 </div>
             </div>
         </div>
@@ -699,7 +1096,7 @@
 
 <div class="divider"></div>
 
-<!-- HOW IT WORKS -->
+<!-- HOW IT WORKS — unchanged -->
 <section id="how" class="reveal">
     <div class="wrap">
         <div class="section-head">
@@ -744,7 +1141,7 @@
 
 <div class="divider"></div>
 
-<!-- WHY US -->
+<!-- WHY US — unchanged -->
 <section id="why" class="reveal">
     <div class="wrap">
         <div class="section-head">
@@ -766,7 +1163,7 @@
 
 <div class="divider"></div>
 
-<!-- OUR STATS -->
+<!-- STATS — unchanged -->
 <section id="stats" class="reveal">
     <div class="wrap">
         <div class="section-head">
@@ -785,7 +1182,7 @@
     </div>
 </section>
 
-<!-- FINAL CTA -->
+<!-- FINAL CTA — unchanged -->
 <section class="final reveal">
     <div class="final-bg"></div>
     <div class="final-content">
@@ -846,6 +1243,16 @@
         document.querySelectorAll('.tab-panel').forEach(function(p) { p.classList.remove('active'); });
         btn.classList.add('active');
         document.getElementById('tab-' + tab).classList.add('active');
+    });
+
+    // Service card accordion
+    document.querySelectorAll('.svc-trigger').forEach(function(trigger) {
+        trigger.addEventListener('click', function() {
+            var card = trigger.closest('.svc-card');
+            var isOpen = card.classList.contains('open');
+            card.classList.toggle('open', !isOpen);
+            trigger.setAttribute('aria-expanded', String(!isOpen));
+        });
     });
 </script>
 </body>
