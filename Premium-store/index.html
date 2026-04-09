@@ -80,7 +80,8 @@
         .tier-toggle { display: flex; justify-content: center; margin-bottom: 3.5rem; background: var(--bg-card); border: 1px solid var(--border); border-radius: 100px; padding: 0.25rem; width: fit-content; margin-left: auto; margin-right: auto; }
         .tier-btn { padding: 0.65rem 1.5rem; border-radius: 100px; border: none; font-family: var(--font-sans); font-size: 0.875rem; font-weight: 500; cursor: pointer; transition: all 0.2s; color: var(--text-muted); background: transparent; white-space: nowrap; }
         .tier-btn.active { background: var(--accent); color: #fff; }
-        @media (max-width: 480px) { .tier-btn { padding: 0.6rem 1rem; font-size: 0.8rem; } }
+        @media (max-width: 600px) { .tier-btn { padding: 0.6rem 0.85rem; font-size: 0.78rem; } }
+        @media (max-width: 420px) { .tier-toggle { flex-direction: column; border-radius: 12px; } .tier-btn { border-radius: 8px; text-align: center; } }
 
         /* Tier views */
         .tier-view { display: none; }
@@ -100,6 +101,12 @@
         .tier-ideal { background: var(--accent-dim); border: 1px solid var(--accent-mid); border-radius: var(--r); padding: 1rem 1.25rem; font-size: 0.85rem; color: var(--text-muted); line-height: 1.65; }
         .tier-ideal strong { font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.09em; color: var(--accent); display: block; margin-bottom: 0.3rem; }
 
+        /* Pricing model callout — used in ch2 left col */
+        .model-switch-note { margin-top: 1rem; padding: 0.85rem 1rem; background: var(--bg-subtle); border: 1px solid var(--border); border-radius: var(--r); font-size: 0.8rem; color: var(--text-faint); line-height: 1.6; }
+        .model-switch-note strong { color: var(--text-muted); font-weight: 500; }
+        .model-switch-link { background: none; border: none; cursor: pointer; font-family: var(--font-sans); font-size: 0.8rem; font-weight: 500; color: rgba(255,27,110,0.7); padding: 0; transition: color 0.15s; text-decoration: underline; text-underline-offset: 2px; }
+        .model-switch-link:hover { color: var(--accent); }
+
         /* Plan card */
         .plan-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--r); border-top: 3px solid var(--accent); overflow: hidden; }
         .plan-header { padding: 1.75rem; border-bottom: 1px solid var(--border); }
@@ -113,6 +120,11 @@
         .price-note { font-size: 0.78rem; color: var(--text-faint); font-style: italic; }
         .plan-pitch { font-size: 0.9rem; color: var(--text-muted); line-height: 1.7; margin-top: 1rem; }
         .plan-body { padding: 1.5rem 1.75rem; }
+
+        /* Identical features badge — for ch2 */
+        .features-same-badge { display: flex; align-items: center; gap: 0.6rem; background: var(--accent-dim); border: 1px solid var(--accent-mid); border-radius: var(--r); padding: 0.75rem 1rem; margin-bottom: 1.5rem; font-size: 0.82rem; color: var(--text-muted); line-height: 1.5; }
+        .features-same-badge .fsb-icon { font-size: 1rem; flex-shrink: 0; }
+        .features-same-badge strong { color: var(--accent); font-weight: 500; }
 
         .expand-row { display: flex; justify-content: flex-end; margin-bottom: 1rem; }
         .expand-btn { background: none; border: none; cursor: pointer; font-family: var(--font-sans); font-size: 0.775rem; font-weight: 500; color: var(--text-faint); transition: color 0.15s; padding: 0; }
@@ -220,13 +232,17 @@
         .compare-table { width: 100%; border-collapse: collapse; font-size: 0.875rem; margin-top: 2rem; }
         .compare-table th, .compare-table td { padding: 0.875rem 1rem; text-align: left; border-bottom: 1px solid var(--border); }
         .compare-table thead th { font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.09em; color: var(--text-faint); }
-        .compare-table thead th:nth-child(2) { color: var(--accent); }
+        .compare-table thead th:nth-child(2),
+        .compare-table thead th:nth-child(3) { color: var(--accent); }
         .compare-table tbody tr:hover td { background: var(--bg-subtle); }
         .compare-table td:first-child { color: var(--text-muted); }
         .compare-table td:not(:first-child) { text-align: center; }
         .check-yes { color: var(--accent); }
         .check-no { color: var(--text-faint); }
         .compare-note-inline { font-size: 0.72rem; color: var(--text-faint); font-style: italic; }
+        .compare-pricing-row td { background: var(--bg-subtle); }
+        .compare-pricing-row td:nth-child(2),
+        .compare-pricing-row td:nth-child(3) { font-family: var(--font-serif); font-size: 1rem; color: var(--accent); }
         @media (max-width: 600px) { .compare-table { font-size: 0.8rem; } .compare-table th, .compare-table td { padding: 0.65rem 0.5rem; } }
 
         /* CTA band */
@@ -268,15 +284,15 @@
         <div class="wrap">
             <div class="store-badge">Plans &amp; Pricing</div>
             <h1>Two ways to work with us.</h1>
-            <p class="lead">Whether you need us running the engine or just targeted support in the right places &mdash; there&rsquo;s a model that fits.</p>
+            <p class="lead">Whether you want a fixed monthly fee or pure pay-per-booking flexibility &mdash; both get you the same Club House infrastructure.</p>
             <div class="hero-stats">
                 <div class="hero-stat">
-                    <span class="hero-stat-num">&pound;40</span>
-                    <span class="hero-stat-label">Club House / month</span>
+                    <span class="hero-stat-num">&pound;50</span>
+                    <span class="hero-stat-label">Club House / month + &pound;1/booking</span>
                 </div>
                 <div class="hero-stat">
-                    <span class="hero-stat-num">&pound;1</span>
-                    <span class="hero-stat-label">per booking</span>
+                    <span class="hero-stat-num">&pound;2</span>
+                    <span class="hero-stat-label">Club House Flex / booking, no monthly fee</span>
                 </div>
                 <div class="hero-stat">
                     <span class="hero-stat-num">8</span>
@@ -296,38 +312,42 @@
         <div class="section-head">
             <span class="eyebrow">How we work together</span>
             <h2>Pick your model.</h2>
-            <p class="sub">Full infrastructure and ongoing support, or specific help when you need it.</p>
+            <p class="sub">Same Club House. Same features. Different ways to pay.</p>
         </div>
 
         <div class="tier-toggle" role="group" aria-label="Select pricing tier">
-            <button class="tier-btn active" data-tier="ch">&#127968; Club House &mdash; &pound;40/mo</button>
+            <button class="tier-btn active" data-tier="ch1">&#127968; Club House &mdash; &pound;50/mo</button>
+            <button class="tier-btn" data-tier="ch2">&#127968; Club House Flex</button>
             <button class="tier-btn" data-tier="alc">&#127859; &Agrave; La Carte</button>
         </div>
 
-        <!-- Tier 1: Club House -->
-        <div class="tier-view active" id="tier-ch">
+        <!-- ===================== TIER 1: Club House £50/mo ===================== -->
+        <div class="tier-view active" id="tier-ch1">
             <div class="tier-layout">
 
                 <div class="tier-label-col">
                     <span class="tier-number">01</span>
-                    <span class="eyebrow">Club House</span>
-                    <h2 class="tier-heading">The full package.</h2>
-                    <p class="tier-desc">For clubs doing good work on the ground that are let down by their marketing and digital setup. Losing players at the point of discovery or booking &mdash; not because their sessions aren&rsquo;t good, but because the infrastructure isn&rsquo;t there.</p>
+                    <span class="eyebrow">Club House &mdash; Monthly</span>
+                    <h2 class="tier-heading">Built for clubs that are ready to grow.</h2>
+                    <p class="tier-desc">You&rsquo;re running sessions regularly and have a handle on what you&rsquo;re doing. You want the full platform infrastructure in place and a predictable monthly cost you can plan around. The &pound;50 covers your setup, management, and presence &mdash; and the &pound;1 per booking keeps our incentives aligned with yours.</p>
                     <div class="tier-ideal">
                         <strong>This is for you if&hellip;</strong>
-                        You&rsquo;re running regular sessions but struggling to fill them consistently. You&rsquo;re chasing bookings manually. Your online presence doesn&rsquo;t do justice to what you&rsquo;re actually offering.
+                        You run consistent sessions, want to budget monthly, and prefer a lower per-booking fee as volume grows. At around 50+ bookings a month, this model becomes more economical than Flex.
+                    </div>
+                    <div class="model-switch-note">
+                        Prefer no subscription? <button class="model-switch-link" data-switch="ch2">See Club House Flex &rarr;</button> &mdash; same features, no monthly fee, just &pound;2 per booking.
                     </div>
                 </div>
 
                 <div>
                     <div class="plan-card">
                         <div class="plan-header">
-                            <span class="eyebrow">Tier 1</span>
+                            <span class="eyebrow">Club House &mdash; Tier 1</span>
                             <div class="plan-name">Club House Subscription</div>
                             <div class="plan-audience-line">A proper home on the platform. A booking system that runs itself.</div>
                             <div class="plan-price-block">
                                 <div class="price-line">
-                                    <span class="price-main">&pound;40</span>
+                                    <span class="price-main">&pound;50</span>
                                     <span class="price-period">/ month</span>
                                     <span class="price-plus">+ &pound;1 per booking</span>
                                 </div>
@@ -338,10 +358,10 @@
 
                         <div class="plan-body">
                             <div class="expand-row">
-                                <button class="expand-btn" data-target="perks-ch">Show all details</button>
+                                <button class="expand-btn" data-target="perks-ch1">Show all details</button>
                             </div>
 
-                            <div id="perks-ch">
+                            <div id="perks-ch1">
                                 <div class="perks-group">
                                     <div class="perks-group-label">Your Presence on The NBRH</div>
                                     <div class="perks-list">
@@ -446,13 +466,13 @@
                         </div>
                         <div class="commitment-item">
                             <div class="ci-icon">&#128184;</div>
-                            <h4>Recovers fast</h4>
-                            <p>Typically covered within the first 10&ndash;15 bookings a month &mdash; a realistic target for any active club.</p>
+                            <h4>Better value at volume</h4>
+                            <p>At 50+ bookings a month, Tier 1&rsquo;s £1 fee works out cheaper than Flex&rsquo;s £2.</p>
                         </div>
                         <div class="commitment-item">
                             <div class="ci-icon">&#128172;</div>
                             <h4>Flexible pricing</h4>
-                            <p>If &pound;40 is a stretch, talk to us. We want the right clubs on the platform.</p>
+                            <p>If &pound;50 is a stretch, talk to us. We want the right clubs on the platform.</p>
                         </div>
                     </div>
                 </div>
@@ -460,12 +480,176 @@
             </div>
         </div>
 
-        <!-- Tier 2: À La Carte -->
-        <div class="tier-view" id="tier-alc">
+        <!-- ===================== TIER 2: Club House Flex ===================== -->
+        <div class="tier-view" id="tier-ch2">
             <div class="tier-layout">
 
                 <div class="tier-label-col">
                     <span class="tier-number">02</span>
+                    <span class="eyebrow">Club House Flex</span>
+                    <h2 class="tier-heading">No subscription. Same platform.</h2>
+                    <p class="tier-desc">All the same Club House infrastructure &mdash; your page, your booking system, your monthly report, your 20% off add-ons &mdash; with no standing monthly cost. You only pay when bookings come through. It&rsquo;s built for clubs that aren&rsquo;t quite ready to commit to a subscription, or that run more seasonal or irregular sessions.</p>
+                    <div class="tier-ideal">
+                        <strong>This is for you if&hellip;</strong>
+                        You want everything Club House offers but prefer to keep costs fully variable. At under 50 bookings a month, Flex can work out cheaper than the monthly plan.
+                    </div>
+                    <div class="model-switch-note">
+                        Running 50+ bookings a month? <button class="model-switch-link" data-switch="ch1">Club House Tier 1 at &pound;50/mo + &pound;1/booking &rarr;</button> will save you money as volume grows.
+                    </div>
+                </div>
+
+                <div>
+                    <div class="plan-card">
+                        <div class="plan-header">
+                            <span class="eyebrow">Club House &mdash; Tier 2</span>
+                            <div class="plan-name">Club House Flex</div>
+                            <div class="plan-audience-line">Everything Club House. No monthly commitment required.</div>
+                            <div class="plan-price-block">
+                                <div class="price-line">
+                                    <span class="price-main">&pound;2</span>
+                                    <span class="price-period">/ booking</span>
+                                </div>
+                                <div class="price-note">No monthly fee. You only pay when players book. Everything else is included.</div>
+                            </div>
+                            <p class="plan-pitch">Same platform presence, same booking system, same monthly report, same 20% off add-ons. The only difference is how you pay. No commitment until you&rsquo;re ready for one.</p>
+                        </div>
+
+                        <div class="plan-body">
+
+                            <div class="features-same-badge">
+                                <span class="fsb-icon">&#10003;</span>
+                                <span><strong>Identical Club House features</strong> &mdash; dedicated page, booking system, bookings management, monthly report, 20% off add-ons, and referral reward. All included. Just a different pricing model.</span>
+                            </div>
+
+                            <div class="expand-row">
+                                <button class="expand-btn" data-target="perks-ch2">Show all details</button>
+                            </div>
+
+                            <div id="perks-ch2">
+                                <div class="perks-group">
+                                    <div class="perks-group-label">Your Presence on The NBRH</div>
+                                    <div class="perks-list">
+                                        <div class="perk-item">
+                                            <div class="perk-icon">&#127968;</div>
+                                            <div class="perk-content">
+                                                <div class="perk-title">Dedicated Club House Page</div>
+                                                <div class="perk-short">A proper home for your sessions</div>
+                                                <div class="perk-detail">A fully built Club House page on The NBRH &mdash; showcasing your sessions, your community, and your story in a way that actually converts visitors into bookings.</div>
+                                                <button class="perk-toggle-btn" aria-expanded="false">+ More detail</button>
+                                            </div>
+                                        </div>
+                                        <div class="perk-item">
+                                            <div class="perk-icon">&#127381;</div>
+                                            <div class="perk-content">
+                                                <div class="perk-title">Platform Presence &amp; Discovery</div>
+                                                <div class="perk-short">In front of people actively looking</div>
+                                                <div class="perk-detail">Your sessions go live on The NBRH platform, putting you in front of people actively searching for sport in London. More visibility, less guesswork.</div>
+                                                <button class="perk-toggle-btn" aria-expanded="false">+ More detail</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="perks-group">
+                                    <div class="perks-group-label">Bookings &amp; Admin</div>
+                                    <div class="perks-list">
+                                        <div class="perk-item">
+                                            <div class="perk-icon">&#128203;</div>
+                                            <div class="perk-content">
+                                                <div class="perk-title">Fully Set Up Booking System</div>
+                                                <div class="perk-short">Runs without you managing it</div>
+                                                <div class="perk-detail">We build and configure your entire booking workflow on The NBRH. Players book directly, payments are handled, and you get notified &mdash; no manual chasing required.</div>
+                                                <button class="perk-toggle-btn" aria-expanded="false">+ More detail</button>
+                                            </div>
+                                        </div>
+                                        <div class="perk-item">
+                                            <div class="perk-icon">&#128257;</div>
+                                            <div class="perk-content">
+                                                <div class="perk-title">Ongoing Bookings Management</div>
+                                                <div class="perk-short">No more chasing admin</div>
+                                                <div class="perk-detail">We stay on top of your bookings on an ongoing basis &mdash; handling queries, managing capacity, and keeping things running smoothly so you don&rsquo;t have to.</div>
+                                                <button class="perk-toggle-btn" aria-expanded="false">+ More detail</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="perks-group">
+                                    <div class="perks-group-label">Reporting &amp; Insight</div>
+                                    <div class="perks-list">
+                                        <div class="perk-item">
+                                            <div class="perk-icon">&#128202;</div>
+                                            <div class="perk-content">
+                                                <div class="perk-title">Monthly Performance Report</div>
+                                                <div class="perk-short">You always know it&rsquo;s working</div>
+                                                <div class="perk-detail">A simple monthly summary covering bookings made, session views, and platform reach. Clear, honest, and in plain English &mdash; so you always have a picture of what&rsquo;s happening.</div>
+                                                <button class="perk-toggle-btn" aria-expanded="false">+ More detail</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="perks-group">
+                                    <div class="perks-group-label">Extras</div>
+                                    <div class="perks-list">
+                                        <div class="perk-item">
+                                            <div class="perk-icon">&#127881;</div>
+                                            <div class="perk-content">
+                                                <div class="perk-title">20% Off All Add-On Services</div>
+                                                <div class="perk-short">More support when you need it</div>
+                                                <div class="perk-detail">Club House Flex members get 20% off any of our eight service packages &mdash; Social Media, League, Outreach, Discovery, Content, Data &amp; Insights, Monetisation, and Booking &mdash; if they want more targeted support on top.</div>
+                                                <button class="perk-toggle-btn" aria-expanded="false">+ More detail</button>
+                                            </div>
+                                        </div>
+                                        <div class="perk-item">
+                                            <div class="perk-icon">&#129309;</div>
+                                            <div class="perk-content">
+                                                <div class="perk-title">Referral Reward</div>
+                                                <div class="perk-short">Bring a club. Earn a credit.</div>
+                                                <div class="perk-detail">Refer another club to The NBRH and we&rsquo;ll credit your account with &pound;50 to offset future booking fees. Simple as that.</div>
+                                                <button class="perk-toggle-btn" aria-expanded="false">+ More detail</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="availability-note">&#9432; The &pound;2 per booking fee is reinvested back into the platform &mdash; better discovery, better infrastructure, better reach for every club on it. As your bookings grow, switching to Tier 1 is always an option.</div>
+                        </div>
+
+                        <div class="plan-footer">
+                            <a href="https://www.thenbrh.co.uk/club-house-sign-up-page" class="plan-cta">Get Started with Club House Flex &rarr;</a>
+                        </div>
+                    </div>
+
+                    <div class="commitment-strip">
+                        <div class="commitment-item">
+                            <div class="ci-icon">&#128275;</div>
+                            <h4>No commitment</h4>
+                            <p>No monthly contract. You&rsquo;re not locked in &mdash; costs only appear when bookings happen.</p>
+                        </div>
+                        <div class="commitment-item">
+                            <div class="ci-icon">&#128201;</div>
+                            <h4>Break-even at 50</h4>
+                            <p>Under 50 bookings a month, Flex is cheaper than the &pound;50/mo Tier 1 plan.</p>
+                        </div>
+                        <div class="commitment-item">
+                            <div class="ci-icon">&#128260;</div>
+                            <h4>Upgrade anytime</h4>
+                            <p>When your volume grows, switching to Tier 1 saves money. We&rsquo;ll flag when it makes sense.</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- ===================== TIER 3: À La Carte ===================== -->
+        <div class="tier-view" id="tier-alc">
+            <div class="tier-layout">
+
+                <div class="tier-label-col">
+                    <span class="tier-number">03</span>
                     <span class="eyebrow">&Agrave; La Carte</span>
                     <h2 class="tier-heading">Specific support.<br>Your terms.</h2>
                     <p class="tier-desc">For clubs that are already established &mdash; marketing sorted, digital infrastructure in place, systems running. They don&rsquo;t need the full subscription. They just need targeted help, when they need it.</p>
@@ -820,7 +1004,7 @@
                             <span class="delivery-icon">&#9889;</span>
                             <div>
                                 <div class="delivery-title">Need it faster?</div>
-                                <div class="delivery-sub">Add a delivery upgrade to any service at checkout. Applies to all À La Carte options.</div>
+                                <div class="delivery-sub">Add a delivery upgrade to any service at checkout. Applies to all &Agrave; La Carte options.</div>
                             </div>
                         </div>
                         <div class="delivery-options">
@@ -865,7 +1049,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="delivery-note">&#9432; Standard delivery timelines vary by service. Delivery upgrades are contingent on receiving all required assets and information promptly. Club House members save 20% on both options.</div>
+                        <div class="delivery-note">&#9432; Standard delivery timelines vary by service. Delivery upgrades are contingent on receiving all required assets and information promptly. Club House members (both tiers) save 20% on both options.</div>
                     </div>
 
                     <div class="tier2-note">
@@ -887,80 +1071,106 @@
         <div class="section-head" style="text-align:left;">
             <span class="eyebrow">Compare</span>
             <h2>Side by side.</h2>
-            <p class="sub" style="margin:0; max-width:none;">See what each model includes and where the differences are.</p>
+            <p class="sub" style="margin:0; max-width:none;">Both Club House tiers include identical features. The only difference is how you pay.</p>
         </div>
         <div style="overflow-x: auto;">
             <table class="compare-table" role="table" aria-label="Plan comparison">
                 <thead>
                     <tr>
                         <th scope="col">What&rsquo;s included</th>
-                        <th scope="col">Club House &mdash; &pound;40/mo + &pound;1/booking</th>
+                        <th scope="col">Club House &mdash; &pound;50/mo + &pound;1/booking</th>
+                        <th scope="col">Club House Flex &mdash; &pound;2/booking</th>
                         <th scope="col">&Agrave; La Carte &mdash; per service</th>
                     </tr>
                 </thead>
                 <tbody>
+                    <tr class="compare-pricing-row">
+                        <td>Monthly fee</td>
+                        <td>&pound;50 / month</td>
+                        <td>None</td>
+                        <td><span style="font-size:0.82rem; color:var(--text-muted);">N/A</span></td>
+                    </tr>
+                    <tr class="compare-pricing-row">
+                        <td>Booking fee</td>
+                        <td>&pound;1 / booking</td>
+                        <td>&pound;2 / booking</td>
+                        <td><span style="font-size:0.82rem; color:var(--text-muted);">N/A</span></td>
+                    </tr>
                     <tr>
                         <td>Dedicated Club House page</td>
+                        <td><span class="check-yes">&#10003;</span></td>
                         <td><span class="check-yes">&#10003;</span></td>
                         <td><span class="check-no">&mdash;</span></td>
                     </tr>
                     <tr>
                         <td>Platform presence &amp; session discovery</td>
                         <td><span class="check-yes">&#10003;</span></td>
+                        <td><span class="check-yes">&#10003;</span></td>
                         <td><span class="check-yes">&#10003; <span class="compare-note-inline">via Discovery (&pound;80)</span></span></td>
                     </tr>
                     <tr>
                         <td>Fully set up booking system</td>
+                        <td><span class="check-yes">&#10003;</span></td>
                         <td><span class="check-yes">&#10003;</span></td>
                         <td><span class="check-no">&mdash;</span></td>
                     </tr>
                     <tr>
                         <td>Ongoing bookings management</td>
                         <td><span class="check-yes">&#10003;</span></td>
+                        <td><span class="check-yes">&#10003;</span></td>
                         <td><span class="check-no">&mdash;</span></td>
                     </tr>
                     <tr>
                         <td>Monthly performance report</td>
+                        <td><span class="check-yes">&#10003;</span></td>
                         <td><span class="check-yes">&#10003;</span></td>
                         <td><span class="check-yes">&#10003; <span class="compare-note-inline">via Data &amp; Insights (&pound;100)</span></span></td>
                     </tr>
                     <tr>
                         <td>20% discount on add-on services</td>
                         <td><span class="check-yes">&#10003;</span></td>
+                        <td><span class="check-yes">&#10003;</span></td>
                         <td><span class="check-no">&mdash;</span></td>
                     </tr>
                     <tr>
                         <td>Referral reward</td>
+                        <td><span class="check-yes">&#10003;</span></td>
                         <td><span class="check-yes">&#10003;</span></td>
                         <td><span class="check-no">&mdash;</span></td>
                     </tr>
                     <tr>
                         <td>Social media management</td>
                         <td><span class="check-yes">&#10003; <span class="compare-note-inline">add-on, 20% off</span></span></td>
+                        <td><span class="check-yes">&#10003; <span class="compare-note-inline">add-on, 20% off</span></span></td>
                         <td><span class="check-yes">&#10003; <span class="compare-note-inline">&pound;100</span></span></td>
                     </tr>
                     <tr>
                         <td>League management</td>
+                        <td><span class="check-yes">&#10003; <span class="compare-note-inline">add-on, 20% off</span></span></td>
                         <td><span class="check-yes">&#10003; <span class="compare-note-inline">add-on, 20% off</span></span></td>
                         <td><span class="check-yes">&#10003; <span class="compare-note-inline">&pound;155</span></span></td>
                     </tr>
                     <tr>
                         <td>Outreach campaigns</td>
                         <td><span class="check-yes">&#10003; <span class="compare-note-inline">add-on, 20% off</span></span></td>
+                        <td><span class="check-yes">&#10003; <span class="compare-note-inline">add-on, 20% off</span></span></td>
                         <td><span class="check-yes">&#10003; <span class="compare-note-inline">&pound;120</span></span></td>
                     </tr>
                     <tr>
                         <td>Content creation</td>
+                        <td><span class="check-yes">&#10003; <span class="compare-note-inline">add-on, 20% off</span></span></td>
                         <td><span class="check-yes">&#10003; <span class="compare-note-inline">add-on, 20% off</span></span></td>
                         <td><span class="check-yes">&#10003; <span class="compare-note-inline">&pound;215</span></span></td>
                     </tr>
                     <tr>
                         <td>Monetisation strategy</td>
                         <td><span class="check-yes">&#10003; <span class="compare-note-inline">add-on, 20% off</span></span></td>
+                        <td><span class="check-yes">&#10003; <span class="compare-note-inline">add-on, 20% off</span></span></td>
                         <td><span class="check-yes">&#10003; <span class="compare-note-inline">&pound;120</span></span></td>
                     </tr>
                     <tr>
                         <td>Express / 24-hour delivery</td>
+                        <td><span class="check-yes">&#10003; <span class="compare-note-inline">add-on, 20% off</span></span></td>
                         <td><span class="check-yes">&#10003; <span class="compare-note-inline">add-on, 20% off</span></span></td>
                         <td><span class="check-yes">&#10003; <span class="compare-note-inline">&pound;25&ndash;&pound;50</span></span></td>
                     </tr>
@@ -968,11 +1178,13 @@
                         <td>Commitment</td>
                         <td><span style="font-size:0.82rem; color:var(--text-muted);">3 months minimum</span></td>
                         <td><span style="font-size:0.82rem; color:var(--text-muted);">None</span></td>
+                        <td><span style="font-size:0.82rem; color:var(--text-muted);">None</span></td>
                     </tr>
                     <tr>
-                        <td>Pricing model</td>
-                        <td><span style="font-size:0.82rem; color:var(--text-muted);">Recurring subscription</span></td>
-                        <td><span style="font-size:0.82rem; color:var(--text-muted);">One-off per service</span></td>
+                        <td>Best value at</td>
+                        <td><span style="font-size:0.82rem; color:var(--text-muted);">50+ bookings / month</span></td>
+                        <td><span style="font-size:0.82rem; color:var(--text-muted);">Under 50 bookings / month</span></td>
+                        <td><span style="font-size:0.82rem; color:var(--text-muted);">Specific one-off needs</span></td>
                     </tr>
                 </tbody>
             </table>
@@ -1015,14 +1227,30 @@
     }, { threshold: 0.06, rootMargin: '0px 0px -5% 0px' });
     reveals.forEach(function (el) { ro.observe(el); });
 
-    // Tier toggle
+    // Core tier switch function (reusable)
+    function switchTier(tier) {
+        document.querySelectorAll('.tier-btn').forEach(function (b) {
+            b.classList.toggle('active', b.dataset.tier === tier);
+        });
+        document.querySelectorAll('.tier-view').forEach(function (v) {
+            v.classList.toggle('active', v.id === 'tier-' + tier);
+        });
+        // Scroll to plans section
+        var plans = document.getElementById('plans');
+        if (plans) plans.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    // Tier toggle buttons
     document.querySelectorAll('.tier-btn').forEach(function (btn) {
         btn.addEventListener('click', function () {
-            var tier = btn.dataset.tier;
-            document.querySelectorAll('.tier-btn').forEach(function (b) { b.classList.remove('active'); });
-            btn.classList.add('active');
-            document.querySelectorAll('.tier-view').forEach(function (v) { v.classList.remove('active'); });
-            document.getElementById('tier-' + tier).classList.add('active');
+            switchTier(btn.dataset.tier);
+        });
+    });
+
+    // Model switch links (inside left columns)
+    document.querySelectorAll('.model-switch-link').forEach(function (link) {
+        link.addEventListener('click', function () {
+            switchTier(link.dataset.switch);
         });
     });
 
