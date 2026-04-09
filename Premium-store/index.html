@@ -101,7 +101,7 @@
         .tier-ideal { background: var(--accent-dim); border: 1px solid var(--accent-mid); border-radius: var(--r); padding: 1rem 1.25rem; font-size: 0.85rem; color: var(--text-muted); line-height: 1.65; }
         .tier-ideal strong { font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.09em; color: var(--accent); display: block; margin-bottom: 0.3rem; }
 
-        /* Pricing model callout — used in ch2 left col */
+        /* Pricing model callout */
         .model-switch-note { margin-top: 1rem; padding: 0.85rem 1rem; background: var(--bg-subtle); border: 1px solid var(--border); border-radius: var(--r); font-size: 0.8rem; color: var(--text-faint); line-height: 1.6; }
         .model-switch-note strong { color: var(--text-muted); font-weight: 500; }
         .model-switch-link { background: none; border: none; cursor: pointer; font-family: var(--font-sans); font-size: 0.8rem; font-weight: 500; color: rgba(255,27,110,0.7); padding: 0; transition: color 0.15s; text-decoration: underline; text-underline-offset: 2px; }
@@ -121,7 +121,7 @@
         .plan-pitch { font-size: 0.9rem; color: var(--text-muted); line-height: 1.7; margin-top: 1rem; }
         .plan-body { padding: 1.5rem 1.75rem; }
 
-        /* Identical features badge — for ch2 */
+        /* Identical features badge */
         .features-same-badge { display: flex; align-items: center; gap: 0.6rem; background: var(--accent-dim); border: 1px solid var(--accent-mid); border-radius: var(--r); padding: 0.75rem 1rem; margin-bottom: 1.5rem; font-size: 0.82rem; color: var(--text-muted); line-height: 1.5; }
         .features-same-badge .fsb-icon { font-size: 1rem; flex-shrink: 0; }
         .features-same-badge strong { color: var(--accent); font-weight: 500; }
@@ -144,6 +144,24 @@
         .perk-toggle-btn { background: none; border: none; cursor: pointer; padding: 0; font-family: var(--font-sans); font-size: 0.72rem; font-weight: 500; letter-spacing: 0.03em; margin-top: 0.2rem; display: block; color: rgba(255,27,110,0.55); transition: color 0.15s; }
         .perk-toggle-btn:hover { color: var(--accent); }
 
+        /* Coming soon badge for perk items */
+        .perk-coming-soon {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+            font-size: 0.62rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.09em;
+            color: var(--accent);
+            background: var(--accent-dim);
+            border: 1px solid var(--accent-mid);
+            border-radius: 100px;
+            padding: 0.15rem 0.55rem;
+            margin-left: 0.4rem;
+            vertical-align: middle;
+        }
+
         .availability-note { font-size: 0.75rem; color: var(--text-faint); font-style: italic; padding: 0.65rem 0.9rem; background: var(--bg-subtle); border-radius: var(--r); border-left: 2px solid var(--accent-mid); margin-top: 1rem; }
 
         .plan-footer { padding: 1.25rem 1.75rem; border-top: 1px solid var(--border); }
@@ -158,12 +176,10 @@
         .commitment-item h4 { font-size: 0.825rem; font-weight: 500; margin-bottom: 0.2rem; }
         .commitment-item p { font-size: 0.775rem; color: var(--text-faint); line-height: 1.5; }
 
-        /* Services grid — expanded cards */
+        /* Services grid */
         .services-grid { display: flex; flex-direction: column; gap: 1rem; }
-
         .svc-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--r); overflow: hidden; transition: border-color 0.2s; }
         .svc-card:hover { border-color: rgba(255,27,110,0.3); }
-
         .svc-trigger { width: 100%; background: none; border: none; cursor: pointer; font-family: var(--font-sans); color: var(--text); padding: 1.1rem 1.25rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; text-align: left; }
         .svc-trigger-left { display: flex; align-items: center; gap: 0.85rem; flex: 1; min-width: 0; }
         .svc-trigger-icon { font-size: 1.1rem; flex-shrink: 0; }
@@ -175,19 +191,16 @@
         .svc-chevron { font-size: 0.75rem; color: var(--text-faint); transition: transform 0.28s ease, color 0.2s; flex-shrink: 0; }
         .svc-card.open .svc-chevron { transform: rotate(180deg); color: var(--accent); }
         .svc-trigger:hover .svc-trigger-name { color: var(--accent); }
-
         .svc-body { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 0.32s ease; }
         .svc-card.open .svc-body { grid-template-rows: 1fr; }
         .svc-body-inner { overflow: hidden; }
         .svc-body-content { border-top: 1px solid var(--border); padding: 1.25rem; display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; align-items: start; }
         @media (max-width: 640px) { .svc-body-content { grid-template-columns: 1fr; } }
-
         .svc-includes { }
         .svc-includes-label { font-size: 0.67rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.09em; color: var(--accent); display: block; margin-bottom: 0.6rem; }
         .svc-includes ul { list-style: none; display: flex; flex-direction: column; gap: 0.35rem; }
         .svc-includes ul li { font-size: 0.8rem; color: var(--text-muted); display: flex; align-items: flex-start; gap: 0.4rem; line-height: 1.45; }
         .svc-includes ul li::before { content: '›'; color: var(--accent); flex-shrink: 0; margin-top: 0.05rem; }
-
         .svc-pricing { display: flex; flex-direction: column; gap: 0.65rem; }
         .svc-price-row { display: flex; align-items: stretch; background: var(--bg-subtle); border: 1px solid var(--border); border-radius: var(--r); overflow: hidden; }
         .svc-price-cell { display: flex; flex-direction: column; flex: 1; padding: 0.55rem 0.85rem; gap: 0.08rem; }
@@ -425,6 +438,41 @@
                                     </div>
                                 </div>
 
+                                <!-- MONETISATION SECTION — NEW -->
+                                <div class="perks-group">
+                                    <div class="perks-group-label">Monetisation</div>
+                                    <div class="perks-list">
+                                        <div class="perk-item">
+                                            <div class="perk-icon">&#128715;</div>
+                                            <div class="perk-content">
+                                                <div class="perk-title">Club Store <span class="perk-coming-soon">Coming Soon</span></div>
+                                                <div class="perk-short">Your club. Your merch. On our platform.</div>
+                                                <div class="perk-detail">We&rsquo;ll add your club merchandise directly to The NBRH Club Store &mdash; from training kit and tees to water bottles and tote bags. We handle the listing, the storefront, and the promotion. You choose what to sell, we handle the rest. A new revenue stream that builds your brand every time someone wears your name.</div>
+                                                <button class="perk-toggle-btn" aria-expanded="false">+ More detail</button>
+                                            </div>
+                                        </div>
+                                        <div class="perk-item">
+                                            <div class="perk-icon">&#128176;</div>
+                                            <div class="perk-content">
+                                                <div class="perk-title">Revenue Share <span class="perk-coming-soon">Coming Soon</span></div>
+                                                <div class="perk-short">The platform grows. So do you.</div>
+                                                <div class="perk-detail">As The NBRH scales, we want the clubs that helped build it to benefit from it. Club House subscribers will be first in line for our revenue share programme &mdash; a portion of platform revenue distributed back to active partner clubs. The more your community engages on The NBRH, the more you earn. Full details will be shared with Club House members ahead of launch.</div>
+                                                <button class="perk-toggle-btn" aria-expanded="false">+ More detail</button>
+                                            </div>
+                                        </div>
+                                        <div class="perk-item">
+                                            <div class="perk-icon">&#9733;</div>
+                                            <div class="perk-content">
+                                                <div class="perk-title">Member Subscriptions</div>
+                                                <div class="perk-short">Turn one-time bookers into loyal members</div>
+                                                <div class="perk-detail">Give your regulars a reason to commit. Member Subscriptions let you offer a monthly or seasonal pass to your sessions &mdash; a recurring fee that gives players priority access, discounted booking rates, or exclusive perks you define. It builds a loyal core, smooths out your income, and gives your community something worth belonging to.</div>
+                                                <button class="perk-toggle-btn" aria-expanded="false">+ More detail</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- END MONETISATION SECTION -->
+
                                 <div class="perks-group">
                                     <div class="perks-group-label">Extras</div>
                                     <div class="perks-list">
@@ -518,7 +566,7 @@
 
                             <div class="features-same-badge">
                                 <span class="fsb-icon">&#10003;</span>
-                                <span><strong>Identical Club House features</strong> &mdash; dedicated page, booking system, bookings management, monthly report, 20% off add-ons, and referral reward. All included. Just a different pricing model.</span>
+                                <span><strong>Identical Club House features</strong> &mdash; dedicated page, booking system, bookings management, monthly report, monetisation tools, 20% off add-ons, and referral reward. All included. Just a different pricing model.</span>
                             </div>
 
                             <div class="expand-row">
@@ -588,6 +636,41 @@
                                         </div>
                                     </div>
                                 </div>
+
+                                <!-- MONETISATION SECTION — NEW (Tier 2) -->
+                                <div class="perks-group">
+                                    <div class="perks-group-label">Monetisation</div>
+                                    <div class="perks-list">
+                                        <div class="perk-item">
+                                            <div class="perk-icon">&#128715;</div>
+                                            <div class="perk-content">
+                                                <div class="perk-title">Club Store <span class="perk-coming-soon">Coming Soon</span></div>
+                                                <div class="perk-short">Your club. Your merch. On our platform.</div>
+                                                <div class="perk-detail">We&rsquo;ll add your club merchandise directly to The NBRH Club Store &mdash; from training kit and tees to water bottles and tote bags. We handle the listing, the storefront, and the promotion. You choose what to sell, we handle the rest. A new revenue stream that builds your brand every time someone wears your name.</div>
+                                                <button class="perk-toggle-btn" aria-expanded="false">+ More detail</button>
+                                            </div>
+                                        </div>
+                                        <div class="perk-item">
+                                            <div class="perk-icon">&#128176;</div>
+                                            <div class="perk-content">
+                                                <div class="perk-title">Revenue Share <span class="perk-coming-soon">Coming Soon</span></div>
+                                                <div class="perk-short">The platform grows. So do you.</div>
+                                                <div class="perk-detail">As The NBRH scales, we want the clubs that helped build it to benefit from it. Club House subscribers will be first in line for our revenue share programme &mdash; a portion of platform revenue distributed back to active partner clubs. The more your community engages on The NBRH, the more you earn. Full details will be shared with Club House members ahead of launch.</div>
+                                                <button class="perk-toggle-btn" aria-expanded="false">+ More detail</button>
+                                            </div>
+                                        </div>
+                                        <div class="perk-item">
+                                            <div class="perk-icon">&#9733;</div>
+                                            <div class="perk-content">
+                                                <div class="perk-title">Member Subscriptions</div>
+                                                <div class="perk-short">Turn one-time bookers into loyal members</div>
+                                                <div class="perk-detail">Give your regulars a reason to commit. Member Subscriptions let you offer a monthly or seasonal pass to your sessions &mdash; a recurring fee that gives players priority access, discounted booking rates, or exclusive perks you define. It builds a loyal core, smooths out your income, and gives your community something worth belonging to.</div>
+                                                <button class="perk-toggle-btn" aria-expanded="false">+ More detail</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- END MONETISATION SECTION -->
 
                                 <div class="perks-group">
                                     <div class="perks-group-label">Extras</div>
@@ -709,7 +792,7 @@
                             </div>
                         </div>
 
-                        <!-- League -->
+                        <!-- League — UPDATED PRICING -->
                         <div class="svc-card">
                             <button class="svc-trigger" data-svc="lea" aria-expanded="false">
                                 <div class="svc-trigger-left">
@@ -720,7 +803,7 @@
                                     </div>
                                 </div>
                                 <div class="svc-trigger-right">
-                                    <span class="svc-price-pill">&pound;155</span>
+                                    <span class="svc-price-pill">&pound;250</span>
                                     <span class="svc-chevron">&#9660;</span>
                                 </div>
                             </button>
@@ -747,15 +830,15 @@
                                             <div class="svc-price-row">
                                                 <div class="svc-price-cell">
                                                     <span class="svc-price-cell-label">Full Price</span>
-                                                    <span class="svc-price-cell-value">&pound;155 / season</span>
+                                                    <span class="svc-price-cell-value">&pound;250 / season</span>
                                                 </div>
                                                 <div class="svc-price-divider"></div>
                                                 <div class="svc-price-cell ch-price">
                                                     <span class="svc-price-cell-label">Club House Price</span>
-                                                    <span class="svc-price-cell-value">&pound;124 / season</span>
+                                                    <span class="svc-price-cell-value">&pound;200 / season</span>
                                                 </div>
                                             </div>
-                                            <div class="svc-saving">Club House members save <strong>&pound;31</strong> (20% off). Can be paid in monthly instalments.</div>
+                                            <div class="svc-saving">Club House members save <strong>&pound;50</strong> (20% off). Can be paid in monthly instalments.</div>
                                             <a href="https://www.thenbrh.co.uk/services-page/league-package" class="svc-book-btn">Book this Service &rarr;</a>
                                         </div>
                                     </div>
@@ -952,14 +1035,14 @@
                             </div>
                         </div>
 
-                        <!-- Monetisation -->
+                        <!-- Monetisation — UPDATED: Fund Finder only -->
                         <div class="svc-card">
                             <button class="svc-trigger" data-svc="mon" aria-expanded="false">
                                 <div class="svc-trigger-left">
                                     <span class="svc-trigger-icon">&#128200;</span>
                                     <div class="svc-trigger-text">
-                                        <span class="svc-trigger-name">Monetisation</span>
-                                        <span class="svc-trigger-desc">Revenue strategy, funding support, partnerships and new income streams</span>
+                                        <span class="svc-trigger-name">Fund Finder</span>
+                                        <span class="svc-trigger-desc">Funding research, applications and grant management for your club</span>
                                     </div>
                                 </div>
                                 <div class="svc-trigger-right">
@@ -973,7 +1056,11 @@
                                         <div class="svc-includes">
                                             <span class="svc-includes-label">What&rsquo;s Included</span>
                                             <ul>
-                                                <li>Fund Finder &mdash; we search for funding opportunities on your behalf, help craft applications, and manage the entire process. If we secure funding, you keep 100% of it</li>
+                                                <li>Funding landscape research tailored to your club &mdash; sport, location, size and ambition all factor into what we look for</li>
+                                                <li>Identification of grants, trusts, local authority funding and sport governing body programmes your club is eligible for</li>
+                                                <li>Full application writing and submission on your behalf</li>
+                                                <li>End-to-end process management &mdash; from research to submission, we handle it</li>
+                                                <li>If we secure funding, you keep 100% of it. No commission, no catch.</li>
                                             </ul>
                                         </div>
                                         <div class="svc-pricing">
@@ -1127,6 +1214,24 @@
                         <td><span class="check-yes">&#10003; <span class="compare-note-inline">via Data &amp; Insights (&pound;100)</span></span></td>
                     </tr>
                     <tr>
+                        <td>Club Store &mdash; merchandise</td>
+                        <td><span class="check-yes">&#10003; <span class="compare-note-inline">coming soon</span></span></td>
+                        <td><span class="check-yes">&#10003; <span class="compare-note-inline">coming soon</span></span></td>
+                        <td><span class="check-no">&mdash;</span></td>
+                    </tr>
+                    <tr>
+                        <td>Revenue share programme</td>
+                        <td><span class="check-yes">&#10003; <span class="compare-note-inline">coming soon</span></span></td>
+                        <td><span class="check-yes">&#10003; <span class="compare-note-inline">coming soon</span></span></td>
+                        <td><span class="check-no">&mdash;</span></td>
+                    </tr>
+                    <tr>
+                        <td>Member subscriptions</td>
+                        <td><span class="check-yes">&#10003;</span></td>
+                        <td><span class="check-yes">&#10003;</span></td>
+                        <td><span class="check-no">&mdash;</span></td>
+                    </tr>
+                    <tr>
                         <td>20% discount on add-on services</td>
                         <td><span class="check-yes">&#10003;</span></td>
                         <td><span class="check-yes">&#10003;</span></td>
@@ -1148,7 +1253,7 @@
                         <td>League management</td>
                         <td><span class="check-yes">&#10003; <span class="compare-note-inline">add-on, 20% off</span></span></td>
                         <td><span class="check-yes">&#10003; <span class="compare-note-inline">add-on, 20% off</span></span></td>
-                        <td><span class="check-yes">&#10003; <span class="compare-note-inline">&pound;155</span></span></td>
+                        <td><span class="check-yes">&#10003; <span class="compare-note-inline">&pound;250 / season</span></span></td>
                     </tr>
                     <tr>
                         <td>Outreach campaigns</td>
@@ -1163,7 +1268,7 @@
                         <td><span class="check-yes">&#10003; <span class="compare-note-inline">&pound;215</span></span></td>
                     </tr>
                     <tr>
-                        <td>Monetisation strategy</td>
+                        <td>Fund Finder</td>
                         <td><span class="check-yes">&#10003; <span class="compare-note-inline">add-on, 20% off</span></span></td>
                         <td><span class="check-yes">&#10003; <span class="compare-note-inline">add-on, 20% off</span></span></td>
                         <td><span class="check-yes">&#10003; <span class="compare-note-inline">&pound;120</span></span></td>
@@ -1235,7 +1340,6 @@
         document.querySelectorAll('.tier-view').forEach(function (v) {
             v.classList.toggle('active', v.id === 'tier-' + tier);
         });
-        // Scroll to plans section
         var plans = document.getElementById('plans');
         if (plans) plans.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
@@ -1247,14 +1351,14 @@
         });
     });
 
-    // Model switch links (inside left columns)
+    // Model switch links
     document.querySelectorAll('.model-switch-link').forEach(function (link) {
         link.addEventListener('click', function () {
             switchTier(link.dataset.switch);
         });
     });
 
-    // Service card accordion (À La Carte)
+    // Service card accordion
     document.querySelectorAll('.svc-trigger').forEach(function (trigger) {
         trigger.addEventListener('click', function () {
             var card = trigger.closest('.svc-card');
