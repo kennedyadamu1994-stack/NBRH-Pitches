@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>This is how we grow your club. — The NBRH</title>
-    <meta name="description" content="Two ways to work with The NBRH. Club House for clubs that need full support. À La Carte for clubs that just need specific help.">
+    <title>Club House — Grow Your Club. — The NBRH</title>
+    <meta name="description" content="The NBRH Club House gives grassroots sports clubs the expertise, tools, and marketing power to grow — without the agency price tag.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Young+Serif&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet">
@@ -12,37 +12,36 @@
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
         :root {
             --accent: #FF1B6E;
-            --accent-dim: rgba(255,27,110,0.1);
+            --accent-dim: rgba(255,27,110,0.10);
             --accent-mid: rgba(255,27,110,0.28);
+            --accent-bright: rgba(255,27,110,0.55);
             --text: #ffffff;
             --text-muted: rgba(255,255,255,0.65);
             --text-faint: rgba(255,255,255,0.35);
             --bg: #1B1B1B;
             --bg-subtle: #242424;
             --bg-card: #222222;
+            --bg-elevated: #2a2a2a;
             --border: rgba(255,255,255,0.09);
+            --border-strong: rgba(255,255,255,0.15);
             --nav-bg: rgba(27,27,27,0.96);
             --font-serif: 'Young Serif', Georgia, serif;
             --font-sans: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
             --max: 1080px;
             --r: 4px;
+            --r-lg: 8px;
         }
         @media (prefers-reduced-motion: reduce) {
             *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
             html { scroll-behavior: auto; }
         }
         html { scroll-behavior: smooth; font-size: 16px; }
-        body {
-            font-family: var(--font-sans);
-            color: var(--text);
-            background: var(--bg);
-            line-height: 1.6;
-            -webkit-font-smoothing: antialiased;
-            overflow-x: hidden;
-        }
+        body { font-family: var(--font-sans); color: var(--text); background: var(--bg); line-height: 1.6; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
 
+        /* ── Scroll bar ── */
         .scroll-bar { position: fixed; top: 0; left: 0; height: 2px; background: var(--accent); z-index: 2000; width: 0%; transition: width 0.08s linear; }
 
+        /* ── Nav ── */
         nav { position: sticky; top: 0; background: var(--nav-bg); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); z-index: 999; }
         .nav-inner { max-width: var(--max); margin: 0 auto; padding: 0.9rem 1.5rem; display: flex; align-items: center; justify-content: space-between; gap: 2rem; }
         .nav-brand img { height: 30px; width: auto; display: block; }
@@ -51,18 +50,24 @@
         .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 0.8125rem; white-space: nowrap; letter-spacing: 0.01em; transition: color 0.2s; }
         .nav-links a:hover { color: var(--accent); }
 
+        /* ── Layout ── */
         .wrap { max-width: var(--max); margin: 0 auto; padding: 0 1.5rem; overflow-x: hidden; }
         .divider { height: 1px; background: var(--border); }
         section { padding: 4.5rem 0; }
         @media (max-width: 768px) { section { padding: 3rem 0; } }
 
-        .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.5s ease-out, transform 0.5s ease-out; }
+        /* ── Reveal ── */
+        .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.55s ease-out, transform 0.55s ease-out; }
         .reveal.in { opacity: 1; transform: none; }
 
+        /* ── Type ── */
         .eyebrow { font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.13em; color: var(--accent); margin-bottom: 0.75rem; display: block; }
         h1, h2, h3 { font-family: var(--font-serif); font-weight: 400; }
         h1 { font-size: clamp(2.4rem, 6vw, 3.6rem); line-height: 1.08; letter-spacing: -0.02em; }
         h2 { font-size: clamp(1.6rem, 4vw, 2.4rem); line-height: 1.15; letter-spacing: -0.015em; }
+        .section-head { text-align: center; margin-bottom: 2.75rem; }
+        .section-head h2 { margin-bottom: 0.5rem; }
+        .section-head .sub { font-size: 1rem; color: var(--text-muted); font-style: italic; max-width: 52ch; margin: 0 auto; }
 
         /* ── Hero ── */
         .hero { position: relative; overflow: hidden; padding: 0; }
@@ -72,12 +77,17 @@
         @media (max-width: 768px) { .hero-content { padding: 4rem 1.5rem 3rem; } }
         .store-badge { display: inline-flex; align-items: center; gap: 0.5rem; background: var(--accent-dim); border: 1px solid var(--accent-mid); border-radius: 100px; padding: 0.35rem 1rem; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin-bottom: 1.5rem; }
         .hero h1 { margin-bottom: 1rem; max-width: 22ch; margin-left: auto; margin-right: auto; }
-        .hero .lead { font-size: clamp(1rem, 2vw, 1.15rem); color: var(--text-muted); max-width: 52ch; margin: 0 auto 2rem; }
-        .hero-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; justify-items: center; margin-top: 2.5rem; padding-top: 2rem; border-top: 1px solid var(--border); }
+        .hero .lead { font-size: clamp(1rem, 2vw, 1.15rem); color: var(--text-muted); max-width: 54ch; margin: 0 auto 2.5rem; }
+        .hero-ctas { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-bottom: 3rem; }
+        .btn-primary { display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.8rem 1.6rem; background: var(--accent); color: #fff; border-radius: var(--r); font-size: 0.9rem; font-weight: 500; text-decoration: none; transition: all 0.2s; border: none; cursor: pointer; font-family: var(--font-sans); }
+        .btn-primary:hover { opacity: 0.88; transform: translateY(-1px); }
+        .btn-ghost { display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.8rem 1.6rem; background: transparent; color: var(--text-muted); border-radius: var(--r); border: 1px solid var(--border-strong); font-size: 0.9rem; font-weight: 500; text-decoration: none; transition: all 0.2s; cursor: pointer; font-family: var(--font-sans); }
+        .btn-ghost:hover { color: var(--text); border-color: var(--accent-mid); }
+        .hero-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; justify-items: center; padding-top: 2rem; border-top: 1px solid var(--border); }
         .hero-stat { text-align: center; }
         .hero-stat-num { font-family: var(--font-serif); font-size: 1.7rem; color: var(--accent); display: block; line-height: 1; }
         .hero-stat-label { font-size: 0.76rem; color: var(--text-faint); margin-top: 0.35rem; letter-spacing: 0.02em; }
-        @media (max-width: 480px) { .hero-stats { gap: 0.75rem; } .hero-stat-num { font-size: 1.35rem; } .hero-stat-label { font-size: 0.63rem; } }
+        @media (max-width: 480px) { .hero-stats { gap: 0.75rem; } .hero-stat-num { font-size: 1.35rem; } }
 
         /* ── Pilot Banner ── */
         .pilot-banner { background: var(--accent-dim); border-top: 1px solid var(--accent-mid); border-bottom: 1px solid var(--accent-mid); padding: 1.1rem 1.5rem; text-align: center; }
@@ -86,68 +96,116 @@
         .pilot-banner-text { font-size: 0.9rem; color: var(--text-muted); }
         .pilot-banner-text strong { color: var(--text); font-weight: 500; }
 
-        /* ── Section head ── */
-        .section-head { text-align: center; margin-bottom: 2.75rem; }
-        .section-head h2 { margin-bottom: 0.5rem; }
-        .section-head .sub { font-size: 1rem; color: var(--text-muted); font-style: italic; max-width: 52ch; margin: 0 auto; }
+        /* ── WHY — Pain Points ── */
+        .why-section { background: var(--bg-subtle); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+        .pain-intro { text-align: center; max-width: 60ch; margin: 0 auto 3rem; }
+        .pain-intro h2 { margin-bottom: 0.75rem; }
+        .pain-intro p { font-size: 1rem; color: var(--text-muted); line-height: 1.8; }
+        .pain-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-bottom: 2.5rem; }
+        @media (max-width: 900px) { .pain-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 560px) { .pain-grid { grid-template-columns: 1fr; } }
+        .pain-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--r-lg); padding: 1.5rem; position: relative; overflow: hidden; transition: border-color 0.2s; }
+        .pain-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: var(--accent); opacity: 0.4; }
+        .pain-card:hover { border-color: var(--accent-mid); }
+        .pain-card:hover::before { opacity: 1; }
+        .pain-icon { font-size: 1.5rem; margin-bottom: 0.85rem; display: block; }
+        .pain-card h3 { font-family: var(--font-serif); font-size: 1.05rem; margin-bottom: 0.4rem; }
+        .pain-card p { font-size: 0.835rem; color: var(--text-muted); line-height: 1.65; }
+        .pain-callout { background: var(--bg-card); border: 1px solid var(--accent-mid); border-radius: var(--r-lg); padding: 1.5rem 2rem; text-align: center; max-width: 68ch; margin: 0 auto; }
+        .pain-callout p { font-size: 1rem; color: var(--text-muted); line-height: 1.8; font-style: italic; }
+        .pain-callout p strong { color: var(--text); font-style: normal; }
 
-        /* ── Collapsible sections ── */
-        .collapsible-section { border-top: 1px solid var(--border); }
-        .collapsible-header { width: 100%; background: none; border: none; cursor: pointer; font-family: var(--font-sans); color: var(--text); padding: 1.5rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; text-align: left; transition: background 0.2s; }
-        .collapsible-header:hover { background: var(--bg-subtle); }
-        .collapsible-header-left { display: flex; align-items: center; gap: 1rem; }
-        .collapsible-header-icon { font-size: 1.1rem; flex-shrink: 0; }
-        .collapsible-header-title { font-family: var(--font-serif); font-size: clamp(1.1rem, 2.5vw, 1.4rem); line-height: 1.2; }
-        .collapsible-header-sub { font-size: 0.8125rem; color: var(--text-faint); margin-top: 0.15rem; }
-        .collapsible-chevron { font-size: 0.8rem; color: var(--text-faint); transition: transform 0.28s ease, color 0.2s; flex-shrink: 0; }
-        .collapsible-section.open .collapsible-chevron { transform: rotate(180deg); color: var(--accent); }
-        .collapsible-body { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 0.35s ease; }
-        .collapsible-section.open .collapsible-body { grid-template-rows: 1fr; }
-        .collapsible-body-inner { overflow: hidden; }
-        .collapsible-content { padding: 0 1.5rem 2.5rem; }
+        /* ── HOW ── */
+        .how-section {}
+        .how-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
+        @media (max-width: 900px) { .how-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 560px) { .how-grid { grid-template-columns: 1fr; } }
+        .how-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--r-lg); padding: 1.5rem; transition: border-color 0.2s, transform 0.2s; }
+        .how-card:hover { border-color: var(--accent-mid); transform: translateY(-2px); }
+        .how-card-icon { width: 40px; height: 40px; background: var(--accent-dim); border: 1px solid var(--accent-mid); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1rem; margin-bottom: 1rem; }
+        .how-card h3 { font-family: var(--font-serif); font-size: 1.05rem; margin-bottom: 0.4rem; }
+        .how-card p { font-size: 0.835rem; color: var(--text-muted); line-height: 1.65; }
+        .how-bottom { margin-top: 2.5rem; background: var(--accent-dim); border: 1px solid var(--accent-mid); border-radius: var(--r-lg); padding: 1.5rem 2rem; display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap; }
+        .how-bottom-text { flex: 1; min-width: 200px; }
+        .how-bottom-text h3 { font-family: var(--font-serif); font-size: 1.2rem; margin-bottom: 0.35rem; }
+        .how-bottom-text p { font-size: 0.875rem; color: var(--text-muted); line-height: 1.7; }
+        .how-bottom-cta { flex-shrink: 0; }
 
-        /* ── Tier toggle ── */
-        .tier-toggle { display: flex; justify-content: center; margin-bottom: 3.5rem; background: var(--bg-card); border: 1px solid var(--border); border-radius: 100px; padding: 0.25rem; width: fit-content; margin-left: auto; margin-right: auto; max-width: calc(100% - 3rem); }
-        .tier-btn { padding: 0.65rem 1.5rem; border-radius: 100px; border: none; font-family: var(--font-sans); font-size: 0.875rem; font-weight: 500; cursor: pointer; transition: all 0.2s; color: var(--text-muted); background: transparent; white-space: nowrap; }
-        .tier-btn.active { background: var(--accent); color: #fff; }
-        @media (max-width: 640px) { .tier-toggle { flex-direction: column; border-radius: 12px; width: calc(100% - 3rem); max-width: 100%; } .tier-btn { border-radius: 8px; text-align: center; width: 100%; padding: 0.7rem 1rem; font-size: 0.85rem; } .tier-btn.active { border-radius: 8px; } }
+        /* ── WHAT — Plans ── */
+        .plans-section {}
 
-        .tier-view { display: none; }
-        .tier-view.active { display: block; animation: fadeIn 0.28s ease; }
+        /* Tier selector cards at top */
+        .tier-selector { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-bottom: 3rem; }
+        @media (max-width: 768px) { .tier-selector { grid-template-columns: 1fr; gap: 0.75rem; } }
+        .tier-sel-card { background: var(--bg-card); border: 2px solid var(--border); border-radius: var(--r-lg); padding: 1.25rem 1.5rem; cursor: pointer; transition: all 0.2s; text-align: center; position: relative; }
+        .tier-sel-card:hover { border-color: var(--accent-mid); }
+        .tier-sel-card.active { border-color: var(--accent); background: var(--accent-dim); }
+        .tier-sel-card .tier-sel-name { font-family: var(--font-serif); font-size: 1.2rem; margin-bottom: 0.2rem; }
+        .tier-sel-card .tier-sel-price { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.5rem; }
+        .tier-sel-card .tier-sel-for { font-size: 0.75rem; color: var(--text-faint); }
+        .tier-best { position: absolute; top: -10px; left: 50%; transform: translateX(-50%); background: var(--accent); color: #fff; font-size: 0.62rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.09em; border-radius: 100px; padding: 0.15rem 0.65rem; white-space: nowrap; }
+
+        /* ── Comparison Table ── */
+        .compare-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: var(--r-lg); margin-bottom: 2.5rem; }
+        .compare-tbl { width: 100%; border-collapse: collapse; min-width: 680px; }
+        .compare-tbl thead tr { border-bottom: 1px solid var(--border); }
+        .compare-tbl th { padding: 1.1rem 1.25rem; text-align: left; background: var(--bg-subtle); }
+        .compare-tbl th:first-child { color: var(--text-faint); font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.09em; }
+        .compare-tbl th:not(:first-child) { text-align: center; }
+        .th-tier-name { font-family: var(--font-serif); font-size: 1rem; font-weight: 400; color: var(--text); display: block; }
+        .th-tier-price { font-size: 0.75rem; color: var(--text-muted); display: block; margin-top: 0.2rem; }
+        .th-tier-highlight { color: var(--accent) !important; }
+        .th-tier-highlight .th-tier-price { color: var(--accent); opacity: 0.8; }
+        .compare-tbl td { padding: 0.75rem 1.25rem; border-bottom: 1px solid var(--border); font-size: 0.855rem; color: var(--text-muted); vertical-align: middle; }
+        .compare-tbl td:not(:first-child) { text-align: center; }
+        .compare-tbl tr:last-child td { border-bottom: none; }
+        .compare-tbl tbody tr:hover td { background: rgba(255,255,255,0.02); }
+        .cat-row td { background: var(--bg-subtle) !important; padding: 0.5rem 1.25rem; }
+        .cat-label { font-size: 0.67rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-faint); }
+        .price-row td { background: var(--bg-card); }
+        .price-row td:nth-child(4) { background: var(--accent-dim); color: var(--accent); font-family: var(--font-serif); font-size: 1rem; }
+        .yes { color: var(--accent); font-size: 1rem; }
+        .no { color: var(--text-faint); }
+        .soon-badge { display: inline-flex; align-items: center; font-size: 0.6rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent); background: var(--accent-dim); border: 1px solid var(--accent-mid); border-radius: 100px; padding: 0.1rem 0.45rem; white-space: nowrap; vertical-align: middle; margin-left: 0.3rem; }
+        .compare-note { font-size: 0.72rem; color: var(--text-faint); font-style: italic; display: block; margin-top: 0.1rem; }
+        .discount-badge { display: inline-block; font-size: 0.72rem; color: var(--accent); font-weight: 500; }
+
+        /* ── Tier detail cards ── */
+        .tier-details { display: none; }
+        .tier-details.active { display: block; animation: fadeIn 0.28s ease; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
-
-        /* ── Tier layout ── */
-        .tier-layout { display: grid; grid-template-columns: 1fr 1.45fr; gap: 2.5rem; align-items: start; }
-        @media (max-width: 820px) { .tier-layout { grid-template-columns: 1fr; } }
-        .tier-label-col { position: sticky; top: 5.5rem; }
-        @media (max-width: 820px) { .tier-label-col { position: static; } }
-        .tier-number { font-family: var(--font-serif); font-size: 5rem; line-height: 1; color: var(--accent); opacity: 0.13; display: block; margin-bottom: -1.5rem; user-select: none; }
+        .tier-detail-grid { display: grid; grid-template-columns: 1fr 1.5fr; gap: 2.5rem; align-items: start; }
+        @media (max-width: 820px) { .tier-detail-grid { grid-template-columns: 1fr; } }
+        .tier-sticky { position: sticky; top: 5.5rem; }
+        @media (max-width: 820px) { .tier-sticky { position: static; } }
+        .tier-number { font-family: var(--font-serif); font-size: 5rem; line-height: 1; color: var(--accent); opacity: 0.12; display: block; margin-bottom: -1.5rem; user-select: none; }
         .tier-heading { font-family: var(--font-serif); font-size: 2rem; margin-bottom: 0.75rem; }
         .tier-desc { font-size: 0.9375rem; color: var(--text-muted); line-height: 1.8; margin-bottom: 1.5rem; }
-        .tier-ideal { background: var(--accent-dim); border: 1px solid var(--accent-mid); border-radius: var(--r); padding: 1rem 1.25rem; font-size: 0.85rem; color: var(--text-muted); line-height: 1.65; }
+        .tier-ideal { background: var(--accent-dim); border: 1px solid var(--accent-mid); border-radius: var(--r); padding: 1rem 1.25rem; font-size: 0.85rem; color: var(--text-muted); line-height: 1.65; margin-bottom: 1rem; }
         .tier-ideal strong { font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.09em; color: var(--accent); display: block; margin-bottom: 0.3rem; }
-        .model-switch-note { margin-top: 1rem; padding: 0.85rem 1rem; background: var(--bg-subtle); border: 1px solid var(--border); border-radius: var(--r); font-size: 0.8rem; color: var(--text-faint); line-height: 1.6; }
-        .model-switch-note strong { color: var(--text-muted); font-weight: 500; }
-        .model-switch-link { background: none; border: none; cursor: pointer; font-family: var(--font-sans); font-size: 0.8rem; font-weight: 500; color: rgba(255,27,110,0.7); padding: 0; transition: color 0.15s; text-decoration: underline; text-underline-offset: 2px; }
-        .model-switch-link:hover { color: var(--accent); }
+        .tier-switch { background: var(--bg-subtle); border: 1px solid var(--border); border-radius: var(--r); padding: 0.85rem 1rem; font-size: 0.8rem; color: var(--text-faint); line-height: 1.6; }
+        .tier-switch button { background: none; border: none; cursor: pointer; font-family: var(--font-sans); font-size: 0.8rem; font-weight: 500; color: rgba(255,27,110,0.75); padding: 0; text-decoration: underline; text-underline-offset: 2px; transition: color 0.15s; }
+        .tier-switch button:hover { color: var(--accent); }
 
-        /* ── Plan card ── */
-        .plan-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--r); border-top: 3px solid var(--accent); overflow: hidden; }
+        /* Plan card */
+        .plan-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--r-lg); border-top: 3px solid var(--accent); overflow: hidden; }
         .plan-header { padding: 1.75rem; border-bottom: 1px solid var(--border); }
         .plan-name { font-family: var(--font-serif); font-size: 1.7rem; line-height: 1.15; margin-bottom: 0.2rem; }
-        .plan-audience-line { font-size: 0.825rem; color: var(--text-faint); }
+        .plan-tagline { font-size: 0.825rem; color: var(--text-faint); }
         .plan-price-block { margin: 1.25rem 0 0; }
         .price-line { display: flex; align-items: baseline; gap: 0.35rem; flex-wrap: wrap; margin-bottom: 0.3rem; }
         .price-main { font-family: var(--font-serif); font-size: 3rem; line-height: 1; color: var(--accent); }
         .price-period { font-size: 0.875rem; color: var(--text-faint); }
-        .price-note { font-size: 0.78rem; color: var(--text-faint); font-style: italic; }
+        .price-note { font-size: 0.78rem; color: var(--text-faint); font-style: italic; margin-bottom: 0.25rem; }
+        .price-booking-fee { display: inline-flex; align-items: center; gap: 0.4rem; font-size: 0.8rem; color: var(--text-muted); background: var(--bg-subtle); border: 1px solid var(--border); border-radius: 100px; padding: 0.2rem 0.75rem; }
+        .price-booking-fee .fee-label { color: var(--text-faint); font-size: 0.7rem; }
         .plan-pitch { font-size: 0.9rem; color: var(--text-muted); line-height: 1.7; margin-top: 1rem; }
         .plan-body { padding: 1.5rem 1.75rem; }
         .plan-footer { padding: 1.25rem 1.75rem; border-top: 1px solid var(--border); }
         .plan-cta { display: flex; align-items: center; justify-content: center; gap: 0.45rem; width: 100%; padding: 0.9rem 1.5rem; border-radius: var(--r); border: none; cursor: pointer; font-family: var(--font-sans); font-size: 0.9rem; font-weight: 500; text-decoration: none; background: var(--accent); color: #fff; transition: all 0.2s; }
         .plan-cta:hover { opacity: 0.88; transform: translateY(-1px); }
 
-        /* ── Offerings grid (8 categories) ── */
+        /* Offerings inside plan card */
         .offerings-label { font-size: 0.68rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-faint); padding-bottom: 0.6rem; border-bottom: 1px solid var(--border); margin-bottom: 1.25rem; }
         .offerings-grid { display: flex; flex-direction: column; gap: 0.5rem; }
         .offering-item { background: var(--bg-subtle); border: 1px solid var(--border); border-radius: var(--r); overflow: hidden; transition: border-color 0.2s; }
@@ -165,15 +223,13 @@
         .offering-list li { font-size: 0.8rem; color: var(--text-muted); display: flex; align-items: flex-start; gap: 0.4rem; line-height: 1.5; list-style: none; }
         .offering-list li::before { content: '›'; color: var(--accent); flex-shrink: 0; margin-top: 0.05rem; }
 
-        /* Extras strip */
-        .extras-strip { margin-top: 1.5rem; display: flex; flex-direction: column; gap: 0.55rem; }
-        .extra-row { display: flex; align-items: flex-start; gap: 0.65rem; }
-        .extra-icon { width: 28px; height: 28px; border-radius: 50%; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; background: var(--accent-dim); border: 1px solid var(--accent-mid); }
-        .extra-text { flex: 1; font-size: 0.825rem; color: var(--text-muted); line-height: 1.55; }
-        .extra-text strong { color: var(--text); font-weight: 500; }
-        .perk-coming-soon { display: inline-flex; align-items: center; gap: 0.3rem; font-size: 0.62rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.09em; color: var(--accent); background: var(--accent-dim); border: 1px solid var(--accent-mid); border-radius: 100px; padding: 0.15rem 0.55rem; margin-left: 0.4rem; vertical-align: middle; }
-
-        .availability-note { font-size: 0.75rem; color: var(--text-faint); font-style: italic; padding: 0.65rem 0.9rem; background: var(--bg-subtle); border-radius: var(--r); border-left: 2px solid var(--accent-mid); margin-top: 1.25rem; }
+        /* Perks strip */
+        .perks-strip { margin-top: 1.75rem; display: flex; flex-direction: column; gap: 0.55rem; }
+        .perk-row { display: flex; align-items: flex-start; gap: 0.65rem; }
+        .perk-icon { width: 28px; height: 28px; border-radius: 50%; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; background: var(--accent-dim); border: 1px solid var(--accent-mid); }
+        .perk-text { flex: 1; font-size: 0.825rem; color: var(--text-muted); line-height: 1.55; }
+        .perk-text strong { color: var(--text); font-weight: 500; }
+        .perk-coming-soon { display: inline-flex; align-items: center; font-size: 0.62rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent); background: var(--accent-dim); border: 1px solid var(--accent-mid); border-radius: 100px; padding: 0.12rem 0.5rem; margin-left: 0.4rem; vertical-align: middle; }
 
         /* Commitment strip */
         .commitment-strip { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.75rem; margin-top: 1rem; }
@@ -182,13 +238,71 @@
         .commitment-item .ci-icon { font-size: 1rem; margin-bottom: 0.35rem; }
         .commitment-item h4 { font-size: 0.825rem; font-weight: 500; margin-bottom: 0.2rem; }
         .commitment-item p { font-size: 0.775rem; color: var(--text-faint); line-height: 1.5; }
+        .availability-note { font-size: 0.75rem; color: var(--text-faint); font-style: italic; padding: 0.65rem 0.9rem; background: var(--bg-subtle); border-radius: var(--r); border-left: 2px solid var(--accent-mid); margin-top: 1.25rem; }
 
-        /* Tier 2 badge */
-        .features-same-badge { display: flex; align-items: center; gap: 0.6rem; background: var(--accent-dim); border: 1px solid var(--accent-mid); border-radius: var(--r); padding: 0.75rem 1rem; margin-bottom: 1.5rem; font-size: 0.82rem; color: var(--text-muted); line-height: 1.5; }
-        .features-same-badge .fsb-icon { font-size: 1rem; flex-shrink: 0; }
-        .features-same-badge strong { color: var(--accent); font-weight: 500; }
+        /* ── Outcomes ── */
+        .outcomes-section { background: var(--bg-subtle); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+        .outcomes-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
+        @media (max-width: 760px) { .outcomes-grid { grid-template-columns: 1fr; } }
+        .outcome-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--r-lg); padding: 1.5rem; }
+        .outcome-card .oc-icon { font-size: 1.75rem; margin-bottom: 0.85rem; display: block; }
+        .outcome-card h3 { font-family: var(--font-serif); font-size: 1.15rem; margin-bottom: 0.4rem; }
+        .outcome-card p { font-size: 0.845rem; color: var(--text-muted); line-height: 1.7; }
+        .outcome-disclaimer { text-align: center; margin-top: 2rem; font-size: 0.8rem; color: var(--text-faint); font-style: italic; max-width: 55ch; margin-left: auto; margin-right: auto; }
 
-        /* À La Carte */
+        /* ── Competitor Comparison ── */
+        .vs-section {}
+        .vs-table-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: var(--r-lg); }
+        .vs-table { width: 100%; border-collapse: collapse; min-width: 700px; }
+        .vs-table thead tr { border-bottom: 1px solid var(--border); }
+        .vs-table th { padding: 1.1rem 1.25rem; text-align: center; background: var(--bg-subtle); }
+        .vs-table th:first-child { text-align: left; color: var(--text-faint); font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.09em; }
+        .vs-th-nbrh { background: var(--accent-dim) !important; }
+        .vs-th-name { font-family: var(--font-serif); font-size: 0.95rem; font-weight: 400; color: var(--text); display: block; }
+        .vs-th-sub { font-size: 0.72rem; color: var(--text-faint); display: block; margin-top: 0.15rem; }
+        .vs-th-nbrh .vs-th-name { color: var(--accent); }
+        .vs-table td { padding: 0.75rem 1.25rem; border-bottom: 1px solid var(--border); font-size: 0.855rem; color: var(--text-muted); text-align: center; vertical-align: middle; }
+        .vs-table td:first-child { text-align: left; color: var(--text-muted); }
+        .vs-table tr:last-child td { border-bottom: none; }
+        .vs-table tbody tr:hover td { background: rgba(255,255,255,0.02); }
+        .vs-yes { color: var(--accent); font-size: 1rem; }
+        .vs-no { color: var(--text-faint); }
+        .vs-td-nbrh { background: var(--accent-dim) !important; }
+        .vs-td-nbrh .vs-yes { color: var(--accent); }
+        .vs-table .vs-price-row td { background: var(--bg-card); font-weight: 500; }
+        .vs-table .vs-price-row .vs-td-nbrh { background: var(--accent-dim) !important; color: var(--accent); font-family: var(--font-serif); }
+        .vs-note { font-size: 0.72rem; color: var(--text-faint); font-style: italic; display: block; margin-top: 0.15rem; }
+
+        /* ── Testimonials (hidden — infrastructure preserved) ── */
+        .testimonials-section { display: none; }
+
+        /* ── Collapsible sections ── */
+        .collapsible-section { border-top: 1px solid var(--border); }
+        .collapsible-header { width: 100%; background: none; border: none; cursor: pointer; font-family: var(--font-sans); color: var(--text); padding: 1.5rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; text-align: left; transition: background 0.2s; }
+        .collapsible-header:hover { background: var(--bg-subtle); }
+        .collapsible-header-left { display: flex; align-items: center; gap: 1rem; }
+        .collapsible-header-icon { font-size: 1.1rem; flex-shrink: 0; }
+        .collapsible-header-title { font-family: var(--font-serif); font-size: clamp(1.1rem, 2.5vw, 1.4rem); line-height: 1.2; }
+        .collapsible-header-sub { font-size: 0.8125rem; color: var(--text-faint); margin-top: 0.15rem; }
+        .collapsible-chevron { font-size: 0.8rem; color: var(--text-faint); transition: transform 0.28s ease, color 0.2s; flex-shrink: 0; }
+        .collapsible-section.open .collapsible-chevron { transform: rotate(180deg); color: var(--accent); }
+        .collapsible-body { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 0.35s ease; }
+        .collapsible-section.open .collapsible-body { grid-template-rows: 1fr; }
+        .collapsible-body-inner { overflow: hidden; }
+        .collapsible-content { padding: 0 1.5rem 2.5rem; }
+
+        /* ── How It Works ── */
+        .steps-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; position: relative; }
+        @media (max-width: 768px) { .steps-grid { grid-template-columns: 1fr; gap: 1.5rem; } }
+        .steps-connector { display: none; }
+        @media (min-width: 769px) { .steps-connector { display: block; position: absolute; top: 15px; left: calc(33.33% + 1.5rem); right: calc(33.33% + 1.5rem); height: 1px; background: var(--accent-mid); pointer-events: none; } }
+        .step-number-wrap { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.85rem; }
+        .step-number { width: 32px; height: 32px; border-radius: 50%; background: var(--accent); color: #fff; font-family: var(--font-serif); font-size: 0.9rem; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+        .step-timing { font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.09em; color: var(--text-faint); }
+        .step-title { font-size: 1rem; font-weight: 500; color: var(--text); margin-bottom: 0.4rem; }
+        .step-desc { font-size: 0.85rem; color: var(--text-muted); line-height: 1.7; }
+
+        /* ── À La Carte ── */
         .services-grid { display: flex; flex-direction: column; gap: 1rem; }
         .svc-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--r); overflow: hidden; transition: border-color 0.2s; }
         .svc-card:hover { border-color: rgba(255,27,110,0.3); }
@@ -225,8 +339,6 @@
         .svc-saving strong { color: var(--accent); font-style: normal; font-weight: 500; }
         .svc-book-btn { display: flex; align-items: center; justify-content: center; gap: 0.4rem; width: 100%; padding: 0.7rem 1rem; background: var(--accent); color: #fff; border: none; border-radius: var(--r); font-family: var(--font-sans); font-size: 0.84rem; font-weight: 500; text-decoration: none; cursor: pointer; transition: opacity 0.2s, transform 0.2s; }
         .svc-book-btn:hover { opacity: 0.88; transform: translateY(-1px); }
-
-        /* Delivery block */
         .delivery-block { margin-top: 1.1rem; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--r); overflow: hidden; }
         .delivery-header { display: flex; align-items: flex-start; gap: 0.85rem; padding: 1.1rem 1.25rem; border-bottom: 1px solid var(--border); }
         .delivery-icon { font-size: 1.05rem; flex-shrink: 0; margin-top: 0.1rem; }
@@ -249,52 +361,6 @@
         .delivery-divider { width: 1px; background: var(--border); flex-shrink: 0; }
         .delivery-note { font-size: 0.75rem; color: var(--text-faint); font-style: italic; padding: 0.65rem 1.25rem; background: var(--bg-subtle); border-top: 1px solid var(--border); line-height: 1.55; }
         .tier2-note { margin-top: 1.1rem; padding: 1.1rem 1.25rem; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--r); font-size: 0.875rem; color: var(--text-muted); line-height: 1.75; }
-        .tier2-note strong { color: var(--text); font-weight: 500; }
-
-        /* Compare table */
-        .compare-table { width: 100%; border-collapse: collapse; font-size: 0.875rem; margin-top: 2rem; }
-        .compare-table th, .compare-table td { padding: 0.875rem 1rem; text-align: left; border-bottom: 1px solid var(--border); }
-        .compare-table thead th { font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.09em; color: var(--text-faint); }
-        .compare-table thead th:nth-child(2), .compare-table thead th:nth-child(3) { color: var(--accent); }
-        .compare-table tbody tr:hover td { background: var(--bg-subtle); }
-        .compare-table td:first-child { color: var(--text-muted); }
-        .compare-table td:not(:first-child) { text-align: center; }
-        .check-yes { color: var(--accent); }
-        .check-no { color: var(--text-faint); }
-        .compare-note-inline { font-size: 0.72rem; color: var(--text-faint); font-style: italic; }
-        .compare-pricing-row td { background: var(--bg-subtle); }
-        .compare-pricing-row td:nth-child(2), .compare-pricing-row td:nth-child(3) { font-family: var(--font-serif); font-size: 1rem; color: var(--accent); }
-        @media (max-width: 600px) { .compare-table { font-size: 0.8rem; } .compare-table th, .compare-table td { padding: 0.65rem 0.5rem; } }
-
-        /* CTA band */
-        .cta-band { background: var(--accent); padding: 2.75rem 1.5rem; text-align: center; }
-        .cta-band h2 { color: #fff; font-size: clamp(1.4rem, 3vw, 2rem); margin-bottom: 0.6rem; }
-        .cta-band p { color: rgba(255,255,255,0.85); font-size: 0.9375rem; max-width: 48ch; margin: 0 auto 1.5rem; }
-        .cta-band .cta-btn { background: #fff; color: var(--accent); display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.8rem 1.6rem; font-size: 0.9rem; font-weight: 500; text-decoration: none; border-radius: var(--r); transition: all 0.2s; }
-        .cta-band .cta-btn:hover { background: rgba(255,255,255,0.9); transform: translateY(-1px); }
-
-        /* Footer */
-        footer { border-top: 1px solid var(--border); }
-        .footer-inner { max-width: var(--max); margin: 0 auto; padding: 1.25rem 1.5rem; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 1.25rem; }
-        .footer-inner img { height: 24px; width: auto; opacity: 0.7; }
-        .footer-links { display: flex; gap: 1.5rem; flex-wrap: wrap; }
-        .footer-links a { font-size: 0.8125rem; color: var(--text-muted); text-decoration: none; }
-        .footer-links a:hover { color: var(--accent); }
-        .footer-legal { width: 100%; text-align: center; font-size: 0.75rem; color: var(--text-faint); padding: 0.75rem 1.5rem; border-top: 1px solid var(--border); }
-
-        /* ── Testimonials (hidden — infrastructure preserved) ── */
-        .testimonials-section { display: none; }
-
-        /* ── How it works ── */
-        .steps-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; position: relative; }
-        @media (max-width: 768px) { .steps-grid { grid-template-columns: 1fr; gap: 1.5rem; } }
-        .steps-connector { display: none; }
-        @media (min-width: 769px) { .steps-connector { display: block; position: absolute; top: 15px; left: calc(33.33% + 1.5rem); right: calc(33.33% + 1.5rem); height: 1px; background: var(--accent-mid); pointer-events: none; } }
-        .step-number-wrap { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.85rem; }
-        .step-number { width: 32px; height: 32px; border-radius: 50%; background: var(--accent); color: #fff; font-family: var(--font-serif); font-size: 0.9rem; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-        .step-timing { font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.09em; color: var(--text-faint); }
-        .step-title { font-size: 1rem; font-weight: 500; color: var(--text); margin-bottom: 0.4rem; }
-        .step-desc { font-size: 0.85rem; color: var(--text-muted); line-height: 1.7; }
 
         /* ── FAQ ── */
         .faq-list { display: flex; flex-direction: column; gap: 0.5rem; max-width: 760px; margin: 0 auto; }
@@ -308,6 +374,41 @@
         .faq-item.open .faq-body { grid-template-rows: 1fr; }
         .faq-body-inner { overflow: hidden; }
         .faq-answer { padding: 0.9rem 1.25rem 1.1rem; font-size: 0.875rem; color: var(--text-muted); line-height: 1.75; border-top: 1px solid var(--border); }
+
+        /* ── CTA Band ── */
+        .cta-band { background: var(--accent); padding: 2.75rem 1.5rem; text-align: center; }
+        .cta-band h2 { color: #fff; font-size: clamp(1.4rem, 3vw, 2rem); margin-bottom: 0.6rem; }
+        .cta-band p { color: rgba(255,255,255,0.85); font-size: 0.9375rem; max-width: 48ch; margin: 0 auto 1.5rem; }
+        .cta-band .cta-btn { background: #fff; color: var(--accent); display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.8rem 1.6rem; font-size: 0.9rem; font-weight: 500; text-decoration: none; border-radius: var(--r); transition: all 0.2s; }
+        .cta-band .cta-btn:hover { background: rgba(255,255,255,0.9); transform: translateY(-1px); }
+
+        /* ── Footer ── */
+        footer { border-top: 1px solid var(--border); }
+        .footer-inner { max-width: var(--max); margin: 0 auto; padding: 1.25rem 1.5rem; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 1.25rem; }
+        .footer-inner img { height: 24px; width: auto; opacity: 0.7; }
+        .footer-links { display: flex; gap: 1.5rem; flex-wrap: wrap; }
+        .footer-links a { font-size: 0.8125rem; color: var(--text-muted); text-decoration: none; }
+        .footer-links a:hover { color: var(--accent); }
+        .footer-legal { width: 100%; text-align: center; font-size: 0.75rem; color: var(--text-faint); padding: 0.75rem 1.5rem; border-top: 1px solid var(--border); }
+
+        /* ── Simple bullet list ── */
+        .simple-list { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; max-width: 56ch; }
+        .simple-list li { font-size: 0.9375rem; color: var(--text-muted); display: flex; align-items: flex-start; gap: 0.65rem; line-height: 1.5; }
+        .simple-list li::before { content: '›'; color: var(--accent); font-size: 1.1rem; flex-shrink: 0; line-height: 1.4; }
+
+        /* ── Tier summary cards (below compare table) ── */
+        .tier-summary-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.25rem; margin-top: 2rem; }
+        @media (max-width: 768px) { .tier-summary-grid { grid-template-columns: 1fr; } }
+        .tier-summary-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--r-lg); padding: 1.5rem; display: flex; flex-direction: column; gap: 0; position: relative; transition: border-color 0.2s; }
+        .tier-summary-card:hover { border-color: var(--accent-mid); }
+        .tier-summary-card.featured { border-color: var(--accent-mid); background: var(--accent-dim); }
+        .ts-badge { position: absolute; top: -10px; left: 50%; transform: translateX(-50%); background: var(--accent); color: #fff; font-size: 0.62rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.09em; border-radius: 100px; padding: 0.15rem 0.65rem; white-space: nowrap; }
+        .ts-name { font-family: var(--font-serif); font-size: 1.25rem; margin-bottom: 0.2rem; }
+        .ts-price { font-size: 0.8rem; color: var(--accent); font-weight: 500; margin-bottom: 0.85rem; padding-bottom: 0.85rem; border-bottom: 1px solid var(--border); }
+        .ts-ideal-label { font-size: 0.67rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.09em; color: var(--accent); display: block; margin-bottom: 0.4rem; }
+        .ts-desc { font-size: 0.845rem; color: var(--text-muted); line-height: 1.7; flex: 1; margin-bottom: 1.25rem; }
+        .ts-cta { display: flex; align-items: center; justify-content: center; gap: 0.4rem; width: 100%; padding: 0.75rem 1rem; border-radius: var(--r); border: none; cursor: pointer; font-family: var(--font-sans); font-size: 0.865rem; font-weight: 500; text-decoration: none; background: var(--accent); color: #fff; transition: all 0.2s; }
+        .ts-cta:hover { opacity: 0.88; transform: translateY(-1px); }
     </style>
 </head>
 <body>
@@ -320,34 +421,39 @@
             <img src="https://images.squarespace-cdn.com/content/6718416feaa24175e29324d4/9d6e6464-e1e5-4dde-9ae0-03df420cbd77/NBRH+Logo.png?content-type=image%2Fpng" alt="The NBRH">
         </a>
         <ul class="nav-links">
+            <li><a href="#why">Why Club House</a></li>
             <li><a href="#plans">Plans</a></li>
-            <li><a href="#compare">Compare</a></li>
+            <li><a href="#outcomes">What to Expect</a></li>
             <li><a href="#how-it-works">How It Works</a></li>
             <li><a href="#faq">FAQ</a></li>
         </ul>
     </div>
 </nav>
 
-<!-- Hero -->
+<!-- ═══════════════════════════ HERO ═══════════════════════════ -->
 <section class="hero reveal">
     <div class="hero-bg"></div>
     <div class="hero-content">
         <div class="wrap">
-            <div class="store-badge">Plans &amp; Pricing</div>
-            <h1>This is how we grow your club.</h1>
-            <p class="lead">Whether you want a simple flat monthly fee or pure pay-per-booking flexibility &mdash; both get you the same Club House infrastructure.</p>
+            <div class="store-badge">&#127968; Club House &mdash; Plans &amp; Pricing</div>
+            <h1>Your club deserves to grow.</h1>
+            <p class="lead">The NBRH Club House gives grassroots sports clubs the expertise, tools, and marketing power to grow — without the agency price tag. We&rsquo;ve lived it. We know what it takes.</p>
+            <div class="hero-ctas">
+                <a href="#plans" class="btn-primary">See Plans &rarr;</a>
+                <a href="#why" class="btn-ghost">Why Club House?</a>
+            </div>
             <div class="hero-stats">
                 <div class="hero-stat">
-                    <span class="hero-stat-num">&pound;100</span>
-                    <span class="hero-stat-label">Club House / month, all in</span>
+                    <span class="hero-stat-num">Free</span>
+                    <span class="hero-stat-label">2-month pilot, no commitment</span>
                 </div>
                 <div class="hero-stat">
-                    <span class="hero-stat-num">&pound;2</span>
-                    <span class="hero-stat-label">Club House Flex / booking, no monthly fee</span>
+                    <span class="hero-stat-num">3</span>
+                    <span class="hero-stat-label">tiers — from free to fully managed</span>
                 </div>
                 <div class="hero-stat">
-                    <span class="hero-stat-num">8</span>
-                    <span class="hero-stat-label">service categories</span>
+                    <span class="hero-stat-num">1</span>
+                    <span class="hero-stat-label">platform built for grassroots sport</span>
                 </div>
             </div>
         </div>
@@ -358,20 +464,466 @@
 <div class="pilot-banner reveal">
     <div class="pilot-banner-inner">
         <span class="pilot-pill">Free Pilot</span>
-        <p class="pilot-banner-text"><strong>Try Club House free for 2 months.</strong> We offer a pilot so you can see the platform working before you commit to anything. The pilot begins when both parties are ready &mdash; no pressure, no arbitrary start dates.</p>
+        <p class="pilot-banner-text"><strong>Try Club House free for 2 months.</strong> We offer a pilot so you can see the platform working before you commit to anything. The pilot begins when both parties are ready — no pressure, no arbitrary start dates.</p>
     </div>
 </div>
 
-<!-- Testimonials — hidden until real quotes are ready. Infrastructure preserved. -->
+
+<!-- ═══════════════════════════ WHY ═══════════════════════════ -->
+<div class="collapsible-section reveal open" id="why">
+    <button class="collapsible-header" aria-expanded="true" data-target="why-body">
+        <div class="collapsible-header-left">
+            <span class="collapsible-header-icon">&#10067;</span>
+            <div>
+                <div class="collapsible-header-title">Why Club House</div>
+                <div class="collapsible-header-sub">The problem we set out to solve</div>
+            </div>
+        </div>
+        <span class="collapsible-chevron">&#9660;</span>
+    </button>
+    <div class="collapsible-body" id="why-body">
+        <div class="collapsible-body-inner">
+            <div class="collapsible-content">
+    <div class="wrap">
+
+        <div class="pain-intro">
+            <span class="eyebrow">The Why</span>
+            <h2>Running a club is harder than it looks.</h2>
+            <p>You got into sport because you love it. But somewhere between coaching sessions, chasing payments, posting on Instagram and figuring out how to fill your next session — it stopped being fun. Sound familiar?</p>
+        </div>
+
+        <ul class="simple-list">
+            <li>You don&rsquo;t have the time</li>
+            <li>You don&rsquo;t have the expertise</li>
+            <li>You don&rsquo;t have the budget</li>
+            <li>Your sessions aren&rsquo;t visible</li>
+            <li>You don&rsquo;t know what to do</li>
+            <li>The admin never stops</li>
+        </ul>
+
+        <p style="font-size:0.9rem;color:var(--text-faint);margin-top:1.25rem;font-style:italic;">We know this because we&rsquo;ve lived it. Club House is what we wish had existed.</p>
+
+    </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="divider"></div>
+<!-- ═══════════════════════════ HOW ═══════════════════════════ -->
+<div class="collapsible-section reveal open" id="how">
+    <button class="collapsible-header" aria-expanded="true" data-target="how-body">
+        <div class="collapsible-header-left">
+            <span class="collapsible-header-icon">&#128161;</span>
+            <div>
+                <div class="collapsible-header-title">How We Help</div>
+                <div class="collapsible-header-sub">The six pillars of Club House</div>
+            </div>
+        </div>
+        <span class="collapsible-chevron">&#9660;</span>
+    </button>
+    <div class="collapsible-body" id="how-body">
+        <div class="collapsible-body-inner">
+            <div class="collapsible-content">
+    <div class="wrap">
+
+        <div class="section-head">
+            <span class="eyebrow">The How</span>
+            <h2>Here&rsquo;s what we do about it.</h2>
+            <p class="sub">Club House is designed to give you back your time, amplify your reach, and provide the infrastructure to grow sustainably.</p>
+        </div>
+
+        <div class="how-grid">
+            <div class="how-card">
+                <div class="how-card-icon">&#128247;</div>
+                <h3>Expert-led marketing</h3>
+                <p>Organic content, paid ads, SEO blog posts, LinkedIn articles, and in-person video — all created, managed and delivered by us. No briefings, no back-and-forth. We know your sessions, we know your audience.</p>
+            </div>
+            <div class="how-card">
+                <div class="how-card-icon">&#127915;</div>
+                <h3>Booking infrastructure</h3>
+                <p>Your sessions are live on Tickts with a fully managed booking page. Events created, capacity managed, payments processed, waitlists handled. You just show up and coach.</p>
+            </div>
+            <div class="how-card">
+                <div class="how-card-icon">&#128226;</div>
+                <h3>Community outreach</h3>
+                <p>We reach out to Facebook Groups, local clubs, neighbourhoods, and relevant communities on your behalf — every week. Getting your sessions in front of the right people without you lifting a finger.</p>
+            </div>
+            <div class="how-card">
+                <div class="how-card-icon">&#128201;</div>
+                <h3>Growth intelligence</h3>
+                <p>Monthly analytics reports, traffic tracking, booking data, and AI-backed market research. You get clear insights and recommendations — not just numbers on a spreadsheet.</p>
+            </div>
+            <div class="how-card">
+                <div class="how-card-icon">&#128172;</div>
+                <h3>Consultative support</h3>
+                <p>Branding, session formats, content direction, growth strategy — we&rsquo;re a thinking partner, not just a tool. Available when you need guidance, not just when things go wrong.</p>
+            </div>
+            <div class="how-card">
+                <div class="how-card-icon">&#128640;</div>
+                <h3>Tools to scale and earn</h3>
+                <p>Member subscriptions, a people-finder tool, Club Store, and more. As The NBRH grows, so do your tools. Everything is built to compound over time.</p>
+            </div>
+        </div>
+
+    </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- ═══════════════════════════ WHAT — PLANS ═══════════════════════════ -->
+<div class="divider"></div>
+<div class="collapsible-section reveal open" id="plans">
+    <button class="collapsible-header" aria-expanded="true" data-target="plans-body">
+        <div class="collapsible-header-left">
+            <span class="collapsible-header-icon">&#127968;</span>
+            <div>
+                <div class="collapsible-header-title">Plans &amp; Pricing</div>
+                <div class="collapsible-header-sub">Three tiers — from free to fully managed</div>
+            </div>
+        </div>
+        <span class="collapsible-chevron">&#9660;</span>
+    </button>
+    <div class="collapsible-body" id="plans-body">
+        <div class="collapsible-body-inner">
+            <div class="collapsible-content">
+    <div class="wrap">
+
+        <div class="section-head">
+            <span class="eyebrow">The What</span>
+            <h2>Three plans. One platform.</h2>
+            <p class="sub">Start for free, grow with support, or go fully managed. Every plan gets you on the platform and into the system.</p>
+        </div>
+
+        <!-- Comparison Table -->
+        <div class="compare-wrap">
+            <table class="compare-tbl" role="table" aria-label="Plan feature comparison">
+                <thead>
+                    <tr>
+                        <th scope="col">Feature</th>
+                        <th scope="col">
+                            <span class="th-tier-name">Starter</span>
+                            <span class="th-tier-price">Free &middot; £2/booking</span>
+                        </th>
+                        <th scope="col">
+                            <span class="th-tier-name">Growth</span>
+                            <span class="th-tier-price">£30/mo &middot; £1/booking</span>
+                        </th>
+                        <th scope="col" class="th-tier-highlight">
+                            <span class="th-tier-name">Club House</span>
+                            <span class="th-tier-price">£125/mo &middot; No fees</span>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Pricing -->
+                    <tr class="cat-row"><td colspan="4"><span class="cat-label">Pricing</span></td></tr>
+                    <tr class="price-row">
+                        <td>Monthly fee</td>
+                        <td>Free</td>
+                        <td>£30 / month</td>
+                        <td class="vs-td-nbrh">£125 / month</td>
+                    </tr>
+                    <tr class="price-row">
+                        <td>Booking fee</td>
+                        <td>£2 per booking</td>
+                        <td>£1 per booking</td>
+                        <td class="vs-td-nbrh" style="color:var(--accent);font-family:var(--font-serif);">None &#10003;</td>
+                    </tr>
+
+                    <!-- Platform -->
+                    <tr class="cat-row"><td colspan="4"><span class="cat-label">Platform Presence</span></td></tr>
+                    <tr><td>Unlimited sessions on The NBRH</td><td><span class="yes">&#10003;</span></td><td><span class="yes">&#10003;</span></td><td class="vs-td-nbrh"><span class="yes">&#10003;</span></td></tr>
+                    <tr><td>Club Hub page</td><td><span class="yes">&#10003;</span></td><td><span class="yes">&#10003;</span></td><td class="vs-td-nbrh"><span class="yes">&#10003;</span></td></tr>
+                    <tr><td>Club House Dashboard</td><td><span class="yes">&#10003;</span></td><td><span class="yes">&#10003;</span></td><td class="vs-td-nbrh"><span class="yes">&#10003;</span></td></tr>
+                    <tr><td>Club House Engine (search tool)</td><td><span class="yes">&#10003;</span></td><td><span class="yes">&#10003;</span></td><td class="vs-td-nbrh"><span class="yes">&#10003;</span></td></tr>
+                    <tr><td>Sponsored placement on The NBRH</td><td><span class="no">&mdash;</span></td><td><span class="yes">&#10003;</span></td><td class="vs-td-nbrh"><span class="yes">&#10003;</span></td></tr>
+                    <tr><td>Instagram highlights &amp; link placement</td><td><span class="no">&mdash;</span></td><td><span class="no">&mdash;</span></td><td class="vs-td-nbrh"><span class="yes">&#10003;</span></td></tr>
+
+                    <!-- Booking -->
+                    <tr class="cat-row"><td colspan="4"><span class="cat-label">Booking</span></td></tr>
+                    <tr><td>Booking page on Tickts</td><td><span class="yes">&#10003;</span></td><td><span class="yes">&#10003;</span></td><td class="vs-td-nbrh"><span class="yes">&#10003;</span></td></tr>
+                    <tr><td>Booking management</td><td><span class="yes">&#10003;</span></td><td><span class="yes">&#10003;</span></td><td class="vs-td-nbrh"><span class="yes">&#10003;</span></td></tr>
+                    <tr><td>Membership subscriptions</td><td><span class="no">&mdash;</span></td><td><span class="yes">&#10003;</span></td><td class="vs-td-nbrh"><span class="yes">&#10003;</span></td></tr>
+
+                    <!-- Content & Social -->
+                    <tr class="cat-row"><td colspan="4"><span class="cat-label">Content &amp; Social Media</span></td></tr>
+                    <tr><td>x1 Instagram Session Reel (organic)</td><td><span class="yes">&#10003;</span></td><td><span class="yes">&#10003;</span></td><td class="vs-td-nbrh"><span class="yes">&#10003;</span></td></tr>
+                    <tr><td>Instagram Ad creation &amp; management</td><td><span class="yes">&#10003;</span><span class="compare-note">You pay ad spend</span></td><td><span class="yes">&#10003;</span><span class="compare-note">You pay ad spend</span></td><td class="vs-td-nbrh"><span class="yes">&#10003;</span><span class="compare-note">You pay ad spend</span></td></tr>
+                    <tr><td>x1 Instagram Story per week</td><td><span class="no">&mdash;</span></td><td><span class="yes">&#10003;</span></td><td class="vs-td-nbrh"><span class="yes">&#10003;</span></td></tr>
+                    <tr><td>x1 Instagram Social Proof Carousel</td><td><span class="no">&mdash;</span></td><td><span class="yes">&#10003;</span></td><td class="vs-td-nbrh"><span class="yes">&#10003;</span></td></tr>
+                    <tr><td>x1 SEO Blog per month</td><td><span class="no">&mdash;</span></td><td><span class="yes">&#10003;</span></td><td class="vs-td-nbrh"><span class="yes">&#10003;</span></td></tr>
+                    <tr><td>x1 LinkedIn Article per month</td><td><span class="no">&mdash;</span></td><td><span class="yes">&#10003;</span></td><td class="vs-td-nbrh"><span class="yes">&#10003;</span></td></tr>
+                    <tr><td>x1 In-person video per month</td><td><span class="no">&mdash;</span></td><td><span class="no">&mdash;</span></td><td class="vs-td-nbrh"><span class="yes">&#10003;</span></td></tr>
+                    <tr><td>Inclusion in NBRH marketing campaigns</td><td><span class="no">&mdash;</span></td><td><span class="no">&mdash;</span></td><td class="vs-td-nbrh"><span class="yes">&#10003;</span></td></tr>
+
+                    <!-- Outreach -->
+                    <tr class="cat-row"><td colspan="4"><span class="cat-label">Outreach</span></td></tr>
+                    <tr><td>x1 Weekly outreach to groups</td><td><span class="yes">&#10003;</span></td><td><span class="yes">&#10003;</span></td><td class="vs-td-nbrh"><span class="yes">&#10003;</span></td></tr>
+                    <tr><td>x1 Weekly outreach to clubs &amp; pages</td><td><span class="no">&mdash;</span></td><td><span class="yes">&#10003;</span></td><td class="vs-td-nbrh"><span class="yes">&#10003;</span></td></tr>
+                    <tr><td>x1 Weekly outreach to neighbours</td><td><span class="no">&mdash;</span></td><td><span class="yes">&#10003;</span></td><td class="vs-td-nbrh"><span class="yes">&#10003;</span></td></tr>
+
+                    <!-- Support -->
+                    <tr class="cat-row"><td colspan="4"><span class="cat-label">Support &amp; Guidance</span></td></tr>
+                    <tr><td>Access to Resource Hub</td><td><span class="yes">&#10003;</span></td><td><span class="yes">&#10003;</span></td><td class="vs-td-nbrh"><span class="yes">&#10003;</span></td></tr>
+                    <tr><td>Club Consultation &amp; Auditing</td><td><span class="yes">&#10003;</span></td><td><span class="yes">&#10003;</span></td><td class="vs-td-nbrh"><span class="yes">&#10003;</span></td></tr>
+                    <tr><td>Club House Concierge (dedicated support)</td><td><span class="no">&mdash;</span></td><td><span class="no">&mdash;</span></td><td class="vs-td-nbrh"><span class="yes">&#10003;</span></td></tr>
+
+                    <!-- Analytics -->
+                    <tr class="cat-row"><td colspan="4"><span class="cat-label">Analytics &amp; Insights</span></td></tr>
+                    <tr><td>Detailed booking analytics reports</td><td><span class="no">&mdash;</span></td><td><span class="yes">&#10003;</span></td><td class="vs-td-nbrh"><span class="yes">&#10003;</span></td></tr>
+                    <tr><td>Traffic tracking analytics</td><td><span class="no">&mdash;</span></td><td><span class="yes">&#10003;</span></td><td class="vs-td-nbrh"><span class="yes">&#10003;</span></td></tr>
+                    <tr><td>x1 AI Deep Research per month</td><td><span class="no">&mdash;</span></td><td><span class="no">&mdash;</span></td><td class="vs-td-nbrh"><span class="yes">&#10003;</span></td></tr>
+
+                    <!-- Perks -->
+                    <tr class="cat-row"><td colspan="4"><span class="cat-label">Perks &amp; Extras</span></td></tr>
+                    <tr><td>Discount on À La Carte add-ons</td><td><span class="no">&mdash;</span></td><td><span class="discount-badge">10% off</span></td><td class="vs-td-nbrh"><span class="discount-badge" style="color:var(--accent);">20% off</span></td></tr>
+                    <tr><td>Club Store Collaborations</td><td><span class="no">&mdash;</span></td><td><span class="no">&mdash;</span></td><td class="vs-td-nbrh"><span class="yes">&#10003;</span></td></tr>
+                    <tr><td>Influencer Marketing</td><td><span class="no">&mdash;</span></td><td><span class="no">&mdash;</span></td><td class="vs-td-nbrh"><span class="soon-badge">Coming Soon</span></td></tr>
+                    <tr><td>Revenue Share</td><td><span class="no">&mdash;</span></td><td><span class="no">&mdash;</span></td><td class="vs-td-nbrh"><span class="soon-badge">Coming Soon</span></td></tr>
+                    <tr><td>Free 2-month pilot</td><td><span class="yes">&#10003;</span></td><td><span class="yes">&#10003;</span></td><td class="vs-td-nbrh"><span class="yes">&#10003;</span></td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Tier Summary Cards -->
+        <div class="tier-summary-grid">
+
+            <div class="tier-summary-card">
+                <span class="ts-name">Starter</span>
+                <span class="ts-price">Free &middot; + &pound;2 per booking</span>
+                <span class="ts-ideal-label">This is for you if&hellip;</span>
+                <p class="ts-desc">You want to try The NBRH without any monthly commitment. You&rsquo;re curious whether the platform can bring players to your sessions — and you want to find out before spending anything. No fee, no contract. Just list your sessions, get your Club Hub page live, and see what happens.</p>
+                <a href="https://www.thenbrh.co.uk/club-house-sign-up-page" class="ts-cta">Get Started &mdash; Starter &rarr;</a>
+            </div>
+
+            <div class="tier-summary-card featured">
+                <span class="ts-badge">Most Popular</span>
+                <span class="ts-name">Growth</span>
+                <span class="ts-price">&pound;30 / month &middot; + &pound;1 per booking</span>
+                <span class="ts-ideal-label">This is for you if&hellip;</span>
+                <p class="ts-desc">You&rsquo;re running sessions regularly and want marketing support that actually works. You want content going out consistently, outreach happening on your behalf, and analytics that tell you what&rsquo;s working. You don&rsquo;t need full management — you just need the marketing engine turned on.</p>
+                <a href="https://www.thenbrh.co.uk/club-house-sign-up-page" class="ts-cta">Get Started &mdash; Growth &rarr;</a>
+            </div>
+
+            <div class="tier-summary-card">
+                <span class="ts-name">Club House</span>
+                <span class="ts-price">&pound;125 / month &middot; No booking fees</span>
+                <span class="ts-ideal-label">This is for you if&hellip;</span>
+                <p class="ts-desc">You want a genuine growth partner. You&rsquo;re serious about building your club and you&rsquo;re ready to hand off the marketing, admin, and strategy to a team that knows what they&rsquo;re doing. You want in-person video, dedicated concierge support, AI-backed research, and zero booking fees — all included.</p>
+                <a href="https://www.thenbrh.co.uk/club-house-sign-up-page" class="ts-cta">Get Started &mdash; Club House &rarr;</a>
+            </div>
+
+        </div>
+
+
+    </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- ═══════════════════════════ OUTCOMES ═══════════════════════════ -->
+<div class="divider"></div>
+<div class="collapsible-section reveal open" id="outcomes">
+    <button class="collapsible-header" aria-expanded="true" data-target="outcomes-body">
+        <div class="collapsible-header-left">
+            <span class="collapsible-header-icon">&#127919;</span>
+            <div>
+                <div class="collapsible-header-title">What to Expect</div>
+                <div class="collapsible-header-sub">Results and outcomes you can hold us to</div>
+            </div>
+        </div>
+        <span class="collapsible-chevron">&#9660;</span>
+    </button>
+    <div class="collapsible-body" id="outcomes-body">
+        <div class="collapsible-body-inner">
+            <div class="collapsible-content">
+    <div class="wrap">
+
+        <div class="section-head">
+            <span class="eyebrow">What to Expect</span>
+            <h2>Here&rsquo;s what joining The NBRH looks like.</h2>
+            <p class="sub">We won&rsquo;t promise you the world. But here&rsquo;s what we&rsquo;re confident about — and what we&rsquo;re accountable to delivering.</p>
+        </div>
+
+        <ul class="simple-list">
+            <li>You&rsquo;ll save time &mdash; bookings, content, admin, outreach all handled</li>
+            <li>More eyes on your sessions &mdash; platform discovery, Instagram, and outreach working at once</li>
+            <li>Proper digital infrastructure &mdash; booking system, Club Hub, analytics dashboard in one place</li>
+            <li>Clarity on what&rsquo;s working &mdash; monthly reports with insights and clear next steps</li>
+            <li>A community behind your club &mdash; The NBRH network becomes your network</li>
+            <li>A foundation to scale &mdash; tools and support that compound over time</li>
+        </ul>
+
+        <p class="outcome-disclaimer">We don&rsquo;t guarantee specific numbers — but we commit to showing up, doing the work, and being honest about what&rsquo;s working.</p>
+
+    </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- ═══════════════════════════ VS COMPETITORS — hidden until data is ready ═══════════════════════════ -->
+<div style="display:none;">
+<section class="vs-section" id="vs">
+    <div class="wrap">
+
+        <div class="section-head">
+            <span class="eyebrow">How We Compare</span>
+            <h2>Why The NBRH is different.</h2>
+            <p class="sub">There are other platforms out there. Here&rsquo;s an honest look at how they compare — and why Club House offers something they don&rsquo;t.</p>
+        </div>
+
+        <div class="vs-table-wrap">
+            <table class="vs-table" role="table" aria-label="Platform comparison">
+                <thead>
+                    <tr>
+                        <th scope="col">Feature</th>
+                        <th scope="col" class="vs-th-nbrh">
+                            <span class="vs-th-name">The NBRH</span>
+                            <span class="vs-th-sub">Club House</span>
+                        </th>
+                        <th scope="col">
+                            <span class="vs-th-name">Eventbrite</span>
+                            <span class="vs-th-sub">General Events</span>
+                        </th>
+                        <th scope="col">
+                            <span class="vs-th-name">MeetUp</span>
+                            <span class="vs-th-sub">Community Groups</span>
+                        </th>
+                        <th scope="col">
+                            <span class="vs-th-name">Sportas</span>
+                            <span class="vs-th-sub">Sports Booking</span>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="vs-price-row">
+                        <td>Paid plan / monthly</td>
+                        <td class="vs-td-nbrh">From £30/mo</td>
+                        <td>~£25/mo (Pro)</td>
+                        <td>~£25/mo (Organiser)</td>
+                        <td>Commission-based</td>
+                    </tr>
+                    <tr class="vs-price-row">
+                        <td>Booking commission</td>
+                        <td class="vs-td-nbrh">£2 (Starter) / £1 (Growth) / None (Club House)</td>
+                        <td>~3.5–6% + £1.79/ticket</td>
+                        <td>No built-in payments</td>
+                        <td>Commission per booking</td>
+                    </tr>
+                    <tr>
+                        <td>Sport-specific platform</td>
+                        <td class="vs-td-nbrh"><span class="vs-yes">&#10003;</span></td>
+                        <td><span class="vs-no">&mdash;</span><span class="vs-note">General events</span></td>
+                        <td><span class="vs-no">&mdash;</span><span class="vs-note">General communities</span></td>
+                        <td><span class="vs-yes">&#10003;</span></td>
+                    </tr>
+                    <tr>
+                        <td>Booking &amp; payments included</td>
+                        <td class="vs-td-nbrh"><span class="vs-yes">&#10003;</span><span class="vs-note">Via Tickts, managed for you</span></td>
+                        <td><span class="vs-yes">&#10003;</span><span class="vs-note">Self-managed</span></td>
+                        <td><span class="vs-no">&mdash;</span><span class="vs-note">No built-in payments</span></td>
+                        <td><span class="vs-yes">&#10003;</span><span class="vs-note">Self-managed</span></td>
+                    </tr>
+                    <tr>
+                        <td>Booking management (done for you)</td>
+                        <td class="vs-td-nbrh"><span class="vs-yes">&#10003;</span></td>
+                        <td><span class="vs-no">&mdash;</span></td>
+                        <td><span class="vs-no">&mdash;</span></td>
+                        <td><span class="vs-no">&mdash;</span></td>
+                    </tr>
+                    <tr>
+                        <td>Content creation &amp; social media</td>
+                        <td class="vs-td-nbrh"><span class="vs-yes">&#10003;</span><span class="vs-note">Reels, Stories, Carousels, Video</span></td>
+                        <td><span class="vs-no">&mdash;</span></td>
+                        <td><span class="vs-no">&mdash;</span></td>
+                        <td><span class="vs-no">&mdash;</span></td>
+                    </tr>
+                    <tr>
+                        <td>SEO content &amp; blog posts</td>
+                        <td class="vs-td-nbrh"><span class="vs-yes">&#10003;</span></td>
+                        <td><span class="vs-no">&mdash;</span></td>
+                        <td><span class="vs-no">&mdash;</span></td>
+                        <td><span class="vs-no">&mdash;</span></td>
+                    </tr>
+                    <tr>
+                        <td>Community outreach (done for you)</td>
+                        <td class="vs-td-nbrh"><span class="vs-yes">&#10003;</span><span class="vs-note">Groups, clubs, neighbours</span></td>
+                        <td><span class="vs-no">&mdash;</span></td>
+                        <td><span class="vs-no">&mdash;</span></td>
+                        <td><span class="vs-no">&mdash;</span></td>
+                    </tr>
+                    <tr>
+                        <td>Paid ads managed for you</td>
+                        <td class="vs-td-nbrh"><span class="vs-yes">&#10003;</span><span class="vs-note">All tiers (you pay ad spend)</span></td>
+                        <td><span class="vs-no">&mdash;</span></td>
+                        <td><span class="vs-no">&mdash;</span></td>
+                        <td><span class="vs-no">&mdash;</span></td>
+                    </tr>
+                    <tr>
+                        <td>Analytics &amp; growth reporting</td>
+                        <td class="vs-td-nbrh"><span class="vs-yes">&#10003;</span><span class="vs-note">Monthly reports + recommendations</span></td>
+                        <td>Basic only</td>
+                        <td>Basic only</td>
+                        <td>Basic only</td>
+                    </tr>
+                    <tr>
+                        <td>Growth consultancy &amp; strategy</td>
+                        <td class="vs-td-nbrh"><span class="vs-yes">&#10003;</span></td>
+                        <td><span class="vs-no">&mdash;</span></td>
+                        <td><span class="vs-no">&mdash;</span></td>
+                        <td><span class="vs-no">&mdash;</span></td>
+                    </tr>
+                    <tr>
+                        <td>Admin support (done for you)</td>
+                        <td class="vs-td-nbrh"><span class="vs-yes">&#10003;</span></td>
+                        <td><span class="vs-no">&mdash;</span></td>
+                        <td><span class="vs-no">&mdash;</span></td>
+                        <td><span class="vs-no">&mdash;</span></td>
+                    </tr>
+                    <tr>
+                        <td>Free to get started</td>
+                        <td class="vs-td-nbrh"><span class="vs-yes">&#10003;</span><span class="vs-note">Starter is free + 2-month pilot</span></td>
+                        <td><span class="vs-yes">&#10003;</span><span class="vs-note">Free for free events</span></td>
+                        <td><span class="vs-no">&mdash;</span><span class="vs-note">Paid plan required</span></td>
+                        <td><span class="vs-yes">&#10003;</span><span class="vs-note">Commission model</span></td>
+                    </tr>
+                    <tr>
+                        <td>Focused on London grassroots sport</td>
+                        <td class="vs-td-nbrh"><span class="vs-yes">&#10003;</span></td>
+                        <td><span class="vs-no">&mdash;</span></td>
+                        <td><span class="vs-no">&mdash;</span></td>
+                        <td>Partial</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div style="margin-top:1.5rem;padding:1.25rem 1.5rem;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--r-lg);font-size:0.875rem;color:var(--text-muted);line-height:1.75;">
+            <strong style="color:var(--text);">The bottom line:</strong> Eventbrite, MeetUp, and Sportas are tools. You still have to do the marketing, the outreach, the admin, and the strategy yourself. <strong style="color:var(--text);">Club House is a service.</strong> We do it for you — or alongside you — at a price that&rsquo;s a fraction of what a marketing agency would charge.
+            <br><small style="color:var(--text-faint);font-style:italic;margin-top:0.5rem;display:block;">Platform pricing and features are approximate as of 2025 and subject to change. Club booking commission structures vary; check each platform for current rates.</small>
+        </div>
+
+    </div>
+</section>
+</div><!-- /hidden vs section -->
+
+
+<!-- ═══════════════════════════ TESTIMONIALS (hidden — infrastructure preserved) ═══════════════════════════ -->
 <section class="testimonials-section" aria-hidden="true">
     <div class="wrap">
         <div class="section-head">
             <span class="eyebrow">What clubs are saying</span>
             <h2>Built for people who run sport.</h2>
-            <p class="sub">From grassroots sessions to growing community clubs, here&rsquo;s what being on The NBRH looks like in practice.</p>
         </div>
         <div style="display:grid; grid-template-columns: repeat(3,1fr); gap:1.25rem;">
-            <!-- Testimonial slots — replace with real quotes before publishing -->
             <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--r);padding:1.4rem;">
                 <p style="font-size:0.9rem;color:var(--text-muted);font-style:italic;">Before The NBRH, filling sessions meant spamming WhatsApp groups and hoping for the best. Now our Thursday session runs itself &mdash; bookings come in, players show up, and I actually get to focus on coaching.</p>
                 <p style="font-size:0.825rem;font-weight:500;color:var(--text);margin-top:1rem;">Marcus O. &mdash; Kickerbout, Mitcham</p>
@@ -388,866 +940,10 @@
     </div>
 </section>
 
+
+<!-- ═══════════════════════════ HOW IT WORKS (collapsible) ═══════════════════════════ -->
 <div class="divider"></div>
-
-<!-- Plans -->
-<section id="plans" class="reveal">
-    <div class="wrap">
-
-        <div class="section-head">
-            <span class="eyebrow">How we work together</span>
-            <h2>Pick your model.</h2>
-            <p class="sub">Same Club House. Same features. Different ways to pay.</p>
-        </div>
-
-        <div class="tier-toggle" role="group" aria-label="Select pricing tier">
-            <button class="tier-btn active" data-tier="ch1">&#127968; Club House &mdash; &pound;100/mo</button>
-            <button class="tier-btn" data-tier="ch2">&#127968; Club House Flex</button>
-            <button class="tier-btn" data-tier="alc">&#128269; &Agrave; La Carte</button>
-        </div>
-
-        <!-- ===================== TIER 1: Club House £100/mo ===================== -->
-        <div class="tier-view active" id="tier-ch1">
-            <div class="tier-layout">
-
-                <div class="tier-label-col">
-                    <span class="tier-number">01</span>
-                    <span class="eyebrow">Club House &mdash; Monthly</span>
-                    <h2 class="tier-heading">Built for clubs that are ready to grow.</h2>
-                    <p class="tier-desc">You&rsquo;re running sessions regularly and have a handle on what you&rsquo;re doing. You want the full platform infrastructure in place and a single, predictable monthly cost you can plan around. The &pound;100 covers everything &mdash; setup, management, bookings, and your presence on the platform. No per-booking charges, no surprises.</p>
-                    <div class="tier-ideal">
-                        <strong>This is for you if&hellip;</strong>
-                        You run consistent sessions and want a clean, flat monthly cost with no variables. At around 50+ bookings a month, this model works out cheaper than Flex &mdash; and the more you grow, the better value it gets.
-                    </div>
-                    <div class="model-switch-note">
-                        Prefer to keep costs variable? <button class="model-switch-link" data-switch="ch2">See Club House Flex &rarr;</button> &mdash; same features, no monthly fee, just &pound;2 per booking.
-                    </div>
-                </div>
-
-                <div>
-                    <div class="plan-card">
-                        <div class="plan-header">
-                            <span class="eyebrow">Club House &mdash; Tier 1</span>
-                            <div class="plan-name">Club House Subscription</div>
-                            <div class="plan-audience-line">A proper home on the platform. A growth engine that runs itself.</div>
-                            <div class="plan-price-block">
-                                <div class="price-line">
-                                    <span class="price-main">&pound;100</span>
-                                    <span class="price-period">/ month</span>
-                                </div>
-                                <div class="price-note">One flat fee. Everything included. Flexible for the right clubs &mdash; talk to us if the structure doesn&rsquo;t quite fit.</div>
-                            </div>
-                            <p class="plan-pitch">We handle the setup, the systems, the marketing, and the monthly reporting. You focus on the sessions. Everything else runs without you managing it.</p>
-                        </div>
-
-                        <div class="plan-body">
-                            <div class="offerings-label">What&rsquo;s included &mdash; tap each area to expand</div>
-                            <div class="offerings-grid">
-
-                                <!-- 1. Digital Infrastructure -->
-                                <div class="offering-item">
-                                    <button class="offering-trigger" aria-expanded="false">
-                                        <div class="offering-trigger-left">
-                                            <span class="offering-icon">&#127959;</span>
-                                            <span class="offering-name">Your permanent home on the platform</span>
-                                        </div>
-                                        <span class="offering-chevron">&#9660;</span>
-                                    </button>
-                                    <div class="offering-body"><div class="offering-body-inner">
-                                        <ul class="offering-list">
-                                            <li>Club Hub page to sum up all your information in one place &mdash; your story, sessions, and community</li>
-                                            <li>Club House Dashboard to track KPIs and goals, access resources, and use the Club House Search Engine</li>
-                                        </ul>
-                                    </div></div>
-                                </div>
-
-                                <!-- 2. Marketing -->
-                                <div class="offering-item">
-                                    <button class="offering-trigger" aria-expanded="false">
-                                        <div class="offering-trigger-left">
-                                            <span class="offering-icon">&#128247;</span>
-                                            <span class="offering-name">Content and ads that fill your sessions</span>
-                                        </div>
-                                        <span class="offering-chevron">&#9660;</span>
-                                    </button>
-                                    <div class="offering-body"><div class="offering-body-inner">
-                                        <ul class="offering-list">
-                                            <li>Organic content created for Instagram</li>
-                                            <li>Paid ads on Instagram targeted at your ideal player</li>
-                                            <li>SEO-optimised blog posts published on The NBRH and LinkedIn</li>
-                                            <li>In-person video content creation at your sessions</li>
-                                        </ul>
-                                    </div></div>
-                                </div>
-
-                                <!-- 3. Outreach -->
-                                <div class="offering-item">
-                                    <button class="offering-trigger" aria-expanded="false">
-                                        <div class="offering-trigger-left">
-                                            <span class="offering-icon">&#128226;</span>
-                                            <span class="offering-name">We reach the right people on your behalf</span>
-                                        </div>
-                                        <span class="offering-chevron">&#9660;</span>
-                                    </button>
-                                    <div class="offering-body"><div class="offering-body-inner">
-                                        <ul class="offering-list">
-                                            <li>Research &amp; weekly outreach to relevant Facebook Groups</li>
-                                            <li>Research &amp; monthly outreach to PR organisations</li>
-                                            <li>Research &amp; monthly outreach to local influencers</li>
-                                        </ul>
-                                    </div></div>
-                                </div>
-
-                                <!-- 4. Admin Support -->
-                                <div class="offering-item">
-                                    <button class="offering-trigger" aria-expanded="false">
-                                        <div class="offering-trigger-left">
-                                            <span class="offering-icon">&#128203;</span>
-                                            <span class="offering-name">Less admin, more time to coach</span>
-                                        </div>
-                                        <span class="offering-chevron">&#9660;</span>
-                                    </button>
-                                    <div class="offering-body"><div class="offering-body-inner">
-                                        <ul class="offering-list">
-                                            <li>Statistical analysis from games and sessions</li>
-                                            <li>Research on behalf of your club</li>
-                                            <li>Data migration from existing tools and systems</li>
-                                            <li>Community engagement on your behalf</li>
-                                            <li>Data entry and records management</li>
-                                            <li>Customer management & retention support</li>
-                                            <li>Compliance support</li>
-                                            <li>Copywriting for communications and content</li>
-                                            <li>Ad hoc services when you need quick help</li>
-                                        </ul>
-                                    </div></div>
-                                </div>
-
-                                <!-- 5. Booking Management -->
-                                <div class="offering-item">
-                                    <button class="offering-trigger" aria-expanded="false">
-                                        <div class="offering-trigger-left">
-                                            <span class="offering-icon">&#127915;</span>
-                                            <span class="offering-name">A booking system that runs itself</span>
-                                        </div>
-                                        <span class="offering-chevron">&#9660;</span>
-                                    </button>
-                                    <div class="offering-body"><div class="offering-body-inner">
-                                        <ul class="offering-list">
-                                            <li>Setting up your booking page from scratch</li>
-                                            <li>Creating and managing events</li>
-                                            <li>Managing payments and reconciliation</li>
-                                            <li>Managing attendees, capacity, and waitlists</li>
-                                            <li>Providing monthly reports and growth recommendations</li>
-                                        </ul>
-                                    </div></div>
-                                </div>
-
-                                <!-- 6. Data Insights -->
-                                <div class="offering-item">
-                                    <button class="offering-trigger" aria-expanded="false">
-                                        <div class="offering-trigger-left">
-                                            <span class="offering-icon">&#128201;</span>
-                                            <span class="offering-name">Insights to help you grow smarter</span>
-                                        </div>
-                                        <span class="offering-chevron">&#9660;</span>
-                                    </button>
-                                    <div class="offering-body"><div class="offering-body-inner">
-                                        <ul class="offering-list">
-                                            <li>AI-backed research into your market, audience, and competitive landscape</li>
-                                            <li>Reports produced and delivered with clear insights and actionable recommendations</li>
-                                        </ul>
-                                    </div></div>
-                                </div>
-
-                                <!-- 7. Growth Tools -->
-                                <div class="offering-item">
-                                    <button class="offering-trigger" aria-expanded="false">
-                                        <div class="offering-trigger-left">
-                                            <span class="offering-icon">&#128640;</span>
-                                            <span class="offering-name">Tools to help you scale and earn more</span>
-                                        </div>
-                                        <span class="offering-chevron">&#9660;</span>
-                                    </button>
-                                    <div class="offering-body"><div class="offering-body-inner">
-                                        <ul class="offering-list">
-                                            <li>People finder tool to connect with players, clubs, and officials in your area</li>
-                                            <li>Access to monetisation tools including member subscriptions and passes</li>
-                                            <li>Access to the Club Store &mdash; sell your merchandise directly on the platform <span class="perk-coming-soon">Coming Soon</span></li>
-                                        </ul>
-                                    </div></div>
-                                </div>
-
-                                <!-- 8. Consultative Support -->
-                                <div class="offering-item">
-                                    <button class="offering-trigger" aria-expanded="false">
-                                        <div class="offering-trigger-left">
-                                            <span class="offering-icon">&#128172;</span>
-                                            <span class="offering-name">Expert guidance whenever you need it</span>
-                                        </div>
-                                        <span class="offering-chevron">&#9660;</span>
-                                    </button>
-                                    <div class="offering-body"><div class="offering-body-inner">
-                                        <ul class="offering-list">
-                                            <li>Branding advice tailored to your club</li>
-                                            <li>Session format and structure advice</li>
-                                            <li>Content creation advice and direction</li>
-                                            <li>Access to resources, templates, and the Club House knowledge hub</li>
-                                        </ul>
-                                    </div></div>
-                                </div>
-
-                            </div>
-
-                            <div class="extras-strip" style="margin-top:1.75rem;">
-                                <div class="extra-row">
-                                    <div class="extra-icon">&#127881;</div>
-                                    <div class="extra-text"><strong>20% off all &Agrave; La Carte services.</strong> Need extra support? Every one of our service packages is discounted for Club House members.</div>
-                                </div>
-                                <div class="extra-row">
-                                    <div class="extra-icon">&#129309;</div>
-                                    <div class="extra-text"><strong>Referral reward.</strong> Refer another club to The NBRH and get a month free. Simple as that.</div>
-                                </div>
-                                <div class="extra-row">
-                                    <div class="extra-icon">&#128176;</div>
-                                    <div class="extra-text"><strong>Revenue Share <span class="perk-coming-soon">Coming Soon</span>.</strong> As The NBRH scales, a portion of platform revenue gets distributed back to active partner clubs. You helped build it &mdash; you should benefit from it.</div>
-                                </div>
-                                <div class="extra-row">
-                                    <div class="extra-icon">&#128101;</div>
-                                    <div class="extra-text"><strong>The team behind it.</strong> You&rsquo;re not just getting tools &mdash; you&rsquo;re getting a team that knows sport, knows London, and cares about your growth.</div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="plan-footer">
-                            <a href="https://www.thenbrh.co.uk/club-house-sign-up-page" class="plan-cta">Get Started with Club House &rarr;</a>
-                        </div>
-                    </div>
-
-                    <div class="commitment-strip">
-                        <div class="commitment-item">
-                            <div class="ci-icon">&#128197;</div>
-                            <h4>3-month minimum</h4>
-                            <p>Gives the platform a fair chance to show results. We always aim for 6 months.</p>
-                        </div>
-                        <div class="commitment-item">
-                            <div class="ci-icon">&#128184;</div>
-                            <h4>Better value at volume</h4>
-                            <p>At 50+ bookings a month, the flat &pound;100 fee works out cheaper than Flex&rsquo;s &pound;2 per booking.</p>
-                        </div>
-                        <div class="commitment-item">
-                            <div class="ci-icon">&#128172;</div>
-                            <h4>Flexible pricing</h4>
-                            <p>If &pound;100 is a stretch, talk to us. We want the right clubs on the platform.</p>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-
-        <!-- ===================== TIER 2: Club House Flex ===================== -->
-        <div class="tier-view" id="tier-ch2">
-            <div class="tier-layout">
-
-                <div class="tier-label-col">
-                    <span class="tier-number">02</span>
-                    <span class="eyebrow">Club House Flex</span>
-                    <h2 class="tier-heading">No subscription. Same platform.</h2>
-                    <p class="tier-desc">All the same Club House infrastructure &mdash; your page, your booking system, your monthly report, your 20% off add-ons &mdash; with no standing monthly cost. You only pay when bookings come through. Built for clubs that aren&rsquo;t quite ready to commit to a subscription, or that run more seasonal or irregular sessions.</p>
-                    <div class="tier-ideal">
-                        <strong>This is for you if&hellip;</strong>
-                        You want everything Club House offers but prefer to keep costs fully variable. At under 50 bookings a month, Flex can work out cheaper than the monthly plan.
-                    </div>
-                    <div class="model-switch-note">
-                        Running 50+ bookings a month? <button class="model-switch-link" data-switch="ch1">Club House at &pound;100/mo &rarr;</button> will save you money as volume grows &mdash; with no per-booking fee on top.
-                    </div>
-                </div>
-
-                <div>
-                    <div class="plan-card">
-                        <div class="plan-header">
-                            <span class="eyebrow">Club House &mdash; Tier 2</span>
-                            <div class="plan-name">Club House Flex</div>
-                            <div class="plan-audience-line">Everything Club House. No monthly commitment required.</div>
-                            <div class="plan-price-block">
-                                <div class="price-line">
-                                    <span class="price-main">&pound;2</span>
-                                    <span class="price-period">/ booking</span>
-                                </div>
-                                <div class="price-note">No monthly fee. You only pay when players book. Everything else is included.</div>
-                            </div>
-                            <p class="plan-pitch">Same platform presence, same booking system, same monthly report, same 20% off add-ons. The only difference is how you pay. No commitment until you&rsquo;re ready for one.</p>
-                        </div>
-
-                        <div class="plan-body">
-                            <div class="features-same-badge">
-                                <span class="fsb-icon">&#10003;</span>
-                                <span><strong>Full Club House offering included</strong> &mdash; all 8 service categories, the same infrastructure, and the same onboarding package. You just pay per booking instead of a flat monthly fee.</span>
-                            </div>
-
-                            <div class="offerings-label">What&rsquo;s included &mdash; same as Club House</div>
-                            <div class="offerings-grid">
-
-                                <div class="offering-item">
-                                    <button class="offering-trigger" aria-expanded="false">
-                                        <div class="offering-trigger-left"><span class="offering-icon">&#127959;</span><span class="offering-name">Your permanent home on the platform</span></div>
-                                        <span class="offering-chevron">&#9660;</span>
-                                    </button>
-                                    <div class="offering-body"><div class="offering-body-inner"><ul class="offering-list">
-                                        <li>Club Hub page to sum up all your information in one place &mdash; your story, sessions, and community</li>
-                                        <li>Club House Dashboard to track KPIs and goals, access resources, and use the Club House Search Engine</li>
-                                    </ul></div></div>
-                                </div>
-
-                                <div class="offering-item">
-                                    <button class="offering-trigger" aria-expanded="false">
-                                        <div class="offering-trigger-left"><span class="offering-icon">&#128247;</span><span class="offering-name">Content and ads that fill your sessions</span></div>
-                                        <span class="offering-chevron">&#9660;</span>
-                                    </button>
-                                    <div class="offering-body"><div class="offering-body-inner"><ul class="offering-list">
-                                        <li>Organic content created for Instagram</li>
-                                        <li>Paid ads on Instagram targeted at your ideal player</li>
-                                        <li>SEO-optimised blog posts published on The NBRH and LinkedIn</li>
-                                        <li>In-person video content creation at your sessions</li>
-                                    </ul></div></div>
-                                </div>
-
-                                <div class="offering-item">
-                                    <button class="offering-trigger" aria-expanded="false">
-                                        <div class="offering-trigger-left"><span class="offering-icon">&#128226;</span><span class="offering-name">We reach the right people on your behalf</span></div>
-                                        <span class="offering-chevron">&#9660;</span>
-                                    </button>
-                                    <div class="offering-body"><div class="offering-body-inner"><ul class="offering-list">
-                                        <li>Research &amp; weekly outreach to relevant Facebook Groups</li>
-                                        <li>Research &amp; monthly outreach to PR organisations</li>
-                                        <li>Research &amp; monthly outreach to local influencers</li>
-                                    </ul></div></div>
-                                </div>
-
-                                <div class="offering-item">
-                                    <button class="offering-trigger" aria-expanded="false">
-                                        <div class="offering-trigger-left"><span class="offering-icon">&#128203;</span><span class="offering-name">Less admin, more time to coach</span></div>
-                                        <span class="offering-chevron">&#9660;</span>
-                                    </button>
-                                    <div class="offering-body"><div class="offering-body-inner"><ul class="offering-list">
-                                        <li>Statistical analysis from games and sessions</li>
-                                        <li>Research on behalf of your club</li>
-                                        <li>Data migration from existing tools and systems</li>
-                                        <li>Community engagement on your behalf</li>
-                                        <li>Data entry and records management</li>
-                                        <li>Compliance support</li>
-                                        <li>Copywriting for communications and content</li>
-                                        <li>Ad hoc services when you need quick help</li>
-                                    </ul></div></div>
-                                </div>
-
-                                <div class="offering-item">
-                                    <button class="offering-trigger" aria-expanded="false">
-                                        <div class="offering-trigger-left"><span class="offering-icon">&#127915;</span><span class="offering-name">A booking system that runs itself</span></div>
-                                        <span class="offering-chevron">&#9660;</span>
-                                    </button>
-                                    <div class="offering-body"><div class="offering-body-inner"><ul class="offering-list">
-                                        <li>Setting up your booking page from scratch</li>
-                                        <li>Creating and managing events</li>
-                                        <li>Managing payments and reconciliation</li>
-                                        <li>Managing attendees, capacity, and waitlists</li>
-                                        <li>Providing monthly reports and growth recommendations</li>
-                                    </ul></div></div>
-                                </div>
-
-                                <div class="offering-item">
-                                    <button class="offering-trigger" aria-expanded="false">
-                                        <div class="offering-trigger-left"><span class="offering-icon">&#128201;</span><span class="offering-name">Insights to help you grow smarter</span></div>
-                                        <span class="offering-chevron">&#9660;</span>
-                                    </button>
-                                    <div class="offering-body"><div class="offering-body-inner"><ul class="offering-list">
-                                        <li>AI-backed research into your market, audience, and competitive landscape</li>
-                                        <li>Reports produced and delivered with clear insights and actionable recommendations</li>
-                                    </ul></div></div>
-                                </div>
-
-                                <div class="offering-item">
-                                    <button class="offering-trigger" aria-expanded="false">
-                                        <div class="offering-trigger-left"><span class="offering-icon">&#128640;</span><span class="offering-name">Tools to help you scale and earn more</span></div>
-                                        <span class="offering-chevron">&#9660;</span>
-                                    </button>
-                                    <div class="offering-body"><div class="offering-body-inner"><ul class="offering-list">
-                                        <li>People finder tool to connect with players, clubs, and officials in your area</li>
-                                        <li>Access to monetisation tools including member subscriptions and passes</li>
-                                        <li>Access to the Club Store &mdash; sell your merchandise directly on the platform <span class="perk-coming-soon">Coming Soon</span></li>
-                                    </ul></div></div>
-                                </div>
-
-                                <div class="offering-item">
-                                    <button class="offering-trigger" aria-expanded="false">
-                                        <div class="offering-trigger-left"><span class="offering-icon">&#128172;</span><span class="offering-name">Expert guidance whenever you need it</span></div>
-                                        <span class="offering-chevron">&#9660;</span>
-                                    </button>
-                                    <div class="offering-body"><div class="offering-body-inner"><ul class="offering-list">
-                                        <li>Branding advice tailored to your club</li>
-                                        <li>Session format and structure advice</li>
-                                        <li>Content creation advice and direction</li>
-                                        <li>Access to resources, templates, and the Club House knowledge hub</li>
-                                    </ul></div></div>
-                                </div>
-
-                            </div>
-
-                            <div class="availability-note" style="margin-top:1.25rem;">&#9432; The &pound;2 per booking fee is reinvested back into the platform &mdash; better discovery, better infrastructure, better reach for every club on it. As your bookings grow, switching to Club House is always an option.</div>
-                        </div>
-
-                        <div class="plan-footer">
-                            <a href="https://www.thenbrh.co.uk/club-house-flex" class="plan-cta">Get Started with Club House Flex &rarr;</a>
-                        </div>
-                    </div>
-
-                    <div class="commitment-strip">
-                        <div class="commitment-item">
-                            <div class="ci-icon">&#128275;</div>
-                            <h4>No commitment</h4>
-                            <p>No monthly contract. Costs only appear when bookings happen.</p>
-                        </div>
-                        <div class="commitment-item">
-                            <div class="ci-icon">&#128201;</div>
-                            <h4>Break-even at 50</h4>
-                            <p>Under 50 bookings a month, Flex is cheaper than the flat &pound;100/mo Club House plan.</p>
-                        </div>
-                        <div class="commitment-item">
-                            <div class="ci-icon">&#128260;</div>
-                            <h4>Upgrade anytime</h4>
-                            <p>When your volume grows, switching to Club House saves money. We&rsquo;ll flag when it makes sense.</p>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-
-        <!-- ===================== TIER 3: À La Carte ===================== -->
-        <div class="tier-view" id="tier-alc">
-            <div class="tier-layout">
-
-                <div class="tier-label-col">
-                    <span class="tier-number">03</span>
-                    <span class="eyebrow">&Agrave; La Carte</span>
-                    <h2 class="tier-heading">Specific support.<br>Your terms.</h2>
-                    <p class="tier-desc">For clubs that are already established &mdash; marketing sorted, digital infrastructure in place, systems running. They don&rsquo;t need the full subscription. They just need targeted help, when they need it.</p>
-                    <div class="tier-ideal">
-                        <strong>This is for you if&hellip;</strong>
-                        You know what you need. You want flexibility and full control. You&rsquo;re happy managing your own bookings &mdash; you just want specific support in one or two areas.
-                    </div>
-                </div>
-
-                <div>
-                    <div class="services-grid">
-
-                        <!-- Social Media -->
-                        <div class="svc-card">
-                            <button class="svc-trigger" data-svc="soc" aria-expanded="false">
-                                <div class="svc-trigger-left">
-                                    <span class="svc-trigger-icon">&#128247;</span>
-                                    <div class="svc-trigger-text">
-                                        <span class="svc-trigger-name">Social Media</span>
-                                        <span class="svc-trigger-desc">Content, creative, scheduling and channel management</span>
-                                    </div>
-                                </div>
-                                <div class="svc-trigger-right">
-                                    <span class="svc-price-pill">&pound;50</span>
-                                    <span class="svc-chevron">&#9660;</span>
-                                </div>
-                            </button>
-                            <div class="svc-body" id="svc-soc">
-                                <div class="svc-body-inner">
-                                    <div class="svc-body-content">
-                                        <div class="svc-includes">
-                                            <span class="svc-includes-label">What&rsquo;s Included</span>
-                                            <ul>
-                                                <li>Targeted Boosted Sessions Reel &mdash; a paid Instagram Reel built around your sessions</li>
-                                                <li>Boosted Club Awareness Reel &mdash; a brand-building Reel focused on growing your following</li>
-                                                <li>Creative production, targeting, and reporting handled by us</li>
-                                                <li>Ad spend budget agreed with you separately</li>
-                                            </ul>
-                                        </div>
-                                        <div class="svc-pricing">
-                                            <div class="svc-price-row">
-                                                <div class="svc-price-cell">
-                                                    <span class="svc-price-cell-label">Full Price</span>
-                                                    <span class="svc-price-cell-value">&pound;50</span>
-                                                </div>
-                                                <div class="svc-price-divider"></div>
-                                                <div class="svc-price-cell ch-price">
-                                                    <span class="svc-price-cell-label">Club House Price</span>
-                                                    <span class="svc-price-cell-value">&pound;25</span>
-                                                </div>
-                                            </div>
-                                            <div class="svc-saving">Club House members save <strong>&pound;25</strong> (50% off)</div>
-                                            <a href="https://www.thenbrh.co.uk/services-page/social-media-package" class="svc-book-btn">Book this Service &rarr;</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- League -->
-                        <div class="svc-card">
-                            <button class="svc-trigger" data-svc="lea" aria-expanded="false">
-                                <div class="svc-trigger-left">
-                                    <span class="svc-trigger-icon">&#127942;</span>
-                                    <div class="svc-trigger-text">
-                                        <span class="svc-trigger-name">League</span>
-                                        <span class="svc-trigger-desc">Full-service league infrastructure, built and managed for the season</span>
-                                    </div>
-                                </div>
-                                <div class="svc-trigger-right">
-                                    <span class="svc-price-pill">&pound;500</span>
-                                    <span class="svc-chevron">&#9660;</span>
-                                </div>
-                            </button>
-                            <div class="svc-body" id="svc-lea">
-                                <div class="svc-body-inner">
-                                    <div class="svc-body-content">
-                                        <div class="svc-includes">
-                                            <span class="svc-includes-label">What&rsquo;s Included</span>
-                                            <ul>
-                                                <li>Dynamic league table updated after every round of fixtures</li>
-                                                <li>Full fixture list with results, dates, and venues</li>
-                                                <li>Individual club and team profile pages</li>
-                                                <li>Outreach to recruit new players and teams</li>
-                                                <li>Custom branding and additions to your league page</li>
-                                                <li>Data, insights, and performance reporting</li>
-                                                <li>Marketing and paid promotion support</li>
-                                                <li>Season-long page management by The NBRH team</li>
-                                                <li>Shareable league link for players, clubs, and social media</li>
-                                            </ul>
-                                        </div>
-                                        <div class="svc-pricing">
-                                            <div class="svc-price-row">
-                                                <div class="svc-price-cell">
-                                                    <span class="svc-price-cell-label">Full Price</span>
-                                                    <span class="svc-price-cell-value">&pound;500 / season</span>
-                                                </div>
-                                                <div class="svc-price-divider"></div>
-                                                <div class="svc-price-cell ch-price">
-                                                    <span class="svc-price-cell-label">Club House Price</span>
-                                                    <span class="svc-price-cell-value">&pound;350 / season</span>
-                                                </div>
-                                            </div>
-                                            <div class="svc-saving">Club House members save <strong>&pound;150</strong> (30% off). Can be paid in monthly instalments.</div>
-                                            <a href="https://www.thenbrh.co.uk/services-page/league-package" class="svc-book-btn">Book this Service &rarr;</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Outreach -->
-                        <div class="svc-card">
-                            <button class="svc-trigger" data-svc="out" aria-expanded="false">
-                                <div class="svc-trigger-left">
-                                    <span class="svc-trigger-icon">&#128226;</span>
-                                    <div class="svc-trigger-text">
-                                        <span class="svc-trigger-name">Outreach</span>
-                                        <span class="svc-trigger-desc">Targeted player acquisition and community outreach campaigns</span>
-                                    </div>
-                                </div>
-                                <div class="svc-trigger-right">
-                                    <span class="svc-price-pill">&pound;50</span>
-                                    <span class="svc-chevron">&#9660;</span>
-                                </div>
-                            </button>
-                            <div class="svc-body" id="svc-out">
-                                <div class="svc-body-inner">
-                                    <div class="svc-body-content">
-                                        <div class="svc-includes">
-                                            <span class="svc-includes-label">What&rsquo;s Included</span>
-                                            <ul>
-                                                <li>Cold Outreach &mdash; we identify and reach out to relevant online communities (Facebook groups, Reddit, WhatsApp, Discord) with natural messaging introducing your sessions</li>
-                                                <li>3 communities targeted on your behalf per campaign</li>
-                                                <li>Session Filler Outreach &mdash; targeted campaign reaching NBRH users who match your session&rsquo;s sport, location, and availability</li>
-                                                <li>Ideal for last-minute gaps, new slots, or sessions consistently running below capacity</li>
-                                            </ul>
-                                        </div>
-                                        <div class="svc-pricing">
-                                            <div class="svc-price-row">
-                                                <div class="svc-price-cell">
-                                                    <span class="svc-price-cell-label">Full Price</span>
-                                                    <span class="svc-price-cell-value">&pound;50</span>
-                                                </div>
-                                                <div class="svc-price-divider"></div>
-                                                <div class="svc-price-cell ch-price">
-                                                    <span class="svc-price-cell-label">Club House Price</span>
-                                                    <span class="svc-price-cell-value">&pound;25</span>
-                                                </div>
-                                            </div>
-                                            <div class="svc-saving">Club House members save <strong>&pound;25</strong> (50% off)</div>
-                                            <a href="https://www.thenbrh.co.uk/services-page/outreach-package" class="svc-book-btn">Book this Service &rarr;</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Discovery -->
-                        <div class="svc-card">
-                            <button class="svc-trigger" data-svc="dis" aria-expanded="false">
-                                <div class="svc-trigger-left">
-                                    <span class="svc-trigger-icon">&#128269;</span>
-                                    <div class="svc-trigger-text">
-                                        <span class="svc-trigger-name">Discovery</span>
-                                        <span class="svc-trigger-desc">Platform visibility, pinned promotion and session discoverability</span>
-                                    </div>
-                                </div>
-                                <div class="svc-trigger-right">
-                                    <span class="svc-price-pill">&pound;50</span>
-                                    <span class="svc-chevron">&#9660;</span>
-                                </div>
-                            </button>
-                            <div class="svc-body" id="svc-dis">
-                                <div class="svc-body-inner">
-                                    <div class="svc-body-content">
-                                        <div class="svc-includes">
-                                            <span class="svc-includes-label">What&rsquo;s Included</span>
-                                            <ul>
-                                                <li>Sponsored Session &mdash; high-visibility placement of one of your sessions on The NBRH platform</li>
-                                                <li>Additional Session Listing with booking, description, and discovery</li>
-                                                <li>7-Day Pinned Post on Instagram &mdash; your most important message at the top of our page for a full week</li>
-                                                <li>Ideal for new session launches, promo pushes, or time-sensitive announcements</li>
-                                            </ul>
-                                        </div>
-                                        <div class="svc-pricing">
-                                            <div class="svc-price-row">
-                                                <div class="svc-price-cell">
-                                                    <span class="svc-price-cell-label">Full Price</span>
-                                                    <span class="svc-price-cell-value">&pound;50</span>
-                                                </div>
-                                                <div class="svc-price-divider"></div>
-                                                <div class="svc-price-cell ch-price">
-                                                    <span class="svc-price-cell-label">Club House Price</span>
-                                                    <span class="svc-price-cell-value">&pound;25</span>
-                                                </div>
-                                            </div>
-                                            <div class="svc-saving">Club House members save <strong>&pound;25</strong> (50% off)</div>
-                                            <a href="https://www.thenbrh.co.uk/services-page/discovery-package" class="svc-book-btn">Book this Service &rarr;</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Content -->
-                        <div class="svc-card">
-                            <button class="svc-trigger" data-svc="con" aria-expanded="false">
-                                <div class="svc-trigger-left">
-                                    <span class="svc-trigger-icon">&#9999;&#65039;</span>
-                                    <div class="svc-trigger-text">
-                                        <span class="svc-trigger-name">Content</span>
-                                        <span class="svc-trigger-desc">Written content, video production and promotional assets</span>
-                                    </div>
-                                </div>
-                                <div class="svc-trigger-right">
-                                    <span class="svc-price-pill">&pound;75</span>
-                                    <span class="svc-chevron">&#9660;</span>
-                                </div>
-                            </button>
-                            <div class="svc-body" id="svc-con">
-                                <div class="svc-body-inner">
-                                    <div class="svc-body-content">
-                                        <div class="svc-includes">
-                                            <span class="svc-includes-label">What&rsquo;s Included</span>
-                                            <ul>
-                                                <li>Club Blog Post &mdash; an 800&ndash;1,200 word SEO-optimised article published on The NBRH and LinkedIn</li>
-                                                <li>Original Video Content &mdash; on-location filming edited into a Reel (30&ndash;60 sec) plus a longer cut, delivered within 7 days</li>
-                                                <li>Evidence Book &mdash; a branded PDF showcasing your club&rsquo;s stats, reviews, and stories for funding and sponsorship</li>
-                                                <li>All assets are yours to use across your own channels</li>
-                                            </ul>
-                                        </div>
-                                        <div class="svc-pricing">
-                                            <div class="svc-price-row">
-                                                <div class="svc-price-cell">
-                                                    <span class="svc-price-cell-label">Full Price</span>
-                                                    <span class="svc-price-cell-value">&pound;75</span>
-                                                </div>
-                                                <div class="svc-price-divider"></div>
-                                                <div class="svc-price-cell ch-price">
-                                                    <span class="svc-price-cell-label">Club House Price</span>
-                                                    <span class="svc-price-cell-value">&pound;40</span>
-                                                </div>
-                                            </div>
-                                            <div class="svc-saving">Club House members save <strong>&pound;35</strong> (47% off)</div>
-                                            <a href="https://www.thenbrh.co.uk/services-page/content-package" class="svc-book-btn">Book this Service &rarr;</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Data & Insights -->
-                        <div class="svc-card">
-                            <button class="svc-trigger" data-svc="dat" aria-expanded="false">
-                                <div class="svc-trigger-left">
-                                    <span class="svc-trigger-icon">&#128201;</span>
-                                    <div class="svc-trigger-text">
-                                        <span class="svc-trigger-name">Data &amp; Insights</span>
-                                        <span class="svc-trigger-desc">Market research, analytics, reporting and performance review</span>
-                                    </div>
-                                </div>
-                                <div class="svc-trigger-right">
-                                    <span class="svc-price-pill">&pound;50</span>
-                                    <span class="svc-chevron">&#9660;</span>
-                                </div>
-                            </button>
-                            <div class="svc-body" id="svc-dat">
-                                <div class="svc-body-inner">
-                                    <div class="svc-body-content">
-                                        <div class="svc-includes">
-                                            <span class="svc-includes-label">What&rsquo;s Included</span>
-                                            <ul>
-                                                <li>Deep Search Marketing Report &mdash; mapping your competitive landscape and identifying audiences you&rsquo;re missing</li>
-                                                <li>Competitor audit (local and digital)</li>
-                                                <li>Audience and demand analysis specific to your sport and location</li>
-                                                <li>Channel recommendations with rationale</li>
-                                                <li>Quick-win action plan with clear priorities</li>
-                                            </ul>
-                                        </div>
-                                        <div class="svc-pricing">
-                                            <div class="svc-price-row">
-                                                <div class="svc-price-cell">
-                                                    <span class="svc-price-cell-label">Full Price</span>
-                                                    <span class="svc-price-cell-value">&pound;50</span>
-                                                </div>
-                                                <div class="svc-price-divider"></div>
-                                                <div class="svc-price-cell ch-price">
-                                                    <span class="svc-price-cell-label">Club House Price</span>
-                                                    <span class="svc-price-cell-value">&pound;25</span>
-                                                </div>
-                                            </div>
-                                            <div class="svc-saving">Club House members save <strong>&pound;25</strong> (50% off)</div>
-                                            <a href="https://www.thenbrh.co.uk/services-page/data-insights-package" class="svc-book-btn">Book this Service &rarr;</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Boosted Fund Finder -->
-                        <div class="svc-card">
-                            <button class="svc-trigger" data-svc="mon" aria-expanded="false">
-                                <div class="svc-trigger-left">
-                                    <span class="svc-trigger-icon">&#128200;</span>
-                                    <div class="svc-trigger-text">
-                                        <span class="svc-trigger-name">Boosted Fund Finder</span>
-                                        <span class="svc-trigger-desc">Funding research, applications and grant management for your club</span>
-                                    </div>
-                                </div>
-                                <div class="svc-trigger-right">
-                                    <span class="svc-price-pill">&pound;150</span>
-                                    <span class="svc-chevron">&#9660;</span>
-                                </div>
-                            </button>
-                            <div class="svc-body" id="svc-mon">
-                                <div class="svc-body-inner">
-                                    <div class="svc-body-content">
-                                        <div class="svc-includes">
-                                            <span class="svc-includes-label">What&rsquo;s Included</span>
-                                            <ul>
-                                                <li>Funding landscape research tailored to your club &mdash; sport, location, size, and ambition all factor in</li>
-                                                <li>Identification of grants, trusts, local authority funding, and governing body programmes</li>
-                                                <li>Full application writing and submission on your behalf</li>
-                                                <li>End-to-end process management from research to submission</li>
-                                                <li>If we secure funding, you keep 100% of it. No commission, no catch.</li>
-                                            </ul>
-                                        </div>
-                                        <div class="svc-pricing">
-                                            <div class="svc-price-row">
-                                                <div class="svc-price-cell">
-                                                    <span class="svc-price-cell-label">Full Price</span>
-                                                    <span class="svc-price-cell-value">&pound;150</span>
-                                                </div>
-                                                <div class="svc-price-divider"></div>
-                                                <div class="svc-price-cell ch-price">
-                                                    <span class="svc-price-cell-label">Club House Price</span>
-                                                    <span class="svc-price-cell-value">&pound;90</span>
-                                                </div>
-                                            </div>
-                                            <div class="svc-saving">Club House members save <strong>&pound;60</strong> (40% off)</div>
-                                            <a href="https://www.thenbrh.co.uk/services-page/monetisation-package" class="svc-book-btn">Book this Service &rarr;</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <!-- Delivery Add-ons -->
-                    <div class="delivery-block">
-                        <div class="delivery-header">
-                            <span class="delivery-icon">&#9889;</span>
-                            <div>
-                                <div class="delivery-title">Need it faster?</div>
-                                <div class="delivery-sub">Add a delivery upgrade to any service at checkout. Applies to all &Agrave; La Carte options.</div>
-                            </div>
-                        </div>
-                        <div class="delivery-options">
-                            <div class="delivery-option">
-                                <div class="delivery-option-left">
-                                    <span class="delivery-option-icon">&#128293;</span>
-                                    <div>
-                                        <div class="delivery-option-name">24-Hour Delivery</div>
-                                        <div class="delivery-option-desc">Turned around within one business day of all assets and information received</div>
-                                    </div>
-                                </div>
-                                <div class="delivery-option-right">
-                                    <div class="delivery-price-col">
-                                        <span class="delivery-price-label">Full Price</span>
-                                        <span class="delivery-price-value">&pound;50</span>
-                                    </div>
-                                    <div class="delivery-divider"></div>
-                                    <div class="delivery-price-col ch">
-                                        <span class="delivery-price-label">Club House</span>
-                                        <span class="delivery-price-value">&pound;40</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="delivery-option">
-                                <div class="delivery-option-left">
-                                    <span class="delivery-option-icon">&#9193;</span>
-                                    <div>
-                                        <div class="delivery-option-name">Express Delivery</div>
-                                        <div class="delivery-option-desc">Completed within 3 business days of all assets and information received</div>
-                                    </div>
-                                </div>
-                                <div class="delivery-option-right">
-                                    <div class="delivery-price-col">
-                                        <span class="delivery-price-label">Full Price</span>
-                                        <span class="delivery-price-value">&pound;25</span>
-                                    </div>
-                                    <div class="delivery-divider"></div>
-                                    <div class="delivery-price-col ch">
-                                        <span class="delivery-price-label">Club House</span>
-                                        <span class="delivery-price-value">&pound;20</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="delivery-note">&#9432; Standard delivery timelines vary by service. Delivery upgrades are contingent on receiving all required assets and information promptly. Club House members (both tiers) save 20% on delivery upgrades.</div>
-                    </div>
-
-                    <div class="tier2-note">
-                        <strong>One-off. No commitment.</strong> Each service is purchased individually &mdash; you pay for flexibility and control. Every completed project gets a light check-in 30 days later: not a hard sell, just an honest conversation about what&rsquo;s next. Club House subscribers get discounts on every service automatically.
-                    </div>
-                </div>
-
-            </div>
-        </div>
-
-    </div>
-</section>
-
-<div class="divider"></div>
-
-<!-- How it works — collapsible -->
-<div class="collapsible-section reveal" id="how-it-works">
+<div class="collapsible-section reveal open" id="how-it-works">
     <button class="collapsible-header" aria-expanded="true" data-target="how-it-works-body">
         <div class="collapsible-header-left">
             <span class="collapsible-header-icon">&#9881;&#65039;</span>
@@ -1269,17 +965,17 @@
                     <div class="step-item">
                         <div class="step-number-wrap"><div class="step-number">1</div><span class="step-timing">Week one</span></div>
                         <div class="step-title">We set you up</div>
-                        <p class="step-desc">We build your Club House page, configure your booking system, list your sessions in premium spots, and set up your dashboard. We&rsquo;ll need some information from you &mdash; your sessions, your story, a few photos. That&rsquo;s it.</p>
+                        <p class="step-desc">We build your Club Hub page, configure your Tickts booking system, list your sessions, and set up your dashboard. We&rsquo;ll need some information from you — your sessions, your story, a few photos. That&rsquo;s it.</p>
                     </div>
                     <div class="step-item">
                         <div class="step-number-wrap"><div class="step-number">2</div><span class="step-timing">Week two</span></div>
                         <div class="step-title">You go live</div>
-                        <p class="step-desc">Your onboarding campaign launches &mdash; the Reel goes out, the ads start running, outreach kicks off, and your SEO blog goes live. Players start finding you. You don&rsquo;t need to do anything. We handle it.</p>
+                        <p class="step-desc">Your onboarding campaign launches — the Reel goes out, outreach kicks off, and players start finding you. You don&rsquo;t need to do anything. We handle it.</p>
                     </div>
                     <div class="step-item">
                         <div class="step-number-wrap"><div class="step-number">3</div><span class="step-timing">Every month after</span></div>
                         <div class="step-title">We keep it moving</div>
-                        <p class="step-desc">Your monthly deliverables land &mdash; ads, outreach, reports. We manage bookings and handle admin. You get a clear performance report each month. You focus on coaching. We focus on filling your sessions.</p>
+                        <p class="step-desc">Your monthly deliverables land on schedule. We manage bookings, handle admin, and send you a clear performance report. You focus on coaching. We focus on filling your sessions.</p>
                     </div>
                 </div>
             </div>
@@ -1287,151 +983,223 @@
     </div>
 </div>
 
-<!-- Compare — collapsible -->
-<div class="collapsible-section reveal" id="compare">
-    <button class="collapsible-header" aria-expanded="false" data-target="compare-body">
+<!-- À La Carte (collapsible) -->
+<div class="collapsible-section reveal" id="alacarte">
+    <button class="collapsible-header" aria-expanded="false" data-target="alacarte-body">
         <div class="collapsible-header-left">
-            <span class="collapsible-header-icon">&#9878;</span>
+            <span class="collapsible-header-icon">&#128269;</span>
             <div>
-                <div class="collapsible-header-title">Compare Plans</div>
-                <div class="collapsible-header-sub">Both Club House tiers — side by side</div>
+                <div class="collapsible-header-title">À La Carte Services</div>
+                <div class="collapsible-header-sub">Specific help, your terms — no subscription needed</div>
             </div>
         </div>
         <span class="collapsible-chevron">&#9660;</span>
     </button>
-    <div class="collapsible-body" id="compare-body">
+    <div class="collapsible-body" id="alacarte-body">
         <div class="collapsible-body-inner">
             <div class="collapsible-content">
-                <p class="sub" style="font-size:0.9rem;color:var(--text-muted);font-style:italic;margin-bottom:1rem;">Both Club House tiers include identical features. The only difference is how you pay.</p>
-                <div style="overflow-x: auto;">
-                    <table class="compare-table" role="table" aria-label="Plan comparison">
-                        <thead>
-                            <tr>
-                                <th scope="col">What&rsquo;s included</th>
-                                <th scope="col">Club House &mdash; &pound;100/mo flat</th>
-                                <th scope="col">Club House Flex &mdash; &pound;2/booking</th>
-                                <th scope="col">&Agrave; La Carte &mdash; per service</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr class="compare-pricing-row">
-                                <td>Monthly fee</td>
-                                <td>&pound;100 / month</td>
-                                <td>None</td>
-                                <td><span style="font-size:0.82rem;color:var(--text-muted);">N/A</span></td>
-                            </tr>
-                            <tr class="compare-pricing-row">
-                                <td>Booking fee</td>
-                                <td>None</td>
-                                <td>&pound;2 / booking</td>
-                                <td><span style="font-size:0.82rem;color:var(--text-muted);">N/A</span></td>
-                            </tr>
-                            <tr>
-                                <td>Digital Infrastructure (Club Hub page + Dashboard)</td>
-                                <td><span class="check-yes">&#10003;</span></td>
-                                <td><span class="check-yes">&#10003;</span></td>
-                                <td><span class="check-no">&mdash;</span></td>
-                            </tr>
-                            <tr>
-                                <td>Marketing (organic + paid + SEO + video)</td>
-                                <td><span class="check-yes">&#10003;</span></td>
-                                <td><span class="check-yes">&#10003;</span></td>
-                                <td><span class="check-yes">&#10003; <span class="compare-note-inline">Social Media &pound;50 &bull; Content &pound;75</span></span></td>
-                            </tr>
-                            <tr>
-                                <td>Outreach (Facebook Groups, PR, Influencers)</td>
-                                <td><span class="check-yes">&#10003;</span></td>
-                                <td><span class="check-yes">&#10003;</span></td>
-                                <td><span class="check-yes">&#10003; <span class="compare-note-inline">Outreach &pound;50</span></span></td>
-                            </tr>
-                            <tr>
-                                <td>Admin Support</td>
-                                <td><span class="check-yes">&#10003;</span></td>
-                                <td><span class="check-yes">&#10003;</span></td>
-                                <td><span class="check-no">&mdash;</span></td>
-                            </tr>
-                            <tr>
-                                <td>Booking Management</td>
-                                <td><span class="check-yes">&#10003;</span></td>
-                                <td><span class="check-yes">&#10003;</span></td>
-                                <td><span class="check-no">&mdash;</span></td>
-                            </tr>
-                            <tr>
-                                <td>Data Insights (AI research + reports)</td>
-                                <td><span class="check-yes">&#10003;</span></td>
-                                <td><span class="check-yes">&#10003;</span></td>
-                                <td><span class="check-yes">&#10003; <span class="compare-note-inline">Data &amp; Insights &pound;50</span></span></td>
-                            </tr>
-                            <tr>
-                                <td>Growth Tools (people finder, monetisation, Club Store)</td>
-                                <td><span class="check-yes">&#10003;</span></td>
-                                <td><span class="check-yes">&#10003;</span></td>
-                                <td><span class="check-no">&mdash;</span></td>
-                            </tr>
-                            <tr>
-                                <td>Consultative Support (branding, session, content advice)</td>
-                                <td><span class="check-yes">&#10003;</span></td>
-                                <td><span class="check-yes">&#10003;</span></td>
-                                <td><span class="check-no">&mdash;</span></td>
-                            </tr>
-                            <tr>
-                                <td>Platform presence &amp; session discovery</td>
-                                <td><span class="check-yes">&#10003;</span></td>
-                                <td><span class="check-yes">&#10003;</span></td>
-                                <td><span class="check-yes">&#10003; <span class="compare-note-inline">Discovery &pound;50</span></span></td>
-                            </tr>
-                            <tr>
-                                <td>League management</td>
-                                <td><span class="check-no">&mdash;</span></td>
-                                <td><span class="check-no">&mdash;</span></td>
-                                <td><span class="check-yes">&#10003; <span class="compare-note-inline">League &pound;500 / season</span></span></td>
-                            </tr>
-                            <tr>
-                                <td>Boosted Fund Finder</td>
-                                <td><span class="check-no">&mdash;</span></td>
-                                <td><span class="check-no">&mdash;</span></td>
-                                <td><span class="check-yes">&#10003; <span class="compare-note-inline">&pound;150</span></span></td>
-                            </tr>
-                            <tr>
-                                <td>Revenue share programme</td>
-                                <td><span class="check-yes">&#10003; <span class="compare-note-inline">coming soon</span></span></td>
-                                <td><span class="check-yes">&#10003; <span class="compare-note-inline">coming soon</span></span></td>
-                                <td><span class="check-no">&mdash;</span></td>
-                            </tr>
-                            <tr>
-                                <td>Referral reward</td>
-                                <td><span class="check-yes">&#10003;</span></td>
-                                <td><span class="check-yes">&#10003;</span></td>
-                                <td><span class="check-no">&mdash;</span></td>
-                            </tr>
-                            <tr>
-                                <td>Free 2-month pilot</td>
-                                <td><span class="check-yes">&#10003;</span></td>
-                                <td><span class="check-yes">&#10003;</span></td>
-                                <td><span class="check-no">&mdash;</span></td>
-                            </tr>
-                            <tr>
-                                <td>Commitment</td>
-                                <td><span style="font-size:0.82rem;color:var(--text-muted);">3 months after pilot</span></td>
-                                <td><span style="font-size:0.82rem;color:var(--text-muted);">3 months after pilot</span></td>
-                                <td><span style="font-size:0.82rem;color:var(--text-muted);">None</span></td>
-                            </tr>
-                            <tr>
-                                <td>Best value at</td>
-                                <td><span style="font-size:0.82rem;color:var(--text-muted);">50+ bookings / month</span></td>
-                                <td><span style="font-size:0.82rem;color:var(--text-muted);">Under 50 bookings / month</span></td>
-                                <td><span style="font-size:0.82rem;color:var(--text-muted);">Specific one-off needs</span></td>
-                            </tr>
-                        </tbody>
-                    </table>
+                <p style="font-size:0.9rem;color:var(--text-muted);margin-bottom:2rem;max-width:60ch;">Already established? Just need targeted help in one or two areas? Purchase individual services without a subscription. Club House members get 10–20% off everything here.</p>
+                <div class="services-grid">
+                    <!-- Social Media -->
+                    <div class="svc-card">
+                        <button class="svc-trigger" aria-expanded="false">
+                            <div class="svc-trigger-left"><span class="svc-trigger-icon">&#128247;</span><div class="svc-trigger-text"><span class="svc-trigger-name">Social Media</span><span class="svc-trigger-desc">Content, creative, scheduling and channel management</span></div></div>
+                            <div class="svc-trigger-right"><span class="svc-price-pill">&pound;50</span><span class="svc-chevron">&#9660;</span></div>
+                        </button>
+                        <div class="svc-body"><div class="svc-body-inner"><div class="svc-body-content">
+                            <div class="svc-includes"><span class="svc-includes-label">What&rsquo;s Included</span><ul>
+                                <li>Targeted Boosted Sessions Reel — a paid Instagram Reel built around your sessions</li>
+                                <li>Boosted Club Awareness Reel — a brand-building Reel focused on growing your following</li>
+                                <li>Creative production, targeting, and reporting handled by us</li>
+                                <li>Ad spend budget agreed with you separately</li>
+                            </ul></div>
+                            <div class="svc-pricing">
+                                <div class="svc-price-row">
+                                    <div class="svc-price-cell"><span class="svc-price-cell-label">Full Price</span><span class="svc-price-cell-value">&pound;50</span></div>
+                                    <div class="svc-price-divider"></div>
+                                    <div class="svc-price-cell ch-price"><span class="svc-price-cell-label">Club House Price</span><span class="svc-price-cell-value">&pound;25</span></div>
+                                </div>
+                                <div class="svc-saving">Club House members save <strong>&pound;25</strong> (50% off)</div>
+                                <a href="https://www.thenbrh.co.uk/services-page/social-media-package" class="svc-book-btn">Book this Service &rarr;</a>
+                            </div>
+                        </div></div></div>
+                    </div>
+                    <!-- League -->
+                    <div class="svc-card">
+                        <button class="svc-trigger" aria-expanded="false">
+                            <div class="svc-trigger-left"><span class="svc-trigger-icon">&#127942;</span><div class="svc-trigger-text"><span class="svc-trigger-name">League</span><span class="svc-trigger-desc">Full-service league infrastructure, built and managed for the season</span></div></div>
+                            <div class="svc-trigger-right"><span class="svc-price-pill">&pound;500</span><span class="svc-chevron">&#9660;</span></div>
+                        </button>
+                        <div class="svc-body"><div class="svc-body-inner"><div class="svc-body-content">
+                            <div class="svc-includes"><span class="svc-includes-label">What&rsquo;s Included</span><ul>
+                                <li>Dynamic league table updated after every round</li>
+                                <li>Full fixture list with results, dates, and venues</li>
+                                <li>Individual club and team profile pages</li>
+                                <li>Outreach to recruit new players and teams</li>
+                                <li>Season-long management, marketing, and reporting</li>
+                            </ul></div>
+                            <div class="svc-pricing">
+                                <div class="svc-price-row">
+                                    <div class="svc-price-cell"><span class="svc-price-cell-label">Full Price</span><span class="svc-price-cell-value">&pound;500 / season</span></div>
+                                    <div class="svc-price-divider"></div>
+                                    <div class="svc-price-cell ch-price"><span class="svc-price-cell-label">Club House Price</span><span class="svc-price-cell-value">&pound;350 / season</span></div>
+                                </div>
+                                <div class="svc-saving">Club House members save <strong>&pound;150</strong> (30% off). Monthly instalments available.</div>
+                                <a href="https://www.thenbrh.co.uk/services-page/league-package" class="svc-book-btn">Book this Service &rarr;</a>
+                            </div>
+                        </div></div></div>
+                    </div>
+                    <!-- Outreach -->
+                    <div class="svc-card">
+                        <button class="svc-trigger" aria-expanded="false">
+                            <div class="svc-trigger-left"><span class="svc-trigger-icon">&#128226;</span><div class="svc-trigger-text"><span class="svc-trigger-name">Outreach</span><span class="svc-trigger-desc">Targeted player acquisition and community outreach campaigns</span></div></div>
+                            <div class="svc-trigger-right"><span class="svc-price-pill">&pound;50</span><span class="svc-chevron">&#9660;</span></div>
+                        </button>
+                        <div class="svc-body"><div class="svc-body-inner"><div class="svc-body-content">
+                            <div class="svc-includes"><span class="svc-includes-label">What&rsquo;s Included</span><ul>
+                                <li>Cold Outreach — 3 relevant communities (Facebook, Reddit, WhatsApp, Discord) targeted naturally on your behalf</li>
+                                <li>Session Filler Outreach — targeted to NBRH users matching your session&rsquo;s sport, location, and availability</li>
+                                <li>Ideal for new slots, last-minute gaps, or sessions running below capacity</li>
+                            </ul></div>
+                            <div class="svc-pricing">
+                                <div class="svc-price-row">
+                                    <div class="svc-price-cell"><span class="svc-price-cell-label">Full Price</span><span class="svc-price-cell-value">&pound;50</span></div>
+                                    <div class="svc-price-divider"></div>
+                                    <div class="svc-price-cell ch-price"><span class="svc-price-cell-label">Club House Price</span><span class="svc-price-cell-value">&pound;25</span></div>
+                                </div>
+                                <div class="svc-saving">Club House members save <strong>&pound;25</strong> (50% off)</div>
+                                <a href="https://www.thenbrh.co.uk/services-page/outreach-package" class="svc-book-btn">Book this Service &rarr;</a>
+                            </div>
+                        </div></div></div>
+                    </div>
+                    <!-- Discovery -->
+                    <div class="svc-card">
+                        <button class="svc-trigger" aria-expanded="false">
+                            <div class="svc-trigger-left"><span class="svc-trigger-icon">&#128269;</span><div class="svc-trigger-text"><span class="svc-trigger-name">Discovery</span><span class="svc-trigger-desc">Platform visibility, pinned promotion and session discoverability</span></div></div>
+                            <div class="svc-trigger-right"><span class="svc-price-pill">&pound;50</span><span class="svc-chevron">&#9660;</span></div>
+                        </button>
+                        <div class="svc-body"><div class="svc-body-inner"><div class="svc-body-content">
+                            <div class="svc-includes"><span class="svc-includes-label">What&rsquo;s Included</span><ul>
+                                <li>Sponsored Session — high-visibility placement on The NBRH platform</li>
+                                <li>Additional Session Listing with booking, description, and discovery</li>
+                                <li>7-Day Pinned Post on Instagram — your message at the top of our page for a full week</li>
+                            </ul></div>
+                            <div class="svc-pricing">
+                                <div class="svc-price-row">
+                                    <div class="svc-price-cell"><span class="svc-price-cell-label">Full Price</span><span class="svc-price-cell-value">&pound;50</span></div>
+                                    <div class="svc-price-divider"></div>
+                                    <div class="svc-price-cell ch-price"><span class="svc-price-cell-label">Club House Price</span><span class="svc-price-cell-value">&pound;25</span></div>
+                                </div>
+                                <div class="svc-saving">Club House members save <strong>&pound;25</strong> (50% off)</div>
+                                <a href="https://www.thenbrh.co.uk/services-page/discovery-package" class="svc-book-btn">Book this Service &rarr;</a>
+                            </div>
+                        </div></div></div>
+                    </div>
+                    <!-- Content -->
+                    <div class="svc-card">
+                        <button class="svc-trigger" aria-expanded="false">
+                            <div class="svc-trigger-left"><span class="svc-trigger-icon">&#9999;&#65039;</span><div class="svc-trigger-text"><span class="svc-trigger-name">Content</span><span class="svc-trigger-desc">Written content, video production and promotional assets</span></div></div>
+                            <div class="svc-trigger-right"><span class="svc-price-pill">&pound;75</span><span class="svc-chevron">&#9660;</span></div>
+                        </button>
+                        <div class="svc-body"><div class="svc-body-inner"><div class="svc-body-content">
+                            <div class="svc-includes"><span class="svc-includes-label">What&rsquo;s Included</span><ul>
+                                <li>Club Blog Post — 800–1,200 word SEO-optimised article on The NBRH and LinkedIn</li>
+                                <li>Original Video Content — on-location filming edited into a Reel (30–60 sec) plus a longer cut</li>
+                                <li>Evidence Book — branded PDF for funding and sponsorship</li>
+                                <li>All assets are yours to use across your channels</li>
+                            </ul></div>
+                            <div class="svc-pricing">
+                                <div class="svc-price-row">
+                                    <div class="svc-price-cell"><span class="svc-price-cell-label">Full Price</span><span class="svc-price-cell-value">&pound;75</span></div>
+                                    <div class="svc-price-divider"></div>
+                                    <div class="svc-price-cell ch-price"><span class="svc-price-cell-label">Club House Price</span><span class="svc-price-cell-value">&pound;40</span></div>
+                                </div>
+                                <div class="svc-saving">Club House members save <strong>&pound;35</strong> (47% off)</div>
+                                <a href="https://www.thenbrh.co.uk/services-page/content-package" class="svc-book-btn">Book this Service &rarr;</a>
+                            </div>
+                        </div></div></div>
+                    </div>
+                    <!-- Data & Insights -->
+                    <div class="svc-card">
+                        <button class="svc-trigger" aria-expanded="false">
+                            <div class="svc-trigger-left"><span class="svc-trigger-icon">&#128201;</span><div class="svc-trigger-text"><span class="svc-trigger-name">Data &amp; Insights</span><span class="svc-trigger-desc">Market research, analytics, reporting and performance review</span></div></div>
+                            <div class="svc-trigger-right"><span class="svc-price-pill">&pound;50</span><span class="svc-chevron">&#9660;</span></div>
+                        </button>
+                        <div class="svc-body"><div class="svc-body-inner"><div class="svc-body-content">
+                            <div class="svc-includes"><span class="svc-includes-label">What&rsquo;s Included</span><ul>
+                                <li>Deep Search Marketing Report — competitive landscape and audience mapping</li>
+                                <li>Competitor audit (local and digital)</li>
+                                <li>Channel recommendations with rationale and quick-win action plan</li>
+                            </ul></div>
+                            <div class="svc-pricing">
+                                <div class="svc-price-row">
+                                    <div class="svc-price-cell"><span class="svc-price-cell-label">Full Price</span><span class="svc-price-cell-value">&pound;50</span></div>
+                                    <div class="svc-price-divider"></div>
+                                    <div class="svc-price-cell ch-price"><span class="svc-price-cell-label">Club House Price</span><span class="svc-price-cell-value">&pound;25</span></div>
+                                </div>
+                                <div class="svc-saving">Club House members save <strong>&pound;25</strong> (50% off)</div>
+                                <a href="https://www.thenbrh.co.uk/services-page/data-insights-package" class="svc-book-btn">Book this Service &rarr;</a>
+                            </div>
+                        </div></div></div>
+                    </div>
+                    <!-- Boosted Fund Finder -->
+                    <div class="svc-card">
+                        <button class="svc-trigger" aria-expanded="false">
+                            <div class="svc-trigger-left"><span class="svc-trigger-icon">&#128200;</span><div class="svc-trigger-text"><span class="svc-trigger-name">Boosted Fund Finder</span><span class="svc-trigger-desc">Funding research, applications and grant management for your club</span></div></div>
+                            <div class="svc-trigger-right"><span class="svc-price-pill">&pound;150</span><span class="svc-chevron">&#9660;</span></div>
+                        </button>
+                        <div class="svc-body"><div class="svc-body-inner"><div class="svc-body-content">
+                            <div class="svc-includes"><span class="svc-includes-label">What&rsquo;s Included</span><ul>
+                                <li>Funding landscape research tailored to your club — sport, location, size, and ambition</li>
+                                <li>Full application writing and submission on your behalf</li>
+                                <li>End-to-end process management from research to submission</li>
+                                <li>If we secure funding, you keep 100% of it. No commission.</li>
+                            </ul></div>
+                            <div class="svc-pricing">
+                                <div class="svc-price-row">
+                                    <div class="svc-price-cell"><span class="svc-price-cell-label">Full Price</span><span class="svc-price-cell-value">&pound;150</span></div>
+                                    <div class="svc-price-divider"></div>
+                                    <div class="svc-price-cell ch-price"><span class="svc-price-cell-label">Club House Price</span><span class="svc-price-cell-value">&pound;90</span></div>
+                                </div>
+                                <div class="svc-saving">Club House members save <strong>&pound;60</strong> (40% off)</div>
+                                <a href="https://www.thenbrh.co.uk/services-page/monetisation-package" class="svc-book-btn">Book this Service &rarr;</a>
+                            </div>
+                        </div></div></div>
+                    </div>
+                </div>
+
+                <!-- Delivery Add-ons -->
+                <div class="delivery-block">
+                    <div class="delivery-header">
+                        <span class="delivery-icon">&#9889;</span>
+                        <div>
+                            <div class="delivery-title">Need it faster?</div>
+                            <div class="delivery-sub">Add a delivery upgrade to any service at checkout.</div>
+                        </div>
+                    </div>
+                    <div class="delivery-options">
+                        <div class="delivery-option">
+                            <div class="delivery-option-left"><span class="delivery-option-icon">&#128293;</span><div><div class="delivery-option-name">24-Hour Delivery</div><div class="delivery-option-desc">Turned around within one business day of all assets received</div></div></div>
+                            <div class="delivery-option-right"><div class="delivery-price-col"><span class="delivery-price-label">Full Price</span><span class="delivery-price-value">&pound;50</span></div><div class="delivery-divider"></div><div class="delivery-price-col ch"><span class="delivery-price-label">Club House</span><span class="delivery-price-value">&pound;40</span></div></div>
+                        </div>
+                        <div class="delivery-option">
+                            <div class="delivery-option-left"><span class="delivery-option-icon">&#9193;</span><div><div class="delivery-option-name">Express Delivery</div><div class="delivery-option-desc">Completed within 3 business days of all assets received</div></div></div>
+                            <div class="delivery-option-right"><div class="delivery-price-col"><span class="delivery-price-label">Full Price</span><span class="delivery-price-value">&pound;25</span></div><div class="delivery-divider"></div><div class="delivery-price-col ch"><span class="delivery-price-label">Club House</span><span class="delivery-price-value">&pound;20</span></div></div>
+                        </div>
+                    </div>
+                    <div class="delivery-note">&#9432; Standard delivery timelines vary by service. Club House members (all tiers) save on delivery upgrades automatically.</div>
+                </div>
+
+                <div class="tier2-note">
+                    <strong>One-off. No commitment.</strong> Each service is purchased individually. Every completed project gets a light check-in 30 days later — not a hard sell, just an honest conversation about what&rsquo;s next.
                 </div>
             </div>
         </div>
     </div>
 </div>
 
-<!-- FAQ — collapsible wrapper -->
-<div class="collapsible-section reveal" id="faq">
+<!-- FAQ (collapsible) -->
+<div class="collapsible-section reveal open" id="faq">
     <button class="collapsible-header" aria-expanded="true" data-target="faq-body">
         <div class="collapsible-header-left">
             <span class="collapsible-header-icon">&#63;</span>
@@ -1442,41 +1210,41 @@
         </div>
         <span class="collapsible-chevron">&#9660;</span>
     </button>
-    <div class="collapsible-body open" id="faq-body">
+    <div class="collapsible-body" id="faq-body">
         <div class="collapsible-body-inner">
             <div class="collapsible-content">
                 <div class="faq-list">
                     <div class="faq-item">
-                        <button class="faq-trigger" aria-expanded="false"><span class="faq-question">How quickly can we get set up?</span><span class="faq-chevron">&#9660;</span></button>
-                        <div class="faq-body"><div class="faq-body-inner"><div class="faq-answer">Most clubs are fully live within two weeks of signing up. Week one is setup &mdash; your page, booking system, and sessions listed. Week two is launch &mdash; your Reel, ads, and outreach go out. We&rsquo;ll let you know exactly what we need from you and when. It&rsquo;s usually less than you think.</div></div></div>
+                        <button class="faq-trigger" aria-expanded="false"><span class="faq-question">What&rsquo;s the difference between the three tiers?</span><span class="faq-chevron">&#9660;</span></button>
+                        <div class="faq-body"><div class="faq-body-inner"><div class="faq-answer">Starter is free with a £2-per-booking fee — it&rsquo;s for clubs that want to try the platform without any monthly commitment. Growth is £30/month (£1/booking) and adds a full content and outreach engine on top. Club House is £125/month with zero booking fees and includes everything — in-person video, a dedicated Concierge, AI research, and full platform visibility. The comparison table above breaks it all down side by side.</div></div></div>
                     </div>
                     <div class="faq-item">
                         <button class="faq-trigger" aria-expanded="false"><span class="faq-question">What&rsquo;s the free pilot and when does it start?</span><span class="faq-chevron">&#9660;</span></button>
-                        <div class="faq-body"><div class="faq-body-inner"><div class="faq-answer">We offer a free 2-month pilot so you can see the platform working in practice before committing to anything. Importantly, the pilot begins when both of us are ready &mdash; there&rsquo;s no arbitrary start date, and no pressure. We&rsquo;ll agree a start point together once we&rsquo;ve had a conversation, got you set up, and you&rsquo;re comfortable. The clock only starts when it makes sense for your club.</div></div></div>
+                        <div class="faq-body"><div class="faq-body-inner"><div class="faq-answer">We offer a free 2-month pilot so you can see the platform working in practice before committing to anything. The pilot begins when both of us are ready — there&rsquo;s no arbitrary start date. We&rsquo;ll agree a start point together once we&rsquo;ve had a conversation, got you set up, and you&rsquo;re comfortable. The clock only starts when it makes sense for your club.</div></div></div>
                     </div>
                     <div class="faq-item">
-                        <button class="faq-trigger" aria-expanded="false"><span class="faq-question">Who covers the ad spend for the Meta campaigns?</span><span class="faq-chevron">&#9660;</span></button>
-                        <div class="faq-body"><div class="faq-body-inner"><div class="faq-answer">We put a base amount of money behind every ad campaign as standard &mdash; so your sessions are being promoted from day one, regardless of your own budget. If you want to amplify results further, you can choose to contribute additional ad spend on top of that. We&rsquo;ll always discuss the budget with you in advance, and there&rsquo;s never any obligation to increase it. We handle the creative, targeting, and reporting either way.</div></div></div>
+                        <button class="faq-trigger" aria-expanded="false"><span class="faq-question">Can I start on Starter and upgrade later?</span><span class="faq-chevron">&#9660;</span></button>
+                        <div class="faq-body"><div class="faq-body-inner"><div class="faq-answer">Absolutely. Starter is designed as an entry point. Once you&rsquo;re seeing regular bookings and want more marketing support, upgrading to Growth is straightforward. Everything on your profile, booking history, and platform presence carries over. We&rsquo;ll also flag when it makes financial sense to move up.</div></div></div>
                     </div>
                     <div class="faq-item">
-                        <button class="faq-trigger" aria-expanded="false"><span class="faq-question">Does the booking system work for free sessions too?</span><span class="faq-chevron">&#9660;</span></button>
-                        <div class="faq-body"><div class="faq-body-inner"><div class="faq-answer">Yes. The system runs via Ticket Tailor and handles both paid and free sessions. Free sessions still benefit from the registration flow &mdash; players sign up, you get a confirmed attendee list, and the session shows up properly in search and discovery. You always know who&rsquo;s coming.</div></div></div>
+                        <button class="faq-trigger" aria-expanded="false"><span class="faq-question">How quickly can we get set up?</span><span class="faq-chevron">&#9660;</span></button>
+                        <div class="faq-body"><div class="faq-body-inner"><div class="faq-answer">Most clubs are fully live within two weeks of signing up. Week one is setup — your page, booking system, and sessions listed. Week two is launch — your first content goes out and outreach kicks off. We&rsquo;ll let you know exactly what we need from you and when. It&rsquo;s usually less than you think.</div></div></div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-trigger" aria-expanded="false"><span class="faq-question">Who covers the ad spend for Instagram campaigns?</span><span class="faq-chevron">&#9660;</span></button>
+                        <div class="faq-body"><div class="faq-body-inner"><div class="faq-answer">We create, target, and manage the ads — you pay the actual Meta ad spend. We&rsquo;ll discuss a recommended budget with you in advance and there&rsquo;s never any obligation to increase it. We handle the creative and reporting either way.</div></div></div>
                     </div>
                     <div class="faq-item">
                         <button class="faq-trigger" aria-expanded="false"><span class="faq-question">What happens after the 3-month minimum?</span><span class="faq-chevron">&#9660;</span></button>
-                        <div class="faq-body"><div class="faq-body-inner"><div class="faq-answer">After three months, your subscription rolls monthly and you can cancel with 30 days&rsquo; notice. We ask for three months because that&rsquo;s genuinely how long it takes to see things working &mdash; the SEO builds, the ads optimise, and community outreach starts to compound. We&rsquo;d always aim for six months, but there&rsquo;s no pressure after the initial term.</div></div></div>
+                        <div class="faq-body"><div class="faq-body-inner"><div class="faq-answer">After three months (for Growth and Club House), your subscription rolls monthly and you can cancel with 30 days&rsquo; notice. We ask for three months because that&rsquo;s genuinely how long it takes to see things working — SEO builds, ads optimise, outreach compounds. We&rsquo;d always aim for six months, but there&rsquo;s no pressure after the initial term.</div></div></div>
                     </div>
                     <div class="faq-item">
-                        <button class="faq-trigger" aria-expanded="false"><span class="faq-question">Can we switch between Club House and Club House Flex?</span><span class="faq-chevron">&#9660;</span></button>
-                        <div class="faq-body"><div class="faq-body-inner"><div class="faq-answer">Yes, and we&rsquo;ll actively flag when it makes sense to. If you start on Flex and your bookings consistently hit 50+ a month, we&rsquo;ll let you know Club House saves you money. Switching is straightforward &mdash; your page, booking system, and history all carry over. Nothing gets lost.</div></div></div>
-                    </div>
-                    <div class="faq-item">
-                        <button class="faq-trigger" aria-expanded="false"><span class="faq-question">Our sessions are seasonal. Does Club House still make sense?</span><span class="faq-chevron">&#9660;</span></button>
-                        <div class="faq-body"><div class="faq-body-inner"><div class="faq-answer">If your sessions are irregular or heavily seasonal, Club House Flex is probably the better fit &mdash; no monthly fee, just a small charge per booking when sessions are running. Talk to us and we&rsquo;ll be honest about which makes more sense for your situation.</div></div></div>
+                        <button class="faq-trigger" aria-expanded="false"><span class="faq-question">Does the booking system work for free sessions too?</span><span class="faq-chevron">&#9660;</span></button>
+                        <div class="faq-body"><div class="faq-body-inner"><div class="faq-answer">Yes. The system runs via Tickts and handles both paid and free sessions. Free sessions still benefit from the registration flow — players sign up, you get a confirmed attendee list, and the session shows up properly in search and discovery. You always know who&rsquo;s coming.</div></div></div>
                     </div>
                     <div class="faq-item">
                         <button class="faq-trigger" aria-expanded="false"><span class="faq-question">Do you only work with London-based clubs?</span><span class="faq-chevron">&#9660;</span></button>
-                        <div class="faq-body"><div class="faq-body-inner"><div class="faq-answer">Right now, yes &mdash; The NBRH platform is focused on London, and that&rsquo;s where our discovery audience, outreach network, and local knowledge is strongest. We plan to expand to other cities once the platform is properly established here. If you&rsquo;re based just outside London, get in touch &mdash; there may still be a way to make it work.</div></div></div>
+                        <div class="faq-body"><div class="faq-body-inner"><div class="faq-answer">Right now, yes — The NBRH platform is focused on London, and that&rsquo;s where our discovery audience, outreach network, and local knowledge is strongest. We plan to expand to other cities as the platform grows. If you&rsquo;re based just outside London, get in touch — there may still be a way to make it work.</div></div></div>
                     </div>
                 </div>
             </div>
@@ -1484,11 +1252,12 @@
     </div>
 </div>
 
+<!-- CTA Band -->
 <div class="cta-band reveal">
     <div class="wrap">
-        <h2>Still weighing it up?</h2>
-        <p>Most clubs tell us they wished they&rsquo;d joined sooner. Drop us a message &mdash; we&rsquo;ll be straight with you about whether it&rsquo;s the right fit and what results look realistic.</p>
-        <a href="mailto:thenbhr@gmail.com" class="cta-btn">Let&rsquo;s Help You Grow! &rarr;</a>
+        <h2>Ready to grow your club?</h2>
+        <p>Start free on Starter, or jump straight into Growth or Club House. We offer a free 2-month pilot so you can see what the platform can do before committing to anything.</p>
+        <a href="mailto:thenbhr@gmail.com" class="cta-btn">Let&rsquo;s Talk &rarr;</a>
     </div>
 </div>
 
@@ -1505,49 +1274,23 @@
 </footer>
 
 <script>
-    // Scroll progress bar
+    // ── Scroll progress bar ──
     var bar = document.getElementById('scrollBar');
     window.addEventListener('scroll', function () {
         var pct = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight) * 100;
         bar.style.width = pct + '%';
     });
 
-    // Reveal on scroll
+    // ── Reveal on scroll ──
     var reveals = document.querySelectorAll('.reveal');
     var ro = new IntersectionObserver(function (entries) {
         entries.forEach(function (e) { if (e.isIntersecting) e.target.classList.add('in'); });
-    }, { threshold: 0.06, rootMargin: '0px 0px -5% 0px' });
+    }, { threshold: 0.04, rootMargin: '0px 0px -5% 0px' });
     reveals.forEach(function (el) { ro.observe(el); });
 
-    // Tier toggle
-    function switchTier(tier) {
-        document.querySelectorAll('.tier-btn').forEach(function (b) {
-            b.classList.toggle('active', b.dataset.tier === tier);
-        });
-        document.querySelectorAll('.tier-view').forEach(function (v) {
-            v.classList.toggle('active', v.id === 'tier-' + tier);
-        });
-        var plans = document.getElementById('plans');
-        if (plans) plans.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-    document.querySelectorAll('.tier-btn').forEach(function (btn) {
-        btn.addEventListener('click', function () { switchTier(btn.dataset.tier); });
-    });
-    document.querySelectorAll('.model-switch-link').forEach(function (link) {
-        link.addEventListener('click', function () { switchTier(link.dataset.switch); });
-    });
+    // Tier selector removed — tier-details replaced with static summary cards
 
-    // À La Carte accordions
-    document.querySelectorAll('.svc-trigger').forEach(function (trigger) {
-        trigger.addEventListener('click', function () {
-            var card = trigger.closest('.svc-card');
-            var isOpen = card.classList.contains('open');
-            card.classList.toggle('open', !isOpen);
-            trigger.setAttribute('aria-expanded', String(!isOpen));
-        });
-    });
-
-    // Offering item accordions (8 categories inside plan cards)
+    // ── Offering item accordions ──
     document.querySelectorAll('.offering-trigger').forEach(function (trigger) {
         trigger.addEventListener('click', function () {
             var item = trigger.closest('.offering-item');
@@ -1557,7 +1300,17 @@
         });
     });
 
-    // Collapsible sections (How It Works, Compare, FAQ)
+    // ── À La Carte accordions ──
+    document.querySelectorAll('.svc-trigger').forEach(function (trigger) {
+        trigger.addEventListener('click', function () {
+            var card = trigger.closest('.svc-card');
+            var isOpen = card.classList.contains('open');
+            card.classList.toggle('open', !isOpen);
+            trigger.setAttribute('aria-expanded', String(!isOpen));
+        });
+    });
+
+    // ── Collapsible sections ──
     document.querySelectorAll('.collapsible-header').forEach(function (header) {
         header.addEventListener('click', function () {
             var section = header.closest('.collapsible-section');
@@ -1566,18 +1319,12 @@
             header.setAttribute('aria-expanded', String(!isOpen));
         });
     });
-
-    // Open How It Works and FAQ by default
-    document.querySelectorAll('.collapsible-section').forEach(function (section) {
-        var id = section.id;
-        if (id === 'how-it-works' || id === 'faq') {
-            section.classList.add('open');
-            var h = section.querySelector('.collapsible-header');
-            if (h) h.setAttribute('aria-expanded', 'true');
-        }
+    // Sections open by default (already have .open class via HTML; sync aria)
+    document.querySelectorAll('.collapsible-section.open .collapsible-header').forEach(function (h) {
+        h.setAttribute('aria-expanded', 'true');
     });
 
-    // FAQ accordion
+    // ── FAQ accordion (one open at a time) ──
     document.querySelectorAll('.faq-trigger').forEach(function (trigger) {
         trigger.addEventListener('click', function () {
             var item = trigger.closest('.faq-item');
