@@ -51,7 +51,7 @@
         .nav-links a:hover { color: var(--accent); }
 
         /* ── Layout ── */
-        .wrap { max-width: var(--max); margin: 0 auto; padding: 0 1.5rem; overflow-x: hidden; }
+        .wrap { max-width: var(--max); margin: 0 auto; padding: 0 1.5rem; }
         .divider { height: 1px; background: var(--border); }
         section { padding: 4.5rem 0; }
         @media (max-width: 768px) { section { padding: 3rem 0; } }
@@ -117,14 +117,21 @@
 
         /* ── HOW ── */
         .how-section {}
-        .how-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
-        @media (max-width: 900px) { .how-grid { grid-template-columns: repeat(2, 1fr); } }
-        @media (max-width: 560px) { .how-grid { grid-template-columns: 1fr; } }
-        .how-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--r-lg); padding: 1.5rem; transition: border-color 0.2s, transform 0.2s; }
+        .how-grid { display: flex; gap: 1rem; overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; padding-bottom: 1rem; padding-left: 1.5rem; padding-right: 1.5rem; margin-left: -1.5rem; margin-right: -1.5rem; cursor: grab; }
+        .how-grid:active { cursor: grabbing; }
+        .how-grid::-webkit-scrollbar { height: 4px; }
+        .how-grid::-webkit-scrollbar-track { background: var(--bg-subtle); border-radius: 100px; }
+        .how-grid::-webkit-scrollbar-thumb { background: var(--accent-mid); border-radius: 100px; }
+        .how-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--r-lg); padding: 1.5rem; transition: border-color 0.2s, transform 0.2s; flex: 0 0 280px; scroll-snap-align: start; }
+        @media (max-width: 768px) { .how-card { flex: 0 0 75vw; } }
+        @media (max-width: 480px) { .how-card { flex: 0 0 85vw; } }
         .how-card:hover { border-color: var(--accent-mid); transform: translateY(-2px); }
         .how-card-icon { width: 40px; height: 40px; background: var(--accent-dim); border: 1px solid var(--accent-mid); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1rem; margin-bottom: 1rem; }
         .how-card h3 { font-family: var(--font-serif); font-size: 1.05rem; margin-bottom: 0.4rem; }
         .how-card p { font-size: 0.835rem; color: var(--text-muted); line-height: 1.65; }
+        /* Carousel scroll-hint fade */
+        .carousel-fade { position: relative; }
+        .carousel-fade::after { content: ''; position: absolute; top: 0; right: 0; bottom: 1.25rem; width: 3rem; background: linear-gradient(to right, transparent, var(--bg-card, var(--bg))); pointer-events: none; border-radius: 0 var(--r-lg) var(--r-lg) 0; }
         .how-bottom { margin-top: 2.5rem; background: var(--accent-dim); border: 1px solid var(--accent-mid); border-radius: var(--r-lg); padding: 1.5rem 2rem; display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap; }
         .how-bottom-text { flex: 1; min-width: 200px; }
         .how-bottom-text h3 { font-family: var(--font-serif); font-size: 1.2rem; margin-bottom: 0.35rem; }
@@ -392,14 +399,19 @@
         .footer-legal { width: 100%; text-align: center; font-size: 0.75rem; color: var(--text-faint); padding: 0.75rem 1.5rem; border-top: 1px solid var(--border); }
 
         /* ── Simple bullet list ── */
-        .simple-list { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; max-width: 56ch; }
+        .simple-list { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; max-width: 56ch; margin-left: auto; margin-right: auto; }
         .simple-list li { font-size: 0.9375rem; color: var(--text-muted); display: flex; align-items: flex-start; gap: 0.65rem; line-height: 1.5; }
         .simple-list li::before { content: '›'; color: var(--accent); font-size: 1.1rem; flex-shrink: 0; line-height: 1.4; }
 
         /* ── Tier summary cards (below compare table) ── */
-        .tier-summary-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.25rem; margin-top: 2rem; }
-        @media (max-width: 768px) { .tier-summary-grid { grid-template-columns: 1fr; } }
-        .tier-summary-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--r-lg); padding: 1.5rem; display: flex; flex-direction: column; gap: 0; position: relative; transition: border-color 0.2s; }
+        .tier-summary-grid { display: flex; gap: 1.25rem; overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; padding-top: 0.75rem; padding-bottom: 1.25rem; padding-left: 1.5rem; padding-right: 1.5rem; margin-left: -1.5rem; margin-right: -1.5rem; margin-top: 1.25rem; cursor: grab; }
+        .tier-summary-grid:active { cursor: grabbing; }
+        .tier-summary-grid::-webkit-scrollbar { height: 4px; }
+        .tier-summary-grid::-webkit-scrollbar-track { background: var(--bg-subtle); border-radius: 100px; }
+        .tier-summary-grid::-webkit-scrollbar-thumb { background: var(--accent-mid); border-radius: 100px; }
+        .tier-summary-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--r-lg); padding: 1.5rem; display: flex; flex-direction: column; gap: 0; position: relative; transition: border-color 0.2s; flex: 0 0 300px; scroll-snap-align: start; }
+        @media (max-width: 768px) { .tier-summary-card { flex: 0 0 80vw; } }
+        @media (max-width: 480px) { .tier-summary-card { flex: 0 0 88vw; } }
         .tier-summary-card:hover { border-color: var(--accent-mid); }
         .tier-summary-card.featured { border-color: var(--accent-mid); background: var(--accent-dim); }
         .ts-badge { position: absolute; top: -10px; left: 50%; transform: translateX(-50%); background: var(--accent); color: #fff; font-size: 0.62rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.09em; border-radius: 100px; padding: 0.15rem 0.65rem; white-space: nowrap; }
@@ -492,6 +504,7 @@
             <p>You got into sport because you love it. But somewhere between coaching sessions, chasing payments, posting on Instagram and figuring out how to fill your next session — it stopped being fun. Sound familiar?</p>
         </div>
 
+        <div style="display:flex; justify-content:center;">
         <ul class="simple-list">
             <li>You don&rsquo;t have the time</li>
             <li>You don&rsquo;t have the expertise</li>
@@ -500,6 +513,7 @@
             <li>You don&rsquo;t know what to do</li>
             <li>The admin never stops</li>
         </ul>
+        </div>
 
         <p style="font-size:0.9rem;color:var(--text-faint);margin-top:1.25rem;font-style:italic;">We know this because we&rsquo;ve lived it. Club House is what we wish had existed.</p>
 
@@ -719,9 +733,6 @@
             </div>
 
         </div>
-
-
-    </div>
             </div>
         </div>
     </div>
@@ -752,6 +763,7 @@
             <p class="sub">We won&rsquo;t promise you the world. But here&rsquo;s what we&rsquo;re confident about — and what we&rsquo;re accountable to delivering.</p>
         </div>
 
+        <div style="display:flex; justify-content:center;">
         <ul class="simple-list">
             <li>You&rsquo;ll save time &mdash; bookings, content, admin, outreach all handled</li>
             <li>More eyes on your sessions &mdash; platform discovery, Instagram, and outreach working at once</li>
@@ -760,6 +772,7 @@
             <li>A community behind your club &mdash; The NBRH network becomes your network</li>
             <li>A foundation to scale &mdash; tools and support that compound over time</li>
         </ul>
+        </div>
 
         <p class="outcome-disclaimer">We don&rsquo;t guarantee specific numbers — but we commit to showing up, doing the work, and being honest about what&rsquo;s working.</p>
 
@@ -1275,6 +1288,22 @@
 </footer>
 
 <script>
+    // ── Drag-to-scroll for carousels ──
+    ['.how-grid', '.tier-summary-grid'].forEach(function (sel) {
+        var el = document.querySelector(sel);
+        if (!el) return;
+        var isDown = false, startX, scrollLeft;
+        el.addEventListener('mousedown', function (e) { isDown = true; startX = e.pageX - el.offsetLeft; scrollLeft = el.scrollLeft; });
+        el.addEventListener('mouseleave', function () { isDown = false; });
+        el.addEventListener('mouseup', function () { isDown = false; });
+        el.addEventListener('mousemove', function (e) {
+            if (!isDown) return;
+            e.preventDefault();
+            var x = e.pageX - el.offsetLeft;
+            el.scrollLeft = scrollLeft - (x - startX) * 1.2;
+        });
+    });
+
     // ── Scroll progress bar ──
     var bar = document.getElementById('scrollBar');
     window.addEventListener('scroll', function () {
