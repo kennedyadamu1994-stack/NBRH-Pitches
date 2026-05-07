@@ -116,7 +116,6 @@
         .pain-callout p strong { color: var(--text); font-style: normal; }
 
         /* ── HOW ── */
-        .how-section {}
         .how-grid { display: flex; gap: 1rem; overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; padding-bottom: 1rem; padding-left: 1.5rem; padding-right: 1.5rem; margin-left: -1.5rem; margin-right: -1.5rem; cursor: grab; }
         .how-grid:active { cursor: grabbing; }
         .how-grid::-webkit-scrollbar { height: 4px; }
@@ -129,7 +128,6 @@
         .how-card-icon { width: 40px; height: 40px; background: var(--accent-dim); border: 1px solid var(--accent-mid); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1rem; margin-bottom: 1rem; }
         .how-card h3 { font-family: var(--font-serif); font-size: 1.05rem; margin-bottom: 0.4rem; }
         .how-card p { font-size: 0.835rem; color: var(--text-muted); line-height: 1.65; }
-        /* Carousel scroll-hint fade */
         .carousel-fade { position: relative; }
         .carousel-fade::after { content: ''; position: absolute; top: 0; right: 0; bottom: 1.25rem; width: 3rem; background: linear-gradient(to right, transparent, var(--bg-card, var(--bg))); pointer-events: none; border-radius: 0 var(--r-lg) var(--r-lg) 0; }
         .how-bottom { margin-top: 2.5rem; background: var(--accent-dim); border: 1px solid var(--accent-mid); border-radius: var(--r-lg); padding: 1.5rem 2rem; display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap; }
@@ -139,21 +137,12 @@
         .how-bottom-cta { flex-shrink: 0; }
 
         /* ── WHAT — Plans ── */
-        .plans-section {}
-
-        /* Tier selector cards at top */
-        .tier-selector { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-bottom: 3rem; }
-        @media (max-width: 768px) { .tier-selector { grid-template-columns: 1fr; gap: 0.75rem; } }
-        .tier-sel-card { background: var(--bg-card); border: 2px solid var(--border); border-radius: var(--r-lg); padding: 1.25rem 1.5rem; cursor: pointer; transition: all 0.2s; text-align: center; position: relative; }
-        .tier-sel-card:hover { border-color: var(--accent-mid); }
-        .tier-sel-card.active { border-color: var(--accent); background: var(--accent-dim); }
-        .tier-sel-card .tier-sel-name { font-family: var(--font-serif); font-size: 1.2rem; margin-bottom: 0.2rem; }
-        .tier-sel-card .tier-sel-price { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.5rem; }
-        .tier-sel-card .tier-sel-for { font-size: 0.75rem; color: var(--text-faint); }
-        .tier-best { position: absolute; top: -10px; left: 50%; transform: translateX(-50%); background: var(--accent); color: #fff; font-size: 0.62rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.09em; border-radius: 100px; padding: 0.15rem 0.65rem; white-space: nowrap; }
-
         /* ── Comparison Table ── */
-        .compare-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: var(--r-lg); margin-bottom: 2.5rem; }
+        .compare-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: var(--r-lg); margin-bottom: 2.5rem; -webkit-overflow-scrolling: touch; position: relative; }
+        /* Mobile scroll hint */
+        @media (max-width: 767px) {
+            .compare-wrap::after { content: ''; position: absolute; top: 0; right: 0; bottom: 0; width: 2.5rem; background: linear-gradient(to right, transparent, rgba(27,27,27,0.85)); pointer-events: none; border-radius: 0 var(--r-lg) var(--r-lg) 0; z-index: 2; }
+        }
         .compare-tbl { width: 100%; border-collapse: collapse; min-width: 680px; }
         .compare-tbl thead tr { border-bottom: 1px solid var(--border); }
         .compare-tbl th { padding: 1.1rem 1.25rem; text-align: left; background: var(--bg-subtle); }
@@ -177,75 +166,55 @@
         .compare-note { font-size: 0.72rem; color: var(--text-faint); font-style: italic; display: block; margin-top: 0.1rem; }
         .discount-badge { display: inline-block; font-size: 0.72rem; color: var(--accent); font-weight: 500; }
 
-        /* ── Tier detail cards ── */
-        .tier-details { display: none; }
-        .tier-details.active { display: block; animation: fadeIn 0.28s ease; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
-        .tier-detail-grid { display: grid; grid-template-columns: 1fr 1.5fr; gap: 2.5rem; align-items: start; }
-        @media (max-width: 820px) { .tier-detail-grid { grid-template-columns: 1fr; } }
-        .tier-sticky { position: sticky; top: 5.5rem; }
-        @media (max-width: 820px) { .tier-sticky { position: static; } }
-        .tier-number { font-family: var(--font-serif); font-size: 5rem; line-height: 1; color: var(--accent); opacity: 0.12; display: block; margin-bottom: -1.5rem; user-select: none; }
-        .tier-heading { font-family: var(--font-serif); font-size: 2rem; margin-bottom: 0.75rem; }
-        .tier-desc { font-size: 0.9375rem; color: var(--text-muted); line-height: 1.8; margin-bottom: 1.5rem; }
-        .tier-ideal { background: var(--accent-dim); border: 1px solid var(--accent-mid); border-radius: var(--r); padding: 1rem 1.25rem; font-size: 0.85rem; color: var(--text-muted); line-height: 1.65; margin-bottom: 1rem; }
-        .tier-ideal strong { font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.09em; color: var(--accent); display: block; margin-bottom: 0.3rem; }
-        .tier-switch { background: var(--bg-subtle); border: 1px solid var(--border); border-radius: var(--r); padding: 0.85rem 1rem; font-size: 0.8rem; color: var(--text-faint); line-height: 1.6; }
-        .tier-switch button { background: none; border: none; cursor: pointer; font-family: var(--font-sans); font-size: 0.8rem; font-weight: 500; color: rgba(255,27,110,0.75); padding: 0; text-decoration: underline; text-underline-offset: 2px; transition: color 0.15s; }
-        .tier-switch button:hover { color: var(--accent); }
+        /* Mobile sticky first column */
+        @media (max-width: 767px) {
+            .compare-tbl th:first-child,
+            .compare-tbl td:first-child {
+                position: sticky;
+                left: 0;
+                z-index: 1;
+                background: var(--bg-subtle);
+                min-width: 140px;
+                max-width: 160px;
+                white-space: normal;
+                box-shadow: 2px 0 6px rgba(0,0,0,0.3);
+            }
+            .compare-tbl .cat-row td:first-child { background: var(--bg-subtle); }
+            .compare-tbl .price-row td:first-child { background: var(--bg-card); }
+            .compare-tbl tbody tr:hover td:first-child { background: var(--bg-subtle); }
+            .compare-tbl th:first-child { font-size: 0.65rem; }
+            .compare-tbl td { padding: 0.65rem 0.85rem; font-size: 0.8rem; }
+            .compare-tbl th { padding: 0.9rem 0.85rem; }
+        }
 
-        /* Plan card */
-        .plan-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--r-lg); border-top: 3px solid var(--accent); overflow: hidden; }
-        .plan-header { padding: 1.75rem; border-bottom: 1px solid var(--border); }
-        .plan-name { font-family: var(--font-serif); font-size: 1.7rem; line-height: 1.15; margin-bottom: 0.2rem; }
-        .plan-tagline { font-size: 0.825rem; color: var(--text-faint); }
-        .plan-price-block { margin: 1.25rem 0 0; }
-        .price-line { display: flex; align-items: baseline; gap: 0.35rem; flex-wrap: wrap; margin-bottom: 0.3rem; }
-        .price-main { font-family: var(--font-serif); font-size: 3rem; line-height: 1; color: var(--accent); }
-        .price-period { font-size: 0.875rem; color: var(--text-faint); }
-        .price-note { font-size: 0.78rem; color: var(--text-faint); font-style: italic; margin-bottom: 0.25rem; }
-        .price-booking-fee { display: inline-flex; align-items: center; gap: 0.4rem; font-size: 0.8rem; color: var(--text-muted); background: var(--bg-subtle); border: 1px solid var(--border); border-radius: 100px; padding: 0.2rem 0.75rem; }
-        .price-booking-fee .fee-label { color: var(--text-faint); font-size: 0.7rem; }
-        .plan-pitch { font-size: 0.9rem; color: var(--text-muted); line-height: 1.7; margin-top: 1rem; }
-        .plan-body { padding: 1.5rem 1.75rem; }
-        .plan-footer { padding: 1.25rem 1.75rem; border-top: 1px solid var(--border); }
-        .plan-cta { display: flex; align-items: center; justify-content: center; gap: 0.45rem; width: 100%; padding: 0.9rem 1.5rem; border-radius: var(--r); border: none; cursor: pointer; font-family: var(--font-sans); font-size: 0.9rem; font-weight: 500; text-decoration: none; background: var(--accent); color: #fff; transition: all 0.2s; }
-        .plan-cta:hover { opacity: 0.88; transform: translateY(-1px); }
+        /* Mobile scroll label */
+        .compare-scroll-hint { display: none; }
+        @media (max-width: 767px) {
+            .compare-scroll-hint {
+                display: flex; align-items: center; gap: 0.4rem;
+                font-size: 0.72rem; color: var(--text-faint); font-style: italic;
+                margin-bottom: 0.5rem; padding-left: 0.25rem;
+            }
+        }
 
-        /* Offerings inside plan card */
-        .offerings-label { font-size: 0.68rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-faint); padding-bottom: 0.6rem; border-bottom: 1px solid var(--border); margin-bottom: 1.25rem; }
-        .offerings-grid { display: flex; flex-direction: column; gap: 0.5rem; }
-        .offering-item { background: var(--bg-subtle); border: 1px solid var(--border); border-radius: var(--r); overflow: hidden; transition: border-color 0.2s; }
-        .offering-item:hover { border-color: rgba(255,27,110,0.25); }
-        .offering-trigger { width: 100%; background: none; border: none; cursor: pointer; font-family: var(--font-sans); color: var(--text); padding: 0.9rem 1rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; text-align: left; }
-        .offering-trigger-left { display: flex; align-items: center; gap: 0.75rem; flex: 1; min-width: 0; }
-        .offering-icon { font-size: 1rem; flex-shrink: 0; }
-        .offering-name { font-size: 0.875rem; font-weight: 500; color: var(--text); }
-        .offering-chevron { font-size: 0.7rem; color: var(--text-faint); transition: transform 0.25s, color 0.2s; flex-shrink: 0; }
-        .offering-item.open .offering-chevron { transform: rotate(180deg); color: var(--accent); }
-        .offering-body { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 0.28s ease; }
-        .offering-item.open .offering-body { grid-template-rows: 1fr; }
-        .offering-body-inner { overflow: hidden; }
-        .offering-list { border-top: 1px solid var(--border); padding: 0.85rem 1rem; display: flex; flex-direction: column; gap: 0.35rem; }
-        .offering-list li { font-size: 0.8rem; color: var(--text-muted); display: flex; align-items: flex-start; gap: 0.4rem; line-height: 1.5; list-style: none; }
-        .offering-list li::before { content: '›'; color: var(--accent); flex-shrink: 0; margin-top: 0.05rem; }
-
-        /* Perks strip */
-        .perks-strip { margin-top: 1.75rem; display: flex; flex-direction: column; gap: 0.55rem; }
-        .perk-row { display: flex; align-items: flex-start; gap: 0.65rem; }
-        .perk-icon { width: 28px; height: 28px; border-radius: 50%; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; background: var(--accent-dim); border: 1px solid var(--accent-mid); }
-        .perk-text { flex: 1; font-size: 0.825rem; color: var(--text-muted); line-height: 1.55; }
-        .perk-text strong { color: var(--text); font-weight: 500; }
-        .perk-coming-soon { display: inline-flex; align-items: center; font-size: 0.62rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent); background: var(--accent-dim); border: 1px solid var(--accent-mid); border-radius: 100px; padding: 0.12rem 0.5rem; margin-left: 0.4rem; vertical-align: middle; }
-
-        /* Commitment strip */
-        .commitment-strip { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.75rem; margin-top: 1rem; }
-        @media (max-width: 600px) { .commitment-strip { grid-template-columns: 1fr; } }
-        .commitment-item { background: var(--bg-subtle); border: 1px solid var(--border); border-radius: var(--r); padding: 1rem 1.1rem; }
-        .commitment-item .ci-icon { font-size: 1rem; margin-bottom: 0.35rem; }
-        .commitment-item h4 { font-size: 0.825rem; font-weight: 500; margin-bottom: 0.2rem; }
-        .commitment-item p { font-size: 0.775rem; color: var(--text-faint); line-height: 1.5; }
-        .availability-note { font-size: 0.75rem; color: var(--text-faint); font-style: italic; padding: 0.65rem 0.9rem; background: var(--bg-subtle); border-radius: var(--r); border-left: 2px solid var(--accent-mid); margin-top: 1.25rem; }
+        /* ── Tier summary cards ── */
+        .tier-summary-grid { display: flex; gap: 1.25rem; overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; padding-top: 0.75rem; padding-bottom: 1.25rem; padding-left: 1.5rem; padding-right: 1.5rem; margin-left: -1.5rem; margin-right: -1.5rem; margin-top: 1.25rem; cursor: grab; }
+        .tier-summary-grid:active { cursor: grabbing; }
+        .tier-summary-grid::-webkit-scrollbar { height: 4px; }
+        .tier-summary-grid::-webkit-scrollbar-track { background: var(--bg-subtle); border-radius: 100px; }
+        .tier-summary-grid::-webkit-scrollbar-thumb { background: var(--accent-mid); border-radius: 100px; }
+        .tier-summary-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--r-lg); padding: 1.5rem; display: flex; flex-direction: column; gap: 0; position: relative; transition: border-color 0.2s; flex: 0 0 300px; scroll-snap-align: start; }
+        @media (max-width: 768px) { .tier-summary-card { flex: 0 0 80vw; } }
+        @media (max-width: 480px) { .tier-summary-card { flex: 0 0 88vw; } }
+        .tier-summary-card:hover { border-color: var(--accent-mid); }
+        .tier-summary-card.featured { border-color: var(--accent-mid); background: var(--accent-dim); }
+        .ts-badge { position: absolute; top: -10px; left: 50%; transform: translateX(-50%); background: var(--accent); color: #fff; font-size: 0.62rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.09em; border-radius: 100px; padding: 0.15rem 0.65rem; white-space: nowrap; }
+        .ts-name { font-family: var(--font-serif); font-size: 1.25rem; margin-bottom: 0.2rem; }
+        .ts-price { font-size: 0.8rem; color: var(--accent); font-weight: 500; margin-bottom: 0.85rem; padding-bottom: 0.85rem; border-bottom: 1px solid var(--border); }
+        .ts-ideal-label { font-size: 0.67rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.09em; color: var(--accent); display: block; margin-bottom: 0.4rem; }
+        .ts-desc { font-size: 0.845rem; color: var(--text-muted); line-height: 1.7; flex: 1; margin-bottom: 1.25rem; }
+        .ts-cta { display: flex; align-items: center; justify-content: center; gap: 0.4rem; width: 100%; padding: 0.75rem 1rem; border-radius: var(--r); border: none; cursor: pointer; font-family: var(--font-sans); font-size: 0.865rem; font-weight: 500; text-decoration: none; background: var(--accent); color: #fff; transition: all 0.2s; }
+        .ts-cta:hover { opacity: 0.88; transform: translateY(-1px); }
 
         /* ── Outcomes ── */
         .outcomes-section { background: var(--bg-subtle); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
@@ -256,32 +225,6 @@
         .outcome-card h3 { font-family: var(--font-serif); font-size: 1.15rem; margin-bottom: 0.4rem; }
         .outcome-card p { font-size: 0.845rem; color: var(--text-muted); line-height: 1.7; }
         .outcome-disclaimer { text-align: center; margin-top: 2rem; font-size: 0.8rem; color: var(--text-faint); font-style: italic; max-width: 55ch; margin-left: auto; margin-right: auto; }
-
-        /* ── Competitor Comparison ── */
-        .vs-section {}
-        .vs-table-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: var(--r-lg); }
-        .vs-table { width: 100%; border-collapse: collapse; min-width: 700px; }
-        .vs-table thead tr { border-bottom: 1px solid var(--border); }
-        .vs-table th { padding: 1.1rem 1.25rem; text-align: center; background: var(--bg-subtle); }
-        .vs-table th:first-child { text-align: left; color: var(--text-faint); font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.09em; }
-        .vs-th-nbrh { background: var(--accent-dim) !important; }
-        .vs-th-name { font-family: var(--font-serif); font-size: 0.95rem; font-weight: 400; color: var(--text); display: block; }
-        .vs-th-sub { font-size: 0.72rem; color: var(--text-faint); display: block; margin-top: 0.15rem; }
-        .vs-th-nbrh .vs-th-name { color: var(--accent); }
-        .vs-table td { padding: 0.75rem 1.25rem; border-bottom: 1px solid var(--border); font-size: 0.855rem; color: var(--text-muted); text-align: center; vertical-align: middle; }
-        .vs-table td:first-child { text-align: left; color: var(--text-muted); }
-        .vs-table tr:last-child td { border-bottom: none; }
-        .vs-table tbody tr:hover td { background: rgba(255,255,255,0.02); }
-        .vs-yes { color: var(--accent); font-size: 1rem; }
-        .vs-no { color: var(--text-faint); }
-        .vs-td-nbrh { background: var(--accent-dim) !important; }
-        .vs-td-nbrh .vs-yes { color: var(--accent); }
-        .vs-table .vs-price-row td { background: var(--bg-card); font-weight: 500; }
-        .vs-table .vs-price-row .vs-td-nbrh { background: var(--accent-dim) !important; color: var(--accent); font-family: var(--font-serif); }
-        .vs-note { font-size: 0.72rem; color: var(--text-faint); font-style: italic; display: block; margin-top: 0.15rem; }
-
-        /* ── Testimonials (hidden — infrastructure preserved) ── */
-        .testimonials-section { display: none; }
 
         /* ── Collapsible sections ── */
         .collapsible-section { border-top: 1px solid var(--border); }
@@ -298,7 +241,7 @@
         .collapsible-body-inner { overflow: hidden; }
         .collapsible-content { padding: 0 1.5rem 2.5rem; }
 
-        /* ── How It Works ── */
+        /* ── How It Works steps ── */
         .steps-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; position: relative; }
         @media (max-width: 768px) { .steps-grid { grid-template-columns: 1fr; gap: 1.5rem; } }
         .steps-connector { display: none; }
@@ -403,24 +346,33 @@
         .simple-list li { font-size: 0.9375rem; color: var(--text-muted); display: flex; align-items: flex-start; gap: 0.65rem; line-height: 1.5; }
         .simple-list li::before { content: '›'; color: var(--accent); font-size: 1.1rem; flex-shrink: 0; line-height: 1.4; }
 
-        /* ── Tier summary cards (below compare table) ── */
-        .tier-summary-grid { display: flex; gap: 1.25rem; overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; padding-top: 0.75rem; padding-bottom: 1.25rem; padding-left: 1.5rem; padding-right: 1.5rem; margin-left: -1.5rem; margin-right: -1.5rem; margin-top: 1.25rem; cursor: grab; }
-        .tier-summary-grid:active { cursor: grabbing; }
-        .tier-summary-grid::-webkit-scrollbar { height: 4px; }
-        .tier-summary-grid::-webkit-scrollbar-track { background: var(--bg-subtle); border-radius: 100px; }
-        .tier-summary-grid::-webkit-scrollbar-thumb { background: var(--accent-mid); border-radius: 100px; }
-        .tier-summary-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--r-lg); padding: 1.5rem; display: flex; flex-direction: column; gap: 0; position: relative; transition: border-color 0.2s; flex: 0 0 300px; scroll-snap-align: start; }
-        @media (max-width: 768px) { .tier-summary-card { flex: 0 0 80vw; } }
-        @media (max-width: 480px) { .tier-summary-card { flex: 0 0 88vw; } }
-        .tier-summary-card:hover { border-color: var(--accent-mid); }
-        .tier-summary-card.featured { border-color: var(--accent-mid); background: var(--accent-dim); }
-        .ts-badge { position: absolute; top: -10px; left: 50%; transform: translateX(-50%); background: var(--accent); color: #fff; font-size: 0.62rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.09em; border-radius: 100px; padding: 0.15rem 0.65rem; white-space: nowrap; }
-        .ts-name { font-family: var(--font-serif); font-size: 1.25rem; margin-bottom: 0.2rem; }
-        .ts-price { font-size: 0.8rem; color: var(--accent); font-weight: 500; margin-bottom: 0.85rem; padding-bottom: 0.85rem; border-bottom: 1px solid var(--border); }
-        .ts-ideal-label { font-size: 0.67rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.09em; color: var(--accent); display: block; margin-bottom: 0.4rem; }
-        .ts-desc { font-size: 0.845rem; color: var(--text-muted); line-height: 1.7; flex: 1; margin-bottom: 1.25rem; }
-        .ts-cta { display: flex; align-items: center; justify-content: center; gap: 0.4rem; width: 100%; padding: 0.75rem 1rem; border-radius: var(--r); border: none; cursor: pointer; font-family: var(--font-sans); font-size: 0.865rem; font-weight: 500; text-decoration: none; background: var(--accent); color: #fff; transition: all 0.2s; }
-        .ts-cta:hover { opacity: 0.88; transform: translateY(-1px); }
+        /* ── Testimonials (hidden) ── */
+        .testimonials-section { display: none; }
+
+        /* ── VS table (hidden) ── */
+        .vs-section {}
+        .vs-table-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: var(--r-lg); }
+        .vs-table { width: 100%; border-collapse: collapse; min-width: 700px; }
+        .vs-table thead tr { border-bottom: 1px solid var(--border); }
+        .vs-table th { padding: 1.1rem 1.25rem; text-align: center; background: var(--bg-subtle); }
+        .vs-table th:first-child { text-align: left; color: var(--text-faint); font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.09em; }
+        .vs-th-nbrh { background: var(--accent-dim) !important; }
+        .vs-th-name { font-family: var(--font-serif); font-size: 0.95rem; font-weight: 400; color: var(--text); display: block; }
+        .vs-th-sub { font-size: 0.72rem; color: var(--text-faint); display: block; margin-top: 0.15rem; }
+        .vs-th-nbrh .vs-th-name { color: var(--accent); }
+        .vs-table td { padding: 0.75rem 1.25rem; border-bottom: 1px solid var(--border); font-size: 0.855rem; color: var(--text-muted); text-align: center; vertical-align: middle; }
+        .vs-table td:first-child { text-align: left; color: var(--text-muted); }
+        .vs-table tr:last-child td { border-bottom: none; }
+        .vs-table tbody tr:hover td { background: rgba(255,255,255,0.02); }
+        .vs-yes { color: var(--accent); font-size: 1rem; }
+        .vs-no { color: var(--text-faint); }
+        .vs-td-nbrh { background: var(--accent-dim) !important; }
+        .vs-td-nbrh .vs-yes { color: var(--accent); }
+        .vs-table .vs-price-row td { background: var(--bg-card); font-weight: 500; }
+        .vs-table .vs-price-row .vs-td-nbrh { background: var(--accent-dim) !important; color: var(--accent); font-family: var(--font-serif); }
+        .vs-note { font-size: 0.72rem; color: var(--text-faint); font-style: italic; display: block; margin-top: 0.15rem; }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
     </style>
 </head>
 <body>
@@ -456,12 +408,12 @@
             </div>
             <div class="hero-stats">
                 <div class="hero-stat">
-                    <span class="hero-stat-num">Free</span>
-                    <span class="hero-stat-label">2-month pilot, no commitment</span>
+                    <span class="hero-stat-num">&pound;20/mo</span>
+                    <span class="hero-stat-label">Starter tier + &pound;2/booking</span>
                 </div>
                 <div class="hero-stat">
                     <span class="hero-stat-num">3</span>
-                    <span class="hero-stat-label">tiers — from free to fully managed</span>
+                    <span class="hero-stat-label">tiers — from Starter to fully managed</span>
                 </div>
                 <div class="hero-stat">
                     <span class="hero-stat-num">1</span>
@@ -497,13 +449,11 @@
         <div class="collapsible-body-inner">
             <div class="collapsible-content">
     <div class="wrap">
-
         <div class="pain-intro">
             <span class="eyebrow">The Why</span>
             <h2>Running a club is harder than it looks.</h2>
             <p>You got into sport because you love it. But somewhere between coaching sessions, chasing payments, posting on Instagram and figuring out how to fill your next session — it stopped being fun. Sound familiar?</p>
         </div>
-
         <div style="display:flex; justify-content:center;">
         <ul class="simple-list">
             <li>You don&rsquo;t have the time</li>
@@ -514,9 +464,7 @@
             <li>The admin never stops</li>
         </ul>
         </div>
-
         <p style="font-size:0.9rem;color:var(--text-faint);margin-top:1.25rem;font-style:italic;">We know this because we&rsquo;ve lived it. Club House is what we wish had existed.</p>
-
     </div>
             </div>
         </div>
@@ -541,13 +489,11 @@
         <div class="collapsible-body-inner">
             <div class="collapsible-content">
     <div class="wrap">
-
         <div class="section-head">
             <span class="eyebrow">The How</span>
             <h2>Here&rsquo;s what we do about it.</h2>
             <p class="sub">Club House is designed to give you back your time, amplify your reach, and provide the infrastructure to grow sustainably.</p>
         </div>
-
         <div class="how-grid">
             <div class="how-card">
                 <div class="how-card-icon">&#128247;</div>
@@ -580,7 +526,6 @@
                 <p>Member subscriptions, a people-finder tool, Club Store, and more. As The NBRH grows, so do your tools. Everything is built to compound over time.</p>
             </div>
         </div>
-
     </div>
             </div>
         </div>
@@ -596,7 +541,7 @@
             <span class="collapsible-header-icon">&#127968;</span>
             <div>
                 <div class="collapsible-header-title">Plans &amp; Pricing</div>
-                <div class="collapsible-header-sub">Three tiers — from free to fully managed</div>
+                <div class="collapsible-header-sub">Three tiers — from Starter to fully managed</div>
             </div>
         </div>
         <span class="collapsible-chevron">&#9660;</span>
@@ -609,8 +554,11 @@
         <div class="section-head">
             <span class="eyebrow">The What</span>
             <h2>Three plans. One platform.</h2>
-            <p class="sub">Start for free, grow with support, or go fully managed. Every plan gets you on the platform and into the system.</p>
+            <p class="sub">Start on Starter, grow with support, or go fully managed. Every plan gets you on the platform and into the system.</p>
         </div>
+
+        <!-- Mobile scroll hint -->
+        <p class="compare-scroll-hint">&#8594; Scroll to compare all tiers</p>
 
         <!-- Comparison Table -->
         <div class="compare-wrap">
@@ -620,15 +568,15 @@
                         <th scope="col">Feature</th>
                         <th scope="col">
                             <span class="th-tier-name">Starter</span>
-                            <span class="th-tier-price">Free &middot; £2/booking</span>
+                            <span class="th-tier-price">&pound;20/mo &middot; &pound;2/booking</span>
                         </th>
                         <th scope="col">
                             <span class="th-tier-name">Growth</span>
-                            <span class="th-tier-price">£50/mo &middot; £1/booking</span>
+                            <span class="th-tier-price">&pound;50/mo &middot; &pound;1/booking</span>
                         </th>
                         <th scope="col" class="th-tier-highlight">
                             <span class="th-tier-name">Club House</span>
-                            <span class="th-tier-price">£125/mo &middot; No fees</span>
+                            <span class="th-tier-price">&pound;125/mo &middot; No fees</span>
                         </th>
                     </tr>
                 </thead>
@@ -637,14 +585,14 @@
                     <tr class="cat-row"><td colspan="4"><span class="cat-label">Pricing</span></td></tr>
                     <tr class="price-row">
                         <td>Monthly fee</td>
-                        <td>Free</td>
-                        <td>£50 / month</td>
-                        <td class="vs-td-nbrh">£125 / month</td>
+                        <td>&pound;20 / month</td>
+                        <td>&pound;50 / month</td>
+                        <td class="vs-td-nbrh">&pound;125 / month</td>
                     </tr>
                     <tr class="price-row">
                         <td>Booking fee</td>
-                        <td>£2 per booking</td>
-                        <td>£1 per booking</td>
+                        <td>&pound;2 per booking</td>
+                        <td>&pound;1 per booking</td>
                         <td class="vs-td-nbrh" style="color:var(--accent);font-family:var(--font-serif);">None &#10003;</td>
                     </tr>
 
@@ -672,6 +620,7 @@
                     <tr><td>x1 Instagram Social Proof Carousel</td><td><span class="no">&mdash;</span></td><td><span class="yes">&#10003;</span></td><td class="vs-td-nbrh"><span class="yes">&#10003;</span></td></tr>
                     <tr><td>x1 SEO Blog per month</td><td><span class="no">&mdash;</span></td><td><span class="yes">&#10003;</span></td><td class="vs-td-nbrh"><span class="yes">&#10003;</span></td></tr>
                     <tr><td>x1 LinkedIn Article per month</td><td><span class="no">&mdash;</span></td><td><span class="yes">&#10003;</span></td><td class="vs-td-nbrh"><span class="yes">&#10003;</span></td></tr>
+                    <tr><td>TikTok, LinkedIn, Reddit &amp; YouTube posting<span class="compare-note">Multi-platform content distribution</span></td><td><span class="no">&mdash;</span></td><td><span class="soon-badge">Coming Soon</span></td><td class="vs-td-nbrh"><span class="soon-badge">Coming Soon</span></td></tr>
                     <tr><td>x1 In-person video per month</td><td><span class="no">&mdash;</span></td><td><span class="no">&mdash;</span></td><td class="vs-td-nbrh"><span class="yes">&#10003;</span></td></tr>
                     <tr><td>Inclusion in NBRH marketing campaigns</td><td><span class="no">&mdash;</span></td><td><span class="no">&mdash;</span></td><td class="vs-td-nbrh"><span class="yes">&#10003;</span></td></tr>
 
@@ -680,6 +629,7 @@
                     <tr><td>x1 Weekly outreach to groups</td><td><span class="yes">&#10003;</span></td><td><span class="yes">&#10003;</span></td><td class="vs-td-nbrh"><span class="yes">&#10003;</span></td></tr>
                     <tr><td>x1 Weekly outreach to clubs &amp; pages</td><td><span class="no">&mdash;</span></td><td><span class="yes">&#10003;</span></td><td class="vs-td-nbrh"><span class="yes">&#10003;</span></td></tr>
                     <tr><td>x1 Weekly outreach to neighbours</td><td><span class="no">&mdash;</span></td><td><span class="yes">&#10003;</span></td><td class="vs-td-nbrh"><span class="yes">&#10003;</span></td></tr>
+                    <tr><td>Outreach to businesses &amp; corporate bodies<span class="compare-note">Corporate wellness &amp; partnership opportunities</span></td><td><span class="no">&mdash;</span></td><td><span class="no">&mdash;</span></td><td class="vs-td-nbrh"><span class="soon-badge">Coming Soon</span></td></tr>
 
                     <!-- Support -->
                     <tr class="cat-row"><td colspan="4"><span class="cat-label">Support &amp; Guidance</span></td></tr>
@@ -695,7 +645,7 @@
 
                     <!-- Perks -->
                     <tr class="cat-row"><td colspan="4"><span class="cat-label">Perks &amp; Extras</span></td></tr>
-                    <tr><td>Discount on À La Carte add-ons</td><td><span class="no">&mdash;</span></td><td><span class="discount-badge">10% off</span></td><td class="vs-td-nbrh"><span class="discount-badge" style="color:var(--accent);">20% off</span></td></tr>
+                    <tr><td>Discount on &Agrave; La Carte add-ons</td><td><span class="no">&mdash;</span></td><td><span class="discount-badge">10% off</span></td><td class="vs-td-nbrh"><span class="discount-badge" style="color:var(--accent);">20% off</span></td></tr>
                     <tr><td>Club Store Collaborations</td><td><span class="no">&mdash;</span></td><td><span class="no">&mdash;</span></td><td class="vs-td-nbrh"><span class="yes">&#10003;</span></td></tr>
                     <tr><td>Influencer Marketing</td><td><span class="no">&mdash;</span></td><td><span class="no">&mdash;</span></td><td class="vs-td-nbrh"><span class="soon-badge">Coming Soon</span></td></tr>
                     <tr><td>Revenue Share</td><td><span class="no">&mdash;</span></td><td><span class="no">&mdash;</span></td><td class="vs-td-nbrh"><span class="soon-badge">Coming Soon</span></td></tr>
@@ -709,9 +659,9 @@
 
             <div class="tier-summary-card">
                 <span class="ts-name">Starter</span>
-                <span class="ts-price">Free &middot; + &pound;2 per booking</span>
+                <span class="ts-price">&pound;20 / month &middot; + &pound;2 per booking</span>
                 <span class="ts-ideal-label">This is for you if&hellip;</span>
-                <p class="ts-desc">You want to try The NBRH without any monthly commitment. You&rsquo;re curious whether the platform can bring players to your sessions — and you want to find out before spending anything. No fee, no contract. Just list your sessions, get your Club Hub page live, and see what happens.</p>
+                <p class="ts-desc">You want to get onto the platform at a low monthly cost. At &pound;20/month you get your sessions listed, your Club Hub page live, and bookings coming in — without marketing overhead or a long-term contract beyond the initial pilot. Pay-as-you-go bookings at &pound;2 keep things simple while you find your feet.</p>
                 <a href="https://www.thenbrh.co.uk/starter-sign-up" class="ts-cta">Get Started &mdash; Starter &rarr;</a>
             </div>
 
@@ -737,7 +687,6 @@
         </div>
     </div>
 </div>
-</div><!-- /collapsible-section#plans -->
 
 
 <!-- ═══════════════════════════ OUTCOMES ═══════════════════════════ -->
@@ -757,13 +706,11 @@
         <div class="collapsible-body-inner">
             <div class="collapsible-content">
     <div class="wrap">
-
         <div class="section-head">
             <span class="eyebrow">What to Expect</span>
             <h2>Here&rsquo;s what joining The NBRH looks like.</h2>
             <p class="sub">We won&rsquo;t promise you the world. But here&rsquo;s what we&rsquo;re confident about — and what we&rsquo;re accountable to delivering.</p>
         </div>
-
         <div style="display:flex; justify-content:center;">
         <ul class="simple-list">
             <li>You&rsquo;ll save time &mdash; bookings, content, admin, outreach all handled</li>
@@ -774,9 +721,7 @@
             <li>A foundation to scale &mdash; tools and support that compound over time</li>
         </ul>
         </div>
-
         <p class="outcome-disclaimer">We don&rsquo;t guarantee specific numbers — but we commit to showing up, doing the work, and being honest about what&rsquo;s working.</p>
-
     </div>
             </div>
         </div>
@@ -784,179 +729,18 @@
 </div>
 
 
-<!-- ═══════════════════════════ VS COMPETITORS — hidden until data is ready ═══════════════════════════ -->
-<div style="display:none;">
-<section class="vs-section" id="vs">
-    <div class="wrap">
-
-        <div class="section-head">
-            <span class="eyebrow">How We Compare</span>
-            <h2>Why The NBRH is different.</h2>
-            <p class="sub">There are other platforms out there. Here&rsquo;s an honest look at how they compare — and why Club House offers something they don&rsquo;t.</p>
-        </div>
-
-        <div class="vs-table-wrap">
-            <table class="vs-table" role="table" aria-label="Platform comparison">
-                <thead>
-                    <tr>
-                        <th scope="col">Feature</th>
-                        <th scope="col" class="vs-th-nbrh">
-                            <span class="vs-th-name">The NBRH</span>
-                            <span class="vs-th-sub">Club House</span>
-                        </th>
-                        <th scope="col">
-                            <span class="vs-th-name">Eventbrite</span>
-                            <span class="vs-th-sub">General Events</span>
-                        </th>
-                        <th scope="col">
-                            <span class="vs-th-name">MeetUp</span>
-                            <span class="vs-th-sub">Community Groups</span>
-                        </th>
-                        <th scope="col">
-                            <span class="vs-th-name">Sportas</span>
-                            <span class="vs-th-sub">Sports Booking</span>
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr class="vs-price-row">
-                        <td>Paid plan / monthly</td>
-                        <td class="vs-td-nbrh">From £50/mo</td>
-                        <td>~£25/mo (Pro)</td>
-                        <td>~£25/mo (Organiser)</td>
-                        <td>Commission-based</td>
-                    </tr>
-                    <tr class="vs-price-row">
-                        <td>Booking commission</td>
-                        <td class="vs-td-nbrh">£2 (Starter) / £1 (Growth) / None (Club House)</td>
-                        <td>~3.5–6% + £1.79/ticket</td>
-                        <td>No built-in payments</td>
-                        <td>Commission per booking</td>
-                    </tr>
-                    <tr>
-                        <td>Sport-specific platform</td>
-                        <td class="vs-td-nbrh"><span class="vs-yes">&#10003;</span></td>
-                        <td><span class="vs-no">&mdash;</span><span class="vs-note">General events</span></td>
-                        <td><span class="vs-no">&mdash;</span><span class="vs-note">General communities</span></td>
-                        <td><span class="vs-yes">&#10003;</span></td>
-                    </tr>
-                    <tr>
-                        <td>Booking &amp; payments included</td>
-                        <td class="vs-td-nbrh"><span class="vs-yes">&#10003;</span><span class="vs-note">Via Tickts, managed for you</span></td>
-                        <td><span class="vs-yes">&#10003;</span><span class="vs-note">Self-managed</span></td>
-                        <td><span class="vs-no">&mdash;</span><span class="vs-note">No built-in payments</span></td>
-                        <td><span class="vs-yes">&#10003;</span><span class="vs-note">Self-managed</span></td>
-                    </tr>
-                    <tr>
-                        <td>Booking management (done for you)</td>
-                        <td class="vs-td-nbrh"><span class="vs-yes">&#10003;</span></td>
-                        <td><span class="vs-no">&mdash;</span></td>
-                        <td><span class="vs-no">&mdash;</span></td>
-                        <td><span class="vs-no">&mdash;</span></td>
-                    </tr>
-                    <tr>
-                        <td>Content creation &amp; social media</td>
-                        <td class="vs-td-nbrh"><span class="vs-yes">&#10003;</span><span class="vs-note">Reels, Stories, Carousels, Video</span></td>
-                        <td><span class="vs-no">&mdash;</span></td>
-                        <td><span class="vs-no">&mdash;</span></td>
-                        <td><span class="vs-no">&mdash;</span></td>
-                    </tr>
-                    <tr>
-                        <td>SEO content &amp; blog posts</td>
-                        <td class="vs-td-nbrh"><span class="vs-yes">&#10003;</span></td>
-                        <td><span class="vs-no">&mdash;</span></td>
-                        <td><span class="vs-no">&mdash;</span></td>
-                        <td><span class="vs-no">&mdash;</span></td>
-                    </tr>
-                    <tr>
-                        <td>Community outreach (done for you)</td>
-                        <td class="vs-td-nbrh"><span class="vs-yes">&#10003;</span><span class="vs-note">Groups, clubs, neighbours</span></td>
-                        <td><span class="vs-no">&mdash;</span></td>
-                        <td><span class="vs-no">&mdash;</span></td>
-                        <td><span class="vs-no">&mdash;</span></td>
-                    </tr>
-                    <tr>
-                        <td>Paid ads managed for you</td>
-                        <td class="vs-td-nbrh"><span class="vs-yes">&#10003;</span><span class="vs-note">All tiers (you pay ad spend)</span></td>
-                        <td><span class="vs-no">&mdash;</span></td>
-                        <td><span class="vs-no">&mdash;</span></td>
-                        <td><span class="vs-no">&mdash;</span></td>
-                    </tr>
-                    <tr>
-                        <td>Analytics &amp; growth reporting</td>
-                        <td class="vs-td-nbrh"><span class="vs-yes">&#10003;</span><span class="vs-note">Monthly reports + recommendations</span></td>
-                        <td>Basic only</td>
-                        <td>Basic only</td>
-                        <td>Basic only</td>
-                    </tr>
-                    <tr>
-                        <td>Growth consultancy &amp; strategy</td>
-                        <td class="vs-td-nbrh"><span class="vs-yes">&#10003;</span></td>
-                        <td><span class="vs-no">&mdash;</span></td>
-                        <td><span class="vs-no">&mdash;</span></td>
-                        <td><span class="vs-no">&mdash;</span></td>
-                    </tr>
-                    <tr>
-                        <td>Admin support (done for you)</td>
-                        <td class="vs-td-nbrh"><span class="vs-yes">&#10003;</span></td>
-                        <td><span class="vs-no">&mdash;</span></td>
-                        <td><span class="vs-no">&mdash;</span></td>
-                        <td><span class="vs-no">&mdash;</span></td>
-                    </tr>
-                    <tr>
-                        <td>Free to get started</td>
-                        <td class="vs-td-nbrh"><span class="vs-yes">&#10003;</span><span class="vs-note">Starter is free + 2-month pilot</span></td>
-                        <td><span class="vs-yes">&#10003;</span><span class="vs-note">Free for free events</span></td>
-                        <td><span class="vs-no">&mdash;</span><span class="vs-note">Paid plan required</span></td>
-                        <td><span class="vs-yes">&#10003;</span><span class="vs-note">Commission model</span></td>
-                    </tr>
-                    <tr>
-                        <td>Focused on London grassroots sport</td>
-                        <td class="vs-td-nbrh"><span class="vs-yes">&#10003;</span></td>
-                        <td><span class="vs-no">&mdash;</span></td>
-                        <td><span class="vs-no">&mdash;</span></td>
-                        <td>Partial</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
-        <div style="margin-top:1.5rem;padding:1.25rem 1.5rem;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--r-lg);font-size:0.875rem;color:var(--text-muted);line-height:1.75;">
-            <strong style="color:var(--text);">The bottom line:</strong> Eventbrite, MeetUp, and Sportas are tools. You still have to do the marketing, the outreach, the admin, and the strategy yourself. <strong style="color:var(--text);">Club House is a service.</strong> We do it for you — or alongside you — at a price that&rsquo;s a fraction of what a marketing agency would charge.
-            <br><small style="color:var(--text-faint);font-style:italic;margin-top:0.5rem;display:block;">Platform pricing and features are approximate as of 2025 and subject to change. Club booking commission structures vary; check each platform for current rates.</small>
-        </div>
-
-    </div>
-</section>
-</div><!-- /hidden vs section -->
-
-
-<!-- ═══════════════════════════ TESTIMONIALS (hidden — infrastructure preserved) ═══════════════════════════ -->
+<!-- ═══════════════════════════ TESTIMONIALS (hidden) ═══════════════════════════ -->
 <section class="testimonials-section" aria-hidden="true">
     <div class="wrap">
         <div class="section-head">
             <span class="eyebrow">What clubs are saying</span>
             <h2>Built for people who run sport.</h2>
         </div>
-        <div style="display:grid; grid-template-columns: repeat(3,1fr); gap:1.25rem;">
-            <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--r);padding:1.4rem;">
-                <p style="font-size:0.9rem;color:var(--text-muted);font-style:italic;">Before The NBRH, filling sessions meant spamming WhatsApp groups and hoping for the best. Now our Thursday session runs itself &mdash; bookings come in, players show up, and I actually get to focus on coaching.</p>
-                <p style="font-size:0.825rem;font-weight:500;color:var(--text);margin-top:1rem;">Marcus O. &mdash; Kickerbout, Mitcham</p>
-            </div>
-            <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--r);padding:1.4rem;">
-                <p style="font-size:0.9rem;color:var(--text-muted);font-style:italic;">The onboarding was quick and the team handled everything. We had a Club House page, a booking system, and our first Reel live within two weeks. The sessions have been fuller ever since.</p>
-                <p style="font-size:0.825rem;font-weight:500;color:var(--text);margin-top:1rem;">Toyin A. &mdash; OT Basketball, South London</p>
-            </div>
-            <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--r);padding:1.4rem;">
-                <p style="font-size:0.9rem;color:var(--text-muted);font-style:italic;">I&rsquo;d been trying to grow the club on Instagram for a year with no real traction. The Social Proof ad shifted that. People started recognising us. The monthly report helps me understand what&rsquo;s actually working.</p>
-                <p style="font-size:0.825rem;font-weight:500;color:var(--text);margin-top:1rem;">Priya K. &mdash; Larm Fitness, Running &amp; Conditioning</p>
-            </div>
-        </div>
     </div>
 </section>
 
 
-<!-- ═══════════════════════════ HOW IT WORKS (collapsible) ═══════════════════════════ -->
+<!-- ═══════════════════════════ HOW IT WORKS ═══════════════════════════ -->
 <div class="divider"></div>
 <div class="collapsible-section reveal open" id="how-it-works">
     <button class="collapsible-header" aria-expanded="true" data-target="how-it-works-body">
@@ -1004,7 +788,7 @@
         <div class="collapsible-header-left">
             <span class="collapsible-header-icon">&#128269;</span>
             <div>
-                <div class="collapsible-header-title">À La Carte Services</div>
+                <div class="collapsible-header-title">&Agrave; La Carte Services</div>
                 <div class="collapsible-header-sub">Specific help, your terms — no subscription needed</div>
             </div>
         </div>
@@ -1036,31 +820,6 @@
                                 </div>
                                 <div class="svc-saving">Club House members save <strong>&pound;25</strong> (50% off)</div>
                                 <a href="https://www.thenbrh.co.uk/services-page/social-media-package" class="svc-book-btn">Book this Service &rarr;</a>
-                            </div>
-                        </div></div></div>
-                    </div>
-                    <!-- League -->
-                    <div class="svc-card">
-                        <button class="svc-trigger" aria-expanded="false">
-                            <div class="svc-trigger-left"><span class="svc-trigger-icon">&#127942;</span><div class="svc-trigger-text"><span class="svc-trigger-name">League</span><span class="svc-trigger-desc">Full-service league infrastructure, built and managed for the season</span></div></div>
-                            <div class="svc-trigger-right"><span class="svc-price-pill">&pound;500</span><span class="svc-chevron">&#9660;</span></div>
-                        </button>
-                        <div class="svc-body"><div class="svc-body-inner"><div class="svc-body-content">
-                            <div class="svc-includes"><span class="svc-includes-label">What&rsquo;s Included</span><ul>
-                                <li>Dynamic league table updated after every round</li>
-                                <li>Full fixture list with results, dates, and venues</li>
-                                <li>Individual club and team profile pages</li>
-                                <li>Outreach to recruit new players and teams</li>
-                                <li>Season-long management, marketing, and reporting</li>
-                            </ul></div>
-                            <div class="svc-pricing">
-                                <div class="svc-price-row">
-                                    <div class="svc-price-cell"><span class="svc-price-cell-label">Full Price</span><span class="svc-price-cell-value">&pound;500 / season</span></div>
-                                    <div class="svc-price-divider"></div>
-                                    <div class="svc-price-cell ch-price"><span class="svc-price-cell-label">Club House Price</span><span class="svc-price-cell-value">&pound;350 / season</span></div>
-                                </div>
-                                <div class="svc-saving">Club House members save <strong>&pound;150</strong> (30% off). Monthly instalments available.</div>
-                                <a href="https://www.thenbrh.co.uk/services-page/league-package" class="svc-book-btn">Book this Service &rarr;</a>
                             </div>
                         </div></div></div>
                     </div>
@@ -1231,7 +990,7 @@
                 <div class="faq-list">
                     <div class="faq-item">
                         <button class="faq-trigger" aria-expanded="false"><span class="faq-question">What&rsquo;s the difference between the three tiers?</span><span class="faq-chevron">&#9660;</span></button>
-                        <div class="faq-body"><div class="faq-body-inner"><div class="faq-answer">Starter is free with a £2-per-booking fee — it&rsquo;s for clubs that want to try the platform without any monthly commitment. Growth is £50/month (£1/booking) and adds a full content and outreach engine on top. Club House is £125/month with zero booking fees and includes everything — in-person video, a dedicated Concierge, AI research, and full platform visibility. The comparison table above breaks it all down side by side.</div></div></div>
+                        <div class="faq-body"><div class="faq-body-inner"><div class="faq-answer">Starter is &pound;20/month with a &pound;2-per-booking fee — it&rsquo;s for clubs that want to get on the platform at a low entry cost without heavy marketing overhead. Growth is &pound;50/month (&pound;1/booking) and adds a full content and outreach engine on top. Club House is &pound;125/month with zero booking fees and includes everything — in-person video, a dedicated Concierge, AI research, and full platform visibility. The comparison table above breaks it all down side by side.</div></div></div>
                     </div>
                     <div class="faq-item">
                         <button class="faq-trigger" aria-expanded="false"><span class="faq-question">What&rsquo;s the free pilot and when does it start?</span><span class="faq-chevron">&#9660;</span></button>
@@ -1271,7 +1030,7 @@
 <div class="cta-band reveal">
     <div class="wrap">
         <h2>Ready to grow your club?</h2>
-        <p>Start free on Starter, or jump straight into Growth or Club House. We offer a free 2-month pilot so you can see what the platform can do before committing to anything.</p>
+        <p>Start on Starter, or jump straight into Growth or Club House. We offer a free 2-month pilot so you can see what the platform can do before committing to anything.</p>
         <a href="mailto:thenbhr@gmail.com" class="cta-btn">Let&rsquo;s Talk &rarr;</a>
     </div>
 </div>
@@ -1319,18 +1078,6 @@
     }, { threshold: 0.04, rootMargin: '0px 0px -5% 0px' });
     reveals.forEach(function (el) { ro.observe(el); });
 
-    // Tier selector removed — tier-details replaced with static summary cards
-
-    // ── Offering item accordions ──
-    document.querySelectorAll('.offering-trigger').forEach(function (trigger) {
-        trigger.addEventListener('click', function () {
-            var item = trigger.closest('.offering-item');
-            var isOpen = item.classList.contains('open');
-            item.classList.toggle('open', !isOpen);
-            trigger.setAttribute('aria-expanded', String(!isOpen));
-        });
-    });
-
     // ── À La Carte accordions ──
     document.querySelectorAll('.svc-trigger').forEach(function (trigger) {
         trigger.addEventListener('click', function () {
@@ -1350,7 +1097,6 @@
             header.setAttribute('aria-expanded', String(!isOpen));
         });
     });
-    // Sections open by default (already have .open class via HTML; sync aria)
     document.querySelectorAll('.collapsible-section.open .collapsible-header').forEach(function (h) {
         h.setAttribute('aria-expanded', 'true');
     });
