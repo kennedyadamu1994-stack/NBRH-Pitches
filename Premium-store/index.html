@@ -139,9 +139,12 @@
         /* ── WHAT — Plans ── */
         /* ── Comparison Table ── */
         .compare-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: var(--r-lg); margin-bottom: 2.5rem; -webkit-overflow-scrolling: touch; position: relative; }
-        /* Mobile scroll hint */
         @media (max-width: 767px) {
-            .compare-wrap::after { content: ''; position: absolute; top: 0; right: 0; bottom: 0; width: 2.5rem; background: linear-gradient(to right, transparent, rgba(27,27,27,0.85)); pointer-events: none; border-radius: 0 var(--r-lg) var(--r-lg) 0; z-index: 2; }
+            .compare-wrap {
+                margin-left: -1.5rem; margin-right: -1.5rem;
+                border-left: none; border-right: none; border-radius: 0;
+                overflow-x: visible;
+            }
         }
         .compare-tbl { width: 100%; border-collapse: collapse; min-width: 680px; }
         .compare-tbl thead tr { border-bottom: 1px solid var(--border); }
@@ -166,36 +169,29 @@
         .compare-note { font-size: 0.72rem; color: var(--text-faint); font-style: italic; display: block; margin-top: 0.1rem; }
         .discount-badge { display: inline-block; font-size: 0.72rem; color: var(--accent); font-weight: 500; }
 
-        /* Mobile sticky first column */
+        /* ── Mobile table: proportional columns, no scroll ── */
         @media (max-width: 767px) {
+            .compare-tbl { min-width: unset; width: 100%; table-layout: fixed; }
             .compare-tbl th:first-child,
-            .compare-tbl td:first-child {
-                position: sticky;
-                left: 0;
-                z-index: 1;
-                background: var(--bg-subtle);
-                min-width: 140px;
-                max-width: 160px;
-                white-space: normal;
-                box-shadow: 2px 0 6px rgba(0,0,0,0.3);
-            }
-            .compare-tbl .cat-row td:first-child { background: var(--bg-subtle); }
-            .compare-tbl .price-row td:first-child { background: var(--bg-card); }
-            .compare-tbl tbody tr:hover td:first-child { background: var(--bg-subtle); }
-            .compare-tbl th:first-child { font-size: 0.65rem; }
-            .compare-tbl td { padding: 0.65rem 0.85rem; font-size: 0.8rem; }
-            .compare-tbl th { padding: 0.9rem 0.85rem; }
+            .compare-tbl td:first-child { width: 38%; position: static; box-shadow: none; white-space: normal; word-break: break-word; }
+            .compare-tbl th:not(:first-child),
+            .compare-tbl td:not(:first-child) { width: 20.7%; }
+            .compare-tbl th { padding: 0.6rem 0.4rem; font-size: 0.62rem; }
+            .compare-tbl th:first-child { font-size: 0.58rem; letter-spacing: 0.06em; }
+            .compare-tbl td { padding: 0.55rem 0.4rem; font-size: 0.72rem; }
+            .compare-tbl td:first-child { font-size: 0.7rem; }
+            .cat-row td { padding: 0.4rem 0.4rem; }
+            .th-tier-name { font-size: 0.78rem; }
+            .th-tier-price { font-size: 0.58rem; margin-top: 0.1rem; }
+            .yes { font-size: 0.85rem; }
+            .soon-badge { font-size: 0.52rem; padding: 0.08rem 0.35rem; margin-left: 0; display: block; margin-top: 0.2rem; }
+            .compare-note { font-size: 0.6rem; }
+            .discount-badge { font-size: 0.62rem; }
+            .price-row td:nth-child(4) { font-size: 0.78rem; }
         }
 
-        /* Mobile scroll label */
+        /* Hide scroll hint — no longer needed */
         .compare-scroll-hint { display: none; }
-        @media (max-width: 767px) {
-            .compare-scroll-hint {
-                display: flex; align-items: center; gap: 0.4rem;
-                font-size: 0.72rem; color: var(--text-faint); font-style: italic;
-                margin-bottom: 0.5rem; padding-left: 0.25rem;
-            }
-        }
 
         /* ── Tier summary cards ── */
         .tier-summary-grid { display: flex; gap: 1.25rem; overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; padding-top: 0.75rem; padding-bottom: 1.25rem; padding-left: 1.5rem; padding-right: 1.5rem; margin-left: -1.5rem; margin-right: -1.5rem; margin-top: 1.25rem; cursor: grab; }
