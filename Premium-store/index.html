@@ -232,9 +232,8 @@
         .collapsible-header-sub { font-size: 0.8125rem; color: var(--text-faint); margin-top: 0.15rem; }
         .collapsible-chevron { font-size: 0.8rem; color: var(--text-faint); transition: transform 0.28s ease, color 0.2s; flex-shrink: 0; }
         .collapsible-section.open .collapsible-chevron { transform: rotate(180deg); color: var(--accent); }
-        .collapsible-body { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 0.35s ease; }
-        .collapsible-section.open .collapsible-body { grid-template-rows: 1fr; }
-        .collapsible-body-inner { overflow: hidden; }
+        .collapsible-body { overflow: hidden; height: 0; transition: height 0.35s ease; }
+        .collapsible-body-inner { }
         .collapsible-content { padding: 0 1.5rem 2.5rem; }
 
         /* ── How It Works steps ── */
@@ -1085,16 +1084,43 @@
     });
 
     // ── Collapsible sections ──
+    // Init: sections starting open get height:auto so their content is visible
+    document.querySelectorAll('.collapsible-section.open').forEach(function (section) {
+        var header = section.querySelector('.collapsible-header');
+        var body = document.getElementById(header.getAttribute('data-target'));
+        if (body) body.style.height = 'auto';
+        header.setAttribute('aria-expanded', 'true');
+    });
+
     document.querySelectorAll('.collapsible-header').forEach(function (header) {
         header.addEventListener('click', function () {
             var section = header.closest('.collapsible-section');
+            var body = document.getElementById(header.getAttribute('data-target'));
+            if (!body) return;
             var isOpen = section.classList.contains('open');
-            section.classList.toggle('open', !isOpen);
+
             header.setAttribute('aria-expanded', String(!isOpen));
+
+            if (isOpen) {
+                // Snap from auto to explicit px, then animate to 0
+                body.style.height = body.scrollHeight + 'px';
+                section.classList.remove('open');
+                requestAnimationFrame(function () {
+                    requestAnimationFrame(function () {
+                        body.style.height = '0';
+                    });
+                });
+            } else {
+                // Animate to content height, then release to auto
+                section.classList.add('open');
+                body.style.height = body.scrollHeight + 'px';
+                function onEnd() {
+                    body.style.height = 'auto';
+                    body.removeEventListener('transitionend', onEnd);
+                }
+                body.addEventListener('transitionend', onEnd);
+            }
         });
-    });
-    document.querySelectorAll('.collapsible-section.open .collapsible-header').forEach(function (h) {
-        h.setAttribute('aria-expanded', 'true');
     });
 
     // ── FAQ accordion (one open at a time) ──
