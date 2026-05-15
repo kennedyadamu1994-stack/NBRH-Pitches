@@ -30,6 +30,8 @@
             --max: 1080px;
             --r: 4px;
             --r-lg: 8px;
+            /* Noise SVG — reused across sections */
+            --noise: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.78' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)'/%3E%3C/svg%3E");
         }
         @media (prefers-reduced-motion: reduce) {
             *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
@@ -47,8 +49,32 @@
         .nav-brand img { height: 30px; width: auto; display: block; }
         .nav-links { display: flex; gap: 1.5rem; list-style: none; overflow-x: auto; }
         .nav-links::-webkit-scrollbar { display: none; }
-        .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 0.8125rem; white-space: nowrap; letter-spacing: 0.01em; transition: color 0.2s; }
-        .nav-links a:hover { color: var(--accent); }
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.8125rem;
+            white-space: nowrap;
+            letter-spacing: 0.01em;
+            transition: color 0.2s;
+            position: relative;
+            padding-bottom: 2px;
+        }
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -2px; left: 0; right: 0;
+            height: 2px;
+            background: var(--accent);
+            border-radius: 1px;
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.22s ease-out;
+        }
+        /* Enhancement 7: Nav scroll-spy active state */
+        .nav-links a:hover,
+        .nav-links a.active { color: var(--accent); }
+        .nav-links a.active::after,
+        .nav-links a:hover::after { transform: scaleX(1); }
 
         /* ── Layout ── */
         .wrap { max-width: var(--max); margin: 0 auto; padding: 0 1.5rem; }
@@ -60,10 +86,33 @@
         .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.55s ease-out, transform 0.55s ease-out; }
         .reveal.in { opacity: 1; transform: none; }
 
-        /* ── Type ── */
-        .eyebrow { font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.13em; color: var(--accent); margin-bottom: 0.75rem; display: block; }
+        /* ── Enhancement 5: Eyebrow with decorative accent line ── */
+        .eyebrow {
+            font-size: 0.72rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.13em;
+            color: var(--accent);
+            margin-bottom: 0.75rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.55rem;
+        }
+        .eyebrow::before {
+            content: '';
+            display: inline-block;
+            width: 18px;
+            height: 1.5px;
+            background: var(--accent);
+            border-radius: 1px;
+            flex-shrink: 0;
+        }
+
         h1, h2, h3 { font-family: var(--font-serif); font-weight: 400; }
-        h1 { font-size: clamp(2.4rem, 6vw, 3.6rem); line-height: 1.08; letter-spacing: -0.02em; }
+
+        /* Enhancement 6: Hero h1 larger, tighter */
+        h1 { font-size: clamp(2.8rem, 7.5vw, 4.8rem); line-height: 1.04; letter-spacing: -0.03em; }
+
         h2 { font-size: clamp(1.6rem, 4vw, 2.4rem); line-height: 1.15; letter-spacing: -0.015em; }
         .section-head { text-align: center; margin-bottom: 2.75rem; }
         .section-head h2 { margin-bottom: 0.5rem; }
@@ -71,28 +120,81 @@
 
         /* ── Hero ── */
         .hero { position: relative; overflow: hidden; padding: 0; }
-        .hero-bg { position: absolute; inset: 0; background: radial-gradient(ellipse 80% 55% at 50% 0%, rgba(255,27,110,0.11) 0%, transparent 70%); pointer-events: none; }
-        .hero-bg::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to bottom, transparent 50%, var(--bg) 100%); }
-        .hero-content { position: relative; z-index: 1; padding: 6rem 1.5rem 4.5rem; text-align: center; }
+        .hero-bg {
+            position: absolute; inset: 0;
+            background: radial-gradient(ellipse 80% 55% at 50% 0%, rgba(255,27,110,0.13) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        .hero-bg::after {
+            content: '';
+            position: absolute; inset: 0;
+            background: linear-gradient(to bottom, transparent 50%, var(--bg) 100%);
+        }
+
+        /* Enhancement 2: Grain texture on hero */
+        .hero-grain {
+            position: absolute; inset: 0;
+            background-image: var(--noise);
+            background-repeat: repeat;
+            background-size: 400px 400px;
+            opacity: 0.038;
+            pointer-events: none;
+            z-index: 1;
+            mix-blend-mode: screen;
+        }
+
+        .hero-content { position: relative; z-index: 2; padding: 6rem 1.5rem 4.5rem; text-align: center; }
         @media (max-width: 768px) { .hero-content { padding: 4rem 1.5rem 3rem; } }
         .store-badge { display: inline-flex; align-items: center; gap: 0.5rem; background: var(--accent-dim); border: 1px solid var(--accent-mid); border-radius: 100px; padding: 0.35rem 1rem; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin-bottom: 1.5rem; }
-        .hero h1 { margin-bottom: 1rem; max-width: 22ch; margin-left: auto; margin-right: auto; }
-        .hero .lead { font-size: clamp(1rem, 2vw, 1.15rem); color: var(--text-muted); max-width: 54ch; margin: 0 auto 2.5rem; }
+        .hero h1 { margin-bottom: 1.1rem; max-width: 18ch; margin-left: auto; margin-right: auto; }
+        .hero .lead { font-size: clamp(1rem, 2vw, 1.15rem); color: var(--text-muted); max-width: 54ch; margin: 0 auto 2.5rem; line-height: 1.75; }
         .hero-ctas { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-bottom: 3rem; }
         .btn-primary { display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.8rem 1.6rem; background: var(--accent); color: #fff; border-radius: var(--r); font-size: 0.9rem; font-weight: 500; text-decoration: none; transition: all 0.2s; border: none; cursor: pointer; font-family: var(--font-sans); }
         .btn-primary:hover { opacity: 0.88; transform: translateY(-1px); }
         .btn-ghost { display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.8rem 1.6rem; background: transparent; color: var(--text-muted); border-radius: var(--r); border: 1px solid var(--border-strong); font-size: 0.9rem; font-weight: 500; text-decoration: none; transition: all 0.2s; cursor: pointer; font-family: var(--font-sans); }
         .btn-ghost:hover { color: var(--text); border-color: var(--accent-mid); }
+
+        /* Enhancement 1: Hero stats — less SaaS-metric, more editorial */
         .hero-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; justify-items: center; padding-top: 2rem; border-top: 1px solid var(--border); }
         .hero-stat { text-align: center; }
-        .hero-stat-num { font-family: var(--font-serif); font-size: 1.7rem; color: var(--accent); display: block; line-height: 1; }
-        .hero-stat-label { font-size: 0.76rem; color: var(--text-faint); margin-top: 0.35rem; letter-spacing: 0.02em; }
-        @media (max-width: 480px) { .hero-stats { gap: 0.75rem; } .hero-stat-num { font-size: 1.35rem; } }
+        .hero-stat-num {
+            font-family: var(--font-serif);
+            font-size: clamp(1.5rem, 3.5vw, 2.1rem);
+            color: var(--accent);
+            display: block;
+            line-height: 1;
+            letter-spacing: -0.02em;
+            /* Count-up targets animate via JS */
+        }
+        .hero-stat-label { font-size: 0.76rem; color: var(--text-faint); margin-top: 0.4rem; letter-spacing: 0.02em; line-height: 1.4; }
+        @media (max-width: 480px) { .hero-stats { gap: 0.75rem; } }
 
-        /* ── Pilot Banner ── */
-        .pilot-banner { background: var(--accent-dim); border-top: 1px solid var(--accent-mid); border-bottom: 1px solid var(--accent-mid); padding: 1.1rem 1.5rem; text-align: center; }
+        /* ── Enhancement 8: Pilot Banner — full-bleed accent feel ── */
+        .pilot-banner {
+            background: linear-gradient(90deg, rgba(255,27,110,0.07) 0%, rgba(255,27,110,0.12) 50%, rgba(255,27,110,0.07) 100%);
+            border-top: 1px solid var(--accent-mid);
+            border-bottom: 1px solid var(--accent-mid);
+            padding: 1.25rem 1.5rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .pilot-banner::before {
+            content: '';
+            position: absolute;
+            top: 0; bottom: 0; left: 0;
+            width: 3px;
+            background: var(--accent);
+        }
+        .pilot-banner::after {
+            content: '';
+            position: absolute;
+            top: 0; bottom: 0; right: 0;
+            width: 3px;
+            background: var(--accent);
+        }
         .pilot-banner-inner { max-width: var(--max); margin: 0 auto; display: flex; align-items: center; justify-content: center; gap: 0.75rem; flex-wrap: wrap; }
-        .pilot-pill { background: var(--accent); color: #fff; font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; border-radius: 100px; padding: 0.2rem 0.7rem; flex-shrink: 0; }
+        .pilot-pill { background: var(--accent); color: #fff; font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; border-radius: 100px; padding: 0.22rem 0.8rem; flex-shrink: 0; box-shadow: 0 2px 12px rgba(255,27,110,0.4); }
         .pilot-banner-text { font-size: 0.9rem; color: var(--text-muted); }
         .pilot-banner-text strong { color: var(--text); font-weight: 500; }
 
@@ -104,9 +206,23 @@
         .pain-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-bottom: 2.5rem; }
         @media (max-width: 900px) { .pain-grid { grid-template-columns: repeat(2, 1fr); } }
         @media (max-width: 560px) { .pain-grid { grid-template-columns: 1fr; } }
-        .pain-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--r-lg); padding: 1.5rem; position: relative; overflow: hidden; transition: border-color 0.2s; }
-        .pain-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: var(--accent); opacity: 0.4; }
-        .pain-card:hover { border-color: var(--accent-mid); }
+
+        /* Enhancement 4: Card glow hover states */
+        .pain-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--r-lg);
+            padding: 1.5rem;
+            position: relative;
+            overflow: hidden;
+            transition: border-color 0.25s, transform 0.25s ease-out, box-shadow 0.25s;
+        }
+        .pain-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: var(--accent); opacity: 0.4; transition: opacity 0.25s; }
+        .pain-card:hover {
+            border-color: var(--accent-mid);
+            transform: translateY(-3px);
+            box-shadow: 0 0 0 1px rgba(255,27,110,0.18), 0 12px 36px rgba(255,27,110,0.12);
+        }
         .pain-card:hover::before { opacity: 1; }
         .pain-icon { font-size: 1.5rem; margin-bottom: 0.85rem; display: block; }
         .pain-card h3 { font-family: var(--font-serif); font-size: 1.05rem; margin-bottom: 0.4rem; }
@@ -121,10 +237,24 @@
         .how-grid::-webkit-scrollbar { height: 4px; }
         .how-grid::-webkit-scrollbar-track { background: var(--bg-subtle); border-radius: 100px; }
         .how-grid::-webkit-scrollbar-thumb { background: var(--accent-mid); border-radius: 100px; }
-        .how-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--r-lg); padding: 1.5rem; transition: border-color 0.2s, transform 0.2s; flex: 0 0 280px; scroll-snap-align: start; }
+
+        /* Enhancement 4 applied to how-cards too */
+        .how-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--r-lg);
+            padding: 1.5rem;
+            transition: border-color 0.25s, transform 0.25s ease-out, box-shadow 0.25s;
+            flex: 0 0 280px;
+            scroll-snap-align: start;
+        }
         @media (max-width: 768px) { .how-card { flex: 0 0 75vw; } }
         @media (max-width: 480px) { .how-card { flex: 0 0 85vw; } }
-        .how-card:hover { border-color: var(--accent-mid); transform: translateY(-2px); }
+        .how-card:hover {
+            border-color: var(--accent-mid);
+            transform: translateY(-3px);
+            box-shadow: 0 0 0 1px rgba(255,27,110,0.18), 0 12px 36px rgba(255,27,110,0.12);
+        }
         .how-card-icon { width: 40px; height: 40px; background: var(--accent-dim); border: 1px solid var(--accent-mid); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1rem; margin-bottom: 1rem; }
         .how-card h3 { font-family: var(--font-serif); font-size: 1.05rem; margin-bottom: 0.4rem; }
         .how-card p { font-size: 0.835rem; color: var(--text-muted); line-height: 1.65; }
@@ -136,8 +266,16 @@
         .how-bottom-text p { font-size: 0.875rem; color: var(--text-muted); line-height: 1.7; }
         .how-bottom-cta { flex-shrink: 0; }
 
+        /* ── Enhancement 9: Staggered card animations ── */
+        .stagger-item {
+            opacity: 0;
+            transform: translateY(16px);
+            transition: opacity 0.45s ease-out, transform 0.45s ease-out;
+        }
+        .stagger-item.card-visible { opacity: 1; transform: none; }
+
         /* ── WHAT — Plans ── */
-        /* ── Comparison Table ── */
+        /* Enhancement 3: Compare table — Club House column lift */
         .compare-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: var(--r-lg); margin-bottom: 2.5rem; -webkit-overflow-scrolling: touch; position: relative; }
         @media (max-width: 767px) {
             .compare-wrap {
@@ -151,10 +289,42 @@
         .compare-tbl th { padding: 1.1rem 1.25rem; text-align: left; background: var(--bg-subtle); }
         .compare-tbl th:first-child { color: var(--text-faint); font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.09em; }
         .compare-tbl th:not(:first-child) { text-align: center; }
+
+        /* Club House column: glowing top inset + deeper tint */
+        .compare-tbl th:nth-child(4) {
+            background: rgba(255,27,110,0.10) !important;
+            box-shadow: inset 0 3px 0 var(--accent);
+            position: relative;
+        }
+        .compare-tbl td:nth-child(4) {
+            background: rgba(255,27,110,0.05) !important;
+        }
+        .compare-tbl tbody tr:hover td:nth-child(4) {
+            background: rgba(255,27,110,0.09) !important;
+        }
+
         .th-tier-name { font-family: var(--font-serif); font-size: 1rem; font-weight: 400; color: var(--text); display: block; }
         .th-tier-price { font-size: 0.75rem; color: var(--text-muted); display: block; margin-top: 0.2rem; }
         .th-tier-highlight { color: var(--accent) !important; }
         .th-tier-highlight .th-tier-price { color: var(--accent); opacity: 0.8; }
+        .th-tier-highlight .th-tier-name { font-size: 1.05rem; }
+
+        /* Club House column "Recommended" floating badge */
+        .th-ch-wrap { position: relative; display: inline-block; }
+        .th-ch-badge {
+            display: inline-block;
+            background: var(--accent);
+            color: #fff;
+            font-family: var(--font-sans);
+            font-size: 0.58rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            border-radius: 100px;
+            padding: 0.12rem 0.55rem;
+            margin-bottom: 0.35rem;
+        }
+
         .compare-tbl td { padding: 0.75rem 1.25rem; border-bottom: 1px solid var(--border); font-size: 0.855rem; color: var(--text-muted); vertical-align: middle; }
         .compare-tbl td:not(:first-child) { text-align: center; }
         .compare-tbl tr:last-child td { border-bottom: none; }
@@ -162,14 +332,14 @@
         .cat-row td { background: var(--bg-subtle) !important; padding: 0.5rem 1.25rem; }
         .cat-label { font-size: 0.67rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-faint); }
         .price-row td { background: var(--bg-card); }
-        .price-row td:nth-child(4) { background: var(--accent-dim); color: var(--accent); font-family: var(--font-serif); font-size: 1rem; }
+        .price-row td:nth-child(4) { color: var(--accent); font-family: var(--font-serif); font-size: 1rem; }
         .yes { color: var(--accent); font-size: 1rem; }
         .no { color: var(--text-faint); }
         .soon-badge { display: inline-flex; align-items: center; font-size: 0.6rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent); background: var(--accent-dim); border: 1px solid var(--accent-mid); border-radius: 100px; padding: 0.1rem 0.45rem; white-space: nowrap; vertical-align: middle; margin-left: 0.3rem; }
         .compare-note { font-size: 0.72rem; color: var(--text-faint); font-style: italic; display: block; margin-top: 0.1rem; }
         .discount-badge { display: inline-block; font-size: 0.72rem; color: var(--accent); font-weight: 500; }
 
-        /* ── Mobile table: proportional columns, no scroll ── */
+        /* Mobile table */
         @media (max-width: 767px) {
             .compare-tbl { min-width: unset; width: 100%; table-layout: fixed; }
             .compare-tbl th:first-child,
@@ -188,9 +358,8 @@
             .compare-note { font-size: 0.6rem; }
             .discount-badge { font-size: 0.62rem; }
             .price-row td:nth-child(4) { font-size: 0.78rem; }
+            .th-ch-badge { font-size: 0.5rem; }
         }
-
-        /* Hide scroll hint — no longer needed */
         .compare-scroll-hint { display: none; }
 
         /* ── Tier summary cards ── */
@@ -199,12 +368,29 @@
         .tier-summary-grid::-webkit-scrollbar { height: 4px; }
         .tier-summary-grid::-webkit-scrollbar-track { background: var(--bg-subtle); border-radius: 100px; }
         .tier-summary-grid::-webkit-scrollbar-thumb { background: var(--accent-mid); border-radius: 100px; }
-        .tier-summary-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--r-lg); padding: 1.5rem; display: flex; flex-direction: column; gap: 0; position: relative; transition: border-color 0.2s; flex: 0 0 300px; scroll-snap-align: start; }
+        .tier-summary-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--r-lg);
+            padding: 1.5rem;
+            display: flex; flex-direction: column; gap: 0;
+            position: relative;
+            transition: border-color 0.25s, transform 0.25s ease-out, box-shadow 0.25s;
+            flex: 0 0 300px;
+            scroll-snap-align: start;
+        }
         @media (max-width: 768px) { .tier-summary-card { flex: 0 0 80vw; } }
         @media (max-width: 480px) { .tier-summary-card { flex: 0 0 88vw; } }
-        .tier-summary-card:hover { border-color: var(--accent-mid); }
+        .tier-summary-card:hover {
+            border-color: var(--accent-mid);
+            transform: translateY(-3px);
+            box-shadow: 0 0 0 1px rgba(255,27,110,0.18), 0 12px 36px rgba(255,27,110,0.1);
+        }
         .tier-summary-card.featured { border-color: var(--accent-mid); background: var(--accent-dim); }
-        .ts-badge { position: absolute; top: -10px; left: 50%; transform: translateX(-50%); background: var(--accent); color: #fff; font-size: 0.62rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.09em; border-radius: 100px; padding: 0.15rem 0.65rem; white-space: nowrap; }
+        .tier-summary-card.featured:hover {
+            box-shadow: 0 0 0 1px rgba(255,27,110,0.35), 0 16px 40px rgba(255,27,110,0.18);
+        }
+        .ts-badge { position: absolute; top: -10px; left: 50%; transform: translateX(-50%); background: var(--accent); color: #fff; font-size: 0.62rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.09em; border-radius: 100px; padding: 0.15rem 0.65rem; white-space: nowrap; box-shadow: 0 2px 12px rgba(255,27,110,0.4); }
         .ts-name { font-family: var(--font-serif); font-size: 1.25rem; margin-bottom: 0.2rem; }
         .ts-price { font-size: 0.8rem; color: var(--accent); font-weight: 500; margin-bottom: 0.85rem; padding-bottom: 0.85rem; border-bottom: 1px solid var(--border); }
         .ts-ideal-label { font-size: 0.67rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.09em; color: var(--accent); display: block; margin-bottom: 0.4rem; }
@@ -216,7 +402,18 @@
         .outcomes-section { background: var(--bg-subtle); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
         .outcomes-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
         @media (max-width: 760px) { .outcomes-grid { grid-template-columns: 1fr; } }
-        .outcome-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--r-lg); padding: 1.5rem; }
+        .outcome-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--r-lg);
+            padding: 1.5rem;
+            transition: border-color 0.25s, transform 0.25s ease-out, box-shadow 0.25s;
+        }
+        .outcome-card:hover {
+            border-color: var(--accent-mid);
+            transform: translateY(-2px);
+            box-shadow: 0 0 0 1px rgba(255,27,110,0.18), 0 10px 30px rgba(255,27,110,0.1);
+        }
         .outcome-card .oc-icon { font-size: 1.75rem; margin-bottom: 0.85rem; display: block; }
         .outcome-card h3 { font-family: var(--font-serif); font-size: 1.15rem; margin-bottom: 0.4rem; }
         .outcome-card p { font-size: 0.845rem; color: var(--text-muted); line-height: 1.7; }
@@ -320,12 +517,52 @@
         .faq-body-inner { overflow: hidden; }
         .faq-answer { padding: 0.9rem 1.25rem 1.1rem; font-size: 0.875rem; color: var(--text-muted); line-height: 1.75; border-top: 1px solid var(--border); }
 
-        /* ── CTA Band ── */
-        .cta-band { background: var(--accent); padding: 2.75rem 1.5rem; text-align: center; }
-        .cta-band h2 { color: #fff; font-size: clamp(1.4rem, 3vw, 2rem); margin-bottom: 0.6rem; }
-        .cta-band p { color: rgba(255,255,255,0.85); font-size: 0.9375rem; max-width: 48ch; margin: 0 auto 1.5rem; }
-        .cta-band .cta-btn { background: #fff; color: var(--accent); display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.8rem 1.6rem; font-size: 0.9rem; font-weight: 500; text-decoration: none; border-radius: var(--r); transition: all 0.2s; }
-        .cta-band .cta-btn:hover { background: rgba(255,255,255,0.9); transform: translateY(-1px); }
+        /* ── Enhancement 10: CTA Band — poster-level drama ── */
+        .cta-band {
+            background: var(--accent);
+            padding: 4rem 1.5rem 3.5rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        /* Noise grain over the CTA band */
+        .cta-band::before {
+            content: '';
+            position: absolute; inset: 0;
+            background-image: var(--noise);
+            background-repeat: repeat;
+            background-size: 400px 400px;
+            opacity: 0.07;
+            pointer-events: none;
+            mix-blend-mode: multiply;
+        }
+        /* Sport motif — concentric field-marking rings */
+        .cta-motif {
+            position: absolute;
+            right: -80px; top: 50%;
+            transform: translateY(-50%);
+            width: 420px; height: 420px;
+            opacity: 0.07;
+            pointer-events: none;
+        }
+        @media (max-width: 600px) {
+            .cta-motif { width: 220px; height: 220px; right: -40px; }
+        }
+        .cta-motif-left {
+            left: -80px; right: auto;
+        }
+        @media (max-width: 600px) { .cta-motif-left { display: none; } }
+
+        .cta-band-inner { position: relative; z-index: 1; }
+        .cta-band h2 {
+            color: #fff;
+            font-size: clamp(1.9rem, 5vw, 3.2rem);
+            margin-bottom: 0.7rem;
+            letter-spacing: -0.02em;
+        }
+        .cta-band p { color: rgba(255,255,255,0.85); font-size: 0.9375rem; max-width: 48ch; margin: 0 auto 1.75rem; line-height: 1.7; }
+        .cta-band .cta-btn { background: #fff; color: var(--accent); display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.85rem 1.8rem; font-size: 0.9rem; font-weight: 600; text-decoration: none; border-radius: var(--r); transition: all 0.2s; box-shadow: 0 4px 20px rgba(0,0,0,0.2); }
+        .cta-band .cta-btn:hover { background: rgba(255,255,255,0.92); transform: translateY(-2px); box-shadow: 0 8px 28px rgba(0,0,0,0.25); }
 
         /* ── Footer ── */
         footer { border-top: 1px solid var(--border); }
@@ -343,29 +580,7 @@
 
         /* ── Testimonials (hidden) ── */
         .testimonials-section { display: none; }
-
-        /* ── VS table (hidden) ── */
         .vs-section {}
-        .vs-table-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: var(--r-lg); }
-        .vs-table { width: 100%; border-collapse: collapse; min-width: 700px; }
-        .vs-table thead tr { border-bottom: 1px solid var(--border); }
-        .vs-table th { padding: 1.1rem 1.25rem; text-align: center; background: var(--bg-subtle); }
-        .vs-table th:first-child { text-align: left; color: var(--text-faint); font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.09em; }
-        .vs-th-nbrh { background: var(--accent-dim) !important; }
-        .vs-th-name { font-family: var(--font-serif); font-size: 0.95rem; font-weight: 400; color: var(--text); display: block; }
-        .vs-th-sub { font-size: 0.72rem; color: var(--text-faint); display: block; margin-top: 0.15rem; }
-        .vs-th-nbrh .vs-th-name { color: var(--accent); }
-        .vs-table td { padding: 0.75rem 1.25rem; border-bottom: 1px solid var(--border); font-size: 0.855rem; color: var(--text-muted); text-align: center; vertical-align: middle; }
-        .vs-table td:first-child { text-align: left; color: var(--text-muted); }
-        .vs-table tr:last-child td { border-bottom: none; }
-        .vs-table tbody tr:hover td { background: rgba(255,255,255,0.02); }
-        .vs-yes { color: var(--accent); font-size: 1rem; }
-        .vs-no { color: var(--text-faint); }
-        .vs-td-nbrh { background: var(--accent-dim) !important; }
-        .vs-td-nbrh .vs-yes { color: var(--accent); }
-        .vs-table .vs-price-row td { background: var(--bg-card); font-weight: 500; }
-        .vs-table .vs-price-row .vs-td-nbrh { background: var(--accent-dim) !important; color: var(--accent); font-family: var(--font-serif); }
-        .vs-note { font-size: 0.72rem; color: var(--text-faint); font-style: italic; display: block; margin-top: 0.15rem; }
 
         @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
     </style>
@@ -380,11 +595,11 @@
             <img src="https://images.squarespace-cdn.com/content/6718416feaa24175e29324d4/9d6e6464-e1e5-4dde-9ae0-03df420cbd77/NBRH+Logo.png?content-type=image%2Fpng" alt="The NBRH">
         </a>
         <ul class="nav-links">
-            <li><a href="#why">Why Club House</a></li>
-            <li><a href="#plans">Plans</a></li>
-            <li><a href="#outcomes">What to Expect</a></li>
-            <li><a href="#how-it-works">How It Works</a></li>
-            <li><a href="#faq">FAQ</a></li>
+            <li><a href="#why" data-nav="why">Why Club House</a></li>
+            <li><a href="#plans" data-nav="plans">Plans</a></li>
+            <li><a href="#outcomes" data-nav="outcomes">What to Expect</a></li>
+            <li><a href="#how-it-works" data-nav="how-it-works">How It Works</a></li>
+            <li><a href="#faq" data-nav="faq">FAQ</a></li>
         </ul>
     </div>
 </nav>
@@ -392,26 +607,29 @@
 <!-- ═══════════════════════════ HERO ═══════════════════════════ -->
 <section class="hero reveal">
     <div class="hero-bg"></div>
+    <!-- Enhancement 2: grain texture -->
+    <div class="hero-grain"></div>
     <div class="hero-content">
         <div class="wrap">
             <div class="store-badge">&#127968; Club House &mdash; Plans &amp; Pricing</div>
             <h1>Your club deserves to grow.</h1>
-            <p class="lead">The NBRH Club House gives grassroots sports clubs the expertise, tools, and marketing power to grow — without the agency price tag. We&rsquo;ve lived it. We know what it takes.</p>
+            <p class="lead">The NBRH Club House gives grassroots sports clubs the expertise, tools, and marketing power to grow &mdash; without the agency price tag. We&rsquo;ve lived it. We know what it takes.</p>
             <div class="hero-ctas">
                 <a href="#plans" class="btn-primary">See Plans &rarr;</a>
                 <a href="#why" class="btn-ghost">Why Club House?</a>
             </div>
+            <!-- Enhancement 1: count-up targets marked with data-to -->
             <div class="hero-stats">
                 <div class="hero-stat">
-                    <span class="hero-stat-num">&pound;20/mo</span>
+                    <span class="hero-stat-num">&pound;<span class="count-target" data-to="20" data-prefix="£" data-suffix="/mo">20</span>/mo</span>
                     <span class="hero-stat-label">Starter tier + &pound;2/booking</span>
                 </div>
                 <div class="hero-stat">
-                    <span class="hero-stat-num">3</span>
-                    <span class="hero-stat-label">tiers — from Starter to fully managed</span>
+                    <span class="hero-stat-num"><span class="count-target" data-to="3">3</span></span>
+                    <span class="hero-stat-label">tiers &mdash; from Starter to fully managed</span>
                 </div>
                 <div class="hero-stat">
-                    <span class="hero-stat-num">1</span>
+                    <span class="hero-stat-num"><span class="count-target" data-to="1">1</span></span>
                     <span class="hero-stat-label">platform built for grassroots sport</span>
                 </div>
             </div>
@@ -419,11 +637,11 @@
     </div>
 </section>
 
-<!-- Pilot Banner -->
+<!-- Enhancement 8: Pilot Banner -->
 <div class="pilot-banner reveal">
     <div class="pilot-banner-inner">
         <span class="pilot-pill">Free Pilot</span>
-        <p class="pilot-banner-text"><strong>Try Club House free for 2 months.</strong> We offer a pilot so you can see the platform working before you commit to anything. The pilot begins when both parties are ready — no pressure, no arbitrary start dates.</p>
+        <p class="pilot-banner-text"><strong>Try Club House free for 2 months.</strong> We offer a pilot so you can see the platform working before you commit to anything. The pilot begins when both parties are ready &mdash; no pressure, no arbitrary start dates.</p>
     </div>
 </div>
 
@@ -447,7 +665,7 @@
         <div class="pain-intro">
             <span class="eyebrow">The Why</span>
             <h2>Running a club is harder than it looks.</h2>
-            <p>You got into sport because you love it. But somewhere between coaching sessions, chasing payments, posting on Instagram and figuring out how to fill your next session — it stopped being fun. Sound familiar?</p>
+            <p>You got into sport because you love it. But somewhere between coaching sessions, chasing payments, posting on Instagram and figuring out how to fill your next session &mdash; it stopped being fun. Sound familiar?</p>
         </div>
         <div style="display:flex; justify-content:center;">
         <ul class="simple-list">
@@ -459,7 +677,7 @@
             <li>The admin never stops</li>
         </ul>
         </div>
-        <p style="font-size:0.9rem;color:var(--text-faint);margin-top:1.25rem;font-style:italic;">We know this because we&rsquo;ve lived it. Club House is what we wish had existed.</p>
+        <p style="font-size:0.9rem;color:var(--text-faint);margin-top:1.25rem;font-style:italic;text-align:center;">We know this because we&rsquo;ve lived it. Club House is what we wish had existed.</p>
     </div>
             </div>
         </div>
@@ -468,9 +686,9 @@
 
 
 <div class="divider"></div>
-<!-- ═══════════════════════════ HOW ═══════════════════════════ -->
-<div class="collapsible-section reveal open" id="how">
-    <button class="collapsible-header" aria-expanded="true" data-target="how-body">
+<!-- ═══════════════════════ HOW — collapsed by default ═══════════════════ -->
+<div class="collapsible-section reveal" id="how">
+    <button class="collapsible-header" aria-expanded="false" data-target="how-body">
         <div class="collapsible-header-left">
             <span class="collapsible-header-icon">&#128161;</span>
             <div>
@@ -489,33 +707,34 @@
             <h2>Here&rsquo;s what we do about it.</h2>
             <p class="sub">Club House is designed to give you back your time, amplify your reach, and provide the infrastructure to grow sustainably.</p>
         </div>
-        <div class="how-grid">
-            <div class="how-card">
+        <!-- Enhancement 9: stagger-item class on cards -->
+        <div class="how-grid" id="how-grid">
+            <div class="how-card stagger-item">
                 <div class="how-card-icon">&#128247;</div>
                 <h3>Expert-led marketing</h3>
-                <p>Organic content, paid ads, SEO blog posts, LinkedIn articles, and in-person video — all created, managed and delivered by us. No briefings, no back-and-forth. We know your sessions, we know your audience.</p>
+                <p>Organic content, paid ads, SEO blog posts, LinkedIn articles, and in-person video &mdash; all created, managed and delivered by us. No briefings, no back-and-forth. We know your sessions, we know your audience.</p>
             </div>
-            <div class="how-card">
+            <div class="how-card stagger-item">
                 <div class="how-card-icon">&#127915;</div>
                 <h3>Booking infrastructure</h3>
                 <p>Your sessions are live on Tickts with a fully managed booking page. Events created, capacity managed, payments processed, waitlists handled. You just show up and coach.</p>
             </div>
-            <div class="how-card">
+            <div class="how-card stagger-item">
                 <div class="how-card-icon">&#128226;</div>
                 <h3>Community outreach</h3>
-                <p>We reach out to Facebook Groups, local clubs, neighbourhoods, and relevant communities on your behalf — every week. Getting your sessions in front of the right people without you lifting a finger.</p>
+                <p>We reach out to Facebook Groups, local clubs, neighbourhoods, and relevant communities on your behalf &mdash; every week. Getting your sessions in front of the right people without you lifting a finger.</p>
             </div>
-            <div class="how-card">
+            <div class="how-card stagger-item">
                 <div class="how-card-icon">&#128201;</div>
                 <h3>Growth intelligence</h3>
-                <p>Monthly analytics reports, traffic tracking, booking data, and AI-backed market research. You get clear insights and recommendations — not just numbers on a spreadsheet.</p>
+                <p>Monthly analytics reports, traffic tracking, booking data, and AI-backed market research. You get clear insights and recommendations &mdash; not just numbers on a spreadsheet.</p>
             </div>
-            <div class="how-card">
+            <div class="how-card stagger-item">
                 <div class="how-card-icon">&#128172;</div>
                 <h3>Consultative support</h3>
-                <p>Branding, session formats, content direction, growth strategy — we&rsquo;re a thinking partner, not just a tool. Available when you need guidance, not just when things go wrong.</p>
+                <p>Branding, session formats, content direction, growth strategy &mdash; we&rsquo;re a thinking partner, not just a tool. Available when you need guidance, not just when things go wrong.</p>
             </div>
-            <div class="how-card">
+            <div class="how-card stagger-item">
                 <div class="how-card-icon">&#128640;</div>
                 <h3>Tools to scale and earn</h3>
                 <p>Member subscriptions, a people-finder tool, Club Store, and more. As The NBRH grows, so do your tools. Everything is built to compound over time.</p>
@@ -536,7 +755,7 @@
             <span class="collapsible-header-icon">&#127968;</span>
             <div>
                 <div class="collapsible-header-title">Plans &amp; Pricing</div>
-                <div class="collapsible-header-sub">Three tiers — from Starter to fully managed</div>
+                <div class="collapsible-header-sub">Three tiers &mdash; from Starter to fully managed</div>
             </div>
         </div>
         <span class="collapsible-chevron">&#9660;</span>
@@ -552,10 +771,9 @@
             <p class="sub">Start on Starter, grow with support, or go fully managed. Every plan gets you on the platform and into the system.</p>
         </div>
 
-        <!-- Mobile scroll hint -->
         <p class="compare-scroll-hint">&#8594; Scroll to compare all tiers</p>
 
-        <!-- Comparison Table -->
+        <!-- Enhancement 3: Compare table with Club House column lift -->
         <div class="compare-wrap">
             <table class="compare-tbl" role="table" aria-label="Plan feature comparison">
                 <thead>
@@ -570,97 +788,91 @@
                             <span class="th-tier-price">&pound;50/mo &middot; &pound;1/booking</span>
                         </th>
                         <th scope="col" class="th-tier-highlight">
-                            <span class="th-tier-name">Club House</span>
-                            <span class="th-tier-price">&pound;125/mo &middot; No fees</span>
+                            <div class="th-ch-wrap">
+                                <span class="th-ch-badge">Recommended</span>
+                                <span class="th-tier-name">Club House</span>
+                                <span class="th-tier-price">&pound;125/mo &middot; No fees</span>
+                            </div>
                         </th>
                     </tr>
                 </thead>
                 <tbody>
-                    <!-- Pricing -->
                     <tr class="cat-row"><td colspan="4"><span class="cat-label">Pricing</span></td></tr>
                     <tr class="price-row">
                         <td>Monthly fee</td>
                         <td>&pound;20 / month</td>
                         <td>&pound;50 / month</td>
-                        <td class="vs-td-nbrh">&pound;125 / month</td>
+                        <td>&pound;125 / month</td>
                     </tr>
                     <tr class="price-row">
                         <td>Booking fee</td>
                         <td>&pound;2 per booking</td>
                         <td>&pound;1 per booking</td>
-                        <td class="vs-td-nbrh" style="color:var(--accent);font-family:var(--font-serif);">None &#10003;</td>
+                        <td style="color:var(--accent);font-family:var(--font-serif);">None &#10003;</td>
                     </tr>
 
-                    <!-- Platform -->
                     <tr class="cat-row"><td colspan="4"><span class="cat-label">Platform Presence</span></td></tr>
-                    <tr><td>Unlimited sessions on The NBRH</td><td><span class="yes">&#10003;</span></td><td><span class="yes">&#10003;</span></td><td class="vs-td-nbrh"><span class="yes">&#10003;</span></td></tr>
-                    <tr><td>Club Hub page</td><td><span class="yes">&#10003;</span></td><td><span class="yes">&#10003;</span></td><td class="vs-td-nbrh"><span class="yes">&#10003;</span></td></tr>
-                    <tr><td>Club House Dashboard</td><td><span class="yes">&#10003;</span></td><td><span class="yes">&#10003;</span></td><td class="vs-td-nbrh"><span class="yes">&#10003;</span></td></tr>
-                    <tr><td>Club House Engine (search tool)</td><td><span class="yes">&#10003;</span></td><td><span class="yes">&#10003;</span></td><td class="vs-td-nbrh"><span class="yes">&#10003;</span></td></tr>
-                    <tr><td>Sponsored placement on The NBRH</td><td><span class="no">&mdash;</span></td><td><span class="yes">&#10003;</span></td><td class="vs-td-nbrh"><span class="yes">&#10003;</span></td></tr>
-                    <tr><td>Instagram highlights &amp; link placement</td><td><span class="no">&mdash;</span></td><td><span class="no">&mdash;</span></td><td class="vs-td-nbrh"><span class="yes">&#10003;</span></td></tr>
+                    <tr><td>Unlimited sessions on The NBRH</td><td><span class="yes">&#10003;</span></td><td><span class="yes">&#10003;</span></td><td><span class="yes">&#10003;</span></td></tr>
+                    <tr><td>Club Hub page</td><td><span class="yes">&#10003;</span></td><td><span class="yes">&#10003;</span></td><td><span class="yes">&#10003;</span></td></tr>
+                    <tr><td>Club House Dashboard</td><td><span class="yes">&#10003;</span></td><td><span class="yes">&#10003;</span></td><td><span class="yes">&#10003;</span></td></tr>
+                    <tr><td>Club House Engine (search tool)</td><td><span class="yes">&#10003;</span></td><td><span class="yes">&#10003;</span></td><td><span class="yes">&#10003;</span></td></tr>
+                    <tr><td>Sponsored placement on The NBRH</td><td><span class="no">&mdash;</span></td><td><span class="yes">&#10003;</span></td><td><span class="yes">&#10003;</span></td></tr>
+                    <tr><td>Instagram highlights &amp; link placement</td><td><span class="no">&mdash;</span></td><td><span class="no">&mdash;</span></td><td><span class="yes">&#10003;</span></td></tr>
 
-                    <!-- Booking -->
                     <tr class="cat-row"><td colspan="4"><span class="cat-label">Booking</span></td></tr>
-                    <tr><td>Booking page on Tickts</td><td><span class="yes">&#10003;</span></td><td><span class="yes">&#10003;</span></td><td class="vs-td-nbrh"><span class="yes">&#10003;</span></td></tr>
-                    <tr><td>Booking management</td><td><span class="yes">&#10003;</span></td><td><span class="yes">&#10003;</span></td><td class="vs-td-nbrh"><span class="yes">&#10003;</span></td></tr>
-                    <tr><td>Membership subscriptions</td><td><span class="no">&mdash;</span></td><td><span class="yes">&#10003;</span></td><td class="vs-td-nbrh"><span class="yes">&#10003;</span></td></tr>
+                    <tr><td>Booking page on Tickts</td><td><span class="yes">&#10003;</span></td><td><span class="yes">&#10003;</span></td><td><span class="yes">&#10003;</span></td></tr>
+                    <tr><td>Booking management</td><td><span class="yes">&#10003;</span></td><td><span class="yes">&#10003;</span></td><td><span class="yes">&#10003;</span></td></tr>
+                    <tr><td>Membership subscriptions</td><td><span class="no">&mdash;</span></td><td><span class="yes">&#10003;</span></td><td><span class="yes">&#10003;</span></td></tr>
 
-                    <!-- Content & Social -->
                     <tr class="cat-row"><td colspan="4"><span class="cat-label">Content &amp; Social Media</span></td></tr>
-                    <tr><td>x1 Instagram Session Reel (organic)</td><td><span class="yes">&#10003;</span></td><td><span class="yes">&#10003;</span></td><td class="vs-td-nbrh"><span class="yes">&#10003;</span></td></tr>
-                    <tr><td>Complimentary Boosted Instagram Reel(s)</td><td><span class="no">&mdash;</span></td><td><span class="yes">&#10003;</span><span class="compare-note">x1 per month</span></td><td class="vs-td-nbrh"><span class="yes">&#10003;</span><span class="compare-note">x2 per month</span></td></tr>
-                    <tr><td>Instagram Ad creation &amp; management</td><td><span class="yes">&#10003;</span><span class="compare-note">You pay ad spend</span></td><td><span class="yes">&#10003;</span><span class="compare-note">You pay ad spend</span></td><td class="vs-td-nbrh"><span class="yes">&#10003;</span><span class="compare-note">You pay ad spend</span></td></tr>
-                    <tr><td>x1 Instagram Story per week</td><td><span class="no">&mdash;</span></td><td><span class="yes">&#10003;</span></td><td class="vs-td-nbrh"><span class="yes">&#10003;</span></td></tr>
-                    <tr><td>x1 Instagram Social Proof Carousel</td><td><span class="no">&mdash;</span></td><td><span class="yes">&#10003;</span></td><td class="vs-td-nbrh"><span class="yes">&#10003;</span></td></tr>
-                    <tr><td>x1 SEO Blog per month</td><td><span class="no">&mdash;</span></td><td><span class="yes">&#10003;</span></td><td class="vs-td-nbrh"><span class="yes">&#10003;</span></td></tr>
-                    <tr><td>x1 LinkedIn Article per month</td><td><span class="no">&mdash;</span></td><td><span class="yes">&#10003;</span></td><td class="vs-td-nbrh"><span class="yes">&#10003;</span></td></tr>
-                    <tr><td>TikTok, LinkedIn, Reddit &amp; YouTube posting<span class="compare-note">Multi-platform content distribution</span></td><td><span class="no">&mdash;</span></td><td><span class="soon-badge">Coming Soon</span></td><td class="vs-td-nbrh"><span class="soon-badge">Coming Soon</span></td></tr>
-                    <tr><td>x1 In-person video per month</td><td><span class="no">&mdash;</span></td><td><span class="no">&mdash;</span></td><td class="vs-td-nbrh"><span class="yes">&#10003;</span></td></tr>
-                    <tr><td>Inclusion in NBRH marketing campaigns</td><td><span class="no">&mdash;</span></td><td><span class="no">&mdash;</span></td><td class="vs-td-nbrh"><span class="yes">&#10003;</span></td></tr>
+                    <tr><td>x1 Instagram Session Reel (organic)</td><td><span class="yes">&#10003;</span></td><td><span class="yes">&#10003;</span></td><td><span class="yes">&#10003;</span></td></tr>
+                    <tr><td>Complimentary Boosted Instagram Reel(s)</td><td><span class="no">&mdash;</span></td><td><span class="yes">&#10003;</span><span class="compare-note">x1 per month</span></td><td><span class="yes">&#10003;</span><span class="compare-note">x2 per month</span></td></tr>
+                    <tr><td>Instagram Ad creation &amp; management</td><td><span class="yes">&#10003;</span><span class="compare-note">You pay ad spend</span></td><td><span class="yes">&#10003;</span><span class="compare-note">You pay ad spend</span></td><td><span class="yes">&#10003;</span><span class="compare-note">You pay ad spend</span></td></tr>
+                    <tr><td>x1 Instagram Story per week</td><td><span class="no">&mdash;</span></td><td><span class="yes">&#10003;</span></td><td><span class="yes">&#10003;</span></td></tr>
+                    <tr><td>x1 Instagram Social Proof Carousel</td><td><span class="no">&mdash;</span></td><td><span class="yes">&#10003;</span></td><td><span class="yes">&#10003;</span></td></tr>
+                    <tr><td>x1 SEO Blog per month</td><td><span class="no">&mdash;</span></td><td><span class="yes">&#10003;</span></td><td><span class="yes">&#10003;</span></td></tr>
+                    <tr><td>x1 LinkedIn Article per month</td><td><span class="no">&mdash;</span></td><td><span class="yes">&#10003;</span></td><td><span class="yes">&#10003;</span></td></tr>
+                    <tr><td>TikTok, LinkedIn, Reddit &amp; YouTube posting<span class="compare-note">Multi-platform content distribution</span></td><td><span class="no">&mdash;</span></td><td><span class="soon-badge">Coming Soon</span></td><td><span class="soon-badge">Coming Soon</span></td></tr>
+                    <tr><td>x1 In-person video per month</td><td><span class="no">&mdash;</span></td><td><span class="no">&mdash;</span></td><td><span class="yes">&#10003;</span></td></tr>
+                    <tr><td>Inclusion in NBRH marketing campaigns</td><td><span class="no">&mdash;</span></td><td><span class="no">&mdash;</span></td><td><span class="yes">&#10003;</span></td></tr>
 
-                    <!-- Outreach -->
                     <tr class="cat-row"><td colspan="4"><span class="cat-label">Outreach</span></td></tr>
-                    <tr><td>x1 Weekly outreach to groups</td><td><span class="yes">&#10003;</span></td><td><span class="yes">&#10003;</span></td><td class="vs-td-nbrh"><span class="yes">&#10003;</span></td></tr>
-                    <tr><td>x1 Weekly outreach to clubs &amp; pages</td><td><span class="no">&mdash;</span></td><td><span class="yes">&#10003;</span></td><td class="vs-td-nbrh"><span class="yes">&#10003;</span></td></tr>
-                    <tr><td>x1 Weekly outreach to neighbours</td><td><span class="no">&mdash;</span></td><td><span class="yes">&#10003;</span></td><td class="vs-td-nbrh"><span class="yes">&#10003;</span></td></tr>
-                    <tr><td>Outreach to businesses &amp; corporate bodies<span class="compare-note">Corporate wellness &amp; partnership opportunities</span></td><td><span class="no">&mdash;</span></td><td><span class="no">&mdash;</span></td><td class="vs-td-nbrh"><span class="soon-badge">Coming Soon</span></td></tr>
+                    <tr><td>x1 Weekly outreach to groups</td><td><span class="yes">&#10003;</span></td><td><span class="yes">&#10003;</span></td><td><span class="yes">&#10003;</span></td></tr>
+                    <tr><td>x1 Weekly outreach to clubs &amp; pages</td><td><span class="no">&mdash;</span></td><td><span class="yes">&#10003;</span></td><td><span class="yes">&#10003;</span></td></tr>
+                    <tr><td>x1 Weekly outreach to neighbours</td><td><span class="no">&mdash;</span></td><td><span class="yes">&#10003;</span></td><td><span class="yes">&#10003;</span></td></tr>
+                    <tr><td>Outreach to businesses &amp; corporate bodies<span class="compare-note">Corporate wellness &amp; partnership opportunities</span></td><td><span class="no">&mdash;</span></td><td><span class="no">&mdash;</span></td><td><span class="soon-badge">Coming Soon</span></td></tr>
 
-                    <!-- Support -->
                     <tr class="cat-row"><td colspan="4"><span class="cat-label">Support &amp; Guidance</span></td></tr>
-                    <tr><td>Access to Resource Hub</td><td><span class="yes">&#10003;</span></td><td><span class="yes">&#10003;</span></td><td class="vs-td-nbrh"><span class="yes">&#10003;</span></td></tr>
-                    <tr><td>Club Consultation &amp; Auditing</td><td><span class="yes">&#10003;</span></td><td><span class="yes">&#10003;</span></td><td class="vs-td-nbrh"><span class="yes">&#10003;</span></td></tr>
-                    <tr><td>Club House Concierge (dedicated support)</td><td><span class="no">&mdash;</span></td><td><span class="no">&mdash;</span></td><td class="vs-td-nbrh"><span class="yes">&#10003;</span></td></tr>
+                    <tr><td>Access to Resource Hub</td><td><span class="yes">&#10003;</span></td><td><span class="yes">&#10003;</span></td><td><span class="yes">&#10003;</span></td></tr>
+                    <tr><td>Club Consultation &amp; Auditing</td><td><span class="yes">&#10003;</span></td><td><span class="yes">&#10003;</span></td><td><span class="yes">&#10003;</span></td></tr>
+                    <tr><td>Club House Concierge (dedicated support)</td><td><span class="no">&mdash;</span></td><td><span class="no">&mdash;</span></td><td><span class="yes">&#10003;</span></td></tr>
 
-                    <!-- Analytics -->
                     <tr class="cat-row"><td colspan="4"><span class="cat-label">Analytics &amp; Insights</span></td></tr>
-                    <tr><td>Detailed booking analytics reports</td><td><span class="no">&mdash;</span></td><td><span class="yes">&#10003;</span></td><td class="vs-td-nbrh"><span class="yes">&#10003;</span></td></tr>
-                    <tr><td>Traffic tracking analytics</td><td><span class="no">&mdash;</span></td><td><span class="yes">&#10003;</span></td><td class="vs-td-nbrh"><span class="yes">&#10003;</span></td></tr>
-                    <tr><td>x1 AI Deep Research per month</td><td><span class="no">&mdash;</span></td><td><span class="no">&mdash;</span></td><td class="vs-td-nbrh"><span class="yes">&#10003;</span></td></tr>
+                    <tr><td>Detailed booking analytics reports</td><td><span class="no">&mdash;</span></td><td><span class="yes">&#10003;</span></td><td><span class="yes">&#10003;</span></td></tr>
+                    <tr><td>Traffic tracking analytics</td><td><span class="no">&mdash;</span></td><td><span class="yes">&#10003;</span></td><td><span class="yes">&#10003;</span></td></tr>
+                    <tr><td>x1 AI Deep Research per month</td><td><span class="no">&mdash;</span></td><td><span class="no">&mdash;</span></td><td><span class="yes">&#10003;</span></td></tr>
 
-                    <!-- Perks -->
                     <tr class="cat-row"><td colspan="4"><span class="cat-label">Perks &amp; Extras</span></td></tr>
-                    <tr><td>Discount on &Agrave; La Carte add-ons</td><td><span class="no">&mdash;</span></td><td><span class="discount-badge">10% off</span></td><td class="vs-td-nbrh"><span class="discount-badge" style="color:var(--accent);">20% off</span></td></tr>
-                    <tr><td>Club Store Collaborations</td><td><span class="no">&mdash;</span></td><td><span class="no">&mdash;</span></td><td class="vs-td-nbrh"><span class="yes">&#10003;</span></td></tr>
-                    <tr><td>Influencer Marketing</td><td><span class="no">&mdash;</span></td><td><span class="no">&mdash;</span></td><td class="vs-td-nbrh"><span class="soon-badge">Coming Soon</span></td></tr>
-                    <tr><td>Revenue Share</td><td><span class="no">&mdash;</span></td><td><span class="no">&mdash;</span></td><td class="vs-td-nbrh"><span class="soon-badge">Coming Soon</span></td></tr>
-                    <tr><td>Free 2-month pilot</td><td><span class="yes">&#10003;</span></td><td><span class="yes">&#10003;</span></td><td class="vs-td-nbrh"><span class="yes">&#10003;</span></td></tr>
+                    <tr><td>Discount on &Agrave; La Carte add-ons</td><td><span class="no">&mdash;</span></td><td><span class="discount-badge">10% off</span></td><td><span class="discount-badge" style="color:var(--accent);">20% off</span></td></tr>
+                    <tr><td>Club Store Collaborations</td><td><span class="no">&mdash;</span></td><td><span class="no">&mdash;</span></td><td><span class="yes">&#10003;</span></td></tr>
+                    <tr><td>Influencer Marketing</td><td><span class="no">&mdash;</span></td><td><span class="no">&mdash;</span></td><td><span class="soon-badge">Coming Soon</span></td></tr>
+                    <tr><td>Revenue Share</td><td><span class="no">&mdash;</span></td><td><span class="no">&mdash;</span></td><td><span class="soon-badge">Coming Soon</span></td></tr>
+                    <tr><td>Free 2-month pilot</td><td><span class="yes">&#10003;</span></td><td><span class="yes">&#10003;</span></td><td><span class="yes">&#10003;</span></td></tr>
                 </tbody>
             </table>
         </div>
 
         <!-- Tier Summary Cards -->
         <div class="tier-summary-grid">
-
-            <div class="tier-summary-card">
+            <div class="tier-summary-card stagger-item">
                 <span class="ts-name">Starter</span>
                 <span class="ts-price">&pound;20 / month &middot; + &pound;2 per booking</span>
                 <span class="ts-ideal-label">This is for you if&hellip;</span>
-                <p class="ts-desc">You want to get onto the platform at a low monthly cost. At &pound;20/month you get your sessions listed, your Club Hub page live, and bookings coming in — without marketing overhead or a long-term contract beyond the initial pilot. Pay-as-you-go bookings at &pound;2 keep things simple while you find your feet.</p>
+                <p class="ts-desc">You want to get onto the platform at a low monthly cost. At &pound;20/month you get your sessions listed, your Club Hub page live, and bookings coming in &mdash; without marketing overhead or a long-term contract beyond the initial pilot. Pay-as-you-go bookings at &pound;2 keep things simple while you find your feet.</p>
                 <a href="https://www.thenbrh.co.uk/starter-sign-up" class="ts-cta">Get Started &mdash; Starter &rarr;</a>
             </div>
 
-            <div class="tier-summary-card featured">
+            <div class="tier-summary-card featured stagger-item">
                 <span class="ts-badge">Most Popular</span>
                 <span class="ts-name">Growth</span>
                 <span class="ts-price">&pound;50 / month &middot; + &pound;1 per booking</span>
@@ -669,14 +881,13 @@
                 <a href="https://www.thenbrh.co.uk/growth-sign-up" class="ts-cta">Get Started &mdash; Growth &rarr;</a>
             </div>
 
-            <div class="tier-summary-card">
+            <div class="tier-summary-card stagger-item">
                 <span class="ts-name">Club House</span>
                 <span class="ts-price">&pound;125 / month &middot; No booking fees</span>
                 <span class="ts-ideal-label">This is for you if&hellip;</span>
                 <p class="ts-desc">You want a genuine growth partner. You&rsquo;re serious about building your club and you&rsquo;re ready to hand off the marketing, admin, and strategy to a team that knows what they&rsquo;re doing. You want in-person video, two complimentary Boosted Instagram Reels every month, dedicated concierge support, AI-backed research, and zero booking fees &mdash; all included.</p>
                 <a href="https://www.thenbrh.co.uk/club-house" class="ts-cta">Get Started &mdash; Club House &rarr;</a>
             </div>
-
         </div>
             </div>
         </div>
@@ -684,10 +895,10 @@
 </div>
 
 
-<!-- ═══════════════════════════ OUTCOMES ═══════════════════════════ -->
+<!-- ═══════════════════ OUTCOMES — collapsed by default ═══════════════════ -->
 <div class="divider"></div>
-<div class="collapsible-section reveal open" id="outcomes">
-    <button class="collapsible-header" aria-expanded="true" data-target="outcomes-body">
+<div class="collapsible-section reveal" id="outcomes">
+    <button class="collapsible-header" aria-expanded="false" data-target="outcomes-body">
         <div class="collapsible-header-left">
             <span class="collapsible-header-icon">&#127919;</span>
             <div>
@@ -704,7 +915,7 @@
         <div class="section-head">
             <span class="eyebrow">What to Expect</span>
             <h2>Here&rsquo;s what joining The NBRH looks like.</h2>
-            <p class="sub">We won&rsquo;t promise you the world. But here&rsquo;s what we&rsquo;re confident about — and what we&rsquo;re accountable to delivering.</p>
+            <p class="sub">We won&rsquo;t promise you the world. But here&rsquo;s what we&rsquo;re confident about &mdash; and what we&rsquo;re accountable to delivering.</p>
         </div>
         <div style="display:flex; justify-content:center;">
         <ul class="simple-list">
@@ -716,7 +927,7 @@
             <li>A foundation to scale &mdash; tools and support that compound over time</li>
         </ul>
         </div>
-        <p class="outcome-disclaimer">We don&rsquo;t guarantee specific numbers — but we commit to showing up, doing the work, and being honest about what&rsquo;s working.</p>
+        <p class="outcome-disclaimer">We don&rsquo;t guarantee specific numbers &mdash; but we commit to showing up, doing the work, and being honest about what&rsquo;s working.</p>
     </div>
             </div>
         </div>
@@ -724,7 +935,6 @@
 </div>
 
 
-<!-- ═══════════════════════════ TESTIMONIALS (hidden) ═══════════════════════════ -->
 <section class="testimonials-section" aria-hidden="true">
     <div class="wrap">
         <div class="section-head">
@@ -743,7 +953,7 @@
             <span class="collapsible-header-icon">&#9881;&#65039;</span>
             <div>
                 <div class="collapsible-header-title">How It Works</div>
-                <div class="collapsible-header-sub">What to expect — live in two weeks</div>
+                <div class="collapsible-header-sub">What to expect &mdash; live in two weeks</div>
             </div>
         </div>
         <span class="collapsible-chevron">&#9660;</span>
@@ -759,12 +969,12 @@
                     <div class="step-item">
                         <div class="step-number-wrap"><div class="step-number">1</div><span class="step-timing">Week one</span></div>
                         <div class="step-title">We set you up</div>
-                        <p class="step-desc">We build your Club Hub page, configure your Tickts booking system, list your sessions, and set up your dashboard. We&rsquo;ll need some information from you — your sessions, your story, a few photos. That&rsquo;s it.</p>
+                        <p class="step-desc">We build your Club Hub page, configure your Tickts booking system, list your sessions, and set up your dashboard. We&rsquo;ll need some information from you &mdash; your sessions, your story, a few photos. That&rsquo;s it.</p>
                     </div>
                     <div class="step-item">
                         <div class="step-number-wrap"><div class="step-number">2</div><span class="step-timing">Week two</span></div>
                         <div class="step-title">You go live</div>
-                        <p class="step-desc">Your onboarding campaign launches — the Reel goes out, outreach kicks off, and players start finding you. You don&rsquo;t need to do anything. We handle it.</p>
+                        <p class="step-desc">Your onboarding campaign launches &mdash; the Reel goes out, outreach kicks off, and players start finding you. You don&rsquo;t need to do anything. We handle it.</p>
                     </div>
                     <div class="step-item">
                         <div class="step-number-wrap"><div class="step-number">3</div><span class="step-timing">Every month after</span></div>
@@ -784,7 +994,7 @@
             <span class="collapsible-header-icon">&#128269;</span>
             <div>
                 <div class="collapsible-header-title">&Agrave; La Carte Services</div>
-                <div class="collapsible-header-sub">Specific help, your terms — no subscription needed</div>
+                <div class="collapsible-header-sub">Specific help, your terms &mdash; no subscription needed</div>
             </div>
         </div>
         <span class="collapsible-chevron">&#9660;</span>
@@ -792,7 +1002,7 @@
     <div class="collapsible-body" id="alacarte-body">
         <div class="collapsible-body-inner">
             <div class="collapsible-content">
-                <p style="font-size:0.9rem;color:var(--text-muted);margin-bottom:2rem;max-width:60ch;">Already established? Just need targeted help in one or two areas? Purchase individual services without a subscription. Club House members get 10–20% off everything here.</p>
+                <p style="font-size:0.9rem;color:var(--text-muted);margin-bottom:2rem;max-width:60ch;">Already established? Just need targeted help in one or two areas? Purchase individual services without a subscription. Club House members get 10&ndash;20% off everything here.</p>
                 <div class="services-grid">
                     <!-- Social Media -->
                     <div class="svc-card">
@@ -802,8 +1012,8 @@
                         </button>
                         <div class="svc-body"><div class="svc-body-inner"><div class="svc-body-content">
                             <div class="svc-includes"><span class="svc-includes-label">What&rsquo;s Included</span><ul>
-                                <li>Targeted Boosted Sessions Reel — a paid Instagram Reel built around your sessions</li>
-                                <li>Boosted Club Awareness Reel — a brand-building Reel focused on growing your following</li>
+                                <li>Targeted Boosted Sessions Reel &mdash; a paid Instagram Reel built around your sessions</li>
+                                <li>Boosted Club Awareness Reel &mdash; a brand-building Reel focused on growing your following</li>
                                 <li>Creative production, targeting, and reporting handled by us</li>
                                 <li>Ad spend budget agreed with you separately</li>
                             </ul></div>
@@ -826,8 +1036,8 @@
                         </button>
                         <div class="svc-body"><div class="svc-body-inner"><div class="svc-body-content">
                             <div class="svc-includes"><span class="svc-includes-label">What&rsquo;s Included</span><ul>
-                                <li>Cold Outreach — 3 relevant communities (Facebook, Reddit, WhatsApp, Discord) targeted naturally on your behalf</li>
-                                <li>Session Filler Outreach — targeted to NBRH users matching your session&rsquo;s sport, location, and availability</li>
+                                <li>Cold Outreach &mdash; 3 relevant communities (Facebook, Reddit, WhatsApp, Discord) targeted naturally on your behalf</li>
+                                <li>Session Filler Outreach &mdash; targeted to NBRH users matching your session&rsquo;s sport, location, and availability</li>
                                 <li>Ideal for new slots, last-minute gaps, or sessions running below capacity</li>
                             </ul></div>
                             <div class="svc-pricing">
@@ -849,9 +1059,9 @@
                         </button>
                         <div class="svc-body"><div class="svc-body-inner"><div class="svc-body-content">
                             <div class="svc-includes"><span class="svc-includes-label">What&rsquo;s Included</span><ul>
-                                <li>Sponsored Session — high-visibility placement on The NBRH platform</li>
+                                <li>Sponsored Session &mdash; high-visibility placement on The NBRH platform</li>
                                 <li>Additional Session Listing with booking, description, and discovery</li>
-                                <li>7-Day Pinned Post on Instagram — your message at the top of our page for a full week</li>
+                                <li>7-Day Pinned Post on Instagram &mdash; your message at the top of our page for a full week</li>
                             </ul></div>
                             <div class="svc-pricing">
                                 <div class="svc-price-row">
@@ -872,9 +1082,9 @@
                         </button>
                         <div class="svc-body"><div class="svc-body-inner"><div class="svc-body-content">
                             <div class="svc-includes"><span class="svc-includes-label">What&rsquo;s Included</span><ul>
-                                <li>Club Blog Post — 800–1,200 word SEO-optimised article on The NBRH and LinkedIn</li>
-                                <li>Original Video Content — on-location filming edited into a Reel (30–60 sec) plus a longer cut</li>
-                                <li>Evidence Book — branded PDF for funding and sponsorship</li>
+                                <li>Club Blog Post &mdash; 800&ndash;1,200 word SEO-optimised article on The NBRH and LinkedIn</li>
+                                <li>Original Video Content &mdash; on-location filming edited into a Reel (30&ndash;60 sec) plus a longer cut</li>
+                                <li>Evidence Book &mdash; branded PDF for funding and sponsorship</li>
                                 <li>All assets are yours to use across your channels</li>
                             </ul></div>
                             <div class="svc-pricing">
@@ -896,7 +1106,7 @@
                         </button>
                         <div class="svc-body"><div class="svc-body-inner"><div class="svc-body-content">
                             <div class="svc-includes"><span class="svc-includes-label">What&rsquo;s Included</span><ul>
-                                <li>Deep Search Marketing Report — competitive landscape and audience mapping</li>
+                                <li>Deep Search Marketing Report &mdash; competitive landscape and audience mapping</li>
                                 <li>Competitor audit (local and digital)</li>
                                 <li>Channel recommendations with rationale and quick-win action plan</li>
                             </ul></div>
@@ -919,7 +1129,7 @@
                         </button>
                         <div class="svc-body"><div class="svc-body-inner"><div class="svc-body-content">
                             <div class="svc-includes"><span class="svc-includes-label">What&rsquo;s Included</span><ul>
-                                <li>Funding landscape research tailored to your club — sport, location, size, and ambition</li>
+                                <li>Funding landscape research tailored to your club &mdash; sport, location, size, and ambition</li>
                                 <li>Full application writing and submission on your behalf</li>
                                 <li>End-to-end process management from research to submission</li>
                                 <li>If we secure funding, you keep 100% of it. No commission.</li>
@@ -960,21 +1170,21 @@
                 </div>
 
                 <div class="tier2-note">
-                    <strong>One-off. No commitment.</strong> Each service is purchased individually. Every completed project gets a light check-in 30 days later — not a hard sell, just an honest conversation about what&rsquo;s next.
+                    <strong>One-off. No commitment.</strong> Each service is purchased individually. Every completed project gets a light check-in 30 days later &mdash; not a hard sell, just an honest conversation about what&rsquo;s next.
                 </div>
             </div>
         </div>
     </div>
 </div>
 
-<!-- FAQ (collapsible) -->
+<!-- FAQ -->
 <div class="collapsible-section reveal open" id="faq">
     <button class="collapsible-header" aria-expanded="true" data-target="faq-body">
         <div class="collapsible-header-left">
             <span class="collapsible-header-icon">&#63;</span>
             <div>
                 <div class="collapsible-header-title">Common Questions</div>
-                <div class="collapsible-header-sub">Straight answers — drop us a message if yours isn&rsquo;t here</div>
+                <div class="collapsible-header-sub">Straight answers &mdash; drop us a message if yours isn&rsquo;t here</div>
             </div>
         </div>
         <span class="collapsible-chevron">&#9660;</span>
@@ -985,11 +1195,11 @@
                 <div class="faq-list">
                     <div class="faq-item">
                         <button class="faq-trigger" aria-expanded="false"><span class="faq-question">What&rsquo;s the difference between the three tiers?</span><span class="faq-chevron">&#9660;</span></button>
-                        <div class="faq-body"><div class="faq-body-inner"><div class="faq-answer">Starter is &pound;20/month with a &pound;2-per-booking fee — it&rsquo;s for clubs that want to get on the platform at a low entry cost without heavy marketing overhead. Growth is &pound;50/month (&pound;1/booking) and adds a full content and outreach engine on top. Club House is &pound;125/month with zero booking fees and includes everything — in-person video, a dedicated Concierge, AI research, and full platform visibility. The comparison table above breaks it all down side by side.</div></div></div>
+                        <div class="faq-body"><div class="faq-body-inner"><div class="faq-answer">Starter is &pound;20/month with a &pound;2-per-booking fee &mdash; it&rsquo;s for clubs that want to get on the platform at a low entry cost without heavy marketing overhead. Growth is &pound;50/month (&pound;1/booking) and adds a full content and outreach engine on top. Club House is &pound;125/month with zero booking fees and includes everything &mdash; in-person video, a dedicated Concierge, AI research, and full platform visibility. The comparison table above breaks it all down side by side.</div></div></div>
                     </div>
                     <div class="faq-item">
                         <button class="faq-trigger" aria-expanded="false"><span class="faq-question">What&rsquo;s the free pilot and when does it start?</span><span class="faq-chevron">&#9660;</span></button>
-                        <div class="faq-body"><div class="faq-body-inner"><div class="faq-answer">We offer a free 2-month pilot so you can see the platform working in practice before committing to anything. The pilot begins when both of us are ready — there&rsquo;s no arbitrary start date. We&rsquo;ll agree a start point together once we&rsquo;ve had a conversation, got you set up, and you&rsquo;re comfortable. The clock only starts when it makes sense for your club.</div></div></div>
+                        <div class="faq-body"><div class="faq-body-inner"><div class="faq-answer">We offer a free 2-month pilot so you can see the platform working in practice before committing to anything. The pilot begins when both of us are ready &mdash; there&rsquo;s no arbitrary start date. We&rsquo;ll agree a start point together once we&rsquo;ve had a conversation, got you set up, and you&rsquo;re comfortable. The clock only starts when it makes sense for your club.</div></div></div>
                     </div>
                     <div class="faq-item">
                         <button class="faq-trigger" aria-expanded="false"><span class="faq-question">Can I start on Starter and upgrade later?</span><span class="faq-chevron">&#9660;</span></button>
@@ -997,23 +1207,23 @@
                     </div>
                     <div class="faq-item">
                         <button class="faq-trigger" aria-expanded="false"><span class="faq-question">How quickly can we get set up?</span><span class="faq-chevron">&#9660;</span></button>
-                        <div class="faq-body"><div class="faq-body-inner"><div class="faq-answer">Most clubs are fully live within two weeks of signing up. Week one is setup — your page, booking system, and sessions listed. Week two is launch — your first content goes out and outreach kicks off. We&rsquo;ll let you know exactly what we need from you and when. It&rsquo;s usually less than you think.</div></div></div>
+                        <div class="faq-body"><div class="faq-body-inner"><div class="faq-answer">Most clubs are fully live within two weeks of signing up. Week one is setup &mdash; your page, booking system, and sessions listed. Week two is launch &mdash; your first content goes out and outreach kicks off. We&rsquo;ll let you know exactly what we need from you and when. It&rsquo;s usually less than you think.</div></div></div>
                     </div>
                     <div class="faq-item">
                         <button class="faq-trigger" aria-expanded="false"><span class="faq-question">Who covers the ad spend for Instagram campaigns?</span><span class="faq-chevron">&#9660;</span></button>
-                        <div class="faq-body"><div class="faq-body-inner"><div class="faq-answer">We create, target, and manage the ads — you pay the actual Meta ad spend. We&rsquo;ll discuss a recommended budget with you in advance and there&rsquo;s never any obligation to increase it. We handle the creative and reporting either way.</div></div></div>
+                        <div class="faq-body"><div class="faq-body-inner"><div class="faq-answer">We create, target, and manage the ads &mdash; you pay the actual Meta ad spend. We&rsquo;ll discuss a recommended budget with you in advance and there&rsquo;s never any obligation to increase it. We handle the creative and reporting either way.</div></div></div>
                     </div>
                     <div class="faq-item">
                         <button class="faq-trigger" aria-expanded="false"><span class="faq-question">What happens after the 3-month minimum?</span><span class="faq-chevron">&#9660;</span></button>
-                        <div class="faq-body"><div class="faq-body-inner"><div class="faq-answer">After three months (for Growth and Club House), your subscription rolls monthly and you can cancel with 30 days&rsquo; notice. We ask for three months because that&rsquo;s genuinely how long it takes to see things working — SEO builds, ads optimise, outreach compounds. We&rsquo;d always aim for six months, but there&rsquo;s no pressure after the initial term.</div></div></div>
+                        <div class="faq-body"><div class="faq-body-inner"><div class="faq-answer">After three months (for Growth and Club House), your subscription rolls monthly and you can cancel with 30 days&rsquo; notice. We ask for three months because that&rsquo;s genuinely how long it takes to see things working &mdash; SEO builds, ads optimise, outreach compounds. We&rsquo;d always aim for six months, but there&rsquo;s no pressure after the initial term.</div></div></div>
                     </div>
                     <div class="faq-item">
                         <button class="faq-trigger" aria-expanded="false"><span class="faq-question">Does the booking system work for free sessions too?</span><span class="faq-chevron">&#9660;</span></button>
-                        <div class="faq-body"><div class="faq-body-inner"><div class="faq-answer">Yes. The system runs via Tickts and handles both paid and free sessions. Free sessions still benefit from the registration flow — players sign up, you get a confirmed attendee list, and the session shows up properly in search and discovery. You always know who&rsquo;s coming.</div></div></div>
+                        <div class="faq-body"><div class="faq-body-inner"><div class="faq-answer">Yes. The system runs via Tickts and handles both paid and free sessions. Free sessions still benefit from the registration flow &mdash; players sign up, you get a confirmed attendee list, and the session shows up properly in search and discovery. You always know who&rsquo;s coming.</div></div></div>
                     </div>
                     <div class="faq-item">
                         <button class="faq-trigger" aria-expanded="false"><span class="faq-question">Do you only work with London-based clubs?</span><span class="faq-chevron">&#9660;</span></button>
-                        <div class="faq-body"><div class="faq-body-inner"><div class="faq-answer">Right now, yes — The NBRH platform is focused on London, and that&rsquo;s where our discovery audience, outreach network, and local knowledge is strongest. We plan to expand to other cities as the platform grows. If you&rsquo;re based just outside London, get in touch — there may still be a way to make it work.</div></div></div>
+                        <div class="faq-body"><div class="faq-body-inner"><div class="faq-answer">Right now, yes &mdash; The NBRH platform is focused on London, and that&rsquo;s where our discovery audience, outreach network, and local knowledge is strongest. We plan to expand to other cities as the platform grows. If you&rsquo;re based just outside London, get in touch &mdash; there may still be a way to make it work.</div></div></div>
                     </div>
                 </div>
             </div>
@@ -1021,9 +1231,25 @@
     </div>
 </div>
 
-<!-- CTA Band -->
+<!-- Enhancement 10: CTA Band with sport motif and grain -->
 <div class="cta-band reveal">
-    <div class="wrap">
+    <!-- Decorative sport motif: concentric field-marking rings, right side -->
+    <svg class="cta-motif" viewBox="0 0 420 420" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <circle cx="210" cy="210" r="200" stroke="white" stroke-width="1.5" stroke-dasharray="8 6"/>
+        <circle cx="210" cy="210" r="160" stroke="white" stroke-width="1.5" stroke-dasharray="8 6"/>
+        <circle cx="210" cy="210" r="115" stroke="white" stroke-width="1.5" stroke-dasharray="8 6"/>
+        <circle cx="210" cy="210" r="70" stroke="white" stroke-width="1.5" stroke-dasharray="8 6"/>
+        <circle cx="210" cy="210" r="28" stroke="white" stroke-width="1.5"/>
+        <line x1="10" y1="210" x2="410" y2="210" stroke="white" stroke-width="1" stroke-dasharray="4 8" opacity="0.5"/>
+        <line x1="210" y1="10" x2="210" y2="410" stroke="white" stroke-width="1" stroke-dasharray="4 8" opacity="0.5"/>
+    </svg>
+    <!-- Left motif (decorative, hidden on mobile) -->
+    <svg class="cta-motif cta-motif-left" viewBox="0 0 420 420" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <circle cx="210" cy="210" r="200" stroke="white" stroke-width="1.5" stroke-dasharray="8 6"/>
+        <circle cx="210" cy="210" r="140" stroke="white" stroke-width="1.5" stroke-dasharray="8 6"/>
+        <circle cx="210" cy="210" r="80" stroke="white" stroke-width="1.5" stroke-dasharray="8 6"/>
+    </svg>
+    <div class="wrap cta-band-inner">
         <h2>Ready to grow your club?</h2>
         <p>Start on Starter, or jump straight into Growth or Club House. We offer a free 2-month pilot so you can see what the platform can do before committing to anything.</p>
         <a href="mailto:thenbhr@gmail.com" class="cta-btn">Let&rsquo;s Talk &rarr;</a>
@@ -1044,14 +1270,14 @@
 
 <script>
     // ── Drag-to-scroll for carousels ──
-    ['.how-grid', '.tier-summary-grid'].forEach(function (sel) {
+    ['.how-grid', '.tier-summary-grid'].forEach(function(sel) {
         var el = document.querySelector(sel);
         if (!el) return;
         var isDown = false, startX, scrollLeft;
-        el.addEventListener('mousedown', function (e) { isDown = true; startX = e.pageX - el.offsetLeft; scrollLeft = el.scrollLeft; });
-        el.addEventListener('mouseleave', function () { isDown = false; });
-        el.addEventListener('mouseup', function () { isDown = false; });
-        el.addEventListener('mousemove', function (e) {
+        el.addEventListener('mousedown', function(e) { isDown = true; startX = e.pageX - el.offsetLeft; scrollLeft = el.scrollLeft; });
+        el.addEventListener('mouseleave', function() { isDown = false; });
+        el.addEventListener('mouseup', function() { isDown = false; });
+        el.addEventListener('mousemove', function(e) {
             if (!isDown) return;
             e.preventDefault();
             var x = e.pageX - el.offsetLeft;
@@ -1061,21 +1287,87 @@
 
     // ── Scroll progress bar ──
     var bar = document.getElementById('scrollBar');
-    window.addEventListener('scroll', function () {
+    window.addEventListener('scroll', function() {
         var pct = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight) * 100;
         bar.style.width = pct + '%';
+    }, { passive: true });
+
+    // ── Enhancement 1: Count-up animation ──
+    function animateCount(el) {
+        var target = parseInt(el.getAttribute('data-to'), 10);
+        var duration = Math.min(1200, target * 40 + 400);
+        var start = null;
+        function step(timestamp) {
+            if (!start) start = timestamp;
+            var progress = Math.min((timestamp - start) / duration, 1);
+            // ease-out cubic
+            var eased = 1 - Math.pow(1 - progress, 3);
+            el.textContent = Math.round(eased * target);
+            if (progress < 1) requestAnimationFrame(step);
+            else el.textContent = target;
+        }
+        requestAnimationFrame(step);
+    }
+    var countTargets = document.querySelectorAll('.count-target');
+    var countObserver = new IntersectionObserver(function(entries) {
+        entries.forEach(function(e) {
+            if (e.isIntersecting) {
+                animateCount(e.target);
+                countObserver.unobserve(e.target);
+            }
+        });
+    }, { threshold: 0.5 });
+    countTargets.forEach(function(el) { countObserver.observe(el); });
+
+    // ── Enhancement 7: Nav scroll spy ──
+    var navLinks = document.querySelectorAll('.nav-links a[data-nav]');
+    var sectionIds = Array.from(navLinks).map(function(a) { return a.getAttribute('data-nav'); });
+    var sections = sectionIds.map(function(id) { return document.getElementById(id); }).filter(Boolean);
+
+    function updateActiveNav() {
+        var scrollY = window.scrollY + 120;
+        var activeId = null;
+        sections.forEach(function(sec) {
+            if (sec && sec.offsetTop <= scrollY) activeId = sec.id;
+        });
+        navLinks.forEach(function(a) {
+            a.classList.toggle('active', a.getAttribute('data-nav') === activeId);
+        });
+    }
+    window.addEventListener('scroll', updateActiveNav, { passive: true });
+    updateActiveNav();
+
+    // ── Enhancement 9: Staggered card reveals ──
+    var staggerObserver = new IntersectionObserver(function(entries) {
+        entries.forEach(function(e) {
+            if (e.isIntersecting) {
+                var items = e.target.querySelectorAll('.stagger-item');
+                items.forEach(function(item, i) {
+                    setTimeout(function() {
+                        item.classList.add('card-visible');
+                    }, 80 + i * 90);
+                });
+                staggerObserver.unobserve(e.target);
+            }
+        });
+    }, { threshold: 0.08 });
+
+    // Observe grids and card containers
+    ['#how-grid', '.tier-summary-grid'].forEach(function(sel) {
+        var el = document.querySelector(sel);
+        if (el) staggerObserver.observe(el);
     });
 
     // ── Reveal on scroll ──
     var reveals = document.querySelectorAll('.reveal');
-    var ro = new IntersectionObserver(function (entries) {
-        entries.forEach(function (e) { if (e.isIntersecting) e.target.classList.add('in'); });
+    var ro = new IntersectionObserver(function(entries) {
+        entries.forEach(function(e) { if (e.isIntersecting) e.target.classList.add('in'); });
     }, { threshold: 0.04, rootMargin: '0px 0px -5% 0px' });
-    reveals.forEach(function (el) { ro.observe(el); });
+    reveals.forEach(function(el) { ro.observe(el); });
 
     // ── À La Carte accordions ──
-    document.querySelectorAll('.svc-trigger').forEach(function (trigger) {
-        trigger.addEventListener('click', function () {
+    document.querySelectorAll('.svc-trigger').forEach(function(trigger) {
+        trigger.addEventListener('click', function() {
             var card = trigger.closest('.svc-card');
             var isOpen = card.classList.contains('open');
             card.classList.toggle('open', !isOpen);
@@ -1084,16 +1376,16 @@
     });
 
     // ── Collapsible sections ──
-    // Init: sections starting open get height:auto so their content is visible
-    document.querySelectorAll('.collapsible-section.open').forEach(function (section) {
+    // Init open sections
+    document.querySelectorAll('.collapsible-section.open').forEach(function(section) {
         var header = section.querySelector('.collapsible-header');
         var body = document.getElementById(header.getAttribute('data-target'));
         if (body) body.style.height = 'auto';
         header.setAttribute('aria-expanded', 'true');
     });
 
-    document.querySelectorAll('.collapsible-header').forEach(function (header) {
-        header.addEventListener('click', function () {
+    document.querySelectorAll('.collapsible-header').forEach(function(header) {
+        header.addEventListener('click', function() {
             var section = header.closest('.collapsible-section');
             var body = document.getElementById(header.getAttribute('data-target'));
             if (!body) return;
@@ -1102,21 +1394,22 @@
             header.setAttribute('aria-expanded', String(!isOpen));
 
             if (isOpen) {
-                // Snap from auto to explicit px, then animate to 0
                 body.style.height = body.scrollHeight + 'px';
                 section.classList.remove('open');
-                requestAnimationFrame(function () {
-                    requestAnimationFrame(function () {
-                        body.style.height = '0';
-                    });
+                requestAnimationFrame(function() {
+                    requestAnimationFrame(function() { body.style.height = '0'; });
                 });
             } else {
-                // Animate to content height, then release to auto
                 section.classList.add('open');
                 body.style.height = body.scrollHeight + 'px';
                 function onEnd() {
                     body.style.height = 'auto';
                     body.removeEventListener('transitionend', onEnd);
+                    // Trigger stagger for cards now visible
+                    var items = body.querySelectorAll('.stagger-item:not(.card-visible)');
+                    items.forEach(function(item, i) {
+                        setTimeout(function() { item.classList.add('card-visible'); }, i * 90);
+                    });
                 }
                 body.addEventListener('transitionend', onEnd);
             }
@@ -1124,11 +1417,11 @@
     });
 
     // ── FAQ accordion (one open at a time) ──
-    document.querySelectorAll('.faq-trigger').forEach(function (trigger) {
-        trigger.addEventListener('click', function () {
+    document.querySelectorAll('.faq-trigger').forEach(function(trigger) {
+        trigger.addEventListener('click', function() {
             var item = trigger.closest('.faq-item');
             var isOpen = item.classList.contains('open');
-            document.querySelectorAll('.faq-item.open').forEach(function (open) {
+            document.querySelectorAll('.faq-item.open').forEach(function(open) {
                 open.classList.remove('open');
                 open.querySelector('.faq-trigger').setAttribute('aria-expanded', 'false');
             });
