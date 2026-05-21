@@ -158,7 +158,6 @@
         .th-tier-highlight .th-tier-price { color: var(--accent); opacity: 0.8; }
         .th-ch-wrap { display: inline-block; }
         .th-ch-badge { display: inline-block; background: var(--accent); color: #fff; font-family: var(--font-sans); font-size: 0.58rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; border-radius: 100px; padding: 0.12rem 0.55rem; margin-bottom: 0.35rem; }
-        .free-tag { font-size: 0.65rem; color: #4ade80; font-weight: 600; background: rgba(74,222,128,0.1); border: 1px solid rgba(74,222,128,0.25); border-radius: 100px; padding: 0.08rem 0.45rem; display: inline-block; margin-bottom: 0.25rem; }
         .compare-tbl td { padding: 0.75rem 1.25rem; border-bottom: 1px solid var(--border); font-size: 0.855rem; color: var(--text-muted); vertical-align: middle; }
         .compare-tbl td:not(:first-child) { text-align: center; }
         .compare-tbl tr:last-child td { border-bottom: none; }
@@ -172,19 +171,28 @@
         .soon-badge { display: inline-flex; align-items: center; font-size: 0.6rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent); background: var(--accent-dim); border: 1px solid var(--accent-mid); border-radius: 100px; padding: 0.1rem 0.45rem; white-space: nowrap; vertical-align: middle; margin-left: 0.3rem; }
         .compare-note { font-size: 0.72rem; color: var(--text-faint); font-style: italic; display: block; margin-top: 0.1rem; }
         .discount-badge { display: inline-block; font-size: 0.72rem; color: var(--accent); font-weight: 500; }
+
+        /* Mobile table — clean up headers to prevent clashing */
         @media (max-width: 767px) {
             .compare-tbl { min-width: unset; width: 100%; table-layout: fixed; }
             .compare-tbl th:first-child, .compare-tbl td:first-child { width: 36%; white-space: normal; word-break: break-word; }
             .compare-tbl th:not(:first-child), .compare-tbl td:not(:first-child) { width: 21.3%; }
-            .compare-tbl th { padding: 0.6rem 0.4rem; font-size: 0.6rem; }
+            .compare-tbl th { padding: 0.65rem 0.4rem; font-size: 0.6rem; }
             .compare-tbl td { padding: 0.55rem 0.4rem; font-size: 0.7rem; }
-            .th-tier-name { font-size: 0.75rem; }
+            .th-tier-name { font-size: 0.72rem; }
             .th-tier-price { font-size: 0.56rem; }
             .yes { font-size: 0.85rem; }
             .soon-badge { font-size: 0.5rem; display: block; margin: 0.2rem 0 0; }
             .compare-note { font-size: 0.58rem; }
         }
-        .compare-scroll-hint { display: none; }
+        /* On very small screens: hide tier price details from header (visible in the table body anyway) */
+        @media (max-width: 480px) {
+            .th-tier-price { display: none; }
+            .th-ch-badge { font-size: 0.5rem; padding: 0.1rem 0.35rem; margin-bottom: 0.2rem; }
+            .compare-tbl th { padding: 0.55rem 0.3rem; vertical-align: top; }
+            .compare-tbl th:first-child { width: 38%; }
+            .compare-tbl th:not(:first-child) { width: 20.6%; }
+        }
 
         /* ── Tier summary cards ── */
         .tier-summary-grid { display: flex; gap: 1.25rem; overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; padding: 0.75rem 1.5rem 1.25rem; margin-left: -1.5rem; margin-right: -1.5rem; margin-top: 1.25rem; cursor: grab; }
@@ -206,15 +214,46 @@
         .ts-desc { font-size: 0.845rem; color: var(--text-muted); line-height: 1.7; flex: 1; margin-bottom: 1.25rem; }
         .ts-cta { display: flex; align-items: center; justify-content: center; gap: 0.4rem; width: 100%; padding: 0.75rem 1rem; border-radius: var(--r); border: none; cursor: pointer; font-family: var(--font-sans); font-size: 0.865rem; font-weight: 500; text-decoration: none; background: var(--accent); color: #fff; transition: all 0.2s; }
         .ts-cta:hover { opacity: 0.88; transform: translateY(-1px); }
-        .ts-cta.free-cta { background: transparent; border: 1px solid var(--border-strong); color: var(--text-muted); }
-        .ts-cta.free-cta:hover { border-color: var(--accent-mid); color: var(--text); }
+        .ts-cta.ghost-cta { background: transparent; border: 1px solid var(--border-strong); color: var(--text-muted); }
+        .ts-cta.ghost-cta:hover { border-color: var(--accent-mid); color: var(--text); }
 
-        /* ── Neighbours Pass ── */
+        /* ── Neighbours Pass — Coming Soon ── */
         .pass-section { background: var(--bg-subtle); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 4.5rem 0; }
         @media (max-width: 768px) { .pass-section { padding: 3rem 0; } }
-        .pass-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 3.5rem; align-items: center; }
+
+        /* Coming Soon banner at top of section */
+        .pass-cs-banner {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            background: rgba(0,201,167,0.06);
+            border: 1px solid rgba(0,201,167,0.25);
+            border-radius: var(--r-lg);
+            padding: 0.85rem 1.5rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+            text-align: center;
+        }
+        .pass-cs-pill {
+            background: var(--pass-accent);
+            color: #0d1f1c;
+            font-size: 0.65rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.13em;
+            border-radius: 100px;
+            padding: 0.2rem 0.75rem;
+            flex-shrink: 0;
+        }
+        .pass-cs-banner-text {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+        }
+        .pass-cs-banner-text strong { color: var(--pass-accent); font-weight: 500; }
+
+        .pass-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 3.5rem; align-items: start; }
         @media (max-width: 760px) { .pass-layout { grid-template-columns: 1fr; gap: 2.5rem; } }
-        .pass-intro { }
         .pass-intro h2 { margin-bottom: 0.75rem; }
         .pass-intro .pass-lead { font-size: 0.9375rem; color: var(--text-muted); line-height: 1.8; margin-bottom: 1.5rem; }
         .pass-benefits { list-style: none; display: flex; flex-direction: column; gap: 0.85rem; }
@@ -223,8 +262,8 @@
         .pass-benefit-text strong { font-size: 0.875rem; font-weight: 500; color: var(--text); display: block; margin-bottom: 0.1rem; }
         .pass-benefit-text span { font-size: 0.8rem; color: var(--text-faint); line-height: 1.45; }
 
-        /* Pass card visual */
-        .pass-card-wrap { display: flex; justify-content: center; }
+        /* Pass card visual — Coming Soon treatment */
+        .pass-card-wrap { display: flex; justify-content: center; position: relative; }
         .pass-card {
             background: linear-gradient(135deg, #1a2a28 0%, #0d1f1c 100%);
             border: 1px solid var(--pass-mid);
@@ -235,6 +274,7 @@
             position: relative;
             overflow: hidden;
             box-shadow: 0 0 0 1px rgba(0,201,167,0.15), 0 24px 64px rgba(0,201,167,0.1);
+            filter: brightness(0.6) saturate(0.7);
         }
         .pass-card::before {
             content: '';
@@ -261,11 +301,51 @@
         .pass-card-chips { display: flex; flex-wrap: wrap; gap: 0.4rem; }
         .pass-chip { font-size: 0.66rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--pass-accent); background: rgba(0,201,167,0.1); border: 1px solid rgba(0,201,167,0.25); border-radius: 100px; padding: 0.2rem 0.6rem; }
 
-        /* Pass flywheel note */
-        .pass-flywheel { margin-top: 3rem; background: var(--bg-card); border: 1px solid var(--pass-mid); border-radius: var(--r-lg); padding: 1.5rem 2rem; }
-        .pass-flywheel-head { font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--pass-accent); margin-bottom: 0.6rem; display: block; }
-        .pass-flywheel p { font-size: 0.875rem; color: var(--text-muted); line-height: 1.75; }
-        .pass-flywheel p strong { color: var(--text); font-weight: 500; }
+        /* Coming Soon overlay on card */
+        .pass-card-overlay {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 3;
+            border-radius: 16px;
+        }
+        .pass-card-overlay-badge {
+            background: var(--pass-accent);
+            color: #0d1f1c;
+            font-family: var(--font-serif);
+            font-size: 1.1rem;
+            font-weight: 400;
+            letter-spacing: 0.04em;
+            border-radius: 100px;
+            padding: 0.55rem 1.5rem;
+            box-shadow: 0 4px 24px rgba(0,201,167,0.35);
+        }
+
+        /* Development notice box */
+        .pass-dev-notice {
+            margin-top: 1.5rem;
+            background: rgba(0,201,167,0.06);
+            border: 1px solid rgba(0,201,167,0.2);
+            border-radius: var(--r-lg);
+            padding: 1.25rem 1.5rem;
+        }
+        .pass-dev-notice-head {
+            font-size: 0.72rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--pass-accent);
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+        .pass-dev-notice p {
+            font-size: 0.845rem;
+            color: var(--text-muted);
+            line-height: 1.75;
+        }
+        .pass-dev-notice p strong { color: var(--text); font-weight: 500; }
 
         /* ── Simple list ── */
         .simple-list { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; max-width: 56ch; margin-left: auto; margin-right: auto; }
@@ -420,30 +500,30 @@
         <div class="wrap">
             <div class="store-badge">&#127968; Club House &mdash; Plans &amp; Pricing</div>
             <h1>Your club deserves to grow.</h1>
-            <p class="lead">The NBRH Club House gives grassroots sports clubs the expertise, tools, and marketing power to grow &mdash; without the agency price tag. List for free. Upgrade when you&rsquo;re ready.</p>
+            <p class="lead">The NBRH Club House gives grassroots sports clubs the expertise, tools, and marketing power to grow &mdash; without the agency price tag. Start from &pound;30 a month. No booking fees on any plan.</p>
             <div class="hero-ctas">
                 <a href="#plans" class="btn-primary">See Plans &rarr;</a>
                 <a href="#why" class="btn-ghost">Why Club House?</a>
             </div>
             <div class="hero-stats">
                 <div class="hero-stat">
-                    <span class="hero-stat-num">Free</span>
-                    <span class="hero-stat-label">to list &mdash; 8% on bookings, no monthly fee</span>
+                    <span class="hero-stat-num">&pound;30</span>
+                    <span class="hero-stat-label">/ month &mdash; entry-tier plan, no booking fees</span>
                 </div>
                 <div class="hero-stat">
                     <span class="hero-stat-num"><span class="count-target" data-to="3">3</span></span>
-                    <span class="hero-stat-label">tiers &mdash; Free, Growth, Club House</span>
+                    <span class="hero-stat-label">tiers &mdash; Starter, Growth, Club House</span>
                 </div>
                 <div class="hero-stat">
-                    <span class="hero-stat-num pass-color">&pound;5.99</span>
-                    <span class="hero-stat-label">Neighbours Pass &mdash; the player flywheel</span>
+                    <span class="hero-stat-num pass-color" style="font-size:1.1rem;line-height:1.2;">Coming<br>Soon</span>
+                    <span class="hero-stat-label">Neighbours Pass &mdash; in development</span>
                 </div>
             </div>
         </div>
     </div>
 </section>
 
-<!-- Pilot Banner — gated -->
+<!-- Pilot Banner -->
 <div class="pilot-banner reveal">
     <div class="pilot-banner-inner">
         <span class="pilot-pill">Free Pilot</span>
@@ -537,7 +617,7 @@
             <span class="collapsible-header-icon">&#127968;</span>
             <div>
                 <div class="collapsible-header-title">Plans &amp; Pricing</div>
-                <div class="collapsible-header-sub">Start free. Upgrade when it makes sense.</div>
+                <div class="collapsible-header-sub">Start from &pound;30. Upgrade when it makes sense.</div>
             </div>
         </div>
         <span class="collapsible-chevron">&#9660;</span>
@@ -549,7 +629,7 @@
                     <div class="section-head">
                         <span class="eyebrow">The What</span>
                         <h2>Three plans. One platform.</h2>
-                        <p class="sub">List for free and earn on every booking. When you&rsquo;re ready for the full marketing engine, Growth and Club House are waiting.</p>
+                        <p class="sub">No booking fees on any plan. When you&rsquo;re ready for the full marketing engine, Growth and Club House are waiting.</p>
                     </div>
 
                     <div class="compare-wrap">
@@ -558,19 +638,18 @@
                                 <tr>
                                     <th scope="col">Feature</th>
                                     <th scope="col">
-                                        <span class="free-tag">Free to join</span>
-                                        <span class="th-tier-name">Free</span>
-                                        <span class="th-tier-price">No monthly fee &middot; 8% per booking</span>
+                                        <span class="th-tier-name">Starter</span>
+                                        <span class="th-tier-price">&pound;30 / month</span>
                                     </th>
                                     <th scope="col">
                                         <span class="th-tier-name">Growth</span>
-                                        <span class="th-tier-price">&pound;75/mo &middot; 4% per booking</span>
+                                        <span class="th-tier-price">&pound;60 / month</span>
                                     </th>
                                     <th scope="col" class="th-tier-highlight">
                                         <div class="th-ch-wrap">
                                             <span class="th-ch-badge">Recommended</span>
                                             <span class="th-tier-name">Club House</span>
-                                            <span class="th-tier-price">&pound;175/mo &middot; 10% rev share &middot; No booking fees</span>
+                                            <span class="th-tier-price">&pound;125/mo &middot; 10% rev share</span>
                                         </div>
                                     </th>
                                 </tr>
@@ -580,15 +659,9 @@
                                 <tr class="cat-row"><td colspan="4"><span class="cat-label">Pricing</span></td></tr>
                                 <tr class="price-row">
                                     <td>Monthly fee</td>
-                                    <td style="color:#4ade80;font-weight:500;">Free</td>
-                                    <td>&pound;75 / month</td>
-                                    <td>&pound;175 / month</td>
-                                </tr>
-                                <tr class="price-row">
-                                    <td>Booking / transaction fee</td>
-                                    <td>8% per booking</td>
-                                    <td>4% per booking</td>
-                                    <td style="color:var(--accent);font-family:var(--font-serif);">None &#10003;</td>
+                                    <td style="color:var(--accent);font-family:var(--font-serif);">&pound;30 / month</td>
+                                    <td>&pound;60 / month</td>
+                                    <td>&pound;125 / month</td>
                                 </tr>
                                 <tr class="price-row">
                                     <td>Revenue share</td>
@@ -662,25 +735,25 @@
 
                     <!-- Tier Summary Cards -->
                     <div class="tier-summary-grid">
-                        <!-- Free -->
+                        <!-- Starter -->
                         <div class="tier-summary-card stagger-item">
-                            <span class="ts-name">Free</span>
-                            <span class="ts-price">No monthly fee
-                                <span class="ts-fee-note">8% booking fee on all transactions</span>
+                            <span class="ts-name">Starter</span>
+                            <span class="ts-price">&pound;30 / month
+                                <span class="ts-fee-note">No booking fees &middot; No revenue share</span>
                             </span>
                             <span class="ts-ideal-label">This is for you if&hellip;</span>
-                            <p class="ts-desc">You want to get your sessions live with zero upfront cost. You get your Club Hub page, unlimited listings, a Tickts booking page, and you earn on every booking. We take 8% per transaction &mdash; no fee if nobody books. It&rsquo;s how you start before you scale.</p>
-                            <a href="https://www.thenbrh.co.uk/free-sign-up" class="ts-cta free-cta">List for Free &rarr;</a>
+                            <p class="ts-desc">You want to get your sessions listed and start building your presence on The NBRH. At &pound;30/month, you get your Club Hub page, unlimited session listings, a Tickts booking page, and full dashboard access. No booking fees, no commissions. It&rsquo;s the right place to start before you scale.</p>
+                            <a href="https://www.thenbrh.co.uk/free-sign-up" class="ts-cta ghost-cta">Get Listed &rarr;</a>
                         </div>
 
                         <!-- Growth -->
                         <div class="tier-summary-card stagger-item">
                             <span class="ts-name">Growth</span>
-                            <span class="ts-price">&pound;75 / month
-                                <span class="ts-fee-note">+ 4% per booking &middot; 2-month pilot available</span>
+                            <span class="ts-price">&pound;60 / month
+                                <span class="ts-fee-note">No booking fees &middot; 2-month pilot available</span>
                             </span>
                             <span class="ts-ideal-label">This is for you if&hellip;</span>
-                            <p class="ts-desc">You&rsquo;re running sessions regularly and want the full marketing engine. Content going out every week, outreach happening on your behalf, analytics that tell you what&rsquo;s working. The 4% booking fee drops by half vs Free, meaning Growth pays for itself once you hit volume. Best for clubs doing 30+ bookings a month.</p>
+                            <p class="ts-desc">You&rsquo;re running sessions regularly and want the full marketing engine. Content going out every week, outreach happening on your behalf, analytics telling you what&rsquo;s working. At &pound;60/month, Growth gives you the tools and the team to start growing seriously. No booking fees on top.</p>
                             <a href="https://www.thenbrh.co.uk/growth-sign-up" class="ts-cta">Get Started &mdash; Growth &rarr;</a>
                         </div>
 
@@ -688,11 +761,11 @@
                         <div class="tier-summary-card featured stagger-item">
                             <span class="ts-badge">Recommended</span>
                             <span class="ts-name">Club House</span>
-                            <span class="ts-price">&pound;175 / month
+                            <span class="ts-price">&pound;125 / month
                                 <span class="ts-fee-note">+ 10% revenue share &middot; no booking fees &middot; 2-month pilot available</span>
                             </span>
                             <span class="ts-ideal-label">This is for you if&hellip;</span>
-                            <p class="ts-desc">You want a genuine growth partner and you&rsquo;re ready to hand off the marketing, admin and strategy. Zero booking fees, in-person video, two Boosted Reels per month, AI-backed research, and a dedicated Concierge. The 10% revenue share aligns our incentives completely &mdash; we grow when you grow.</p>
+                            <p class="ts-desc">You want a genuine growth partner and you&rsquo;re ready to hand off the marketing, admin and strategy. In-person video, two Boosted Reels per month, AI-backed research, and a dedicated Concierge. The 10% revenue share aligns our incentives completely &mdash; we grow when you grow.</p>
                             <a href="https://www.thenbrh.co.uk/club-house" class="ts-cta">Get Started &mdash; Club House &rarr;</a>
                         </div>
                     </div>
@@ -707,49 +780,59 @@
 <div id="neighbours-pass"></div>
 <section class="pass-section reveal">
     <div class="wrap">
+
+        <!-- Coming Soon banner -->
+        <div class="pass-cs-banner">
+            <span class="pass-cs-pill">In Development</span>
+            <p class="pass-cs-banner-text"><strong>The Neighbours Pass is not yet available.</strong> We&rsquo;re building it in collaboration with our partner clubs before launch.</p>
+        </div>
+
         <div class="pass-layout">
             <!-- Left: intro + benefits -->
             <div class="pass-intro">
-                <span class="eyebrow pass">For Players</span>
-                <h2>Introducing the Neighbours Pass.</h2>
-                <p class="pass-lead">The NBRH isn&rsquo;t just a tool for clubs &mdash; it&rsquo;s a network for the players who love sport. The Neighbours Pass is how players get more from every session, and how The NBRH builds revenue independent of club subscriptions.</p>
+                <span class="eyebrow pass">Coming Soon</span>
+                <h2>The Neighbours Pass is coming.</h2>
+                <p class="pass-lead">We&rsquo;re building a player-facing membership that gives your members more &mdash; and keeps them connected to your club. The Neighbours Pass is designed as a retention tool you can offer your players, tailored to your club, with access that stretches across the full NBRH network.</p>
                 <ul class="pass-benefits">
                     <li>
-                        <div class="pass-benefit-icon">&#9201;</div>
+                        <div class="pass-benefit-icon">&#127981;</div>
                         <div class="pass-benefit-text">
-                            <strong>Priority booking window</strong>
-                            <span>Pass holders get 24 hours of early access before sessions open to the public. Never miss a session because it sold out.</span>
+                            <strong>Built around your club</strong>
+                            <span>Each club will be able to shape how the Pass looks and what it offers their members &mdash; their sessions, their perks, their own terms. Not a one-size-fits-all product.</span>
                         </div>
                     </li>
                     <li>
                         <div class="pass-benefit-icon">&#128274;</div>
                         <div class="pass-benefit-text">
-                            <strong>Members-only &amp; capped sessions</strong>
-                            <span>Access to invite-only sessions and low-cap formats that non-members can&rsquo;t see on the platform.</span>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="pass-benefit-icon">&#128178;</div>
-                        <div class="pass-benefit-text">
-                            <strong>10&ndash;15% off at partner clubs</strong>
-                            <span>Discounts on pay-and-play sessions at every NBRH partner venue, automatically applied at checkout.</span>
+                            <strong>A retention tool that actually works</strong>
+                            <span>Once your members are on the Pass, their loyalty is tied to your club and to The NBRH. Their session history, preferences, and community all live on the platform.</span>
                         </div>
                     </li>
                     <li>
                         <div class="pass-benefit-icon">&#127760;</div>
                         <div class="pass-benefit-text">
-                            <strong>One pass. Every venue.</strong>
-                            <span>A single digital membership card that works across every club on The NBRH. One subscription, the whole network.</span>
+                            <strong>One pass. Every NBRH venue.</strong>
+                            <span>The Pass isn&rsquo;t limited to one club. Members will be able to use it across every partner venue on The NBRH &mdash; giving them more value, and giving your club more pull.</span>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="pass-benefit-icon">&#128178;</div>
+                        <div class="pass-benefit-text">
+                            <strong>Offered to your members, not the public</strong>
+                            <span>The Pass is something your club offers to its own players. We handle the infrastructure &mdash; you decide who gets access and how it&rsquo;s positioned within your community.</span>
                         </div>
                     </li>
                 </ul>
             </div>
 
-            <!-- Right: Pass card + flywheel note -->
+            <!-- Right: Pass card (Coming Soon) + notice -->
             <div>
                 <div class="pass-card-wrap">
+                    <!-- Coming Soon overlay -->
+                    <div class="pass-card-overlay">
+                        <span class="pass-card-overlay-badge">Coming Soon</span>
+                    </div>
                     <div class="pass-card">
-                        <!-- Decorative ring -->
                         <svg class="pass-card-ring" viewBox="0 0 220 220" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                             <circle cx="110" cy="110" r="100" stroke="#00C9A7" stroke-width="1" stroke-dasharray="6 5"/>
                             <circle cx="110" cy="110" r="75" stroke="#00C9A7" stroke-width="1" stroke-dasharray="6 5"/>
@@ -773,9 +856,9 @@
                     </div>
                 </div>
 
-                <div class="pass-flywheel">
-                    <span class="pass-flywheel-head">Why this matters for clubs</span>
-                    <p>Once your players have a Neighbours Pass, their <strong>booking history, preferences, and community</strong> are on The NBRH. Leaving the platform gets harder for everyone. The Pass is the moat &mdash; for your club, and for the business. At 500 active Pass holders, that&rsquo;s <strong>&pound;3,000/month in recurring revenue</strong> that grows independently of how many club subscriptions we have.</p>
+                <div class="pass-dev-notice">
+                    <span class="pass-dev-notice-head">&#128204; Currently in development</span>
+                    <p>The Neighbours Pass is something we&rsquo;re building carefully, in close collaboration with our partner clubs. If you&rsquo;re on a <strong>Growth or Club House plan</strong> and want input into how the Pass gets shaped for your community, get in touch &mdash; we&rsquo;d love to hear from you. Early partners will have a say in how it launches.</p>
                 </div>
             </div>
         </div>
@@ -939,11 +1022,12 @@
         <div class="collapsible-body-inner">
             <div class="collapsible-content">
                 <div class="faq-list">
-                    <div class="faq-item"><button class="faq-trigger" aria-expanded="false"><span class="faq-question">What&rsquo;s the difference between the three tiers?</span><span class="faq-chevron">&#9660;</span></button><div class="faq-body"><div class="faq-body-inner"><div class="faq-answer">Free is the entry point &mdash; no monthly fee, just an 8% cut on every booking. You get your sessions listed, your Club Hub page, and the booking system. Growth is &pound;75/month with a 4% booking fee and adds the full marketing engine: content, outreach, analytics, and ads management. Club House is &pound;175/month with a 10% revenue share on gross session income and zero booking fees &mdash; plus in-person video, a dedicated Concierge, AI research, and full platform visibility. The comparison table above breaks it all down row by row.</div></div></div></div>
-                    <div class="faq-item"><button class="faq-trigger" aria-expanded="false"><span class="faq-question">How does the Club House revenue share work?</span><span class="faq-chevron">&#9660;</span></button><div class="faq-body"><div class="faq-body-inner"><div class="faq-answer">It&rsquo;s 10% of your gross session revenue &mdash; what players pay for your sessions in total. There are no booking fees on top of that. So if you run sessions generating &pound;1,000/month, we take &pound;100. At &pound;2,000/month, we take &pound;200 &mdash; and you&rsquo;re still paying less than most agencies charge for a single campaign. The share replaces all per-booking fees and aligns our incentives completely: we grow when you grow.</div></div></div></div>
-                    <div class="faq-item"><button class="faq-trigger" aria-expanded="false"><span class="faq-question">When does Free stop making sense?</span><span class="faq-chevron">&#9660;</span></button><div class="faq-body"><div class="faq-body-inner"><div class="faq-answer">The crossover point from Free to Growth is roughly 30 bookings per month at an average session price of &pound;8&ndash;10. At that volume, the drop from 8% to 4% saves you more than the &pound;75 monthly fee &mdash; so Growth pays for itself. If you&rsquo;re below that, Free is the right place to start. We&rsquo;ll flag the crossover when it gets close.</div></div></div></div>
+                    <div class="faq-item"><button class="faq-trigger" aria-expanded="false"><span class="faq-question">What&rsquo;s the difference between the three tiers?</span><span class="faq-chevron">&#9660;</span></button><div class="faq-body"><div class="faq-body-inner"><div class="faq-answer">Free is the entry point at &pound;30/month. You get your sessions listed, your Club Hub page, and the booking system. No booking fees on any plan. Growth is &pound;60/month and adds the full marketing engine: content, outreach, analytics, and ads management. Club House is &pound;125/month with a 10% revenue share on gross session income &mdash; plus in-person video, a dedicated Concierge, AI research, and full platform visibility. The comparison table above breaks it all down row by row.</div></div></div></div>
+                    <div class="faq-item"><button class="faq-trigger" aria-expanded="false"><span class="faq-question">How does the Club House revenue share work?</span><span class="faq-chevron">&#9660;</span></button><div class="faq-body"><div class="faq-body-inner"><div class="faq-answer">It&rsquo;s 10% of your gross session revenue &mdash; what players pay for your sessions in total. So if you run sessions generating &pound;1,000/month, we take &pound;100. At &pound;2,000/month, we take &pound;200 &mdash; and you&rsquo;re still paying less than most agencies charge for a single campaign. The share aligns our incentives completely: we grow when you grow.</div></div></div></div>
+                    <div class="faq-item"><button class="faq-trigger" aria-expanded="false"><span class="faq-question">Are there any booking fees?</span><span class="faq-chevron">&#9660;</span></button><div class="faq-body"><div class="faq-body-inner"><div class="faq-answer">No. There are no booking fees or per-transaction charges on any plan. Free, Growth, and Club House all include zero booking fees. You pay your flat monthly fee (and a revenue share on Club House) &mdash; that&rsquo;s it. The pricing is designed to be straightforward and predictable.</div></div></div></div>
+                    <div class="faq-item"><button class="faq-trigger" aria-expanded="false"><span class="faq-question">When does the Free plan stop making sense?</span><span class="faq-chevron">&#9660;</span></button><div class="faq-body"><div class="faq-body-inner"><div class="faq-answer">Free at &pound;30/month is the right starting point while you&rsquo;re establishing yourself on the platform. Once you&rsquo;re running regular sessions and want the marketing engine working for you &mdash; content, outreach, analytics, ads &mdash; Growth at &pound;60/month is the natural next step. The difference isn&rsquo;t just the fee; it&rsquo;s the full team behind your club.</div></div></div></div>
                     <div class="faq-item"><button class="faq-trigger" aria-expanded="false"><span class="faq-question">What&rsquo;s the pilot offer and how do I qualify?</span><span class="faq-chevron">&#9660;</span></button><div class="faq-body"><div class="faq-body-inner"><div class="faq-answer">Growth and Club House both include a free 2-month pilot. To qualify, you need to have at least 4 active sessions listed on the platform and complete a short onboarding call with the team. This keeps things real on both sides &mdash; the pilot is for clubs that are genuinely ready to grow, not a free trial that sits idle. The 2-month clock starts from your first content drop, not from sign-up.</div></div></div></div>
-                    <div class="faq-item"><button class="faq-trigger" aria-expanded="false"><span class="faq-question">What is the Neighbours Pass and how does it work for my club?</span><span class="faq-chevron">&#9660;</span></button><div class="faq-body"><div class="faq-body-inner"><div class="faq-answer">The Neighbours Pass is a &pound;5.99/month player membership that works across every NBRH partner club. Pass holders get priority booking, access to members-only sessions, and 10&ndash;15% off pay-and-play sessions at partner venues. For your club, it means your regular players are embedded in The NBRH network. Their booking history, preferences, and session habits live on the platform &mdash; which makes them stickier to you and to us. You don&rsquo;t need to do anything to enable it; it&rsquo;s platform-wide.</div></div></div></div>
+                    <div class="faq-item"><button class="faq-trigger" aria-expanded="false"><span class="faq-question">What is the Neighbours Pass and when is it available?</span><span class="faq-chevron">&#9660;</span></button><div class="faq-body"><div class="faq-body-inner"><div class="faq-answer">The Neighbours Pass is a player-facing membership we&rsquo;re currently building. It&rsquo;s not yet available. When it launches, it will be a club-tailored retention tool &mdash; something your club can offer its own members, designed around your sessions and community. It will also give members access across the full NBRH network, not just one club. If you&rsquo;re on Growth or Club House and want to be involved in shaping it, get in touch.</div></div></div></div>
                     <div class="faq-item"><button class="faq-trigger" aria-expanded="false"><span class="faq-question">How quickly can we get set up?</span><span class="faq-chevron">&#9660;</span></button><div class="faq-body"><div class="faq-body-inner"><div class="faq-answer">Most clubs are fully live within two weeks. Week one is setup &mdash; your page, booking system, and sessions listed. Week two is launch &mdash; first content goes out and outreach kicks off. We&rsquo;ll tell you exactly what we need and when. It&rsquo;s usually less than you think. For Growth and Club House pilots, the onboarding call happens in week one.</div></div></div></div>
                     <div class="faq-item"><button class="faq-trigger" aria-expanded="false"><span class="faq-question">Who covers the ad spend for Instagram campaigns?</span><span class="faq-chevron">&#9660;</span></button><div class="faq-body"><div class="faq-body-inner"><div class="faq-answer">We create, target, and manage the ads &mdash; you pay the actual Meta ad spend. We&rsquo;ll agree a recommended budget with you in advance, and there&rsquo;s never any obligation to increase it. We handle the creative and reporting either way.</div></div></div></div>
                     <div class="faq-item"><button class="faq-trigger" aria-expanded="false"><span class="faq-question">Do you only work with London-based clubs?</span><span class="faq-chevron">&#9660;</span></button><div class="faq-body"><div class="faq-body-inner"><div class="faq-answer">Right now, yes &mdash; The NBRH platform is focused on London, where our discovery audience, outreach network, and local knowledge is strongest. We plan to expand to other cities as the platform grows. If you&rsquo;re just outside London, get in touch &mdash; there may still be a way to make it work.</div></div></div></div>
@@ -971,7 +1055,7 @@
     </svg>
     <div class="wrap cta-band-inner">
         <h2>Ready to grow your club?</h2>
-        <p>Start for free and pay only when players book. When you&rsquo;re ready for the full engine, Growth and Club House are waiting &mdash; with a free 2-month pilot to prove it works first.</p>
+        <p>Start from &pound;30 a month with no booking fees. When you&rsquo;re ready for the full engine, Growth and Club House are waiting &mdash; with a free 2-month pilot to prove it works first.</p>
         <a href="mailto:thenbhr@gmail.com" class="cta-btn">Let&rsquo;s Talk &rarr;</a>
     </div>
 </div>
