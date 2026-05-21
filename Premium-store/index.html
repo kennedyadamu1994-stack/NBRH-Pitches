@@ -14,7 +14,6 @@
             --accent: #FF1B6E;
             --accent-dim: rgba(255,27,110,0.10);
             --accent-mid: rgba(255,27,110,0.28);
-            --accent-bright: rgba(255,27,110,0.55);
             --pass-accent: #00C9A7;
             --pass-dim: rgba(0,201,167,0.10);
             --pass-mid: rgba(0,201,167,0.28);
@@ -40,16 +39,15 @@
         }
         html { scroll-behavior: smooth; font-size: 16px; }
         body { font-family: var(--font-sans); color: var(--text); background: var(--bg); line-height: 1.6; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
-
         .scroll-bar { position: fixed; top: 0; left: 0; height: 2px; background: var(--accent); z-index: 2000; width: 0%; transition: width 0.08s linear; }
 
         /* ── Nav ── */
         nav { position: sticky; top: 0; background: var(--nav-bg); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); z-index: 999; }
-        .nav-inner { max-width: var(--max); margin: 0 auto; padding: 0.9rem 1.5rem; display: flex; align-items: center; justify-content: space-between; gap: 2rem; }
-        .nav-brand img { height: 30px; width: auto; display: block; }
-        .nav-links { display: flex; gap: 1.5rem; list-style: none; overflow-x: auto; }
+        .nav-inner { max-width: var(--max); margin: 0 auto; padding: 0.9rem 1.25rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+        .nav-brand img { height: 28px; width: auto; display: block; flex-shrink: 0; }
+        .nav-links { display: flex; gap: 1.25rem; list-style: none; overflow-x: auto; -webkit-overflow-scrolling: touch; }
         .nav-links::-webkit-scrollbar { display: none; }
-        .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 0.8125rem; white-space: nowrap; letter-spacing: 0.01em; transition: color 0.2s; position: relative; padding-bottom: 2px; }
+        .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 0.78rem; white-space: nowrap; letter-spacing: 0.01em; transition: color 0.2s; position: relative; padding-bottom: 2px; }
         .nav-links a::after { content: ''; position: absolute; bottom: -2px; left: 0; right: 0; height: 2px; background: var(--accent); border-radius: 1px; transform: scaleX(0); transform-origin: left; transition: transform 0.22s ease-out; }
         .nav-links a:hover, .nav-links a.active { color: var(--accent); }
         .nav-links a.active::after, .nav-links a:hover::after { transform: scaleX(1); }
@@ -58,417 +56,373 @@
         .nav-links a.pass-link:hover, .nav-links a.pass-link.active { color: var(--pass-accent); }
 
         /* ── Layout ── */
-        .wrap { max-width: var(--max); margin: 0 auto; padding: 0 1.5rem; }
+        .wrap { max-width: var(--max); margin: 0 auto; padding: 0 1.25rem; }
         .divider { height: 1px; background: var(--border); }
         .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.55s ease-out, transform 0.55s ease-out; }
         .reveal.in { opacity: 1; transform: none; }
 
         /* ── Eyebrow ── */
-        .eyebrow { font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.13em; color: var(--accent); margin-bottom: 0.75rem; display: inline-flex; align-items: center; gap: 0.55rem; }
-        .eyebrow::before { content: ''; display: inline-block; width: 18px; height: 1.5px; background: var(--accent); border-radius: 1px; flex-shrink: 0; }
+        .eyebrow { font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.13em; color: var(--accent); margin-bottom: 0.75rem; display: inline-flex; align-items: center; gap: 0.55rem; }
+        .eyebrow::before { content: ''; display: inline-block; width: 16px; height: 1.5px; background: var(--accent); border-radius: 1px; flex-shrink: 0; }
         .eyebrow.pass { color: var(--pass-accent); }
         .eyebrow.pass::before { background: var(--pass-accent); }
 
         h1, h2, h3 { font-family: var(--font-serif); font-weight: 400; }
-        h1 { font-size: clamp(2.8rem, 7.5vw, 4.8rem); line-height: 1.04; letter-spacing: -0.03em; }
-        h2 { font-size: clamp(1.6rem, 4vw, 2.4rem); line-height: 1.15; letter-spacing: -0.015em; }
-        .section-head { text-align: center; margin-bottom: 2.75rem; }
+        h1 { font-size: clamp(2.4rem, 7vw, 4.8rem); line-height: 1.04; letter-spacing: -0.03em; }
+        h2 { font-size: clamp(1.5rem, 4vw, 2.4rem); line-height: 1.15; letter-spacing: -0.015em; }
+        .section-head { text-align: center; margin-bottom: 2.5rem; }
         .section-head h2 { margin-bottom: 0.5rem; }
-        .section-head .sub { font-size: 1rem; color: var(--text-muted); font-style: italic; max-width: 52ch; margin: 0 auto; }
+        .section-head .sub { font-size: 0.9375rem; color: var(--text-muted); font-style: italic; max-width: 52ch; margin: 0 auto; }
 
         /* ── Hero ── */
-        .hero { position: relative; overflow: hidden; padding: 0; }
+        .hero { position: relative; overflow: hidden; }
         .hero-bg { position: absolute; inset: 0; background: radial-gradient(ellipse 80% 55% at 50% 0%, rgba(255,27,110,0.13) 0%, transparent 70%); pointer-events: none; }
         .hero-bg::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to bottom, transparent 50%, var(--bg) 100%); }
         .hero-grain { position: absolute; inset: 0; background-image: var(--noise); background-repeat: repeat; background-size: 400px 400px; opacity: 0.038; pointer-events: none; z-index: 1; mix-blend-mode: screen; }
-        .hero-content { position: relative; z-index: 2; padding: 6rem 1.5rem 4.5rem; text-align: center; }
-        @media (max-width: 768px) { .hero-content { padding: 4rem 1.5rem 3rem; } }
-        .store-badge { display: inline-flex; align-items: center; gap: 0.5rem; background: var(--accent-dim); border: 1px solid var(--accent-mid); border-radius: 100px; padding: 0.35rem 1rem; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin-bottom: 1.5rem; }
-        .hero h1 { margin-bottom: 1.1rem; max-width: 18ch; margin-left: auto; margin-right: auto; }
-        .hero .lead { font-size: clamp(1rem, 2vw, 1.15rem); color: var(--text-muted); max-width: 54ch; margin: 0 auto 2.5rem; line-height: 1.75; }
-        .hero-ctas { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-bottom: 3rem; }
-        .btn-primary { display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.8rem 1.6rem; background: var(--accent); color: #fff; border-radius: var(--r); font-size: 0.9rem; font-weight: 500; text-decoration: none; transition: all 0.2s; border: none; cursor: pointer; font-family: var(--font-sans); }
+        .hero-content { position: relative; z-index: 2; padding: 5rem 1.25rem 4rem; text-align: center; }
+        @media (max-width: 600px) { .hero-content { padding: 3.5rem 1.25rem 2.5rem; } }
+        .store-badge { display: inline-flex; align-items: center; gap: 0.5rem; background: var(--accent-dim); border: 1px solid var(--accent-mid); border-radius: 100px; padding: 0.3rem 0.9rem; font-size: 0.68rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin-bottom: 1.25rem; }
+        .hero h1 { margin-bottom: 1rem; max-width: 18ch; margin-left: auto; margin-right: auto; }
+        .hero .lead { font-size: clamp(0.9375rem, 2vw, 1.1rem); color: var(--text-muted); max-width: 50ch; margin: 0 auto 2.25rem; line-height: 1.75; }
+        .hero-ctas { display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap; margin-bottom: 2.75rem; }
+        .btn-primary { display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.75rem 1.5rem; background: var(--accent); color: #fff; border-radius: var(--r); font-size: 0.875rem; font-weight: 500; text-decoration: none; transition: all 0.2s; border: none; cursor: pointer; font-family: var(--font-sans); }
         .btn-primary:hover { opacity: 0.88; transform: translateY(-1px); }
-        .btn-ghost { display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.8rem 1.6rem; background: transparent; color: var(--text-muted); border-radius: var(--r); border: 1px solid var(--border-strong); font-size: 0.9rem; font-weight: 500; text-decoration: none; transition: all 0.2s; cursor: pointer; font-family: var(--font-sans); }
+        .btn-ghost { display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.75rem 1.5rem; background: transparent; color: var(--text-muted); border-radius: var(--r); border: 1px solid var(--border-strong); font-size: 0.875rem; font-weight: 500; text-decoration: none; transition: all 0.2s; cursor: pointer; font-family: var(--font-sans); }
         .btn-ghost:hover { color: var(--text); border-color: var(--accent-mid); }
 
         /* Hero stats */
-        .hero-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; justify-items: center; padding-top: 2rem; border-top: 1px solid var(--border); }
+        .hero-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; padding-top: 1.75rem; border-top: 1px solid var(--border); }
         .hero-stat { text-align: center; }
-        .hero-stat-num { font-family: var(--font-serif); font-size: clamp(1.5rem, 3.5vw, 2.1rem); color: var(--accent); display: block; line-height: 1; letter-spacing: -0.02em; }
+        .hero-stat-num { font-family: var(--font-serif); font-size: clamp(1.4rem, 3.5vw, 2rem); color: var(--accent); display: block; line-height: 1.1; letter-spacing: -0.02em; }
         .hero-stat-num.pass-color { color: var(--pass-accent); }
-        .hero-stat-label { font-size: 0.76rem; color: var(--text-faint); margin-top: 0.4rem; letter-spacing: 0.02em; line-height: 1.4; }
-        @media (max-width: 480px) { .hero-stats { gap: 0.75rem; } }
+        .hero-stat-label { font-size: 0.72rem; color: var(--text-faint); margin-top: 0.35rem; line-height: 1.4; }
+        @media (max-width: 400px) { .hero-stats { gap: 0.5rem; } .hero-stat-label { font-size: 0.65rem; } }
 
         /* ── Pilot Banner ── */
-        .pilot-banner { background: linear-gradient(90deg, rgba(255,27,110,0.07) 0%, rgba(255,27,110,0.12) 50%, rgba(255,27,110,0.07) 100%); border-top: 1px solid var(--accent-mid); border-bottom: 1px solid var(--accent-mid); padding: 1.25rem 1.5rem; text-align: center; position: relative; overflow: hidden; }
+        .pilot-banner { background: linear-gradient(90deg, rgba(255,27,110,0.07) 0%, rgba(255,27,110,0.12) 50%, rgba(255,27,110,0.07) 100%); border-top: 1px solid var(--accent-mid); border-bottom: 1px solid var(--accent-mid); padding: 1.1rem 1.25rem; text-align: center; position: relative; overflow: hidden; }
         .pilot-banner::before { content: ''; position: absolute; top: 0; bottom: 0; left: 0; width: 3px; background: var(--accent); }
         .pilot-banner::after { content: ''; position: absolute; top: 0; bottom: 0; right: 0; width: 3px; background: var(--accent); }
-        .pilot-banner-inner { max-width: var(--max); margin: 0 auto; display: flex; align-items: center; justify-content: center; gap: 0.75rem; flex-wrap: wrap; }
-        .pilot-pill { background: var(--accent); color: #fff; font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; border-radius: 100px; padding: 0.22rem 0.8rem; flex-shrink: 0; box-shadow: 0 2px 12px rgba(255,27,110,0.4); }
-        .pilot-banner-text { font-size: 0.9rem; color: var(--text-muted); }
+        .pilot-banner-inner { max-width: var(--max); margin: 0 auto; display: flex; align-items: center; justify-content: center; gap: 0.6rem; flex-wrap: wrap; }
+        .pilot-pill { background: var(--accent); color: #fff; font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; border-radius: 100px; padding: 0.2rem 0.7rem; flex-shrink: 0; }
+        .pilot-banner-text { font-size: 0.875rem; color: var(--text-muted); }
         .pilot-banner-text strong { color: var(--text); font-weight: 500; }
-        .pilot-qualifier { font-size: 0.78rem; color: var(--text-faint); font-style: italic; width: 100%; text-align: center; margin-top: 0.2rem; }
+        .pilot-qualifier { font-size: 0.75rem; color: var(--text-faint); font-style: italic; width: 100%; text-align: center; margin-top: 0.2rem; }
         .pilot-qualifier strong { color: var(--accent); font-style: normal; font-weight: 500; }
 
-        /* ── Cards ── */
-        .pain-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-bottom: 2.5rem; }
-        @media (max-width: 900px) { .pain-grid { grid-template-columns: repeat(2, 1fr); } }
-        @media (max-width: 560px) { .pain-grid { grid-template-columns: 1fr; } }
-        .pain-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--r-lg); padding: 1.5rem; position: relative; overflow: hidden; transition: border-color 0.25s, transform 0.25s ease-out, box-shadow 0.25s; }
-        .pain-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: var(--accent); opacity: 0.4; transition: opacity 0.25s; }
-        .pain-card:hover { border-color: var(--accent-mid); transform: translateY(-3px); box-shadow: 0 0 0 1px rgba(255,27,110,0.18), 0 12px 36px rgba(255,27,110,0.12); }
-        .pain-card:hover::before { opacity: 1; }
-        .pain-icon { font-size: 1.5rem; margin-bottom: 0.85rem; display: block; }
-        .pain-card h3 { font-family: var(--font-serif); font-size: 1.05rem; margin-bottom: 0.4rem; }
-        .pain-card p { font-size: 0.835rem; color: var(--text-muted); line-height: 1.65; }
-
         /* ── How cards ── */
-        .how-grid { display: flex; gap: 1rem; overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; padding-bottom: 1rem; padding-left: 1.5rem; padding-right: 1.5rem; margin-left: -1.5rem; margin-right: -1.5rem; cursor: grab; }
+        .how-grid { display: flex; gap: 1rem; overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; padding-bottom: 1rem; padding-left: 1.25rem; padding-right: 1.25rem; margin-left: -1.25rem; margin-right: -1.25rem; cursor: grab; }
         .how-grid:active { cursor: grabbing; }
-        .how-grid::-webkit-scrollbar { height: 4px; }
+        .how-grid::-webkit-scrollbar { height: 3px; }
         .how-grid::-webkit-scrollbar-track { background: var(--bg-subtle); border-radius: 100px; }
         .how-grid::-webkit-scrollbar-thumb { background: var(--accent-mid); border-radius: 100px; }
-        .how-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--r-lg); padding: 1.5rem; transition: border-color 0.25s, transform 0.25s ease-out, box-shadow 0.25s; flex: 0 0 280px; scroll-snap-align: start; }
-        @media (max-width: 768px) { .how-card { flex: 0 0 75vw; } }
-        @media (max-width: 480px) { .how-card { flex: 0 0 85vw; } }
-        .how-card:hover { border-color: var(--accent-mid); transform: translateY(-3px); box-shadow: 0 0 0 1px rgba(255,27,110,0.18), 0 12px 36px rgba(255,27,110,0.12); }
-        .how-card-icon { width: 40px; height: 40px; background: var(--accent-dim); border: 1px solid var(--accent-mid); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1rem; margin-bottom: 1rem; }
-        .how-card h3 { font-family: var(--font-serif); font-size: 1.05rem; margin-bottom: 0.4rem; }
-        .how-card p { font-size: 0.835rem; color: var(--text-muted); line-height: 1.65; }
+        .how-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--r-lg); padding: 1.4rem; transition: border-color 0.25s, transform 0.25s ease-out, box-shadow 0.25s; flex: 0 0 260px; scroll-snap-align: start; }
+        @media (max-width: 600px) { .how-card { flex: 0 0 78vw; } }
+        .how-card:hover { border-color: var(--accent-mid); transform: translateY(-3px); box-shadow: 0 12px 36px rgba(255,27,110,0.12); }
+        .how-card-icon { width: 38px; height: 38px; background: var(--accent-dim); border: 1px solid var(--accent-mid); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.95rem; margin-bottom: 0.9rem; }
+        .how-card h3 { font-family: var(--font-serif); font-size: 1rem; margin-bottom: 0.35rem; }
+        .how-card p { font-size: 0.82rem; color: var(--text-muted); line-height: 1.65; }
 
         /* ── Stagger ── */
-        .stagger-item { opacity: 0; transform: translateY(16px); transition: opacity 0.45s ease-out, transform 0.45s ease-out; }
+        .stagger-item { opacity: 0; transform: translateY(14px); transition: opacity 0.45s ease-out, transform 0.45s ease-out; }
         .stagger-item.card-visible { opacity: 1; transform: none; }
 
         /* ── Compare table ── */
-        .compare-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: var(--r-lg); margin-bottom: 2.5rem; -webkit-overflow-scrolling: touch; }
-        @media (max-width: 767px) { .compare-wrap { margin-left: -1.5rem; margin-right: -1.5rem; border-left: none; border-right: none; border-radius: 0; overflow-x: visible; } }
-        .compare-tbl { width: 100%; border-collapse: collapse; min-width: 700px; }
+        /* Scroll hint — mobile only */
+        .compare-scroll-hint {
+            display: none;
+            font-size: 0.72rem;
+            color: var(--text-faint);
+            font-style: italic;
+            text-align: center;
+            padding: 0 0 0.6rem;
+        }
+        @media (max-width: 767px) { .compare-scroll-hint { display: block; } }
+
+        .compare-wrap {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            border: 1px solid var(--border);
+            border-radius: var(--r-lg);
+            margin-bottom: 2.5rem;
+        }
+        @media (max-width: 767px) {
+            .compare-wrap {
+                margin-left: -1.25rem;
+                margin-right: -1.25rem;
+                border-left: none;
+                border-right: none;
+                border-radius: 0;
+            }
+        }
+
+        .compare-tbl { width: 100%; border-collapse: collapse; min-width: 660px; }
+        @media (max-width: 767px) { .compare-tbl { min-width: 520px; } }
+
         .compare-tbl thead tr { border-bottom: 1px solid var(--border); }
-        .compare-tbl th { padding: 1.1rem 1.25rem; text-align: left; background: var(--bg-subtle); }
-        .compare-tbl th:first-child { color: var(--text-faint); font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.09em; }
+        .compare-tbl th { padding: 1rem 1rem; text-align: left; background: var(--bg-subtle); vertical-align: top; }
+        .compare-tbl th:first-child { color: var(--text-faint); font-size: 0.68rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.09em; }
         .compare-tbl th:not(:first-child) { text-align: center; }
         .compare-tbl th:nth-child(4) { background: rgba(255,27,110,0.10) !important; box-shadow: inset 0 3px 0 var(--accent); }
         .compare-tbl td:nth-child(4) { background: rgba(255,27,110,0.05) !important; }
         .compare-tbl tbody tr:hover td:nth-child(4) { background: rgba(255,27,110,0.09) !important; }
-        .th-tier-name { font-family: var(--font-serif); font-size: 1rem; font-weight: 400; color: var(--text); display: block; }
-        .th-tier-price { font-size: 0.73rem; color: var(--text-muted); display: block; margin-top: 0.2rem; }
-        .th-tier-highlight .th-tier-name { font-size: 1.05rem; color: var(--accent); }
-        .th-tier-highlight .th-tier-price { color: var(--accent); opacity: 0.8; }
+
+        .th-tier-name { font-family: var(--font-serif); font-size: 0.95rem; font-weight: 400; color: var(--text); display: block; }
+        .th-tier-price { font-size: 0.68rem; color: var(--text-muted); display: block; margin-top: 0.2rem; }
+        .th-tier-highlight .th-tier-name { color: var(--accent); }
+        .th-tier-highlight .th-tier-price { color: rgba(255,27,110,0.75); }
         .th-ch-wrap { display: inline-block; }
-        .th-ch-badge { display: inline-block; background: var(--accent); color: #fff; font-family: var(--font-sans); font-size: 0.58rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; border-radius: 100px; padding: 0.12rem 0.55rem; margin-bottom: 0.35rem; }
-        .compare-tbl td { padding: 0.75rem 1.25rem; border-bottom: 1px solid var(--border); font-size: 0.855rem; color: var(--text-muted); vertical-align: middle; }
+        /* Recommended label — plain text, no pill */
+        .th-ch-badge { display: block; font-family: var(--font-sans); font-size: 0.58rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent); margin-bottom: 0.3rem; }
+
+        .compare-tbl td { padding: 0.65rem 1rem; border-bottom: 1px solid var(--border); font-size: 0.835rem; color: var(--text-muted); vertical-align: middle; }
         .compare-tbl td:not(:first-child) { text-align: center; }
         .compare-tbl tr:last-child td { border-bottom: none; }
         .compare-tbl tbody tr:hover td { background: rgba(255,255,255,0.02); }
-        .cat-row td { background: var(--bg-subtle) !important; padding: 0.5rem 1.25rem; }
-        .cat-label { font-size: 0.67rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-faint); }
+        .cat-row td { background: var(--bg-subtle) !important; padding: 0.4rem 1rem; }
+        .cat-label { font-size: 0.64rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-faint); }
         .price-row td { background: var(--bg-card); }
-        .price-row td:nth-child(4) { color: var(--accent); font-family: var(--font-serif); font-size: 1rem; }
-        .yes { color: var(--accent); font-size: 1rem; }
+        .price-row td:nth-child(4) { color: var(--accent); font-family: var(--font-serif); }
+        .yes { color: var(--accent); font-size: 0.95rem; }
         .no { color: var(--text-faint); }
-        .soon-badge { display: inline-flex; align-items: center; font-size: 0.6rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent); background: var(--accent-dim); border: 1px solid var(--accent-mid); border-radius: 100px; padding: 0.1rem 0.45rem; white-space: nowrap; vertical-align: middle; margin-left: 0.3rem; }
-        .compare-note { font-size: 0.72rem; color: var(--text-faint); font-style: italic; display: block; margin-top: 0.1rem; }
-        .discount-badge { display: inline-block; font-size: 0.72rem; color: var(--accent); font-weight: 500; }
 
-        /* Mobile table — clean up headers to prevent clashing */
+        /* Coming soon — plain italic text, no pill/badge */
+        .soon-text { font-size: 0.68rem; color: var(--text-faint); font-style: italic; display: inline; }
+
+        .compare-note { font-size: 0.67rem; color: var(--text-faint); font-style: italic; display: block; margin-top: 0.1rem; }
+        .discount-badge { font-size: 0.72rem; color: var(--accent); font-weight: 500; }
+
+        /* Mobile table adjustments */
         @media (max-width: 767px) {
-            .compare-tbl { min-width: unset; width: 100%; table-layout: fixed; }
-            .compare-tbl th:first-child, .compare-tbl td:first-child { width: 36%; white-space: normal; word-break: break-word; }
-            .compare-tbl th:not(:first-child), .compare-tbl td:not(:first-child) { width: 21.3%; }
-            .compare-tbl th { padding: 0.65rem 0.4rem; font-size: 0.6rem; }
-            .compare-tbl td { padding: 0.55rem 0.4rem; font-size: 0.7rem; }
-            .th-tier-name { font-size: 0.72rem; }
-            .th-tier-price { font-size: 0.56rem; }
+            .compare-tbl th { padding: 0.75rem 0.6rem; }
+            .compare-tbl td { padding: 0.55rem 0.6rem; font-size: 0.72rem; }
+            .th-tier-name { font-size: 0.8rem; }
+            .th-tier-price { font-size: 0.6rem; }
             .yes { font-size: 0.85rem; }
-            .soon-badge { font-size: 0.5rem; display: block; margin: 0.2rem 0 0; }
             .compare-note { font-size: 0.58rem; }
         }
-        /* On very small screens: hide tier price details from header (visible in the table body anyway) */
-        @media (max-width: 480px) {
+        @media (max-width: 420px) {
             .th-tier-price { display: none; }
-            .th-ch-badge { font-size: 0.5rem; padding: 0.1rem 0.35rem; margin-bottom: 0.2rem; }
-            .compare-tbl th { padding: 0.55rem 0.3rem; vertical-align: top; }
-            .compare-tbl th:first-child { width: 38%; }
-            .compare-tbl th:not(:first-child) { width: 20.6%; }
         }
 
         /* ── Tier summary cards ── */
-        .tier-summary-grid { display: flex; gap: 1.25rem; overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; padding: 0.75rem 1.5rem 1.25rem; margin-left: -1.5rem; margin-right: -1.5rem; margin-top: 1.25rem; cursor: grab; }
+        .tier-summary-grid { display: flex; gap: 1.1rem; overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; padding: 0.5rem 1.25rem 1.1rem; margin-left: -1.25rem; margin-right: -1.25rem; margin-top: 1.1rem; cursor: grab; }
         .tier-summary-grid:active { cursor: grabbing; }
-        .tier-summary-grid::-webkit-scrollbar { height: 4px; }
+        .tier-summary-grid::-webkit-scrollbar { height: 3px; }
         .tier-summary-grid::-webkit-scrollbar-track { background: var(--bg-subtle); border-radius: 100px; }
         .tier-summary-grid::-webkit-scrollbar-thumb { background: var(--accent-mid); border-radius: 100px; }
-        .tier-summary-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--r-lg); padding: 1.5rem; display: flex; flex-direction: column; position: relative; transition: border-color 0.25s, transform 0.25s ease-out, box-shadow 0.25s; flex: 0 0 300px; scroll-snap-align: start; }
-        @media (max-width: 768px) { .tier-summary-card { flex: 0 0 80vw; } }
-        @media (max-width: 480px) { .tier-summary-card { flex: 0 0 88vw; } }
-        .tier-summary-card:hover { border-color: var(--accent-mid); transform: translateY(-3px); box-shadow: 0 0 0 1px rgba(255,27,110,0.18), 0 12px 36px rgba(255,27,110,0.1); }
+        .tier-summary-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--r-lg); padding: 1.4rem; display: flex; flex-direction: column; position: relative; transition: border-color 0.25s, transform 0.25s ease-out, box-shadow 0.25s; flex: 0 0 290px; scroll-snap-align: start; }
+        @media (max-width: 600px) { .tier-summary-card { flex: 0 0 82vw; } }
+        @media (max-width: 380px) { .tier-summary-card { flex: 0 0 90vw; } }
+        .tier-summary-card:hover { border-color: var(--accent-mid); transform: translateY(-3px); box-shadow: 0 12px 36px rgba(255,27,110,0.1); }
         .tier-summary-card.featured { border-color: var(--accent-mid); background: var(--accent-dim); }
-        .tier-summary-card.featured:hover { box-shadow: 0 0 0 1px rgba(255,27,110,0.35), 0 16px 40px rgba(255,27,110,0.18); }
-        .ts-badge { position: absolute; top: -10px; left: 50%; transform: translateX(-50%); background: var(--accent); color: #fff; font-size: 0.62rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.09em; border-radius: 100px; padding: 0.15rem 0.65rem; white-space: nowrap; box-shadow: 0 2px 12px rgba(255,27,110,0.4); }
-        .ts-name { font-family: var(--font-serif); font-size: 1.25rem; margin-bottom: 0.2rem; }
-        .ts-price { font-size: 0.8rem; color: var(--accent); font-weight: 500; margin-bottom: 0.85rem; padding-bottom: 0.85rem; border-bottom: 1px solid var(--border); }
-        .ts-fee-note { font-size: 0.72rem; color: var(--text-faint); font-weight: 400; display: block; margin-top: 0.15rem; }
-        .ts-ideal-label { font-size: 0.67rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.09em; color: var(--accent); display: block; margin-bottom: 0.4rem; }
-        .ts-desc { font-size: 0.845rem; color: var(--text-muted); line-height: 1.7; flex: 1; margin-bottom: 1.25rem; }
-        .ts-cta { display: flex; align-items: center; justify-content: center; gap: 0.4rem; width: 100%; padding: 0.75rem 1rem; border-radius: var(--r); border: none; cursor: pointer; font-family: var(--font-sans); font-size: 0.865rem; font-weight: 500; text-decoration: none; background: var(--accent); color: #fff; transition: all 0.2s; }
+        /* Recommended badge — plain text above card, no pill shape */
+        .ts-badge { position: absolute; top: -10px; left: 50%; transform: translateX(-50%); background: var(--accent); color: #fff; font-size: 0.58rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.09em; border-radius: 2px; padding: 0.12rem 0.6rem; white-space: nowrap; }
+        .ts-name { font-family: var(--font-serif); font-size: 1.2rem; margin-bottom: 0.2rem; }
+        .ts-price { font-size: 0.8rem; color: var(--accent); font-weight: 500; margin-bottom: 0.8rem; padding-bottom: 0.8rem; border-bottom: 1px solid var(--border); }
+        .ts-fee-note { font-size: 0.7rem; color: var(--text-faint); font-weight: 400; display: block; margin-top: 0.15rem; }
+        .ts-ideal-label { font-size: 0.65rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.09em; color: var(--accent); display: block; margin-bottom: 0.35rem; }
+        .ts-desc { font-size: 0.83rem; color: var(--text-muted); line-height: 1.7; flex: 1; margin-bottom: 1.1rem; }
+        .ts-cta { display: flex; align-items: center; justify-content: center; gap: 0.4rem; width: 100%; padding: 0.7rem 1rem; border-radius: var(--r); border: none; cursor: pointer; font-family: var(--font-sans); font-size: 0.845rem; font-weight: 500; text-decoration: none; background: var(--accent); color: #fff; transition: all 0.2s; }
         .ts-cta:hover { opacity: 0.88; transform: translateY(-1px); }
         .ts-cta.ghost-cta { background: transparent; border: 1px solid var(--border-strong); color: var(--text-muted); }
         .ts-cta.ghost-cta:hover { border-color: var(--accent-mid); color: var(--text); }
 
         /* ── Neighbours Pass — Coming Soon ── */
-        .pass-section { background: var(--bg-subtle); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 4.5rem 0; }
-        @media (max-width: 768px) { .pass-section { padding: 3rem 0; } }
+        .pass-section { background: var(--bg-subtle); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 4rem 0; }
+        @media (max-width: 600px) { .pass-section { padding: 2.75rem 0; } }
 
-        /* Coming Soon banner at top of section */
-        .pass-cs-banner {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.75rem;
-            background: rgba(0,201,167,0.06);
-            border: 1px solid rgba(0,201,167,0.25);
+        /* In Development notice — no pill, just a clean bar */
+        .pass-dev-bar {
+            background: rgba(0,201,167,0.07);
+            border: 1px solid rgba(0,201,167,0.22);
             border-radius: var(--r-lg);
-            padding: 0.85rem 1.5rem;
-            margin-bottom: 3rem;
-            flex-wrap: wrap;
-            text-align: center;
-        }
-        .pass-cs-pill {
-            background: var(--pass-accent);
-            color: #0d1f1c;
-            font-size: 0.65rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.13em;
-            border-radius: 100px;
-            padding: 0.2rem 0.75rem;
-            flex-shrink: 0;
-        }
-        .pass-cs-banner-text {
-            font-size: 0.875rem;
-            color: var(--text-muted);
-        }
-        .pass-cs-banner-text strong { color: var(--pass-accent); font-weight: 500; }
-
-        .pass-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 3.5rem; align-items: start; }
-        @media (max-width: 760px) { .pass-layout { grid-template-columns: 1fr; gap: 2.5rem; } }
-        .pass-intro h2 { margin-bottom: 0.75rem; }
-        .pass-intro .pass-lead { font-size: 0.9375rem; color: var(--text-muted); line-height: 1.8; margin-bottom: 1.5rem; }
-        .pass-benefits { list-style: none; display: flex; flex-direction: column; gap: 0.85rem; }
-        .pass-benefits li { display: flex; align-items: flex-start; gap: 0.85rem; }
-        .pass-benefit-icon { width: 32px; height: 32px; background: var(--pass-dim); border: 1px solid var(--pass-mid); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 0.9rem; flex-shrink: 0; }
-        .pass-benefit-text strong { font-size: 0.875rem; font-weight: 500; color: var(--text); display: block; margin-bottom: 0.1rem; }
-        .pass-benefit-text span { font-size: 0.8rem; color: var(--text-faint); line-height: 1.45; }
-
-        /* Pass card visual — Coming Soon treatment */
-        .pass-card-wrap { display: flex; justify-content: center; position: relative; }
-        .pass-card {
-            background: linear-gradient(135deg, #1a2a28 0%, #0d1f1c 100%);
-            border: 1px solid var(--pass-mid);
-            border-radius: 16px;
-            padding: 2rem;
-            width: 100%;
-            max-width: 340px;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 0 0 1px rgba(0,201,167,0.15), 0 24px 64px rgba(0,201,167,0.1);
-            filter: brightness(0.6) saturate(0.7);
-        }
-        .pass-card::before {
-            content: '';
-            position: absolute; inset: 0;
-            background-image: var(--noise);
-            background-size: 400px;
-            opacity: 0.04;
-            pointer-events: none;
-        }
-        .pass-card-ring {
-            position: absolute;
-            right: -60px; top: -60px;
-            width: 220px; height: 220px;
-            opacity: 0.07;
-        }
-        .pass-card-logo { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.15em; color: var(--pass-accent); margin-bottom: 1.75rem; display: block; }
-        .pass-card-title { font-family: var(--font-serif); font-size: 1.5rem; color: var(--text); margin-bottom: 0.2rem; line-height: 1.1; }
-        .pass-card-sub { font-size: 0.78rem; color: rgba(0,201,167,0.7); margin-bottom: 1.5rem; }
-        .pass-card-divider { height: 1px; background: rgba(0,201,167,0.2); margin-bottom: 1.25rem; }
-        .pass-card-price-row { display: flex; align-items: baseline; gap: 0.4rem; margin-bottom: 0.25rem; }
-        .pass-card-price { font-family: var(--font-serif); font-size: 2rem; color: var(--pass-accent); line-height: 1; }
-        .pass-card-period { font-size: 0.8rem; color: rgba(255,255,255,0.4); }
-        .pass-card-desc { font-size: 0.78rem; color: rgba(255,255,255,0.4); margin-bottom: 1.5rem; }
-        .pass-card-chips { display: flex; flex-wrap: wrap; gap: 0.4rem; }
-        .pass-chip { font-size: 0.66rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--pass-accent); background: rgba(0,201,167,0.1); border: 1px solid rgba(0,201,167,0.25); border-radius: 100px; padding: 0.2rem 0.6rem; }
-
-        /* Coming Soon overlay on card */
-        .pass-card-overlay {
-            position: absolute;
-            inset: 0;
+            padding: 0.9rem 1.25rem;
+            margin-bottom: 2.75rem;
             display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 3;
-            border-radius: 16px;
+            align-items: flex-start;
+            gap: 0.85rem;
         }
-        .pass-card-overlay-badge {
-            background: var(--pass-accent);
-            color: #0d1f1c;
-            font-family: var(--font-serif);
-            font-size: 1.1rem;
-            font-weight: 400;
-            letter-spacing: 0.04em;
-            border-radius: 100px;
-            padding: 0.55rem 1.5rem;
-            box-shadow: 0 4px 24px rgba(0,201,167,0.35);
-        }
+        .pass-dev-bar-icon { font-size: 1rem; flex-shrink: 0; margin-top: 0.05rem; }
+        .pass-dev-bar-text { font-size: 0.855rem; color: var(--text-muted); line-height: 1.65; }
+        .pass-dev-bar-text strong { color: var(--pass-accent); font-weight: 500; }
 
-        /* Development notice box */
-        .pass-dev-notice {
-            margin-top: 1.5rem;
-            background: rgba(0,201,167,0.06);
-            border: 1px solid rgba(0,201,167,0.2);
-            border-radius: var(--r-lg);
-            padding: 1.25rem 1.5rem;
-        }
-        .pass-dev-notice-head {
-            font-size: 0.72rem;
+        .pass-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; }
+        @media (max-width: 720px) { .pass-layout { grid-template-columns: 1fr; gap: 2rem; } }
+        .pass-intro h2 { margin-bottom: 0.65rem; }
+        .pass-intro .pass-lead { font-size: 0.9rem; color: var(--text-muted); line-height: 1.8; margin-bottom: 1.4rem; }
+        .pass-benefits { list-style: none; display: flex; flex-direction: column; gap: 0.8rem; }
+        .pass-benefits li { display: flex; align-items: flex-start; gap: 0.75rem; }
+        .pass-benefit-icon { width: 30px; height: 30px; background: var(--pass-dim); border: 1px solid var(--pass-mid); border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 0.85rem; flex-shrink: 0; }
+        .pass-benefit-text strong { font-size: 0.855rem; font-weight: 500; color: var(--text); display: block; margin-bottom: 0.08rem; }
+        .pass-benefit-text span { font-size: 0.78rem; color: var(--text-faint); line-height: 1.45; }
+
+        /* Pass card — dimmed, Coming Soon label replaces overlay pill */
+        .pass-card-wrap { display: flex; justify-content: center; flex-direction: column; align-items: center; gap: 0.75rem; }
+        .pass-cs-label {
+            font-size: 0.68rem;
             font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 0.1em;
+            letter-spacing: 0.13em;
             color: var(--pass-accent);
-            margin-bottom: 0.5rem;
-            display: block;
         }
-        .pass-dev-notice p {
-            font-size: 0.845rem;
-            color: var(--text-muted);
-            line-height: 1.75;
+        .pass-card {
+            background: linear-gradient(135deg, #1a2a28 0%, #0d1f1c 100%);
+            border: 1px solid rgba(0,201,167,0.2);
+            border-radius: 14px;
+            padding: 1.75rem;
+            width: 100%;
+            max-width: 320px;
+            position: relative;
+            overflow: hidden;
+            opacity: 0.55;
         }
+        .pass-card::before { content: ''; position: absolute; inset: 0; background-image: var(--noise); background-size: 400px; opacity: 0.04; pointer-events: none; }
+        .pass-card-ring { position: absolute; right: -50px; top: -50px; width: 200px; height: 200px; opacity: 0.07; }
+        .pass-card-logo { font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.15em; color: var(--pass-accent); margin-bottom: 1.5rem; display: block; }
+        .pass-card-title { font-family: var(--font-serif); font-size: 1.4rem; color: var(--text); margin-bottom: 0.2rem; line-height: 1.1; }
+        .pass-card-sub { font-size: 0.75rem; color: rgba(0,201,167,0.6); margin-bottom: 1.25rem; }
+        .pass-card-divider { height: 1px; background: rgba(0,201,167,0.15); margin-bottom: 1rem; }
+        .pass-card-price-row { display: flex; align-items: baseline; gap: 0.35rem; margin-bottom: 0.2rem; }
+        .pass-card-price { font-family: var(--font-serif); font-size: 1.85rem; color: var(--pass-accent); line-height: 1; }
+        .pass-card-period { font-size: 0.75rem; color: rgba(255,255,255,0.35); }
+        .pass-card-desc { font-size: 0.72rem; color: rgba(255,255,255,0.35); margin-bottom: 1.25rem; }
+        .pass-card-chips { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+        .pass-chip { font-size: 0.62rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--pass-accent); background: rgba(0,201,167,0.1); border: 1px solid rgba(0,201,167,0.2); border-radius: 100px; padding: 0.18rem 0.55rem; }
+
+        .pass-dev-notice {
+            margin-top: 1.1rem;
+            background: rgba(0,201,167,0.05);
+            border: 1px solid rgba(0,201,167,0.18);
+            border-radius: var(--r-lg);
+            padding: 1.1rem 1.25rem;
+        }
+        .pass-dev-notice-head { font-size: 0.68rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--pass-accent); margin-bottom: 0.45rem; display: block; }
+        .pass-dev-notice p { font-size: 0.83rem; color: var(--text-muted); line-height: 1.75; }
         .pass-dev-notice p strong { color: var(--text); font-weight: 500; }
 
         /* ── Simple list ── */
-        .simple-list { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; max-width: 56ch; margin-left: auto; margin-right: auto; }
-        .simple-list li { font-size: 0.9375rem; color: var(--text-muted); display: flex; align-items: flex-start; gap: 0.65rem; line-height: 1.5; }
-        .simple-list li::before { content: '›'; color: var(--accent); font-size: 1.1rem; flex-shrink: 0; line-height: 1.4; }
+        .simple-list { list-style: none; display: flex; flex-direction: column; gap: 0.55rem; max-width: 54ch; margin-left: auto; margin-right: auto; }
+        .simple-list li { font-size: 0.9rem; color: var(--text-muted); display: flex; align-items: flex-start; gap: 0.6rem; line-height: 1.5; }
+        .simple-list li::before { content: '›'; color: var(--accent); font-size: 1.05rem; flex-shrink: 0; line-height: 1.4; }
 
         /* ── Collapsibles ── */
         .collapsible-section { border-top: 1px solid var(--border); }
-        .collapsible-header { width: 100%; background: none; border: none; cursor: pointer; font-family: var(--font-sans); color: var(--text); padding: 1.5rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; text-align: left; transition: background 0.2s; }
+        .collapsible-header { width: 100%; background: none; border: none; cursor: pointer; font-family: var(--font-sans); color: var(--text); padding: 1.25rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; text-align: left; transition: background 0.2s; }
         .collapsible-header:hover { background: var(--bg-subtle); }
-        .collapsible-header-left { display: flex; align-items: center; gap: 1rem; }
-        .collapsible-header-icon { font-size: 1.1rem; flex-shrink: 0; }
-        .collapsible-header-title { font-family: var(--font-serif); font-size: clamp(1.1rem, 2.5vw, 1.4rem); line-height: 1.2; }
-        .collapsible-header-sub { font-size: 0.8125rem; color: var(--text-faint); margin-top: 0.15rem; }
-        .collapsible-chevron { font-size: 0.8rem; color: var(--text-faint); transition: transform 0.28s ease, color 0.2s; flex-shrink: 0; }
+        .collapsible-header-left { display: flex; align-items: center; gap: 0.85rem; }
+        .collapsible-header-icon { font-size: 1.05rem; flex-shrink: 0; }
+        .collapsible-header-title { font-family: var(--font-serif); font-size: clamp(1rem, 2.5vw, 1.35rem); line-height: 1.2; }
+        .collapsible-header-sub { font-size: 0.775rem; color: var(--text-faint); margin-top: 0.1rem; }
+        .collapsible-chevron { font-size: 0.75rem; color: var(--text-faint); transition: transform 0.28s ease, color 0.2s; flex-shrink: 0; }
         .collapsible-section.open .collapsible-chevron { transform: rotate(180deg); color: var(--accent); }
         .collapsible-body { overflow: hidden; height: 0; transition: height 0.35s ease; }
-        .collapsible-content { padding: 0 1.5rem 2.5rem; }
+        .collapsible-content { padding: 0 1.25rem 2.25rem; }
 
         /* ── Steps ── */
         .steps-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; position: relative; }
-        @media (max-width: 768px) { .steps-grid { grid-template-columns: 1fr; gap: 1.5rem; } }
+        @media (max-width: 640px) { .steps-grid { grid-template-columns: 1fr; gap: 1.5rem; } }
         .steps-connector { display: none; }
-        @media (min-width: 769px) { .steps-connector { display: block; position: absolute; top: 15px; left: calc(33.33% + 1.5rem); right: calc(33.33% + 1.5rem); height: 1px; background: var(--accent-mid); pointer-events: none; } }
-        .step-number-wrap { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.85rem; }
-        .step-number { width: 32px; height: 32px; border-radius: 50%; background: var(--accent); color: #fff; font-family: var(--font-serif); font-size: 0.9rem; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-        .step-timing { font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.09em; color: var(--text-faint); }
-        .step-title { font-size: 1rem; font-weight: 500; color: var(--text); margin-bottom: 0.4rem; }
-        .step-desc { font-size: 0.85rem; color: var(--text-muted); line-height: 1.7; }
+        @media (min-width: 641px) { .steps-connector { display: block; position: absolute; top: 15px; left: calc(33.33% + 1rem); right: calc(33.33% + 1rem); height: 1px; background: var(--accent-mid); pointer-events: none; } }
+        .step-number-wrap { display: flex; align-items: center; gap: 0.65rem; margin-bottom: 0.75rem; }
+        .step-number { width: 30px; height: 30px; border-radius: 50%; background: var(--accent); color: #fff; font-family: var(--font-serif); font-size: 0.875rem; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+        .step-timing { font-size: 0.67rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.09em; color: var(--text-faint); }
+        .step-title { font-size: 0.95rem; font-weight: 500; color: var(--text); margin-bottom: 0.35rem; }
+        .step-desc { font-size: 0.83rem; color: var(--text-muted); line-height: 1.7; }
 
         /* ── Services (à la carte) ── */
-        .services-grid { display: flex; flex-direction: column; gap: 1rem; }
+        .services-grid { display: flex; flex-direction: column; gap: 0.85rem; }
         .svc-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--r); overflow: hidden; transition: border-color 0.2s; }
         .svc-card:hover { border-color: rgba(255,27,110,0.3); }
-        .svc-trigger { width: 100%; background: none; border: none; cursor: pointer; font-family: var(--font-sans); color: var(--text); padding: 1.1rem 1.25rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; text-align: left; }
-        .svc-trigger-left { display: flex; align-items: center; gap: 0.85rem; flex: 1; min-width: 0; }
-        .svc-trigger-icon { font-size: 1.1rem; flex-shrink: 0; }
+        .svc-trigger { width: 100%; background: none; border: none; cursor: pointer; font-family: var(--font-sans); color: var(--text); padding: 1rem 1.1rem; display: flex; align-items: center; justify-content: space-between; gap: 0.85rem; text-align: left; }
+        .svc-trigger-left { display: flex; align-items: center; gap: 0.75rem; flex: 1; min-width: 0; }
+        .svc-trigger-icon { font-size: 1rem; flex-shrink: 0; }
         .svc-trigger-text { flex: 1; min-width: 0; }
-        .svc-trigger-name { font-size: 0.9375rem; font-weight: 500; color: var(--text); display: block; }
-        .svc-trigger-desc { font-size: 0.79rem; color: var(--text-faint); margin-top: 0.1rem; display: block; }
-        .svc-trigger-right { display: flex; align-items: center; gap: 1rem; flex-shrink: 0; }
-        .svc-price-pill { font-family: var(--font-serif); font-size: 1.05rem; color: var(--accent); white-space: nowrap; }
-        .svc-chevron { font-size: 0.75rem; color: var(--text-faint); transition: transform 0.28s ease, color 0.2s; flex-shrink: 0; }
+        .svc-trigger-name { font-size: 0.9rem; font-weight: 500; color: var(--text); display: block; }
+        .svc-trigger-desc { font-size: 0.76rem; color: var(--text-faint); margin-top: 0.08rem; display: block; }
+        .svc-trigger-right { display: flex; align-items: center; gap: 0.85rem; flex-shrink: 0; }
+        .svc-price-pill { font-family: var(--font-serif); font-size: 1rem; color: var(--accent); white-space: nowrap; }
+        .svc-chevron { font-size: 0.72rem; color: var(--text-faint); transition: transform 0.28s ease, color 0.2s; flex-shrink: 0; }
         .svc-card.open .svc-chevron { transform: rotate(180deg); color: var(--accent); }
         .svc-trigger:hover .svc-trigger-name { color: var(--accent); }
         .svc-body { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 0.32s ease; }
         .svc-card.open .svc-body { grid-template-rows: 1fr; }
         .svc-body-inner { overflow: hidden; }
-        .svc-body-content { border-top: 1px solid var(--border); padding: 1.25rem; display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; align-items: start; }
-        @media (max-width: 640px) { .svc-body-content { grid-template-columns: 1fr; } }
-        .svc-includes-label { font-size: 0.67rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.09em; color: var(--accent); display: block; margin-bottom: 0.6rem; }
-        .svc-includes ul { list-style: none; display: flex; flex-direction: column; gap: 0.35rem; }
-        .svc-includes ul li { font-size: 0.8rem; color: var(--text-muted); display: flex; align-items: flex-start; gap: 0.4rem; line-height: 1.45; }
-        .svc-includes ul li::before { content: '›'; color: var(--accent); flex-shrink: 0; margin-top: 0.05rem; }
-        .svc-pricing { display: flex; flex-direction: column; gap: 0.65rem; }
+        .svc-body-content { border-top: 1px solid var(--border); padding: 1.1rem; display: grid; grid-template-columns: 1fr 1fr; gap: 1.1rem; align-items: start; }
+        @media (max-width: 560px) { .svc-body-content { grid-template-columns: 1fr; } }
+        .svc-includes-label { font-size: 0.64rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.09em; color: var(--accent); display: block; margin-bottom: 0.5rem; }
+        .svc-includes ul { list-style: none; display: flex; flex-direction: column; gap: 0.3rem; }
+        .svc-includes ul li { font-size: 0.78rem; color: var(--text-muted); display: flex; align-items: flex-start; gap: 0.35rem; line-height: 1.45; }
+        .svc-includes ul li::before { content: '›'; color: var(--accent); flex-shrink: 0; margin-top: 0.04rem; }
+        .svc-pricing { display: flex; flex-direction: column; gap: 0.55rem; }
         .svc-price-row { display: flex; align-items: stretch; background: var(--bg-subtle); border: 1px solid var(--border); border-radius: var(--r); overflow: hidden; }
-        .svc-price-cell { display: flex; flex-direction: column; flex: 1; padding: 0.55rem 0.85rem; gap: 0.08rem; }
-        .svc-price-cell-label { font-size: 0.61rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-faint); white-space: nowrap; }
-        .svc-price-cell-value { font-size: 0.9rem; font-weight: 500; color: var(--text-muted); white-space: nowrap; }
+        .svc-price-cell { display: flex; flex-direction: column; flex: 1; padding: 0.5rem 0.75rem; gap: 0.06rem; }
+        .svc-price-cell-label { font-size: 0.58rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-faint); white-space: nowrap; }
+        .svc-price-cell-value { font-size: 0.875rem; font-weight: 500; color: var(--text-muted); }
         .svc-price-divider { width: 1px; background: var(--border); flex-shrink: 0; }
         .svc-price-cell.ch-price { background: var(--accent-dim); }
         .svc-price-cell.ch-price .svc-price-cell-label { color: var(--accent); }
-        .svc-price-cell.ch-price .svc-price-cell-value { font-family: var(--font-serif); font-size: 1rem; color: var(--accent); font-weight: 400; }
-        .svc-saving { font-size: 0.72rem; color: var(--text-faint); font-style: italic; }
+        .svc-price-cell.ch-price .svc-price-cell-value { font-family: var(--font-serif); font-size: 0.95rem; color: var(--accent); font-weight: 400; }
+        .svc-saving { font-size: 0.7rem; color: var(--text-faint); font-style: italic; }
         .svc-saving strong { color: var(--accent); font-style: normal; font-weight: 500; }
-        .svc-book-btn { display: flex; align-items: center; justify-content: center; gap: 0.4rem; width: 100%; padding: 0.7rem 1rem; background: var(--accent); color: #fff; border: none; border-radius: var(--r); font-family: var(--font-sans); font-size: 0.84rem; font-weight: 500; text-decoration: none; cursor: pointer; transition: opacity 0.2s, transform 0.2s; }
+        .svc-book-btn { display: flex; align-items: center; justify-content: center; gap: 0.4rem; width: 100%; padding: 0.65rem 1rem; background: var(--accent); color: #fff; border: none; border-radius: var(--r); font-family: var(--font-sans); font-size: 0.82rem; font-weight: 500; text-decoration: none; cursor: pointer; transition: opacity 0.2s, transform 0.2s; }
         .svc-book-btn:hover { opacity: 0.88; transform: translateY(-1px); }
-        .delivery-block { margin-top: 1.1rem; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--r); overflow: hidden; }
-        .delivery-header { display: flex; align-items: flex-start; gap: 0.85rem; padding: 1.1rem 1.25rem; border-bottom: 1px solid var(--border); }
-        .delivery-icon { font-size: 1.05rem; flex-shrink: 0; margin-top: 0.1rem; }
-        .delivery-title { font-size: 0.9375rem; font-weight: 500; color: var(--text); margin-bottom: 0.15rem; }
-        .delivery-sub { font-size: 0.79rem; color: var(--text-faint); line-height: 1.5; }
+
+        .delivery-block { margin-top: 1rem; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--r); overflow: hidden; }
+        .delivery-header { display: flex; align-items: flex-start; gap: 0.75rem; padding: 1rem 1.1rem; border-bottom: 1px solid var(--border); }
+        .delivery-icon { font-size: 1rem; flex-shrink: 0; margin-top: 0.08rem; }
+        .delivery-title { font-size: 0.9rem; font-weight: 500; color: var(--text); margin-bottom: 0.12rem; }
+        .delivery-sub { font-size: 0.76rem; color: var(--text-faint); line-height: 1.5; }
         .delivery-options { display: flex; flex-direction: column; }
-        .delivery-option { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 1rem 1.25rem; border-bottom: 1px solid var(--border); flex-wrap: wrap; }
+        .delivery-option { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 0.9rem 1.1rem; border-bottom: 1px solid var(--border); flex-wrap: wrap; }
         .delivery-option:last-child { border-bottom: none; }
-        .delivery-option-left { display: flex; align-items: flex-start; gap: 0.75rem; flex: 1; min-width: 0; }
-        .delivery-option-icon { font-size: 1rem; flex-shrink: 0; margin-top: 0.1rem; }
-        .delivery-option-name { font-size: 0.875rem; font-weight: 500; color: var(--text); margin-bottom: 0.1rem; }
-        .delivery-option-desc { font-size: 0.775rem; color: var(--text-faint); line-height: 1.45; }
+        .delivery-option-left { display: flex; align-items: flex-start; gap: 0.65rem; flex: 1; min-width: 0; }
+        .delivery-option-icon { font-size: 0.95rem; flex-shrink: 0; margin-top: 0.08rem; }
+        .delivery-option-name { font-size: 0.855rem; font-weight: 500; color: var(--text); margin-bottom: 0.08rem; }
+        .delivery-option-desc { font-size: 0.75rem; color: var(--text-faint); line-height: 1.45; }
         .delivery-option-right { display: flex; align-items: stretch; background: var(--bg-subtle); border: 1px solid var(--border); border-radius: var(--r); overflow: hidden; flex-shrink: 0; }
-        .delivery-price-col { display: flex; flex-direction: column; padding: 0.5rem 0.85rem; gap: 0.06rem; }
-        .delivery-price-label { font-size: 0.6rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-faint); white-space: nowrap; }
-        .delivery-price-value { font-size: 0.9rem; font-weight: 500; color: var(--text-muted); white-space: nowrap; }
+        .delivery-price-col { display: flex; flex-direction: column; padding: 0.45rem 0.75rem; gap: 0.05rem; }
+        .delivery-price-label { font-size: 0.58rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-faint); white-space: nowrap; }
+        .delivery-price-value { font-size: 0.875rem; font-weight: 500; color: var(--text-muted); }
         .delivery-price-col.ch { background: var(--accent-dim); }
         .delivery-price-col.ch .delivery-price-label { color: var(--accent); }
-        .delivery-price-col.ch .delivery-price-value { font-family: var(--font-serif); font-size: 1rem; color: var(--accent); font-weight: 400; }
+        .delivery-price-col.ch .delivery-price-value { font-family: var(--font-serif); font-size: 0.95rem; color: var(--accent); font-weight: 400; }
         .delivery-divider { width: 1px; background: var(--border); flex-shrink: 0; }
-        .delivery-note { font-size: 0.75rem; color: var(--text-faint); font-style: italic; padding: 0.65rem 1.25rem; background: var(--bg-subtle); border-top: 1px solid var(--border); line-height: 1.55; }
-        .tier2-note { margin-top: 1.1rem; padding: 1.1rem 1.25rem; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--r); font-size: 0.875rem; color: var(--text-muted); line-height: 1.75; }
+        .delivery-note { font-size: 0.72rem; color: var(--text-faint); font-style: italic; padding: 0.6rem 1.1rem; background: var(--bg-subtle); border-top: 1px solid var(--border); line-height: 1.55; }
+        .tier2-note { margin-top: 1rem; padding: 1rem 1.1rem; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--r); font-size: 0.855rem; color: var(--text-muted); line-height: 1.75; }
 
         /* ── FAQ ── */
-        .faq-list { display: flex; flex-direction: column; gap: 0.5rem; max-width: 760px; margin: 0 auto; }
+        .faq-list { display: flex; flex-direction: column; gap: 0.45rem; max-width: 720px; margin: 0 auto; }
         .faq-item { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--r); overflow: hidden; transition: border-color 0.2s; }
         .faq-item:hover { border-color: rgba(255,27,110,0.25); }
-        .faq-trigger { width: 100%; background: none; border: none; cursor: pointer; font-family: var(--font-sans); color: var(--text); padding: 1rem 1.25rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; text-align: left; }
-        .faq-question { font-size: 0.9rem; font-weight: 500; line-height: 1.4; }
-        .faq-chevron { font-size: 0.75rem; color: var(--text-faint); transition: transform 0.25s ease, color 0.2s; flex-shrink: 0; }
+        .faq-trigger { width: 100%; background: none; border: none; cursor: pointer; font-family: var(--font-sans); color: var(--text); padding: 0.9rem 1.1rem; display: flex; align-items: center; justify-content: space-between; gap: 0.85rem; text-align: left; }
+        .faq-question { font-size: 0.875rem; font-weight: 500; line-height: 1.4; }
+        .faq-chevron { font-size: 0.72rem; color: var(--text-faint); transition: transform 0.25s ease, color 0.2s; flex-shrink: 0; }
         .faq-item.open .faq-chevron { transform: rotate(180deg); color: var(--accent); }
         .faq-body { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 0.3s ease; }
         .faq-item.open .faq-body { grid-template-rows: 1fr; }
         .faq-body-inner { overflow: hidden; }
-        .faq-answer { padding: 0.9rem 1.25rem 1.1rem; font-size: 0.875rem; color: var(--text-muted); line-height: 1.75; border-top: 1px solid var(--border); }
+        .faq-answer { padding: 0.8rem 1.1rem 1rem; font-size: 0.855rem; color: var(--text-muted); line-height: 1.75; border-top: 1px solid var(--border); }
 
         /* ── CTA Band ── */
-        .cta-band { background: var(--accent); padding: 4rem 1.5rem 3.5rem; text-align: center; position: relative; overflow: hidden; }
+        .cta-band { background: var(--accent); padding: 3.75rem 1.25rem 3.25rem; text-align: center; position: relative; overflow: hidden; }
         .cta-band::before { content: ''; position: absolute; inset: 0; background-image: var(--noise); background-repeat: repeat; background-size: 400px 400px; opacity: 0.07; pointer-events: none; mix-blend-mode: multiply; }
-        .cta-motif { position: absolute; right: -80px; top: 50%; transform: translateY(-50%); width: 420px; height: 420px; opacity: 0.07; pointer-events: none; }
+        .cta-motif { position: absolute; right: -80px; top: 50%; transform: translateY(-50%); width: 380px; height: 380px; opacity: 0.07; pointer-events: none; }
         .cta-motif-left { left: -80px; right: auto; }
-        @media (max-width: 600px) { .cta-motif { width: 220px; height: 220px; right: -40px; } .cta-motif-left { display: none; } }
+        @media (max-width: 600px) { .cta-motif { width: 200px; height: 200px; right: -30px; } .cta-motif-left { display: none; } }
         .cta-band-inner { position: relative; z-index: 1; }
-        .cta-band h2 { color: #fff; font-size: clamp(1.9rem, 5vw, 3.2rem); margin-bottom: 0.7rem; letter-spacing: -0.02em; }
-        .cta-band p { color: rgba(255,255,255,0.85); font-size: 0.9375rem; max-width: 48ch; margin: 0 auto 1.75rem; line-height: 1.7; }
-        .cta-btn { background: #fff; color: var(--accent); display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.85rem 1.8rem; font-size: 0.9rem; font-weight: 600; text-decoration: none; border-radius: var(--r); transition: all 0.2s; box-shadow: 0 4px 20px rgba(0,0,0,0.2); }
-        .cta-btn:hover { background: rgba(255,255,255,0.92); transform: translateY(-2px); box-shadow: 0 8px 28px rgba(0,0,0,0.25); }
+        .cta-band h2 { color: #fff; font-size: clamp(1.75rem, 5vw, 3rem); margin-bottom: 0.65rem; letter-spacing: -0.02em; }
+        .cta-band p { color: rgba(255,255,255,0.85); font-size: 0.9rem; max-width: 46ch; margin: 0 auto 1.6rem; line-height: 1.7; }
+        .cta-btn { background: #fff; color: var(--accent); display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.8rem 1.7rem; font-size: 0.875rem; font-weight: 600; text-decoration: none; border-radius: var(--r); transition: all 0.2s; box-shadow: 0 4px 20px rgba(0,0,0,0.2); }
+        .cta-btn:hover { background: rgba(255,255,255,0.92); transform: translateY(-2px); }
 
         /* ── Footer ── */
         footer { border-top: 1px solid var(--border); }
-        .footer-inner { max-width: var(--max); margin: 0 auto; padding: 1.25rem 1.5rem; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 1.25rem; }
-        .footer-inner img { height: 24px; width: auto; opacity: 0.7; }
-        .footer-links { display: flex; gap: 1.5rem; flex-wrap: wrap; }
-        .footer-links a { font-size: 0.8125rem; color: var(--text-muted); text-decoration: none; }
+        .footer-inner { max-width: var(--max); margin: 0 auto; padding: 1.1rem 1.25rem; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 1rem; }
+        .footer-inner img { height: 22px; width: auto; opacity: 0.7; }
+        .footer-links { display: flex; gap: 1.25rem; flex-wrap: wrap; }
+        .footer-links a { font-size: 0.775rem; color: var(--text-muted); text-decoration: none; }
         .footer-links a:hover { color: var(--accent); }
-        .footer-legal { width: 100%; text-align: center; font-size: 0.75rem; color: var(--text-faint); padding: 0.75rem 1.5rem; border-top: 1px solid var(--border); }
+        .footer-legal { width: 100%; text-align: center; font-size: 0.72rem; color: var(--text-faint); padding: 0.65rem 1.25rem; border-top: 1px solid var(--border); }
 
         .testimonials-section { display: none; }
     </style>
@@ -492,7 +446,7 @@
     </div>
 </nav>
 
-<!-- ═══════════════════════════ HERO ═══════════════════════════ -->
+<!-- HERO -->
 <section class="hero reveal">
     <div class="hero-bg"></div>
     <div class="hero-grain"></div>
@@ -500,7 +454,7 @@
         <div class="wrap">
             <div class="store-badge">&#127968; Club House &mdash; Plans &amp; Pricing</div>
             <h1>Your club deserves to grow.</h1>
-            <p class="lead">The NBRH Club House gives grassroots sports clubs the expertise, tools, and marketing power to grow &mdash; without the agency price tag. Start from &pound;30 a month. No booking fees on any plan.</p>
+            <p class="lead">The NBRH Club House gives grassroots sports clubs the tools, marketing, and expertise to grow &mdash; without the agency price tag. From &pound;30 a month. No booking fees on any plan.</p>
             <div class="hero-ctas">
                 <a href="#plans" class="btn-primary">See Plans &rarr;</a>
                 <a href="#why" class="btn-ghost">Why Club House?</a>
@@ -508,14 +462,14 @@
             <div class="hero-stats">
                 <div class="hero-stat">
                     <span class="hero-stat-num">&pound;30</span>
-                    <span class="hero-stat-label">/ month &mdash; entry-tier plan, no booking fees</span>
+                    <span class="hero-stat-label">/ month &mdash; Starter tier, no booking fees</span>
                 </div>
                 <div class="hero-stat">
                     <span class="hero-stat-num"><span class="count-target" data-to="3">3</span></span>
                     <span class="hero-stat-label">tiers &mdash; Starter, Growth, Club House</span>
                 </div>
                 <div class="hero-stat">
-                    <span class="hero-stat-num pass-color" style="font-size:1.1rem;line-height:1.2;">Coming<br>Soon</span>
+                    <span class="hero-stat-num pass-color" style="font-size:0.95rem;line-height:1.25;letter-spacing:0.01em;">Coming<br>Soon</span>
                     <span class="hero-stat-label">Neighbours Pass &mdash; in development</span>
                 </div>
             </div>
@@ -527,13 +481,12 @@
 <div class="pilot-banner reveal">
     <div class="pilot-banner-inner">
         <span class="pilot-pill">Free Pilot</span>
-        <p class="pilot-banner-text"><strong>Try Growth or Club House free for 2 months.</strong> No pressure, no arbitrary start dates &mdash; the clock starts when you&rsquo;re ready.</p>
-        <p class="pilot-qualifier">To qualify: <strong>list at least 4 active sessions</strong> and complete a short onboarding call with the team. This keeps the pilot meaningful for both sides.</p>
+        <p class="pilot-banner-text"><strong>Try Growth or Club House free for 2 months.</strong> No pressure &mdash; the clock starts when you&rsquo;re ready.</p>
+        <p class="pilot-qualifier">To qualify: <strong>list at least 4 active sessions</strong> and complete a short onboarding call with the team.</p>
     </div>
 </div>
 
-
-<!-- ═══════════════════════════ WHY ═══════════════════════════ -->
+<!-- WHY -->
 <div class="collapsible-section reveal open" id="why">
     <button class="collapsible-header" aria-expanded="true" data-target="why-body">
         <div class="collapsible-header-left">
@@ -546,34 +499,32 @@
         <span class="collapsible-chevron">&#9660;</span>
     </button>
     <div class="collapsible-body" id="why-body">
-        <div class="collapsible-body-inner">
-            <div class="collapsible-content">
-                <div class="wrap">
-                    <div style="text-align:center; max-width:60ch; margin: 0 auto 3rem;">
-                        <span class="eyebrow">The Why</span>
-                        <h2>Running a club is harder than it looks.</h2>
-                        <p style="font-size:1rem;color:var(--text-muted);line-height:1.8;margin-top:0.75rem;">You got into sport because you love it. But somewhere between coaching sessions, chasing payments, posting on Instagram and figuring out how to fill your next session &mdash; it stopped being fun. Sound familiar?</p>
-                    </div>
-                    <div style="display:flex;justify-content:center;">
-                        <ul class="simple-list">
-                            <li>You don&rsquo;t have the time</li>
-                            <li>You don&rsquo;t have the expertise</li>
-                            <li>You don&rsquo;t have the budget</li>
-                            <li>Your sessions aren&rsquo;t visible</li>
-                            <li>You don&rsquo;t know what to do</li>
-                            <li>The admin never stops</li>
-                        </ul>
-                    </div>
-                    <p style="font-size:0.9rem;color:var(--text-faint);margin-top:1.25rem;font-style:italic;text-align:center;">We know this because we&rsquo;ve lived it. Club House is what we wish had existed.</p>
+        <div class="collapsible-content">
+            <div class="wrap">
+                <div style="text-align:center; max-width:58ch; margin: 0 auto 2.75rem;">
+                    <span class="eyebrow">The Why</span>
+                    <h2>Running a club is harder than it looks.</h2>
+                    <p style="font-size:0.9375rem;color:var(--text-muted);line-height:1.8;margin-top:0.65rem;">You got into sport because you love it. But somewhere between coaching sessions, chasing payments, posting on Instagram, and figuring out how to fill your next slot &mdash; it stopped being fun.</p>
                 </div>
+                <div style="display:flex;justify-content:center;">
+                    <ul class="simple-list">
+                        <li>You don&rsquo;t have the time</li>
+                        <li>You don&rsquo;t have the expertise</li>
+                        <li>You don&rsquo;t have the budget</li>
+                        <li>Your sessions aren&rsquo;t visible enough</li>
+                        <li>You don&rsquo;t know what to do next</li>
+                        <li>The admin never stops</li>
+                    </ul>
+                </div>
+                <p style="font-size:0.875rem;color:var(--text-faint);margin-top:1.1rem;font-style:italic;text-align:center;">We know this because we&rsquo;ve lived it. Club House is what we wish had existed.</p>
             </div>
         </div>
     </div>
 </div>
 
-
 <div class="divider"></div>
-<!-- ═══════════════════════ HOW — collapsed ═══════════════════════ -->
+
+<!-- HOW WE HELP -->
 <div class="collapsible-section reveal" id="how">
     <button class="collapsible-header" aria-expanded="false" data-target="how-body">
         <div class="collapsible-header-left">
@@ -586,30 +537,27 @@
         <span class="collapsible-chevron">&#9660;</span>
     </button>
     <div class="collapsible-body" id="how-body">
-        <div class="collapsible-body-inner">
-            <div class="collapsible-content">
-                <div class="wrap">
-                    <div class="section-head">
-                        <span class="eyebrow">The How</span>
-                        <h2>Here&rsquo;s what we do about it.</h2>
-                        <p class="sub">Club House is designed to give you back your time, amplify your reach, and provide the infrastructure to grow sustainably.</p>
-                    </div>
-                    <div class="how-grid" id="how-grid">
-                        <div class="how-card stagger-item"><div class="how-card-icon">&#128247;</div><h3>Expert-led marketing</h3><p>Organic content, paid ads, SEO blog posts, LinkedIn articles, and in-person video &mdash; all created, managed and delivered by us. No briefings, no back-and-forth.</p></div>
-                        <div class="how-card stagger-item"><div class="how-card-icon">&#127915;</div><h3>Booking infrastructure</h3><p>Your sessions are live on Tickts with a fully managed booking page. Events created, capacity managed, payments processed, waitlists handled. You just show up and coach.</p></div>
-                        <div class="how-card stagger-item"><div class="how-card-icon">&#128226;</div><h3>Community outreach</h3><p>We reach out to Facebook Groups, local clubs, neighbourhoods, and relevant communities on your behalf &mdash; every week. Getting your sessions in front of the right people.</p></div>
-                        <div class="how-card stagger-item"><div class="how-card-icon">&#128201;</div><h3>Growth intelligence</h3><p>Monthly analytics reports, traffic tracking, booking data, and AI-backed market research. Clear insights and recommendations &mdash; not just numbers on a spreadsheet.</p></div>
-                        <div class="how-card stagger-item"><div class="how-card-icon">&#128172;</div><h3>Consultative support</h3><p>Branding, session formats, content direction, growth strategy &mdash; we&rsquo;re a thinking partner, not just a tool. Available when you need guidance, not just when things go wrong.</p></div>
-                        <div class="how-card stagger-item"><div class="how-card-icon">&#128640;</div><h3>Tools to scale and earn</h3><p>Member subscriptions, the Neighbours Pass network, Club Store, and more. Everything is built to compound over time as The NBRH grows.</p></div>
-                    </div>
+        <div class="collapsible-content">
+            <div class="wrap">
+                <div class="section-head">
+                    <span class="eyebrow">The How</span>
+                    <h2>Here&rsquo;s what we do about it.</h2>
+                    <p class="sub">Club House gives you back your time, amplifies your reach, and provides the infrastructure to grow sustainably.</p>
+                </div>
+                <div class="how-grid" id="how-grid">
+                    <div class="how-card stagger-item"><div class="how-card-icon">&#128247;</div><h3>Expert-led marketing</h3><p>Organic content, paid ads, SEO blog posts, LinkedIn articles, and in-person video &mdash; all created, managed, and delivered by us. No briefings, no back-and-forth.</p></div>
+                    <div class="how-card stagger-item"><div class="how-card-icon">&#127915;</div><h3>Booking infrastructure</h3><p>Your sessions are live on Tickts with a fully managed booking page. Events created, capacity managed, payments processed. You just show up and coach.</p></div>
+                    <div class="how-card stagger-item"><div class="how-card-icon">&#128226;</div><h3>Community outreach</h3><p>We reach out to Facebook Groups, local clubs, neighbourhoods, and communities on your behalf &mdash; every week. Getting your sessions in front of the right people.</p></div>
+                    <div class="how-card stagger-item"><div class="how-card-icon">&#128201;</div><h3>Growth intelligence</h3><p>Monthly analytics reports, traffic tracking, booking data, and AI-backed research. Clear insights and recommendations &mdash; not just numbers on a spreadsheet.</p></div>
+                    <div class="how-card stagger-item"><div class="how-card-icon">&#128172;</div><h3>Consultative support</h3><p>Branding, session formats, content direction, growth strategy &mdash; we&rsquo;re a thinking partner. Available when you need guidance, not just when things go wrong.</p></div>
+                    <div class="how-card stagger-item"><div class="how-card-icon">&#128640;</div><h3>Tools to scale and earn</h3><p>Member subscriptions, the Neighbours Pass network, Club Store, and more. Everything compounds over time as The NBRH grows.</p></div>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
-
-<!-- ═══════════════════════════ PLANS ═══════════════════════════ -->
+<!-- PLANS -->
 <div class="divider"></div>
 <div class="collapsible-section reveal open" id="plans">
     <button class="collapsible-header" aria-expanded="true" data-target="plans-body">
@@ -623,151 +571,143 @@
         <span class="collapsible-chevron">&#9660;</span>
     </button>
     <div class="collapsible-body" id="plans-body">
-        <div class="collapsible-body-inner">
-            <div class="collapsible-content">
-                <div class="wrap">
-                    <div class="section-head">
-                        <span class="eyebrow">The What</span>
-                        <h2>Three plans. One platform.</h2>
-                        <p class="sub">No booking fees on any plan. When you&rsquo;re ready for the full marketing engine, Growth and Club House are waiting.</p>
+        <div class="collapsible-content">
+            <div class="wrap">
+                <div class="section-head">
+                    <span class="eyebrow">The What</span>
+                    <h2>Three plans. One platform.</h2>
+                    <p class="sub">No booking fees on any plan. When you&rsquo;re ready for the full marketing engine, Growth and Club House are waiting.</p>
+                </div>
+
+                <p class="compare-scroll-hint">Swipe to compare all plans &rarr;</p>
+                <div class="compare-wrap">
+                    <table class="compare-tbl" role="table" aria-label="Plan feature comparison">
+                        <thead>
+                            <tr>
+                                <th scope="col">Feature</th>
+                                <th scope="col">
+                                    <span class="th-tier-name">Starter</span>
+                                    <span class="th-tier-price">&pound;30 / month</span>
+                                </th>
+                                <th scope="col">
+                                    <span class="th-tier-name">Growth</span>
+                                    <span class="th-tier-price">&pound;60 / month</span>
+                                </th>
+                                <th scope="col" class="th-tier-highlight">
+                                    <div class="th-ch-wrap">
+                                        <span class="th-ch-badge">Recommended</span>
+                                        <span class="th-tier-name">Club House</span>
+                                        <span class="th-tier-price">&pound;125/mo + 10% rev share</span>
+                                    </div>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="cat-row"><td colspan="4"><span class="cat-label">Pricing</span></td></tr>
+                            <tr class="price-row">
+                                <td>Monthly fee</td>
+                                <td style="color:var(--accent);font-family:var(--font-serif);">&pound;30 / month</td>
+                                <td>&pound;60 / month</td>
+                                <td>&pound;125 / month</td>
+                            </tr>
+                            <tr class="price-row">
+                                <td>Revenue share</td>
+                                <td><span class="no">&mdash;</span></td>
+                                <td><span class="no">&mdash;</span></td>
+                                <td>10% of gross session revenue<span class="compare-note">We earn when you earn</span></td>
+                            </tr>
+                            <tr class="price-row">
+                                <td>Booking fees</td>
+                                <td style="color:#4ade80;font-size:0.78rem;font-weight:500;">None</td>
+                                <td style="color:#4ade80;font-size:0.78rem;font-weight:500;">None</td>
+                                <td style="color:#4ade80;font-size:0.78rem;font-weight:500;">None</td>
+                            </tr>
+                            <tr class="price-row">
+                                <td>Pilot offer</td>
+                                <td><span class="no">&mdash;</span></td>
+                                <td>2 months free<span class="compare-note">4 sessions + onboarding call</span></td>
+                                <td>2 months free<span class="compare-note">4 sessions + onboarding call</span></td>
+                            </tr>
+
+                            <tr class="cat-row"><td colspan="4"><span class="cat-label">Platform Presence</span></td></tr>
+                            <tr><td>Unlimited sessions on The NBRH</td><td><span class="yes">&#10003;</span></td><td><span class="yes">&#10003;</span></td><td><span class="yes">&#10003;</span></td></tr>
+                            <tr><td>Club Hub page</td><td><span class="yes">&#10003;</span></td><td><span class="yes">&#10003;</span></td><td><span class="yes">&#10003;</span></td></tr>
+                            <tr><td>Club House Dashboard</td><td><span class="yes">&#10003;</span></td><td><span class="yes">&#10003;</span></td><td><span class="yes">&#10003;</span></td></tr>
+                            <tr><td>Club House Engine</td><td><span class="yes">&#10003;</span></td><td><span class="yes">&#10003;</span></td><td><span class="yes">&#10003;</span></td></tr>
+                            <tr><td>Resource Hub access</td><td><span class="yes">&#10003;</span></td><td><span class="yes">&#10003;</span></td><td><span class="yes">&#10003;</span></td></tr>
+                            <tr><td>Sponsored placement on The NBRH</td><td><span class="no">&mdash;</span></td><td><span class="yes">&#10003;</span></td><td><span class="yes">&#10003;</span></td></tr>
+                            <tr><td>Instagram highlights &amp; link placement</td><td><span class="no">&mdash;</span></td><td><span class="no">&mdash;</span></td><td><span class="yes">&#10003;</span></td></tr>
+
+                            <tr class="cat-row"><td colspan="4"><span class="cat-label">Booking</span></td></tr>
+                            <tr><td>Booking page on Tickts</td><td><span class="yes">&#10003;</span></td><td><span class="yes">&#10003;</span></td><td><span class="yes">&#10003;</span></td></tr>
+                            <tr><td>Booking management (self-serve)</td><td><span class="yes">&#10003;</span></td><td><span class="yes">&#10003;</span></td><td><span class="yes">&#10003;</span></td></tr>
+                            <tr><td>Booking management (handled by us)</td><td><span class="no">&mdash;</span></td><td><span class="yes">&#10003;</span></td><td><span class="yes">&#10003;</span></td></tr>
+                            <tr><td>Membership subscriptions</td><td><span class="no">&mdash;</span></td><td><span class="yes">&#10003;</span></td><td><span class="yes">&#10003;</span></td></tr>
+
+                            <tr class="cat-row"><td colspan="4"><span class="cat-label">Content &amp; Social Media</span></td></tr>
+                            <tr><td>x1 Instagram Session Reel (organic)</td><td><span class="no">&mdash;</span></td><td><span class="yes">&#10003;</span></td><td><span class="yes">&#10003;</span></td></tr>
+                            <tr><td>Boosted Instagram Reel(s)</td><td><span class="no">&mdash;</span></td><td><span class="yes">&#10003;</span><span class="compare-note">x1 per month</span></td><td><span class="yes">&#10003;</span><span class="compare-note">x2 per month</span></td></tr>
+                            <tr><td>Instagram Ad creation &amp; management</td><td><span class="no">&mdash;</span></td><td><span class="yes">&#10003;</span><span class="compare-note">You pay ad spend</span></td><td><span class="yes">&#10003;</span><span class="compare-note">You pay ad spend</span></td></tr>
+                            <tr><td>x1 Instagram Story per week</td><td><span class="no">&mdash;</span></td><td><span class="yes">&#10003;</span></td><td><span class="yes">&#10003;</span></td></tr>
+                            <tr><td>x1 Instagram Social Proof Carousel</td><td><span class="no">&mdash;</span></td><td><span class="yes">&#10003;</span></td><td><span class="yes">&#10003;</span></td></tr>
+                            <tr><td>x1 SEO Blog per month</td><td><span class="no">&mdash;</span></td><td><span class="yes">&#10003;</span></td><td><span class="yes">&#10003;</span></td></tr>
+                            <tr><td>x1 LinkedIn Article per month</td><td><span class="no">&mdash;</span></td><td><span class="yes">&#10003;</span></td><td><span class="yes">&#10003;</span></td></tr>
+                            <tr><td>Multi-platform distribution<span class="compare-note">TikTok, LinkedIn, Reddit, YouTube</span></td><td><span class="no">&mdash;</span></td><td><span class="soon-text">coming soon</span></td><td><span class="soon-text">coming soon</span></td></tr>
+                            <tr><td>x1 In-person video per month</td><td><span class="no">&mdash;</span></td><td><span class="no">&mdash;</span></td><td><span class="yes">&#10003;</span></td></tr>
+                            <tr><td>Inclusion in NBRH campaigns</td><td><span class="no">&mdash;</span></td><td><span class="no">&mdash;</span></td><td><span class="yes">&#10003;</span></td></tr>
+
+                            <tr class="cat-row"><td colspan="4"><span class="cat-label">Outreach</span></td></tr>
+                            <tr><td>x1 Weekly outreach to groups</td><td><span class="no">&mdash;</span></td><td><span class="yes">&#10003;</span></td><td><span class="yes">&#10003;</span></td></tr>
+                            <tr><td>x1 Weekly outreach to clubs &amp; pages</td><td><span class="no">&mdash;</span></td><td><span class="yes">&#10003;</span></td><td><span class="yes">&#10003;</span></td></tr>
+                            <tr><td>x1 Weekly outreach to neighbours</td><td><span class="no">&mdash;</span></td><td><span class="yes">&#10003;</span></td><td><span class="yes">&#10003;</span></td></tr>
+                            <tr><td>Outreach to businesses &amp; corporates<span class="compare-note">Corporate wellness &amp; partnerships</span></td><td><span class="no">&mdash;</span></td><td><span class="no">&mdash;</span></td><td><span class="soon-text">coming soon</span></td></tr>
+
+                            <tr class="cat-row"><td colspan="4"><span class="cat-label">Support &amp; Guidance</span></td></tr>
+                            <tr><td>Club Consultation &amp; Auditing</td><td><span class="no">&mdash;</span></td><td><span class="yes">&#10003;</span></td><td><span class="yes">&#10003;</span></td></tr>
+                            <tr><td>Club House Concierge</td><td><span class="no">&mdash;</span></td><td><span class="no">&mdash;</span></td><td><span class="yes">&#10003;</span></td></tr>
+
+                            <tr class="cat-row"><td colspan="4"><span class="cat-label">Analytics &amp; Insights</span></td></tr>
+                            <tr><td>Booking analytics reports</td><td><span class="no">&mdash;</span></td><td><span class="yes">&#10003;</span></td><td><span class="yes">&#10003;</span></td></tr>
+                            <tr><td>Traffic tracking analytics</td><td><span class="no">&mdash;</span></td><td><span class="yes">&#10003;</span></td><td><span class="yes">&#10003;</span></td></tr>
+                            <tr><td>x1 AI Deep Research per month</td><td><span class="no">&mdash;</span></td><td><span class="no">&mdash;</span></td><td><span class="yes">&#10003;</span></td></tr>
+
+                            <tr class="cat-row"><td colspan="4"><span class="cat-label">Perks &amp; Extras</span></td></tr>
+                            <tr><td>Discount on &Agrave; La Carte add-ons</td><td><span class="no">&mdash;</span></td><td><span class="discount-badge">10% off</span></td><td><span class="discount-badge" style="color:var(--accent);">20% off</span></td></tr>
+                            <tr><td>Club Store Collaborations</td><td><span class="no">&mdash;</span></td><td><span class="no">&mdash;</span></td><td><span class="yes">&#10003;</span></td></tr>
+                            <tr><td>Influencer Marketing</td><td><span class="no">&mdash;</span></td><td><span class="no">&mdash;</span></td><td><span class="soon-text">coming soon</span></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Tier Summary Cards -->
+                <div class="tier-summary-grid">
+                    <div class="tier-summary-card stagger-item">
+                        <span class="ts-name">Starter</span>
+                        <span class="ts-price">&pound;30 / month
+                            <span class="ts-fee-note">No booking fees &middot; No revenue share</span>
+                        </span>
+                        <span class="ts-ideal-label">This is for you if&hellip;</span>
+                        <p class="ts-desc">You want to get your sessions listed and start building your presence on The NBRH. You get your Club Hub page, unlimited session listings, a Tickts booking page, and full dashboard access. No booking fees, no commissions. The right place to start.</p>
+                        <a href="https://www.thenbrh.co.uk/free-sign-up" class="ts-cta ghost-cta">Get Listed &rarr;</a>
                     </div>
-
-                    <div class="compare-wrap">
-                        <table class="compare-tbl" role="table" aria-label="Plan feature comparison">
-                            <thead>
-                                <tr>
-                                    <th scope="col">Feature</th>
-                                    <th scope="col">
-                                        <span class="th-tier-name">Starter</span>
-                                        <span class="th-tier-price">&pound;30 / month</span>
-                                    </th>
-                                    <th scope="col">
-                                        <span class="th-tier-name">Growth</span>
-                                        <span class="th-tier-price">&pound;60 / month</span>
-                                    </th>
-                                    <th scope="col" class="th-tier-highlight">
-                                        <div class="th-ch-wrap">
-                                            <span class="th-ch-badge">Recommended</span>
-                                            <span class="th-tier-name">Club House</span>
-                                            <span class="th-tier-price">&pound;125/mo &middot; 10% rev share</span>
-                                        </div>
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <!-- Pricing -->
-                                <tr class="cat-row"><td colspan="4"><span class="cat-label">Pricing</span></td></tr>
-                                <tr class="price-row">
-                                    <td>Monthly fee</td>
-                                    <td style="color:var(--accent);font-family:var(--font-serif);">&pound;30 / month</td>
-                                    <td>&pound;60 / month</td>
-                                    <td>&pound;125 / month</td>
-                                </tr>
-                                <tr class="price-row">
-                                    <td>Revenue share</td>
-                                    <td><span class="no">&mdash;</span></td>
-                                    <td><span class="no">&mdash;</span></td>
-                                    <td>10% of gross session revenue<span class="compare-note">We earn when you earn</span></td>
-                                </tr>
-                                <tr class="price-row">
-                                    <td>Pilot offer</td>
-                                    <td><span class="no">&mdash;</span></td>
-                                    <td>2 months free<span class="compare-note">4 sessions + onboarding call required</span></td>
-                                    <td>2 months free<span class="compare-note">4 sessions + onboarding call required</span></td>
-                                </tr>
-
-                                <!-- Platform -->
-                                <tr class="cat-row"><td colspan="4"><span class="cat-label">Platform Presence</span></td></tr>
-                                <tr><td>Unlimited sessions on The NBRH</td><td><span class="yes">&#10003;</span></td><td><span class="yes">&#10003;</span></td><td><span class="yes">&#10003;</span></td></tr>
-                                <tr><td>Club Hub page</td><td><span class="yes">&#10003;</span></td><td><span class="yes">&#10003;</span></td><td><span class="yes">&#10003;</span></td></tr>
-                                <tr><td>Club House Dashboard</td><td><span class="yes">&#10003;</span></td><td><span class="yes">&#10003;</span></td><td><span class="yes">&#10003;</span></td></tr>
-                                <tr><td>Club House Engine (search tool)</td><td><span class="yes">&#10003;</span></td><td><span class="yes">&#10003;</span></td><td><span class="yes">&#10003;</span></td></tr>
-                                <tr><td>Resource Hub access</td><td><span class="yes">&#10003;</span></td><td><span class="yes">&#10003;</span></td><td><span class="yes">&#10003;</span></td></tr>
-                                <tr><td>Sponsored placement on The NBRH</td><td><span class="no">&mdash;</span></td><td><span class="yes">&#10003;</span></td><td><span class="yes">&#10003;</span></td></tr>
-                                <tr><td>Instagram highlights &amp; link placement</td><td><span class="no">&mdash;</span></td><td><span class="no">&mdash;</span></td><td><span class="yes">&#10003;</span></td></tr>
-
-                                <!-- Booking -->
-                                <tr class="cat-row"><td colspan="4"><span class="cat-label">Booking</span></td></tr>
-                                <tr><td>Booking page on Tickts</td><td><span class="yes">&#10003;</span></td><td><span class="yes">&#10003;</span></td><td><span class="yes">&#10003;</span></td></tr>
-                                <tr><td>Booking management (self-serve)</td><td><span class="yes">&#10003;</span></td><td><span class="yes">&#10003;</span></td><td><span class="yes">&#10003;</span></td></tr>
-                                <tr><td>Booking management (handled by us)</td><td><span class="no">&mdash;</span></td><td><span class="yes">&#10003;</span></td><td><span class="yes">&#10003;</span></td></tr>
-                                <tr><td>Membership subscriptions</td><td><span class="no">&mdash;</span></td><td><span class="yes">&#10003;</span></td><td><span class="yes">&#10003;</span></td></tr>
-
-                                <!-- Content -->
-                                <tr class="cat-row"><td colspan="4"><span class="cat-label">Content &amp; Social Media</span></td></tr>
-                                <tr><td>x1 Instagram Session Reel (organic)</td><td><span class="no">&mdash;</span></td><td><span class="yes">&#10003;</span></td><td><span class="yes">&#10003;</span></td></tr>
-                                <tr><td>Complimentary Boosted Instagram Reel(s)</td><td><span class="no">&mdash;</span></td><td><span class="yes">&#10003;</span><span class="compare-note">x1 per month</span></td><td><span class="yes">&#10003;</span><span class="compare-note">x2 per month</span></td></tr>
-                                <tr><td>Instagram Ad creation &amp; management</td><td><span class="no">&mdash;</span></td><td><span class="yes">&#10003;</span><span class="compare-note">You pay ad spend</span></td><td><span class="yes">&#10003;</span><span class="compare-note">You pay ad spend</span></td></tr>
-                                <tr><td>x1 Instagram Story per week</td><td><span class="no">&mdash;</span></td><td><span class="yes">&#10003;</span></td><td><span class="yes">&#10003;</span></td></tr>
-                                <tr><td>x1 Instagram Social Proof Carousel</td><td><span class="no">&mdash;</span></td><td><span class="yes">&#10003;</span></td><td><span class="yes">&#10003;</span></td></tr>
-                                <tr><td>x1 SEO Blog per month</td><td><span class="no">&mdash;</span></td><td><span class="yes">&#10003;</span></td><td><span class="yes">&#10003;</span></td></tr>
-                                <tr><td>x1 LinkedIn Article per month</td><td><span class="no">&mdash;</span></td><td><span class="yes">&#10003;</span></td><td><span class="yes">&#10003;</span></td></tr>
-                                <tr><td>Multi-platform distribution<span class="compare-note">TikTok, LinkedIn, Reddit, YouTube</span></td><td><span class="no">&mdash;</span></td><td><span class="soon-badge">Coming Soon</span></td><td><span class="soon-badge">Coming Soon</span></td></tr>
-                                <tr><td>x1 In-person video per month</td><td><span class="no">&mdash;</span></td><td><span class="no">&mdash;</span></td><td><span class="yes">&#10003;</span></td></tr>
-                                <tr><td>Inclusion in NBRH marketing campaigns</td><td><span class="no">&mdash;</span></td><td><span class="no">&mdash;</span></td><td><span class="yes">&#10003;</span></td></tr>
-
-                                <!-- Outreach -->
-                                <tr class="cat-row"><td colspan="4"><span class="cat-label">Outreach</span></td></tr>
-                                <tr><td>x1 Weekly outreach to groups</td><td><span class="no">&mdash;</span></td><td><span class="yes">&#10003;</span></td><td><span class="yes">&#10003;</span></td></tr>
-                                <tr><td>x1 Weekly outreach to clubs &amp; pages</td><td><span class="no">&mdash;</span></td><td><span class="yes">&#10003;</span></td><td><span class="yes">&#10003;</span></td></tr>
-                                <tr><td>x1 Weekly outreach to neighbours</td><td><span class="no">&mdash;</span></td><td><span class="yes">&#10003;</span></td><td><span class="yes">&#10003;</span></td></tr>
-                                <tr><td>Outreach to businesses &amp; corporates<span class="compare-note">Corporate wellness &amp; partnership opportunities</span></td><td><span class="no">&mdash;</span></td><td><span class="no">&mdash;</span></td><td><span class="soon-badge">Coming Soon</span></td></tr>
-
-                                <!-- Support -->
-                                <tr class="cat-row"><td colspan="4"><span class="cat-label">Support &amp; Guidance</span></td></tr>
-                                <tr><td>Club Consultation &amp; Auditing</td><td><span class="no">&mdash;</span></td><td><span class="yes">&#10003;</span></td><td><span class="yes">&#10003;</span></td></tr>
-                                <tr><td>Club House Concierge (dedicated support)</td><td><span class="no">&mdash;</span></td><td><span class="no">&mdash;</span></td><td><span class="yes">&#10003;</span></td></tr>
-
-                                <!-- Analytics -->
-                                <tr class="cat-row"><td colspan="4"><span class="cat-label">Analytics &amp; Insights</span></td></tr>
-                                <tr><td>Detailed booking analytics reports</td><td><span class="no">&mdash;</span></td><td><span class="yes">&#10003;</span></td><td><span class="yes">&#10003;</span></td></tr>
-                                <tr><td>Traffic tracking analytics</td><td><span class="no">&mdash;</span></td><td><span class="yes">&#10003;</span></td><td><span class="yes">&#10003;</span></td></tr>
-                                <tr><td>x1 AI Deep Research per month</td><td><span class="no">&mdash;</span></td><td><span class="no">&mdash;</span></td><td><span class="yes">&#10003;</span></td></tr>
-
-                                <!-- Perks -->
-                                <tr class="cat-row"><td colspan="4"><span class="cat-label">Perks &amp; Extras</span></td></tr>
-                                <tr><td>Discount on &Agrave; La Carte add-ons</td><td><span class="no">&mdash;</span></td><td><span class="discount-badge">10% off</span></td><td><span class="discount-badge" style="color:var(--accent);">20% off</span></td></tr>
-                                <tr><td>Club Store Collaborations</td><td><span class="no">&mdash;</span></td><td><span class="no">&mdash;</span></td><td><span class="yes">&#10003;</span></td></tr>
-                                <tr><td>Influencer Marketing</td><td><span class="no">&mdash;</span></td><td><span class="no">&mdash;</span></td><td><span class="soon-badge">Coming Soon</span></td></tr>
-                            </tbody>
-                        </table>
+                    <div class="tier-summary-card stagger-item">
+                        <span class="ts-name">Growth</span>
+                        <span class="ts-price">&pound;60 / month
+                            <span class="ts-fee-note">No booking fees &middot; 2-month pilot available</span>
+                        </span>
+                        <span class="ts-ideal-label">This is for you if&hellip;</span>
+                        <p class="ts-desc">You&rsquo;re running sessions regularly and want the full marketing engine. Content going out every week, outreach happening on your behalf, analytics telling you what&rsquo;s working. At &pound;60/month, Growth gives you the tools and the team to grow seriously.</p>
+                        <a href="https://www.thenbrh.co.uk/growth-sign-up" class="ts-cta">Get Started &mdash; Growth &rarr;</a>
                     </div>
-
-                    <!-- Tier Summary Cards -->
-                    <div class="tier-summary-grid">
-                        <!-- Starter -->
-                        <div class="tier-summary-card stagger-item">
-                            <span class="ts-name">Starter</span>
-                            <span class="ts-price">&pound;30 / month
-                                <span class="ts-fee-note">No booking fees &middot; No revenue share</span>
-                            </span>
-                            <span class="ts-ideal-label">This is for you if&hellip;</span>
-                            <p class="ts-desc">You want to get your sessions listed and start building your presence on The NBRH. At &pound;30/month, you get your Club Hub page, unlimited session listings, a Tickts booking page, and full dashboard access. No booking fees, no commissions. It&rsquo;s the right place to start before you scale.</p>
-                            <a href="https://www.thenbrh.co.uk/free-sign-up" class="ts-cta ghost-cta">Get Listed &rarr;</a>
-                        </div>
-
-                        <!-- Growth -->
-                        <div class="tier-summary-card stagger-item">
-                            <span class="ts-name">Growth</span>
-                            <span class="ts-price">&pound;60 / month
-                                <span class="ts-fee-note">No booking fees &middot; 2-month pilot available</span>
-                            </span>
-                            <span class="ts-ideal-label">This is for you if&hellip;</span>
-                            <p class="ts-desc">You&rsquo;re running sessions regularly and want the full marketing engine. Content going out every week, outreach happening on your behalf, analytics telling you what&rsquo;s working. At &pound;60/month, Growth gives you the tools and the team to start growing seriously. No booking fees on top.</p>
-                            <a href="https://www.thenbrh.co.uk/growth-sign-up" class="ts-cta">Get Started &mdash; Growth &rarr;</a>
-                        </div>
-
-                        <!-- Club House -->
-                        <div class="tier-summary-card featured stagger-item">
-                            <span class="ts-badge">Recommended</span>
-                            <span class="ts-name">Club House</span>
-                            <span class="ts-price">&pound;125 / month
-                                <span class="ts-fee-note">+ 10% revenue share &middot; no booking fees &middot; 2-month pilot available</span>
-                            </span>
-                            <span class="ts-ideal-label">This is for you if&hellip;</span>
-                            <p class="ts-desc">You want a genuine growth partner and you&rsquo;re ready to hand off the marketing, admin and strategy. In-person video, two Boosted Reels per month, AI-backed research, and a dedicated Concierge. The 10% revenue share aligns our incentives completely &mdash; we grow when you grow.</p>
-                            <a href="https://www.thenbrh.co.uk/club-house" class="ts-cta">Get Started &mdash; Club House &rarr;</a>
-                        </div>
+                    <div class="tier-summary-card featured stagger-item">
+                        <span class="ts-badge">Recommended</span>
+                        <span class="ts-name">Club House</span>
+                        <span class="ts-price">&pound;125 / month
+                            <span class="ts-fee-note">+ 10% revenue share &middot; no booking fees &middot; 2-month pilot</span>
+                        </span>
+                        <span class="ts-ideal-label">This is for you if&hellip;</span>
+                        <p class="ts-desc">You want a genuine growth partner and you&rsquo;re ready to hand off the marketing, admin, and strategy. In-person video, two Boosted Reels per month, AI-backed research, and a dedicated Concierge. The 10% revenue share means we grow when you grow.</p>
+                        <a href="https://www.thenbrh.co.uk/club-house" class="ts-cta">Get Started &mdash; Club House &rarr;</a>
                     </div>
                 </div>
             </div>
@@ -775,63 +715,53 @@
     </div>
 </div>
 
-
-<!-- ═══════════════════════════ NEIGHBOURS PASS ═══════════════════════════ -->
+<!-- NEIGHBOURS PASS -->
 <div id="neighbours-pass"></div>
 <section class="pass-section reveal">
     <div class="wrap">
-
-        <!-- Coming Soon banner -->
-        <div class="pass-cs-banner">
-            <span class="pass-cs-pill">In Development</span>
-            <p class="pass-cs-banner-text"><strong>The Neighbours Pass is not yet available.</strong> We&rsquo;re building it in collaboration with our partner clubs before launch.</p>
+        <div class="pass-dev-bar">
+            <span class="pass-dev-bar-icon">&#128204;</span>
+            <p class="pass-dev-bar-text"><strong>The Neighbours Pass is not yet available.</strong> We&rsquo;re building it in collaboration with our partner clubs before launch &mdash; it&rsquo;s currently in development.</p>
         </div>
-
         <div class="pass-layout">
-            <!-- Left: intro + benefits -->
             <div class="pass-intro">
                 <span class="eyebrow pass">Coming Soon</span>
                 <h2>The Neighbours Pass is coming.</h2>
-                <p class="pass-lead">We&rsquo;re building a player-facing membership that gives your members more &mdash; and keeps them connected to your club. The Neighbours Pass is designed as a retention tool you can offer your players, tailored to your club, with access that stretches across the full NBRH network.</p>
+                <p class="pass-lead">We&rsquo;re building a player-facing membership that gives your members more &mdash; and keeps them connected to your club. The Neighbours Pass is a retention tool designed to be offered to club members, tailored to each club, and usable across the full NBRH network.</p>
                 <ul class="pass-benefits">
                     <li>
                         <div class="pass-benefit-icon">&#127981;</div>
                         <div class="pass-benefit-text">
-                            <strong>Built around your club</strong>
-                            <span>Each club will be able to shape how the Pass looks and what it offers their members &mdash; their sessions, their perks, their own terms. Not a one-size-fits-all product.</span>
+                            <strong>Tailored to your club</strong>
+                            <span>Each club will be able to shape what the Pass looks like for their members &mdash; their sessions, their perks, their terms. Not a generic product.</span>
                         </div>
                     </li>
                     <li>
                         <div class="pass-benefit-icon">&#128274;</div>
                         <div class="pass-benefit-text">
                             <strong>A retention tool that actually works</strong>
-                            <span>Once your members are on the Pass, their loyalty is tied to your club and to The NBRH. Their session history, preferences, and community all live on the platform.</span>
+                            <span>Once your members are on the Pass, their loyalty is tied to your club. Their session history, preferences, and community all live on The NBRH platform.</span>
                         </div>
                     </li>
                     <li>
                         <div class="pass-benefit-icon">&#127760;</div>
                         <div class="pass-benefit-text">
                             <strong>One pass. Every NBRH venue.</strong>
-                            <span>The Pass isn&rsquo;t limited to one club. Members will be able to use it across every partner venue on The NBRH &mdash; giving them more value, and giving your club more pull.</span>
+                            <span>The Pass isn&rsquo;t limited to one club. Members will be able to use it across every partner venue on The NBRH, giving them more value wherever they play.</span>
                         </div>
                     </li>
                     <li>
                         <div class="pass-benefit-icon">&#128178;</div>
                         <div class="pass-benefit-text">
                             <strong>Offered to your members, not the public</strong>
-                            <span>The Pass is something your club offers to its own players. We handle the infrastructure &mdash; you decide who gets access and how it&rsquo;s positioned within your community.</span>
+                            <span>This is something your club offers to its own players. You decide who gets access &mdash; we handle the infrastructure.</span>
                         </div>
                     </li>
                 </ul>
             </div>
-
-            <!-- Right: Pass card (Coming Soon) + notice -->
             <div>
                 <div class="pass-card-wrap">
-                    <!-- Coming Soon overlay -->
-                    <div class="pass-card-overlay">
-                        <span class="pass-card-overlay-badge">Coming Soon</span>
-                    </div>
+                    <span class="pass-cs-label">In Development &mdash; Preview Only</span>
                     <div class="pass-card">
                         <svg class="pass-card-ring" viewBox="0 0 220 220" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                             <circle cx="110" cy="110" r="100" stroke="#00C9A7" stroke-width="1" stroke-dasharray="6 5"/>
@@ -855,18 +785,16 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="pass-dev-notice">
-                    <span class="pass-dev-notice-head">&#128204; Currently in development</span>
-                    <p>The Neighbours Pass is something we&rsquo;re building carefully, in close collaboration with our partner clubs. If you&rsquo;re on a <strong>Growth or Club House plan</strong> and want input into how the Pass gets shaped for your community, get in touch &mdash; we&rsquo;d love to hear from you. Early partners will have a say in how it launches.</p>
+                    <span class="pass-dev-notice-head">Working with partner clubs to build this right</span>
+                    <p>The Neighbours Pass is being developed carefully, in close collaboration with clubs already on the platform. If you&rsquo;re on <strong>Growth or Club House</strong> and want input into how it gets shaped for your community, get in touch. Early partners will have a say in how it launches.</p>
                 </div>
             </div>
         </div>
     </div>
 </section>
 
-
-<!-- ═══════════════════════ OUTCOMES — collapsed ═══════════════════════ -->
+<!-- OUTCOMES -->
 <div class="divider"></div>
 <div class="collapsible-section reveal" id="outcomes">
     <button class="collapsible-header" aria-expanded="false" data-target="outcomes-body">
@@ -880,26 +808,24 @@
         <span class="collapsible-chevron">&#9660;</span>
     </button>
     <div class="collapsible-body" id="outcomes-body">
-        <div class="collapsible-body-inner">
-            <div class="collapsible-content">
-                <div class="wrap">
-                    <div class="section-head">
-                        <span class="eyebrow">What to Expect</span>
-                        <h2>Here&rsquo;s what joining The NBRH looks like.</h2>
-                        <p class="sub">We won&rsquo;t promise you the world. But here&rsquo;s what we&rsquo;re confident about &mdash; and what we&rsquo;re accountable to delivering.</p>
-                    </div>
-                    <div style="display:flex;justify-content:center;">
-                        <ul class="simple-list">
-                            <li>You&rsquo;ll save time &mdash; bookings, content, admin, outreach all handled</li>
-                            <li>More eyes on your sessions &mdash; platform discovery, Instagram, and outreach working at once</li>
-                            <li>Proper digital infrastructure &mdash; booking system, Club Hub, analytics dashboard in one place</li>
-                            <li>Clarity on what&rsquo;s working &mdash; monthly reports with insights and clear next steps</li>
-                            <li>A community behind your club &mdash; The NBRH network becomes your network</li>
-                            <li>A foundation to scale &mdash; tools and support that compound over time</li>
-                        </ul>
-                    </div>
-                    <p style="text-align:center;margin-top:2rem;font-size:0.8rem;color:var(--text-faint);font-style:italic;max-width:55ch;margin-left:auto;margin-right:auto;">We don&rsquo;t guarantee specific numbers &mdash; but we commit to showing up, doing the work, and being honest about what&rsquo;s working.</p>
+        <div class="collapsible-content">
+            <div class="wrap">
+                <div class="section-head">
+                    <span class="eyebrow">What to Expect</span>
+                    <h2>Here&rsquo;s what joining looks like.</h2>
+                    <p class="sub">We won&rsquo;t promise you the world. But here&rsquo;s what we&rsquo;re confident about &mdash; and what we&rsquo;re accountable to delivering.</p>
                 </div>
+                <div style="display:flex;justify-content:center;">
+                    <ul class="simple-list">
+                        <li>You&rsquo;ll save time &mdash; bookings, content, admin, and outreach all handled</li>
+                        <li>More eyes on your sessions &mdash; platform discovery, Instagram, and outreach working at once</li>
+                        <li>Proper digital infrastructure &mdash; booking system, Club Hub, and analytics in one place</li>
+                        <li>Clarity on what&rsquo;s working &mdash; monthly reports with insights and clear next steps</li>
+                        <li>A community behind your club &mdash; The NBRH network becomes your network</li>
+                        <li>A foundation to scale &mdash; tools and support that compound over time</li>
+                    </ul>
+                </div>
+                <p style="text-align:center;margin-top:1.75rem;font-size:0.78rem;color:var(--text-faint);font-style:italic;max-width:52ch;margin-left:auto;margin-right:auto;">We don&rsquo;t guarantee specific numbers &mdash; but we commit to showing up, doing the work, and being honest about what&rsquo;s working.</p>
             </div>
         </div>
     </div>
@@ -907,8 +833,7 @@
 
 <section class="testimonials-section" aria-hidden="true"></section>
 
-
-<!-- ═══════════════════════════ HOW IT WORKS ═══════════════════════════ -->
+<!-- HOW IT WORKS -->
 <div class="divider"></div>
 <div class="collapsible-section reveal open" id="how-it-works">
     <button class="collapsible-header" aria-expanded="true" data-target="how-it-works-body">
@@ -922,35 +847,33 @@
         <span class="collapsible-chevron">&#9660;</span>
     </button>
     <div class="collapsible-body" id="how-it-works-body">
-        <div class="collapsible-body-inner">
-            <div class="collapsible-content">
-                <div class="section-head" style="margin-bottom:2rem;">
-                    <p class="sub">We handle the setup so you don&rsquo;t have to. Here&rsquo;s what joining looks like in practice.</p>
+        <div class="collapsible-content">
+            <div class="section-head" style="margin-bottom:1.75rem;">
+                <p class="sub">We handle the setup so you don&rsquo;t have to. Here&rsquo;s what joining looks like in practice.</p>
+            </div>
+            <div class="steps-grid">
+                <div class="steps-connector"></div>
+                <div class="step-item">
+                    <div class="step-number-wrap"><div class="step-number">1</div><span class="step-timing">Week one</span></div>
+                    <div class="step-title">We set you up</div>
+                    <p class="step-desc">We build your Club Hub page, configure your Tickts booking system, list your sessions, and set up your dashboard. We&rsquo;ll need your sessions, your story, a few photos. That&rsquo;s it. For the pilot, this is also where we run the onboarding call.</p>
                 </div>
-                <div class="steps-grid">
-                    <div class="steps-connector"></div>
-                    <div class="step-item">
-                        <div class="step-number-wrap"><div class="step-number">1</div><span class="step-timing">Week one</span></div>
-                        <div class="step-title">We set you up</div>
-                        <p class="step-desc">We build your Club Hub page, configure your Tickts booking system, list your sessions, and set up your dashboard. We&rsquo;ll need your sessions, your story, a few photos. That&rsquo;s it. For the pilot, this is also where we run the onboarding call.</p>
-                    </div>
-                    <div class="step-item">
-                        <div class="step-number-wrap"><div class="step-number">2</div><span class="step-timing">Week two</span></div>
-                        <div class="step-title">You go live</div>
-                        <p class="step-desc">Your onboarding campaign launches &mdash; the Reel goes out, outreach kicks off, and players start finding you. You don&rsquo;t need to do anything. We handle it.</p>
-                    </div>
-                    <div class="step-item">
-                        <div class="step-number-wrap"><div class="step-number">3</div><span class="step-timing">Every month after</span></div>
-                        <div class="step-title">We keep it moving</div>
-                        <p class="step-desc">Your monthly deliverables land on schedule. We manage bookings, handle admin, and send you a clear performance report. You focus on coaching. We focus on filling your sessions.</p>
-                    </div>
+                <div class="step-item">
+                    <div class="step-number-wrap"><div class="step-number">2</div><span class="step-timing">Week two</span></div>
+                    <div class="step-title">You go live</div>
+                    <p class="step-desc">Your onboarding campaign launches &mdash; the Reel goes out, outreach kicks off, and players start finding you. You don&rsquo;t need to do anything. We handle it.</p>
+                </div>
+                <div class="step-item">
+                    <div class="step-number-wrap"><div class="step-number">3</div><span class="step-timing">Every month after</span></div>
+                    <div class="step-title">We keep it moving</div>
+                    <p class="step-desc">Your monthly deliverables land on schedule. We manage bookings, handle admin, and send you a clear performance report. You focus on coaching. We focus on filling your sessions.</p>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
-<!-- À La Carte -->
+<!-- A LA CARTE -->
 <div class="collapsible-section reveal" id="alacarte">
     <button class="collapsible-header" aria-expanded="false" data-target="alacarte-body">
         <div class="collapsible-header-left">
@@ -963,45 +886,43 @@
         <span class="collapsible-chevron">&#9660;</span>
     </button>
     <div class="collapsible-body" id="alacarte-body">
-        <div class="collapsible-body-inner">
-            <div class="collapsible-content">
-                <p style="font-size:0.9rem;color:var(--text-muted);margin-bottom:2rem;max-width:60ch;">Already established? Just need targeted help in one or two areas? Purchase individual services without a subscription. Growth members get 10% off; Club House members get 20% off.</p>
-                <div class="services-grid">
-                    <div class="svc-card">
-                        <button class="svc-trigger" aria-expanded="false"><div class="svc-trigger-left"><span class="svc-trigger-icon">&#128247;</span><div class="svc-trigger-text"><span class="svc-trigger-name">Social Media</span><span class="svc-trigger-desc">Content, creative, scheduling and channel management</span></div></div><div class="svc-trigger-right"><span class="svc-price-pill">&pound;50</span><span class="svc-chevron">&#9660;</span></div></button>
-                        <div class="svc-body"><div class="svc-body-inner"><div class="svc-body-content"><div class="svc-includes"><span class="svc-includes-label">What&rsquo;s Included</span><ul><li>Targeted Boosted Sessions Reel &mdash; a paid Instagram Reel built around your sessions</li><li>Boosted Club Awareness Reel &mdash; a brand-building Reel focused on growing your following</li><li>Creative production, targeting, and reporting handled by us</li><li>Ad spend budget agreed with you separately</li></ul></div><div class="svc-pricing"><div class="svc-price-row"><div class="svc-price-cell"><span class="svc-price-cell-label">Full Price</span><span class="svc-price-cell-value">&pound;50</span></div><div class="svc-price-divider"></div><div class="svc-price-cell ch-price"><span class="svc-price-cell-label">Club House Price</span><span class="svc-price-cell-value">&pound;40</span></div></div><div class="svc-saving">Club House members save <strong>&pound;10</strong> (20% off)</div><a href="https://www.thenbrh.co.uk/services-page/social-media-package" class="svc-book-btn">Book this Service &rarr;</a></div></div></div></div>
-                    </div>
-                    <div class="svc-card">
-                        <button class="svc-trigger" aria-expanded="false"><div class="svc-trigger-left"><span class="svc-trigger-icon">&#128226;</span><div class="svc-trigger-text"><span class="svc-trigger-name">Outreach</span><span class="svc-trigger-desc">Targeted player acquisition and community outreach campaigns</span></div></div><div class="svc-trigger-right"><span class="svc-price-pill">&pound;50</span><span class="svc-chevron">&#9660;</span></div></button>
-                        <div class="svc-body"><div class="svc-body-inner"><div class="svc-body-content"><div class="svc-includes"><span class="svc-includes-label">What&rsquo;s Included</span><ul><li>Cold Outreach &mdash; 3 relevant communities (Facebook, Reddit, WhatsApp, Discord) targeted naturally on your behalf</li><li>Session Filler Outreach &mdash; targeted to NBRH users matching your session&rsquo;s sport, location, and availability</li><li>Ideal for new slots, last-minute gaps, or sessions running below capacity</li></ul></div><div class="svc-pricing"><div class="svc-price-row"><div class="svc-price-cell"><span class="svc-price-cell-label">Full Price</span><span class="svc-price-cell-value">&pound;50</span></div><div class="svc-price-divider"></div><div class="svc-price-cell ch-price"><span class="svc-price-cell-label">Club House Price</span><span class="svc-price-cell-value">&pound;40</span></div></div><div class="svc-saving">Club House members save <strong>&pound;10</strong> (20% off)</div><a href="https://www.thenbrh.co.uk/services-page/outreach-package" class="svc-book-btn">Book this Service &rarr;</a></div></div></div></div>
-                    </div>
-                    <div class="svc-card">
-                        <button class="svc-trigger" aria-expanded="false"><div class="svc-trigger-left"><span class="svc-trigger-icon">&#128269;</span><div class="svc-trigger-text"><span class="svc-trigger-name">Discovery</span><span class="svc-trigger-desc">Platform visibility, pinned promotion and session discoverability</span></div></div><div class="svc-trigger-right"><span class="svc-price-pill">&pound;50</span><span class="svc-chevron">&#9660;</span></div></button>
-                        <div class="svc-body"><div class="svc-body-inner"><div class="svc-body-content"><div class="svc-includes"><span class="svc-includes-label">What&rsquo;s Included</span><ul><li>Sponsored Session &mdash; high-visibility placement on The NBRH platform</li><li>Additional Session Listing with booking, description, and discovery</li><li>7-Day Pinned Post on Instagram &mdash; your message at the top of our page for a full week</li></ul></div><div class="svc-pricing"><div class="svc-price-row"><div class="svc-price-cell"><span class="svc-price-cell-label">Full Price</span><span class="svc-price-cell-value">&pound;50</span></div><div class="svc-price-divider"></div><div class="svc-price-cell ch-price"><span class="svc-price-cell-label">Club House Price</span><span class="svc-price-cell-value">&pound;40</span></div></div><div class="svc-saving">Club House members save <strong>&pound;10</strong> (20% off)</div><a href="https://www.thenbrh.co.uk/services-page/discovery-package" class="svc-book-btn">Book this Service &rarr;</a></div></div></div></div>
-                    </div>
-                    <div class="svc-card">
-                        <button class="svc-trigger" aria-expanded="false"><div class="svc-trigger-left"><span class="svc-trigger-icon">&#9999;&#65039;</span><div class="svc-trigger-text"><span class="svc-trigger-name">Content</span><span class="svc-trigger-desc">Written content, video production and promotional assets</span></div></div><div class="svc-trigger-right"><span class="svc-price-pill">&pound;75</span><span class="svc-chevron">&#9660;</span></div></button>
-                        <div class="svc-body"><div class="svc-body-inner"><div class="svc-body-content"><div class="svc-includes"><span class="svc-includes-label">What&rsquo;s Included</span><ul><li>Club Blog Post &mdash; 800&ndash;1,200 word SEO-optimised article on The NBRH and LinkedIn</li><li>Original Video Content &mdash; on-location filming edited into a Reel (30&ndash;60 sec) plus a longer cut</li><li>Evidence Book &mdash; branded PDF for funding and sponsorship</li><li>All assets are yours to use across your channels</li></ul></div><div class="svc-pricing"><div class="svc-price-row"><div class="svc-price-cell"><span class="svc-price-cell-label">Full Price</span><span class="svc-price-cell-value">&pound;75</span></div><div class="svc-price-divider"></div><div class="svc-price-cell ch-price"><span class="svc-price-cell-label">Club House Price</span><span class="svc-price-cell-value">&pound;60</span></div></div><div class="svc-saving">Club House members save <strong>&pound;15</strong> (20% off)</div><a href="https://www.thenbrh.co.uk/services-page/content-package" class="svc-book-btn">Book this Service &rarr;</a></div></div></div></div>
-                    </div>
-                    <div class="svc-card">
-                        <button class="svc-trigger" aria-expanded="false"><div class="svc-trigger-left"><span class="svc-trigger-icon">&#128201;</span><div class="svc-trigger-text"><span class="svc-trigger-name">Data &amp; Insights</span><span class="svc-trigger-desc">Market research, analytics, reporting and performance review</span></div></div><div class="svc-trigger-right"><span class="svc-price-pill">&pound;50</span><span class="svc-chevron">&#9660;</span></div></button>
-                        <div class="svc-body"><div class="svc-body-inner"><div class="svc-body-content"><div class="svc-includes"><span class="svc-includes-label">What&rsquo;s Included</span><ul><li>Deep Search Marketing Report &mdash; competitive landscape and audience mapping</li><li>Competitor audit (local and digital)</li><li>Channel recommendations with rationale and quick-win action plan</li></ul></div><div class="svc-pricing"><div class="svc-price-row"><div class="svc-price-cell"><span class="svc-price-cell-label">Full Price</span><span class="svc-price-cell-value">&pound;50</span></div><div class="svc-price-divider"></div><div class="svc-price-cell ch-price"><span class="svc-price-cell-label">Club House Price</span><span class="svc-price-cell-value">&pound;40</span></div></div><div class="svc-saving">Club House members save <strong>&pound;10</strong> (20% off)</div><a href="https://www.thenbrh.co.uk/services-page/data-insights-package" class="svc-book-btn">Book this Service &rarr;</a></div></div></div></div>
-                    </div>
-                    <div class="svc-card">
-                        <button class="svc-trigger" aria-expanded="false"><div class="svc-trigger-left"><span class="svc-trigger-icon">&#128200;</span><div class="svc-trigger-text"><span class="svc-trigger-name">Boosted Fund Finder</span><span class="svc-trigger-desc">Funding research, applications and grant management for your club</span></div></div><div class="svc-trigger-right"><span class="svc-price-pill">&pound;150</span><span class="svc-chevron">&#9660;</span></div></button>
-                        <div class="svc-body"><div class="svc-body-inner"><div class="svc-body-content"><div class="svc-includes"><span class="svc-includes-label">What&rsquo;s Included</span><ul><li>Funding landscape research tailored to your club &mdash; sport, location, size, and ambition</li><li>Full application writing and submission on your behalf</li><li>End-to-end process management from research to submission</li><li>If we secure funding, you keep 100% of it. No commission.</li></ul></div><div class="svc-pricing"><div class="svc-price-row"><div class="svc-price-cell"><span class="svc-price-cell-label">Full Price</span><span class="svc-price-cell-value">&pound;150</span></div><div class="svc-price-divider"></div><div class="svc-price-cell ch-price"><span class="svc-price-cell-label">Club House Price</span><span class="svc-price-cell-value">&pound;120</span></div></div><div class="svc-saving">Club House members save <strong>&pound;30</strong> (20% off)</div><a href="https://www.thenbrh.co.uk/services-page/monetisation-package" class="svc-book-btn">Book this Service &rarr;</a></div></div></div></div>
-                    </div>
+        <div class="collapsible-content">
+            <p style="font-size:0.875rem;color:var(--text-muted);margin-bottom:1.75rem;max-width:58ch;">Already established? Just need targeted help in one or two areas? Purchase individual services without a subscription. Growth members get 10% off; Club House members get 20% off.</p>
+            <div class="services-grid">
+                <div class="svc-card">
+                    <button class="svc-trigger" aria-expanded="false"><div class="svc-trigger-left"><span class="svc-trigger-icon">&#128247;</span><div class="svc-trigger-text"><span class="svc-trigger-name">Social Media</span><span class="svc-trigger-desc">Content, creative, scheduling and channel management</span></div></div><div class="svc-trigger-right"><span class="svc-price-pill">&pound;50</span><span class="svc-chevron">&#9660;</span></div></button>
+                    <div class="svc-body"><div class="svc-body-inner"><div class="svc-body-content"><div class="svc-includes"><span class="svc-includes-label">What&rsquo;s Included</span><ul><li>Targeted Boosted Sessions Reel &mdash; a paid Instagram Reel built around your sessions</li><li>Boosted Club Awareness Reel &mdash; a brand-building Reel focused on your following</li><li>Creative production, targeting, and reporting handled by us</li><li>Ad spend budget agreed with you separately</li></ul></div><div class="svc-pricing"><div class="svc-price-row"><div class="svc-price-cell"><span class="svc-price-cell-label">Full Price</span><span class="svc-price-cell-value">&pound;50</span></div><div class="svc-price-divider"></div><div class="svc-price-cell ch-price"><span class="svc-price-cell-label">Club House Price</span><span class="svc-price-cell-value">&pound;40</span></div></div><div class="svc-saving">Club House members save <strong>&pound;10</strong> (20% off)</div><a href="https://www.thenbrh.co.uk/services-page/social-media-package" class="svc-book-btn">Book this Service &rarr;</a></div></div></div></div>
                 </div>
-                <div class="delivery-block">
-                    <div class="delivery-header"><span class="delivery-icon">&#9889;</span><div><div class="delivery-title">Need it faster?</div><div class="delivery-sub">Add a delivery upgrade to any service at checkout.</div></div></div>
-                    <div class="delivery-options">
-                        <div class="delivery-option"><div class="delivery-option-left"><span class="delivery-option-icon">&#128293;</span><div><div class="delivery-option-name">24-Hour Delivery</div><div class="delivery-option-desc">Turned around within one business day of all assets received</div></div></div><div class="delivery-option-right"><div class="delivery-price-col"><span class="delivery-price-label">Full Price</span><span class="delivery-price-value">&pound;50</span></div><div class="delivery-divider"></div><div class="delivery-price-col ch"><span class="delivery-price-label">Club House</span><span class="delivery-price-value">&pound;40</span></div></div></div>
-                        <div class="delivery-option"><div class="delivery-option-left"><span class="delivery-option-icon">&#9193;</span><div><div class="delivery-option-name">Express Delivery</div><div class="delivery-option-desc">Completed within 3 business days of all assets received</div></div></div><div class="delivery-option-right"><div class="delivery-price-col"><span class="delivery-price-label">Full Price</span><span class="delivery-price-value">&pound;25</span></div><div class="delivery-divider"></div><div class="delivery-price-col ch"><span class="delivery-price-label">Club House</span><span class="delivery-price-value">&pound;20</span></div></div></div>
-                    </div>
-                    <div class="delivery-note">&#9432; Standard delivery timelines vary by service. Club House members save on delivery upgrades automatically.</div>
+                <div class="svc-card">
+                    <button class="svc-trigger" aria-expanded="false"><div class="svc-trigger-left"><span class="svc-trigger-icon">&#128226;</span><div class="svc-trigger-text"><span class="svc-trigger-name">Outreach</span><span class="svc-trigger-desc">Targeted player acquisition and community outreach campaigns</span></div></div><div class="svc-trigger-right"><span class="svc-price-pill">&pound;50</span><span class="svc-chevron">&#9660;</span></div></button>
+                    <div class="svc-body"><div class="svc-body-inner"><div class="svc-body-content"><div class="svc-includes"><span class="svc-includes-label">What&rsquo;s Included</span><ul><li>Cold Outreach &mdash; 3 relevant communities (Facebook, Reddit, WhatsApp, Discord) targeted on your behalf</li><li>Session Filler Outreach &mdash; targeted to NBRH users matching your sport, location, and availability</li><li>Ideal for new slots, last-minute gaps, or sessions running below capacity</li></ul></div><div class="svc-pricing"><div class="svc-price-row"><div class="svc-price-cell"><span class="svc-price-cell-label">Full Price</span><span class="svc-price-cell-value">&pound;50</span></div><div class="svc-price-divider"></div><div class="svc-price-cell ch-price"><span class="svc-price-cell-label">Club House Price</span><span class="svc-price-cell-value">&pound;40</span></div></div><div class="svc-saving">Club House members save <strong>&pound;10</strong> (20% off)</div><a href="https://www.thenbrh.co.uk/services-page/outreach-package" class="svc-book-btn">Book this Service &rarr;</a></div></div></div></div>
                 </div>
-                <div class="tier2-note"><strong>One-off. No commitment.</strong> Each service is purchased individually. Every completed project gets a light check-in 30 days later &mdash; not a hard sell, just an honest conversation about what&rsquo;s next.</div>
+                <div class="svc-card">
+                    <button class="svc-trigger" aria-expanded="false"><div class="svc-trigger-left"><span class="svc-trigger-icon">&#128269;</span><div class="svc-trigger-text"><span class="svc-trigger-name">Discovery</span><span class="svc-trigger-desc">Platform visibility, pinned promotion and session discoverability</span></div></div><div class="svc-trigger-right"><span class="svc-price-pill">&pound;50</span><span class="svc-chevron">&#9660;</span></div></button>
+                    <div class="svc-body"><div class="svc-body-inner"><div class="svc-body-content"><div class="svc-includes"><span class="svc-includes-label">What&rsquo;s Included</span><ul><li>Sponsored Session &mdash; high-visibility placement on The NBRH platform</li><li>Additional Session Listing with booking, description, and discovery</li><li>7-Day Pinned Post on Instagram &mdash; your message at the top of our page for a full week</li></ul></div><div class="svc-pricing"><div class="svc-price-row"><div class="svc-price-cell"><span class="svc-price-cell-label">Full Price</span><span class="svc-price-cell-value">&pound;50</span></div><div class="svc-price-divider"></div><div class="svc-price-cell ch-price"><span class="svc-price-cell-label">Club House Price</span><span class="svc-price-cell-value">&pound;40</span></div></div><div class="svc-saving">Club House members save <strong>&pound;10</strong> (20% off)</div><a href="https://www.thenbrh.co.uk/services-page/discovery-package" class="svc-book-btn">Book this Service &rarr;</a></div></div></div></div>
+                </div>
+                <div class="svc-card">
+                    <button class="svc-trigger" aria-expanded="false"><div class="svc-trigger-left"><span class="svc-trigger-icon">&#9999;&#65039;</span><div class="svc-trigger-text"><span class="svc-trigger-name">Content</span><span class="svc-trigger-desc">Written content, video production and promotional assets</span></div></div><div class="svc-trigger-right"><span class="svc-price-pill">&pound;75</span><span class="svc-chevron">&#9660;</span></div></button>
+                    <div class="svc-body"><div class="svc-body-inner"><div class="svc-body-content"><div class="svc-includes"><span class="svc-includes-label">What&rsquo;s Included</span><ul><li>Club Blog Post &mdash; 800&ndash;1,200 word SEO article on The NBRH and LinkedIn</li><li>Original Video Content &mdash; on-location filming edited into a Reel plus a longer cut</li><li>Evidence Book &mdash; branded PDF for funding and sponsorship</li><li>All assets are yours to use across your channels</li></ul></div><div class="svc-pricing"><div class="svc-price-row"><div class="svc-price-cell"><span class="svc-price-cell-label">Full Price</span><span class="svc-price-cell-value">&pound;75</span></div><div class="svc-price-divider"></div><div class="svc-price-cell ch-price"><span class="svc-price-cell-label">Club House Price</span><span class="svc-price-cell-value">&pound;60</span></div></div><div class="svc-saving">Club House members save <strong>&pound;15</strong> (20% off)</div><a href="https://www.thenbrh.co.uk/services-page/content-package" class="svc-book-btn">Book this Service &rarr;</a></div></div></div></div>
+                </div>
+                <div class="svc-card">
+                    <button class="svc-trigger" aria-expanded="false"><div class="svc-trigger-left"><span class="svc-trigger-icon">&#128201;</span><div class="svc-trigger-text"><span class="svc-trigger-name">Data &amp; Insights</span><span class="svc-trigger-desc">Market research, analytics, reporting and performance review</span></div></div><div class="svc-trigger-right"><span class="svc-price-pill">&pound;50</span><span class="svc-chevron">&#9660;</span></div></button>
+                    <div class="svc-body"><div class="svc-body-inner"><div class="svc-body-content"><div class="svc-includes"><span class="svc-includes-label">What&rsquo;s Included</span><ul><li>Deep Search Marketing Report &mdash; competitive landscape and audience mapping</li><li>Competitor audit (local and digital)</li><li>Channel recommendations with quick-win action plan</li></ul></div><div class="svc-pricing"><div class="svc-price-row"><div class="svc-price-cell"><span class="svc-price-cell-label">Full Price</span><span class="svc-price-cell-value">&pound;50</span></div><div class="svc-price-divider"></div><div class="svc-price-cell ch-price"><span class="svc-price-cell-label">Club House Price</span><span class="svc-price-cell-value">&pound;40</span></div></div><div class="svc-saving">Club House members save <strong>&pound;10</strong> (20% off)</div><a href="https://www.thenbrh.co.uk/services-page/data-insights-package" class="svc-book-btn">Book this Service &rarr;</a></div></div></div></div>
+                </div>
+                <div class="svc-card">
+                    <button class="svc-trigger" aria-expanded="false"><div class="svc-trigger-left"><span class="svc-trigger-icon">&#128200;</span><div class="svc-trigger-text"><span class="svc-trigger-name">Boosted Fund Finder</span><span class="svc-trigger-desc">Funding research, applications and grant management for your club</span></div></div><div class="svc-trigger-right"><span class="svc-price-pill">&pound;150</span><span class="svc-chevron">&#9660;</span></div></button>
+                    <div class="svc-body"><div class="svc-body-inner"><div class="svc-body-content"><div class="svc-includes"><span class="svc-includes-label">What&rsquo;s Included</span><ul><li>Funding landscape research tailored to your club &mdash; sport, location, size, and ambition</li><li>Full application writing and submission on your behalf</li><li>End-to-end management from research to submission</li><li>If we secure funding, you keep 100%. No commission.</li></ul></div><div class="svc-pricing"><div class="svc-price-row"><div class="svc-price-cell"><span class="svc-price-cell-label">Full Price</span><span class="svc-price-cell-value">&pound;150</span></div><div class="svc-price-divider"></div><div class="svc-price-cell ch-price"><span class="svc-price-cell-label">Club House Price</span><span class="svc-price-cell-value">&pound;120</span></div></div><div class="svc-saving">Club House members save <strong>&pound;30</strong> (20% off)</div><a href="https://www.thenbrh.co.uk/services-page/monetisation-package" class="svc-book-btn">Book this Service &rarr;</a></div></div></div></div>
+                </div>
             </div>
+            <div class="delivery-block">
+                <div class="delivery-header"><span class="delivery-icon">&#9889;</span><div><div class="delivery-title">Need it faster?</div><div class="delivery-sub">Add a delivery upgrade to any service at checkout.</div></div></div>
+                <div class="delivery-options">
+                    <div class="delivery-option"><div class="delivery-option-left"><span class="delivery-option-icon">&#128293;</span><div><div class="delivery-option-name">24-Hour Delivery</div><div class="delivery-option-desc">Turned around within one business day of all assets received</div></div></div><div class="delivery-option-right"><div class="delivery-price-col"><span class="delivery-price-label">Full Price</span><span class="delivery-price-value">&pound;50</span></div><div class="delivery-divider"></div><div class="delivery-price-col ch"><span class="delivery-price-label">Club House</span><span class="delivery-price-value">&pound;40</span></div></div></div>
+                    <div class="delivery-option"><div class="delivery-option-left"><span class="delivery-option-icon">&#9193;</span><div><div class="delivery-option-name">Express Delivery</div><div class="delivery-option-desc">Completed within 3 business days of all assets received</div></div></div><div class="delivery-option-right"><div class="delivery-price-col"><span class="delivery-price-label">Full Price</span><span class="delivery-price-value">&pound;25</span></div><div class="delivery-divider"></div><div class="delivery-price-col ch"><span class="delivery-price-label">Club House</span><span class="delivery-price-value">&pound;20</span></div></div></div>
+                </div>
+                <div class="delivery-note">Standard delivery timelines vary by service. Club House members save on delivery upgrades automatically.</div>
+            </div>
+            <div class="tier2-note"><strong>One-off. No commitment.</strong> Each service is purchased individually. Every completed project gets a light check-in 30 days later &mdash; not a hard sell, just an honest conversation about what&rsquo;s next.</div>
         </div>
     </div>
 </div>
@@ -1019,19 +940,17 @@
         <span class="collapsible-chevron">&#9660;</span>
     </button>
     <div class="collapsible-body" id="faq-body">
-        <div class="collapsible-body-inner">
-            <div class="collapsible-content">
-                <div class="faq-list">
-                    <div class="faq-item"><button class="faq-trigger" aria-expanded="false"><span class="faq-question">What&rsquo;s the difference between the three tiers?</span><span class="faq-chevron">&#9660;</span></button><div class="faq-body"><div class="faq-body-inner"><div class="faq-answer">Free is the entry point at &pound;30/month. You get your sessions listed, your Club Hub page, and the booking system. No booking fees on any plan. Growth is &pound;60/month and adds the full marketing engine: content, outreach, analytics, and ads management. Club House is &pound;125/month with a 10% revenue share on gross session income &mdash; plus in-person video, a dedicated Concierge, AI research, and full platform visibility. The comparison table above breaks it all down row by row.</div></div></div></div>
-                    <div class="faq-item"><button class="faq-trigger" aria-expanded="false"><span class="faq-question">How does the Club House revenue share work?</span><span class="faq-chevron">&#9660;</span></button><div class="faq-body"><div class="faq-body-inner"><div class="faq-answer">It&rsquo;s 10% of your gross session revenue &mdash; what players pay for your sessions in total. So if you run sessions generating &pound;1,000/month, we take &pound;100. At &pound;2,000/month, we take &pound;200 &mdash; and you&rsquo;re still paying less than most agencies charge for a single campaign. The share aligns our incentives completely: we grow when you grow.</div></div></div></div>
-                    <div class="faq-item"><button class="faq-trigger" aria-expanded="false"><span class="faq-question">Are there any booking fees?</span><span class="faq-chevron">&#9660;</span></button><div class="faq-body"><div class="faq-body-inner"><div class="faq-answer">No. There are no booking fees or per-transaction charges on any plan. Free, Growth, and Club House all include zero booking fees. You pay your flat monthly fee (and a revenue share on Club House) &mdash; that&rsquo;s it. The pricing is designed to be straightforward and predictable.</div></div></div></div>
-                    <div class="faq-item"><button class="faq-trigger" aria-expanded="false"><span class="faq-question">When does the Free plan stop making sense?</span><span class="faq-chevron">&#9660;</span></button><div class="faq-body"><div class="faq-body-inner"><div class="faq-answer">Free at &pound;30/month is the right starting point while you&rsquo;re establishing yourself on the platform. Once you&rsquo;re running regular sessions and want the marketing engine working for you &mdash; content, outreach, analytics, ads &mdash; Growth at &pound;60/month is the natural next step. The difference isn&rsquo;t just the fee; it&rsquo;s the full team behind your club.</div></div></div></div>
-                    <div class="faq-item"><button class="faq-trigger" aria-expanded="false"><span class="faq-question">What&rsquo;s the pilot offer and how do I qualify?</span><span class="faq-chevron">&#9660;</span></button><div class="faq-body"><div class="faq-body-inner"><div class="faq-answer">Growth and Club House both include a free 2-month pilot. To qualify, you need to have at least 4 active sessions listed on the platform and complete a short onboarding call with the team. This keeps things real on both sides &mdash; the pilot is for clubs that are genuinely ready to grow, not a free trial that sits idle. The 2-month clock starts from your first content drop, not from sign-up.</div></div></div></div>
-                    <div class="faq-item"><button class="faq-trigger" aria-expanded="false"><span class="faq-question">What is the Neighbours Pass and when is it available?</span><span class="faq-chevron">&#9660;</span></button><div class="faq-body"><div class="faq-body-inner"><div class="faq-answer">The Neighbours Pass is a player-facing membership we&rsquo;re currently building. It&rsquo;s not yet available. When it launches, it will be a club-tailored retention tool &mdash; something your club can offer its own members, designed around your sessions and community. It will also give members access across the full NBRH network, not just one club. If you&rsquo;re on Growth or Club House and want to be involved in shaping it, get in touch.</div></div></div></div>
-                    <div class="faq-item"><button class="faq-trigger" aria-expanded="false"><span class="faq-question">How quickly can we get set up?</span><span class="faq-chevron">&#9660;</span></button><div class="faq-body"><div class="faq-body-inner"><div class="faq-answer">Most clubs are fully live within two weeks. Week one is setup &mdash; your page, booking system, and sessions listed. Week two is launch &mdash; first content goes out and outreach kicks off. We&rsquo;ll tell you exactly what we need and when. It&rsquo;s usually less than you think. For Growth and Club House pilots, the onboarding call happens in week one.</div></div></div></div>
-                    <div class="faq-item"><button class="faq-trigger" aria-expanded="false"><span class="faq-question">Who covers the ad spend for Instagram campaigns?</span><span class="faq-chevron">&#9660;</span></button><div class="faq-body"><div class="faq-body-inner"><div class="faq-answer">We create, target, and manage the ads &mdash; you pay the actual Meta ad spend. We&rsquo;ll agree a recommended budget with you in advance, and there&rsquo;s never any obligation to increase it. We handle the creative and reporting either way.</div></div></div></div>
-                    <div class="faq-item"><button class="faq-trigger" aria-expanded="false"><span class="faq-question">Do you only work with London-based clubs?</span><span class="faq-chevron">&#9660;</span></button><div class="faq-body"><div class="faq-body-inner"><div class="faq-answer">Right now, yes &mdash; The NBRH platform is focused on London, where our discovery audience, outreach network, and local knowledge is strongest. We plan to expand to other cities as the platform grows. If you&rsquo;re just outside London, get in touch &mdash; there may still be a way to make it work.</div></div></div></div>
-                </div>
+        <div class="collapsible-content">
+            <div class="faq-list">
+                <div class="faq-item"><button class="faq-trigger" aria-expanded="false"><span class="faq-question">What&rsquo;s the difference between the three plans?</span><span class="faq-chevron">&#9660;</span></button><div class="faq-body"><div class="faq-body-inner"><div class="faq-answer">Starter is &pound;30/month &mdash; your sessions listed, your Club Hub page, and the booking system, all with no booking fees. Growth is &pound;60/month and adds the full marketing engine: content, outreach, analytics, and ads management. Club House is &pound;125/month with a 10% revenue share on gross session income &mdash; plus in-person video, a dedicated Concierge, AI research, and full platform visibility. The comparison table above breaks it all down row by row.</div></div></div></div>
+                <div class="faq-item"><button class="faq-trigger" aria-expanded="false"><span class="faq-question">Are there any booking fees?</span><span class="faq-chevron">&#9660;</span></button><div class="faq-body"><div class="faq-body-inner"><div class="faq-answer">No. There are zero booking fees on any plan &mdash; Starter, Growth, or Club House. You pay your flat monthly fee (and a revenue share on Club House). That&rsquo;s it. The pricing is designed to be straightforward and predictable.</div></div></div></div>
+                <div class="faq-item"><button class="faq-trigger" aria-expanded="false"><span class="faq-question">How does the Club House revenue share work?</span><span class="faq-chevron">&#9660;</span></button><div class="faq-body"><div class="faq-body-inner"><div class="faq-answer">It&rsquo;s 10% of your gross session revenue &mdash; what players pay for your sessions in total. So if your sessions generate &pound;1,000/month, we take &pound;100. At &pound;2,000/month, we take &pound;200 &mdash; and you&rsquo;re still paying less than most agencies charge for a single campaign. The share aligns our incentives completely: we grow when you grow.</div></div></div></div>
+                <div class="faq-item"><button class="faq-trigger" aria-expanded="false"><span class="faq-question">When does the Starter plan stop making sense?</span><span class="faq-chevron">&#9660;</span></button><div class="faq-body"><div class="faq-body-inner"><div class="faq-answer">Starter at &pound;30/month is the right place to begin while you&rsquo;re getting established on the platform. Once you&rsquo;re running sessions regularly and want the full marketing engine working for you &mdash; content, outreach, analytics, ads &mdash; Growth at &pound;60/month is the natural next step. The difference isn&rsquo;t just the fee; it&rsquo;s the full team behind your club.</div></div></div></div>
+                <div class="faq-item"><button class="faq-trigger" aria-expanded="false"><span class="faq-question">What&rsquo;s the pilot offer and how do I qualify?</span><span class="faq-chevron">&#9660;</span></button><div class="faq-body"><div class="faq-body-inner"><div class="faq-answer">Growth and Club House both include a free 2-month pilot. To qualify, you need at least 4 active sessions listed on the platform and to complete a short onboarding call with the team. This keeps things real on both sides &mdash; the pilot is for clubs genuinely ready to grow. The 2-month clock starts from your first content drop, not from sign-up.</div></div></div></div>
+                <div class="faq-item"><button class="faq-trigger" aria-expanded="false"><span class="faq-question">What is the Neighbours Pass and when is it available?</span><span class="faq-chevron">&#9660;</span></button><div class="faq-body"><div class="faq-body-inner"><div class="faq-answer">The Neighbours Pass is a player-facing membership we&rsquo;re currently building. It&rsquo;s not yet available. When it launches, it will be a club-tailored retention tool &mdash; something your club can offer its own members, shaped around your sessions and community. Members will also be able to use it across the full NBRH network. If you&rsquo;re on Growth or Club House and want to be involved in shaping it, get in touch.</div></div></div></div>
+                <div class="faq-item"><button class="faq-trigger" aria-expanded="false"><span class="faq-question">How quickly can we get set up?</span><span class="faq-chevron">&#9660;</span></button><div class="faq-body"><div class="faq-body-inner"><div class="faq-answer">Most clubs are fully live within two weeks. Week one is setup &mdash; your page, booking system, and sessions listed. Week two is launch &mdash; first content goes out and outreach kicks off. We&rsquo;ll tell you exactly what we need and when. It&rsquo;s usually less than you think.</div></div></div></div>
+                <div class="faq-item"><button class="faq-trigger" aria-expanded="false"><span class="faq-question">Who covers the ad spend for Instagram campaigns?</span><span class="faq-chevron">&#9660;</span></button><div class="faq-body"><div class="faq-body-inner"><div class="faq-answer">We create, target, and manage the ads &mdash; you pay the actual Meta ad spend. We&rsquo;ll agree a recommended budget with you in advance and there&rsquo;s never any obligation to increase it. We handle the creative and reporting either way.</div></div></div></div>
+                <div class="faq-item"><button class="faq-trigger" aria-expanded="false"><span class="faq-question">Do you only work with London-based clubs?</span><span class="faq-chevron">&#9660;</span></button><div class="faq-body"><div class="faq-body-inner"><div class="faq-answer">Right now, yes &mdash; The NBRH is focused on London, where our discovery audience, outreach network, and local knowledge is strongest. We plan to expand to other cities as the platform grows. If you&rsquo;re just outside London, get in touch &mdash; there may still be a way to make it work.</div></div></div></div>
             </div>
         </div>
     </div>
@@ -1041,9 +960,9 @@
 <div class="cta-band reveal">
     <svg class="cta-motif" viewBox="0 0 420 420" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
         <circle cx="210" cy="210" r="200" stroke="white" stroke-width="1.5" stroke-dasharray="8 6"/>
-        <circle cx="210" cy="210" r="160" stroke="white" stroke-width="1.5" stroke-dasharray="8 6"/>
-        <circle cx="210" cy="210" r="115" stroke="white" stroke-width="1.5" stroke-dasharray="8 6"/>
-        <circle cx="210" cy="210" r="70" stroke="white" stroke-width="1.5" stroke-dasharray="8 6"/>
+        <circle cx="210" cy="210" r="155" stroke="white" stroke-width="1.5" stroke-dasharray="8 6"/>
+        <circle cx="210" cy="210" r="110" stroke="white" stroke-width="1.5" stroke-dasharray="8 6"/>
+        <circle cx="210" cy="210" r="68" stroke="white" stroke-width="1.5" stroke-dasharray="8 6"/>
         <circle cx="210" cy="210" r="28" stroke="white" stroke-width="1.5"/>
         <line x1="10" y1="210" x2="410" y2="210" stroke="white" stroke-width="1" stroke-dasharray="4 8" opacity="0.5"/>
         <line x1="210" y1="10" x2="210" y2="410" stroke="white" stroke-width="1" stroke-dasharray="4 8" opacity="0.5"/>
@@ -1073,7 +992,7 @@
 </footer>
 
 <script>
-    // ── Drag-to-scroll ──
+    // Drag-to-scroll
     ['.how-grid', '.tier-summary-grid'].forEach(function(sel) {
         var el = document.querySelector(sel);
         if (!el) return;
@@ -1084,13 +1003,14 @@
         el.addEventListener('mousemove', function(e) { if (!isDown) return; e.preventDefault(); el.scrollLeft = scrollLeft - (e.pageX - el.offsetLeft - startX) * 1.2; });
     });
 
-    // ── Scroll bar ──
+    // Scroll bar
     var bar = document.getElementById('scrollBar');
     window.addEventListener('scroll', function() {
-        bar.style.width = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight) * 100) + '%';
+        var h = document.documentElement;
+        bar.style.width = (window.scrollY / (h.scrollHeight - h.clientHeight) * 100) + '%';
     }, { passive: true });
 
-    // ── Count-up ──
+    // Count-up
     function animateCount(el) {
         var target = parseInt(el.getAttribute('data-to'), 10);
         var duration = Math.min(1200, target * 40 + 400);
@@ -1108,18 +1028,18 @@
     }, { threshold: 0.5 });
     document.querySelectorAll('.count-target').forEach(function(el) { countObserver.observe(el); });
 
-    // ── Nav scroll spy ──
+    // Nav scroll spy
     var navLinks = document.querySelectorAll('.nav-links a[data-nav]');
     var spySections = Array.from(navLinks).map(function(a) { return document.getElementById(a.getAttribute('data-nav')); }).filter(Boolean);
     function updateNav() {
-        var y = window.scrollY + 120, activeId = null;
+        var y = window.scrollY + 100, activeId = null;
         spySections.forEach(function(s) { if (s && s.offsetTop <= y) activeId = s.id; });
         navLinks.forEach(function(a) { a.classList.toggle('active', a.getAttribute('data-nav') === activeId); });
     }
     window.addEventListener('scroll', updateNav, { passive: true });
     updateNav();
 
-    // ── Staggered card reveals ──
+    // Staggered card reveals
     var staggerObserver = new IntersectionObserver(function(entries) {
         entries.forEach(function(e) {
             if (e.isIntersecting) {
@@ -1134,13 +1054,13 @@
         var el = document.querySelector(sel); if (el) staggerObserver.observe(el);
     });
 
-    // ── Reveal on scroll ──
+    // Reveal on scroll
     var ro = new IntersectionObserver(function(entries) {
         entries.forEach(function(e) { if (e.isIntersecting) e.target.classList.add('in'); });
     }, { threshold: 0.04, rootMargin: '0px 0px -5% 0px' });
     document.querySelectorAll('.reveal').forEach(function(el) { ro.observe(el); });
 
-    // ── À La Carte accordions ──
+    // A La Carte accordions
     document.querySelectorAll('.svc-trigger').forEach(function(trigger) {
         trigger.addEventListener('click', function() {
             var card = trigger.closest('.svc-card'), isOpen = card.classList.contains('open');
@@ -1149,7 +1069,7 @@
         });
     });
 
-    // ── Collapsible sections ──
+    // Collapsible sections
     document.querySelectorAll('.collapsible-section.open').forEach(function(section) {
         var header = section.querySelector('.collapsible-header');
         var body = document.getElementById(header.getAttribute('data-target'));
@@ -1182,11 +1102,14 @@
         });
     });
 
-    // ── FAQ accordion ──
+    // FAQ accordion
     document.querySelectorAll('.faq-trigger').forEach(function(trigger) {
         trigger.addEventListener('click', function() {
             var item = trigger.closest('.faq-item'), isOpen = item.classList.contains('open');
-            document.querySelectorAll('.faq-item.open').forEach(function(o) { o.classList.remove('open'); o.querySelector('.faq-trigger').setAttribute('aria-expanded', 'false'); });
+            document.querySelectorAll('.faq-item.open').forEach(function(o) {
+                o.classList.remove('open');
+                o.querySelector('.faq-trigger').setAttribute('aria-expanded', 'false');
+            });
             if (!isOpen) { item.classList.add('open'); trigger.setAttribute('aria-expanded', 'true'); }
         });
     });
