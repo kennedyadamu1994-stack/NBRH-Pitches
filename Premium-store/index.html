@@ -12,16 +12,16 @@
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
   --pink:#FF1B6E;--pink-dim:rgba(255,27,110,0.10);--pink-mid:rgba(255,27,110,0.22);
-  --bg:#0F0F0F;--surface:#161616;--surface-2:#1E1E1E;--surface-3:#252525;
+  --bg:#171512;--surface:#1F1D1A;--surface-2:#272522;--surface-3:#2F2D2A;
   --border:rgba(255,255,255,0.07);--border-strong:rgba(255,255,255,0.13);
   --text:#FFFFFF;--muted:rgba(255,255,255,0.60);--faint:rgba(255,255,255,0.30);
   --serif:'Young Serif',Georgia,serif;--sans:'DM Sans',-apple-system,sans-serif;
-  --max:1080px;--r:4px
+  --max:1080px
 }
 html{scroll-behavior:smooth;font-size:16px}
 body{font-family:var(--sans);background:var(--bg);color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
 .scroll-bar{position:fixed;top:0;left:0;height:2px;background:var(--pink);z-index:2000;width:0%;transition:width 0.08s linear;pointer-events:none}
-nav{position:sticky;top:0;z-index:100;background:rgba(15,15,15,0.94);backdrop-filter:blur(14px);border-bottom:1px solid var(--border)}
+nav{position:sticky;top:0;z-index:100;background:rgba(23,21,18,0.95);backdrop-filter:blur(14px);border-bottom:1px solid var(--border)}
 .nav-inner{max-width:var(--max);margin:0 auto;padding:0 1.5rem;height:62px;display:flex;align-items:center;justify-content:space-between;gap:1rem}
 .nav-brand img{height:26px;display:block}
 .nav-badge{font-size:10px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);border:1px solid var(--border);padding:4px 10px}
@@ -29,7 +29,6 @@ nav{position:sticky;top:0;z-index:100;background:rgba(15,15,15,0.94);backdrop-fi
 .nav-cta{background:var(--pink);color:#fff;font-size:12.5px;font-weight:600;padding:9px 20px;border:none;cursor:pointer;font-family:var(--sans);text-decoration:none;transition:opacity 0.2s,transform 0.15s}
 .nav-cta:hover{opacity:.88;transform:translateY(-1px)}
 .wrap{max-width:var(--max);margin:0 auto;padding:0 1.5rem}
-.divider{height:1px;background:var(--border)}
 .reveal{opacity:0;transform:translateY(22px);transition:opacity 0.6s ease-out,transform 0.6s ease-out}
 .reveal.visible{opacity:1;transform:none}
 .eyebrow{display:inline-flex;align-items:center;gap:.5rem;font-size:10.5px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;color:var(--pink);margin-bottom:.8rem}
@@ -46,9 +45,10 @@ h2{font-size:clamp(1.6rem,4.5vw,2.75rem);line-height:1.12;letter-spacing:-0.02em
 .btn-primary:hover{opacity:.88;transform:translateY(-1px)}
 .btn-ghost{display:inline-flex;align-items:center;gap:.35rem;background:transparent;color:var(--muted);padding:.85rem 1.75rem;font-size:.9rem;font-weight:500;text-decoration:none;border:1px solid var(--border-strong);cursor:pointer;font-family:var(--sans);transition:border-color 0.2s,color 0.2s}
 .btn-ghost:hover{border-color:var(--pink-mid);color:var(--text)}
+/* HERO */
 .hero{position:relative;overflow:hidden}
-.hero-glow{position:absolute;top:-120px;left:50%;transform:translateX(-50%);width:780px;height:500px;background:radial-gradient(ellipse at top,rgba(255,27,110,0.14) 0%,transparent 68%);pointer-events:none}
-.hero-grain{position:absolute;inset:0;opacity:.035;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");background-size:300px;mix-blend-mode:screen}
+.hero-glow{position:absolute;top:-120px;left:50%;transform:translateX(-50%);width:780px;height:500px;background:radial-gradient(ellipse at top,rgba(255,27,110,0.12) 0%,transparent 68%);pointer-events:none}
+.hero-grain{position:absolute;inset:0;opacity:.03;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");background-size:300px;mix-blend-mode:screen}
 .hero-content{position:relative;z-index:2;padding:5.5rem 1.5rem 4.5rem;text-align:center}
 .hero-pill{display:inline-flex;align-items:center;gap:.5rem;background:var(--pink-dim);border:1px solid var(--pink-mid);border-radius:100px;padding:.3rem 1rem;font-size:.68rem;font-weight:600;letter-spacing:.11em;text-transform:uppercase;color:var(--pink);margin-bottom:1.5rem}
 .hero h1{max-width:16ch;margin:0 auto 1.1rem}
@@ -57,11 +57,12 @@ h2{font-size:clamp(1.6rem,4.5vw,2.75rem);line-height:1.12;letter-spacing:-0.02em
 .hero-lead strong{color:var(--text);font-weight:500}
 .hero-actions{display:flex;gap:.75rem;justify-content:center;flex-wrap:wrap;margin-bottom:1rem}
 .hero-note{font-size:.72rem;color:var(--faint);margin-bottom:2.5rem}
-.hero-stats{display:flex;align-items:stretch;justify-content:center;gap:0;border:1px solid var(--border);max-width:520px;margin:0 auto}
+.hero-stats{display:flex;align-items:stretch;justify-content:center;border:1px solid var(--border);max-width:520px;margin:0 auto}
 .hero-stat{flex:1;padding:1.1rem 1rem;text-align:center;border-right:1px solid var(--border)}
 .hero-stat:last-child{border-right:none}
 .hero-stat-val{font-family:var(--serif);font-size:clamp(1.4rem,3vw,1.9rem);color:var(--pink);display:block;line-height:1;letter-spacing:-0.02em;margin-bottom:.3rem}
 .hero-stat-label{font-size:.68rem;color:var(--faint);line-height:1.4}
+/* URGENCY */
 .urgency-strip{background:rgba(255,27,110,0.06);border-top:1px solid var(--pink-mid);border-bottom:1px solid var(--pink-mid);padding:.85rem 1.5rem;text-align:center;position:relative;overflow:hidden}
 .urgency-strip::before{content:'';position:absolute;top:0;bottom:0;left:0;width:3px;background:var(--pink)}
 .urgency-strip::after{content:'';position:absolute;top:0;bottom:0;right:0;width:3px;background:var(--pink)}
@@ -69,12 +70,7 @@ h2{font-size:clamp(1.6rem,4.5vw,2.75rem);line-height:1.12;letter-spacing:-0.02em
 .urgency-dot{width:7px;height:7px;border-radius:50%;background:var(--pink);flex-shrink:0;animation:pulse 2s ease-in-out infinite}
 @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.75)}}
 .urgency-text{font-size:.8125rem;color:var(--muted)}.urgency-text strong{color:var(--text);font-weight:500}
-.proof-bar{background:var(--surface);border-bottom:1px solid var(--border);padding:1.25rem 1.5rem}
-.proof-bar-inner{max-width:var(--max);margin:0 auto;display:flex;align-items:center;gap:1.5rem;flex-wrap:wrap}
-.proof-label{font-size:10px;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--faint);white-space:nowrap;flex-shrink:0}
-.proof-sep{width:1px;height:28px;background:var(--border);flex-shrink:0}
-.proof-clubs{display:flex;gap:.5rem;flex-wrap:wrap}
-.proof-club{padding:5px 12px;border:1px solid var(--border);font-size:11.5px;font-weight:500;color:var(--muted);background:var(--surface-2)}
+/* WHO IT'S FOR */
 .for-section{background:var(--surface);border-bottom:1px solid var(--border);padding:3.5rem 1.5rem}
 .for-inner{max-width:var(--max);margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center}
 .for-copy p{font-size:.9rem;color:var(--muted);line-height:1.75;font-weight:300;margin-top:.75rem}
@@ -87,6 +83,7 @@ h2{font-size:clamp(1.6rem,4.5vw,2.75rem);line-height:1.12;letter-spacing:-0.02em
 .not-for{margin-top:1.25rem;padding:.85rem 1rem;border:1px solid var(--border)}
 .not-for-label{font-size:9.5px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);display:block;margin-bottom:.35rem}
 .not-for p{font-size:.78rem;color:var(--faint);line-height:1.6;font-weight:300}
+/* PROBLEM */
 .problem-layout{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start}
 .problem-body p{font-size:.9375rem;color:var(--muted);line-height:1.8;margin-bottom:1rem;font-weight:300}
 .problem-body p strong{color:var(--text);font-weight:500}
@@ -96,15 +93,7 @@ h2{font-size:clamp(1.6rem,4.5vw,2.75rem);line-height:1.12;letter-spacing:-0.02em
 .pain-dot{width:5px;height:5px;background:var(--pink);border-radius:50%;margin-top:9px;flex-shrink:0}
 .pain-text{font-size:.875rem;color:var(--muted);line-height:1.65;font-weight:300}
 .pain-text strong{color:var(--text);font-weight:500;display:block;margin-bottom:2px}
-.model-section{background:var(--surface)}
-.model-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);margin-top:2.5rem}
-.model-side{padding:2.5rem 2rem;background:var(--surface)}
-.model-side.highlighted{background:var(--surface-2)}
-.model-side-label{font-size:10px;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--faint);margin-bottom:1.1rem}
-.model-side-label.pink{color:var(--pink)}
-.model-side h3{font-size:1.4rem;margin-bottom:.75rem}
-.model-side p{font-size:.875rem;color:var(--muted);line-height:1.75;font-weight:300}
-.model-side p strong{color:var(--text);font-weight:500}
+/* PILLARS */
 .pillars-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);margin-top:3rem}
 .pillar-card{background:var(--bg);padding:1.75rem 1.5rem;transition:background 0.2s}
 .pillar-card:hover{background:var(--surface)}
@@ -112,16 +101,7 @@ h2{font-size:clamp(1.6rem,4.5vw,2.75rem);line-height:1.12;letter-spacing:-0.02em
 .pillar-card h3{font-size:.95rem;margin-bottom:.5rem;color:var(--text);font-family:var(--sans);font-weight:600}
 .pillar-card p{font-size:.8125rem;color:var(--muted);line-height:1.65;font-weight:300}
 .pillar-tag{display:inline-block;font-size:9.5px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--pink);background:var(--pink-dim);padding:2px 7px;margin-bottom:.75rem}
-.how-section{background:var(--surface)}
-.steps-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2.5rem;margin-top:2.5rem;position:relative}
-.steps-connector{display:none}
-@media(min-width:660px){.steps-connector{display:block;position:absolute;top:14px;left:calc(33.33% + 1.25rem);right:calc(33.33% + 1.25rem);height:1px;background:var(--pink-mid);pointer-events:none}}
-.step{display:flex;flex-direction:column;gap:.75rem}
-.step-num-row{display:flex;align-items:center;gap:.65rem}
-.step-num{width:28px;height:28px;border-radius:50%;background:var(--pink);color:#fff;display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:.85rem;flex-shrink:0}
-.step-timing{font-size:.68rem;font-weight:600;letter-spacing:.09em;text-transform:uppercase;color:var(--faint)}
-.step h3{font-size:.95rem;font-weight:600;font-family:var(--sans);margin:0;color:var(--text)}
-.step p{font-size:.83rem;color:var(--muted);line-height:1.7;font-weight:300}
+/* TESTIMONIALS */
 .testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;margin-top:2.5rem}
 .testi-card{background:var(--surface);border:1px solid var(--border);padding:1.75rem;display:flex;flex-direction:column;transition:border-color 0.2s}
 .testi-card:hover{border-color:var(--pink-mid)}
@@ -130,26 +110,21 @@ h2{font-size:clamp(1.6rem,4.5vw,2.75rem);line-height:1.12;letter-spacing:-0.02em
 .testi-quote strong{color:var(--text);font-style:normal;font-weight:500}
 .testi-person{display:flex;align-items:center;gap:.75rem;padding-top:1.25rem;border-top:1px solid var(--border)}
 .testi-avatar{width:36px;height:36px;background:var(--pink-dim);border:1px solid var(--pink-mid);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--pink);flex-shrink:0}
-.testi-name{font-size:.83rem;font-weight:600;color:var(--text)}
+.testi-name{font-size:.83rem;font-weight:600}
 .testi-role{font-size:.72rem;color:var(--faint);font-weight:300}
 .testi-disclaimer{font-size:.68rem;color:var(--faint);font-style:italic;text-align:center;margin-top:1rem}
-.kpi-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:1px;background:var(--border);margin-top:2.5rem}
-.kpi-card{background:var(--bg);padding:1.5rem 1rem;text-align:center;transition:background 0.2s}
-.kpi-card:hover{background:var(--surface)}
-.kpi-number{font-family:var(--serif);font-size:1.9rem;color:var(--pink);display:block;line-height:1;margin-bottom:.5rem;letter-spacing:-0.02em}
-.kpi-name{font-size:.82rem;font-weight:600;color:var(--text);display:block;margin-bottom:.25rem}
-.kpi-metric{font-size:.7rem;color:var(--faint);line-height:1.5}
+/* PRICING */
 .pricing-section{background:var(--surface)}
 .pricing-layout{display:grid;grid-template-columns:1.4fr .6fr;gap:1.5rem;align-items:start;margin-top:3rem}
 .price-main-card{border:1px solid var(--pink-mid);background:var(--pink-dim);padding:2.5rem;position:relative;overflow:hidden}
 .price-main-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--pink)}
 .price-main-badge{display:inline-block;background:var(--pink);color:#fff;font-size:9.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:4px 12px;margin-bottom:1.25rem}
 .price-main-label{font-size:10px;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--pink);margin-bottom:.6rem}
-.price-value{font-family:var(--serif);font-size:4.5rem;line-height:1;letter-spacing:-0.03em;color:var(--text)}
+.price-value{font-family:var(--serif);font-size:4.5rem;line-height:1;letter-spacing:-0.03em}
 .price-period{font-size:.9rem;color:var(--muted);font-family:var(--sans);font-weight:300}
 .price-desc{font-size:.875rem;color:var(--muted);line-height:1.65;margin:1.25rem 0 1.75rem;font-weight:300}
 .price-desc strong{color:var(--text);font-weight:500}
-.price-cta{display:block;width:100%;text-align:center;background:var(--pink);color:#fff;font-size:.9rem;font-weight:600;padding:1rem;border:none;cursor:pointer;font-family:var(--sans);text-decoration:none;transition:opacity 0.2s,transform 0.15s}
+.price-cta{display:block;width:100%;text-align:center;background:var(--pink);color:#fff;font-size:.9rem;font-weight:600;padding:1rem;border:none;cursor:pointer;font-family:var(--sans);transition:opacity 0.2s,transform 0.15s}
 .price-cta:hover{opacity:.88;transform:translateY(-1px)}
 .price-includes{margin-top:1.75rem}
 .price-includes-label{font-size:9.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--pink);display:block;margin-bottom:.85rem}
@@ -163,15 +138,22 @@ h2{font-size:clamp(1.6rem,4.5vw,2.75rem);line-height:1.12;letter-spacing:-0.02em
 .price-comparison{display:flex;flex-direction:column;gap:.85rem}
 .comparison-row{display:flex;justify-content:space-between;align-items:baseline;gap:.5rem}
 .comparison-label{font-size:.8rem;color:var(--faint);font-weight:300}
-.comparison-val{font-family:var(--serif);font-size:1.1rem;color:var(--text)}
+.comparison-val{font-family:var(--serif);font-size:1.1rem}
 .comparison-val.highlight{color:var(--pink)}
 .price-side-divider{height:1px;background:var(--border)}
 .alacarte-label{font-size:10px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;color:var(--faint);display:block;margin-bottom:.6rem}
 .alacarte-price{font-family:var(--serif);font-size:1.6rem;color:var(--muted);display:block;margin-bottom:.35rem}
 .alacarte-desc{font-size:.78rem;color:var(--faint);line-height:1.6}
-.alacarte-link{font-size:.78rem;color:var(--pink);text-decoration:none;cursor:pointer}
+.alacarte-link{font-size:.78rem;color:var(--pink);text-decoration:none}
 .alacarte-link:hover{text-decoration:underline}
-.pilot-layout{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center}
+/* PILOT */
+.pilot-layout{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start}
+.pilot-copy h2{margin-bottom:.75rem}
+.pilot-copy p{font-size:.9375rem;color:var(--muted);line-height:1.8;font-weight:300;margin-bottom:1rem}
+.pilot-copy p strong{color:var(--text);font-weight:500}
+.commitment-note{margin-top:1.5rem;background:var(--surface-2);border:1px solid var(--border);border-left:3px solid var(--pink);padding:1rem 1.25rem}
+.commitment-note p{font-size:.83rem;color:var(--muted);line-height:1.7;font-weight:300;margin:0}
+.commitment-note p strong{color:var(--text);font-weight:500}
 .pilot-card{background:var(--surface);border:1px solid var(--border);padding:2rem}
 .pilot-card-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5rem;padding-bottom:1.25rem;border-bottom:1px solid var(--border)}
 .pilot-card-title{font-family:var(--serif);font-size:1.3rem}
@@ -181,15 +163,15 @@ h2{font-size:clamp(1.6rem,4.5vw,2.75rem);line-height:1.12;letter-spacing:-0.02em
 .pilot-include{display:flex;align-items:flex-start;gap:.65rem;font-size:.875rem;color:var(--muted);font-weight:300;line-height:1.45}
 .pilot-include-icon{color:var(--pink);flex-shrink:0;font-style:normal;margin-top:1px}
 .pilot-include strong{color:var(--text);font-weight:500}
-.pilot-footer{margin-top:1.5rem;padding-top:1.25rem;border-top:1px solid var(--border)}
-.pilot-cta-block{display:flex;flex-direction:column;gap:.5rem}
-.pilot-note{font-size:.72rem;color:var(--faint);text-align:center}
-.pilot-copy h2{margin-bottom:.75rem}
-.pilot-copy p{font-size:.9375rem;color:var(--muted);line-height:1.8;font-weight:300;margin-bottom:1rem}
-.pilot-copy p strong{color:var(--text);font-weight:500}
-.commitment-note{margin-top:1.5rem;background:var(--surface-2);border:1px solid var(--border);border-left:3px solid var(--pink);padding:1rem 1.25rem}
-.commitment-note p{font-size:.83rem;color:var(--muted);line-height:1.7;font-weight:300;margin:0}
-.commitment-note p strong{color:var(--text);font-weight:500}
+.pilot-steps{display:flex;flex-direction:column;gap:0;margin-top:1.5rem;padding-top:1.5rem;border-top:1px solid var(--border)}
+.pilot-step{display:flex;gap:.9rem;padding:.75rem 0;border-bottom:1px solid var(--border);align-items:flex-start}
+.pilot-step:last-child{border-bottom:none}
+.pilot-step-num{width:22px;height:22px;border-radius:50%;background:var(--pink);color:#fff;display:flex;align-items:center;justify-content:center;font-size:.7rem;font-family:var(--serif);flex-shrink:0;margin-top:1px}
+.pilot-step-text{font-size:.83rem;color:var(--muted);line-height:1.55;font-weight:300}
+.pilot-step-text strong{color:var(--text);font-weight:500;display:block;margin-bottom:1px}
+.pilot-footer{margin-top:1.5rem;padding-top:1.25rem;border-top:1px solid var(--border);display:flex;flex-direction:column;gap:.5rem}
+.pilot-note{font-size:.72rem;color:var(--faint);text-align:center;margin-top:.15rem}
+/* FAQ */
 .faq-section{background:var(--surface)}
 .faq-layout{display:grid;grid-template-columns:1fr 1.4fr;gap:4.5rem}
 .faq-intro p{font-size:.9375rem;color:var(--muted);line-height:1.8;font-weight:300;margin-top:1rem}
@@ -203,12 +185,14 @@ h2{font-size:clamp(1.6rem,4.5vw,2.75rem);line-height:1.12;letter-spacing:-0.02em
 .faq-answer{max-height:0;overflow:hidden;transition:max-height 0.32s ease}
 .faq-answer-inner{padding:0 0 1.1rem;font-size:.855rem;color:var(--muted);line-height:1.8;font-weight:300}
 .faq-answer-inner strong{color:var(--text);font-weight:500}
+/* CTA */
 .cta-section{text-align:center;padding:7rem 1.5rem;position:relative;overflow:hidden}
 .cta-glow{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:700px;height:500px;background:radial-gradient(ellipse,rgba(255,27,110,0.08) 0%,transparent 65%);pointer-events:none}
 .cta-section h2{font-size:clamp(2rem,6vw,4.5rem);margin-bottom:.75rem;position:relative}
 .cta-section p{font-size:1rem;color:var(--muted);max-width:44ch;margin:0 auto 2.5rem;line-height:1.7;font-weight:300;position:relative}
 .cta-buttons{display:flex;gap:.75rem;justify-content:center;flex-wrap:wrap;position:relative}
 .cta-note{font-size:.72rem;color:var(--faint);margin-top:1.25rem;position:relative}
+/* FOOTER */
 footer{border-top:1px solid var(--border)}
 .footer-inner{max-width:var(--max);margin:0 auto;padding:1.25rem 1.5rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap}
 .footer-inner img{height:22px;opacity:.65}
@@ -216,6 +200,7 @@ footer{border-top:1px solid var(--border)}
 .footer-links a{font-size:.775rem;color:var(--muted);text-decoration:none;transition:color 0.2s}
 .footer-links a:hover{color:var(--pink)}
 .footer-legal{text-align:center;font-size:.68rem;color:var(--faint);padding:.75rem 1.5rem;border-top:1px solid var(--border)}
+/* MODAL */
 .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.78);z-index:500;display:flex;align-items:center;justify-content:center;padding:1.5rem;opacity:0;pointer-events:none;transition:opacity 0.25s ease}
 .modal-overlay.open{opacity:1;pointer-events:all}
 .modal{background:var(--surface);border:1px solid var(--border-strong);width:100%;max-width:520px;max-height:90vh;overflow-y:auto;position:relative;transform:translateY(20px);transition:transform 0.28s ease}
@@ -223,7 +208,7 @@ footer{border-top:1px solid var(--border)}
 .modal-header{padding:1.75rem 1.75rem 1.25rem;border-bottom:1px solid var(--border);display:flex;align-items:flex-start;justify-content:space-between;gap:1rem}
 .modal-title{font-family:var(--serif);font-size:1.4rem;line-height:1.2}
 .modal-sub{font-size:.8rem;color:var(--muted);margin-top:.25rem}
-.modal-close{background:none;border:none;color:var(--faint);font-size:1.25rem;cursor:pointer;flex-shrink:0;padding:.25rem;line-height:1;transition:color 0.2s;margin-top:.1rem}
+.modal-close{background:none;border:none;color:var(--faint);font-size:1.25rem;cursor:pointer;flex-shrink:0;padding:.25rem;line-height:1;transition:color 0.2s}
 .modal-close:hover{color:var(--text)}
 .modal-body{padding:1.75rem}
 .modal-progress{display:flex;gap:.4rem;margin-bottom:1.75rem}
@@ -255,9 +240,10 @@ footer{border-top:1px solid var(--border)}
 .modal-success h3{font-family:var(--serif);font-size:1.5rem}
 .modal-success p{font-size:.875rem;color:var(--muted);line-height:1.7;max-width:36ch}
 .modal-privacy{font-size:.68rem;color:var(--faint);text-align:center;margin-top:.75rem;line-height:1.5}
-@media(max-width:960px){.pillars-grid{grid-template-columns:repeat(2,1fr)}.kpi-grid{grid-template-columns:repeat(4,1fr)}.pricing-layout{grid-template-columns:1fr}.price-includes-grid{grid-template-columns:1fr}.testi-grid{grid-template-columns:1fr 1fr}}
-@media(max-width:780px){.problem-layout,.model-grid,.pilot-layout,.faq-layout,.for-inner{grid-template-columns:1fr;gap:2.5rem}.steps-grid{grid-template-columns:1fr}.section{padding:3.5rem 1.25rem}.proof-sep,.nav-badge{display:none}.testi-grid{grid-template-columns:1fr}.form-row,.checkbox-grid{grid-template-columns:1fr}}
-@media(max-width:560px){.pillars-grid{grid-template-columns:1fr}.kpi-grid{grid-template-columns:repeat(2,1fr)}.hero-content{padding:3.75rem 1.25rem 3rem}.hero-stats{flex-direction:column;max-width:280px}.hero-stat{border-right:none;border-bottom:1px solid var(--border)}.hero-stat:last-child{border-bottom:none}}
+/* RESPONSIVE */
+@media(max-width:960px){.pillars-grid{grid-template-columns:repeat(2,1fr)}.pricing-layout{grid-template-columns:1fr}.price-includes-grid{grid-template-columns:1fr}.testi-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:780px){.problem-layout,.pilot-layout,.faq-layout,.for-inner{grid-template-columns:1fr;gap:2.5rem}.section{padding:3.5rem 1.25rem}.nav-badge{display:none}.testi-grid{grid-template-columns:1fr}.form-row,.checkbox-grid{grid-template-columns:1fr}}
+@media(max-width:560px){.pillars-grid{grid-template-columns:1fr}.hero-content{padding:3.75rem 1.25rem 3rem}.hero-stats{flex-direction:column;max-width:280px}.hero-stat{border-right:none;border-bottom:1px solid var(--border)}.hero-stat:last-child{border-bottom:none}}
 </style>
 </head>
 <body>
@@ -273,6 +259,8 @@ footer{border-top:1px solid var(--border)}
     </div>
   </div>
 </nav>
+
+<!-- HERO -->
 <section class="hero">
   <div class="hero-glow"></div><div class="hero-grain"></div>
   <div class="hero-content reveal">
@@ -288,26 +276,21 @@ footer{border-top:1px solid var(--border)}
       <div class="hero-stats">
         <div class="hero-stat"><span class="hero-stat-val">&pound;50</span><span class="hero-stat-label">flat monthly retainer</span></div>
         <div class="hero-stat"><span class="hero-stat-val">8</span><span class="hero-stat-label">marketing pillars included</span></div>
-        <div class="hero-stat"><span class="hero-stat-val">7</span><span class="hero-stat-label">KPIs tracked every month</span></div>
+
       </div>
     </div>
   </div>
 </section>
+
+<!-- URGENCY -->
 <div class="urgency-strip reveal">
   <div class="urgency-inner">
     <span class="urgency-dot"></span>
     <p class="urgency-text"><strong>Limited onboarding spaces.</strong> We&rsquo;re currently taking on a small number of new partner clubs &mdash; so we can give each one the attention it deserves.</p>
   </div>
 </div>
-<div class="proof-bar reveal">
-  <div class="proof-bar-inner">
-    <span class="proof-label">Partner clubs</span>
-    <div class="proof-sep"></div>
-    <div class="proof-clubs">
-      <span class="proof-club">Kickerbout</span><span class="proof-club">OT Basketball</span><span class="proof-club">ULBLW</span><span class="proof-club">Larm Fitness</span><span class="proof-club">Mind Games</span>
-    </div>
-  </div>
-</div>
+
+<!-- WHO IT'S FOR -->
 <div class="for-section">
   <div class="for-inner">
     <div class="for-copy reveal">
@@ -320,16 +303,18 @@ footer{border-top:1px solid var(--border)}
         <div class="for-item"><i class="for-check">&#10003;</i><div class="for-item-text"><strong>You&rsquo;re running 1&ndash;5 sessions a week</strong>Regularly enough that growth matters, but small enough that you&rsquo;re doing it mostly alone.</div></div>
         <div class="for-item"><i class="for-check">&#10003;</i><div class="for-item-text"><strong>You have 100&ndash;1,000 Instagram followers</strong>You have an audience, but it&rsquo;s not growing consistently &mdash; and you&rsquo;re not sure why.</div></div>
         <div class="for-item"><i class="for-check">&#10003;</i><div class="for-item-text"><strong>You don&rsquo;t have a dedicated marketing person</strong>Marketing is something you squeeze in between running sessions, chasing payments, and keeping things going.</div></div>
-        <div class="for-item"><i class="for-check">&#10003;</i><div class="for-item-text"><strong>You rely on word of mouth and it&rsquo;s not enough</strong>Your regulars love you. Getting new players through the door consistently is a different problem entirely.</div></div>
+        <div class="for-item"><i class="for-check">&#10003;</i><div class="for-item-text"><strong>You rely on word of mouth and it&rsquo;s not enough</strong>Your regulars love you. Getting new players in consistently is a different problem entirely.</div></div>
       </div>
-      <div class="not-for"><span class="not-for-label">Not the right fit?</span><p>If you&rsquo;re a large club with an existing marketing team, or you&rsquo;ve just started and don&rsquo;t have regular sessions yet, Club House probably isn&rsquo;t the right move right now. Get in touch and we&rsquo;ll be honest with you.</p></div>
+      <div class="not-for"><span class="not-for-label">Not the right fit?</span><p>Large clubs with existing marketing teams, or clubs that haven&rsquo;t started regular sessions yet, probably aren&rsquo;t ready for Club House. Get in touch and we&rsquo;ll be honest with you.</p></div>
     </div>
   </div>
 </div>
-<section class="section">
+
+<!-- PROBLEM -->
+<section class="section" style="display:none">
   <div class="wrap">
     <div class="problem-layout">
-      <div><span class="eyebrow reveal">Sound familiar?</span><h2 class="reveal">Your sessions are great. Nobody outside your circle knows it.</h2></div>
+      <div><span class="eyebrow reveal">The real problem</span><h2 class="reveal">Your sessions are great. Nobody outside your circle knows it.</h2></div>
       <div class="problem-body reveal">
         <p>The biggest challenge facing small sports clubs and exercise classes isn&rsquo;t what happens <em>inside</em> the session &mdash; it&rsquo;s what happens outside it. <strong>Getting people to find you, trust you, and show up for the first time</strong> is where most clubs get stuck.</p>
         <p>The problem is ambiguity. Without a strong online presence, social proof, and consistent content, your club is a gamble to anyone who hasn&rsquo;t been personally recommended you. Word of mouth only goes so far.</p>
@@ -343,17 +328,9 @@ footer{border-top:1px solid var(--border)}
     </div>
   </div>
 </section>
-<section class="section-sm model-section reveal">
-  <div class="wrap">
-    <span class="eyebrow">The difference</span>
-    <h2>What running a club with a marketing team looks like.</h2>
-    <div class="model-grid">
-      <div class="model-side"><div class="model-side-label">Without Club House</div><h3>Marketing is something you squeeze in</h3><p>You post when you remember, run the odd boost, ask regulars to share. It works occasionally. But <strong>there&rsquo;s no strategy, no consistency, and no one accountable for growth.</strong> The club plateaus and you&rsquo;re not sure what to do next.</p></div>
-      <div class="model-side highlighted"><div class="model-side-label pink">With Club House</div><h3>Marketing runs in the background, all the time</h3><p>Content goes out every week. Outreach is happening on your behalf. Your club ranks higher on Google. Players arrive having already seen your content and decided they want to come. <strong>You coach. We handle the rest.</strong></p></div>
-    </div>
-  </div>
-</section>
-<section class="section" id="what-we-do">
+
+<!-- 8 PILLARS -->
+<section class="section" id="what-we-do" style="background:var(--surface)">
   <div class="wrap">
     <div class="section-head center reveal">
       <span class="eyebrow">What we do</span>
@@ -363,31 +340,18 @@ footer{border-top:1px solid var(--border)}
     <div class="pillars-grid reveal">
       <div class="pillar-card"><div class="pillar-num">01</div><span class="pillar-tag">Authority</span><h3>SEO that gets you ranking</h3><p>We optimise your online presence so your club appears when players in your area search for sessions. The more visible you are, the less you rely on luck.</p></div>
       <div class="pillar-card"><div class="pillar-num">02</div><span class="pillar-tag">Exposure</span><h3>PR, outreach &amp; networking</h3><p>We tap into our network and your local community to get your sessions in front of people who aren&rsquo;t already following you &mdash; consistently, every week.</p></div>
-      <div class="pillar-card"><div class="pillar-num">03</div><span class="pillar-tag">Trust</span><h3>Influencer &amp; social proof</h3><p>We identify the right local voices &mdash; social media creators, community figures, and relevant clubs &mdash; to speak about what you do and remove the ambiguity that stops new players showing up.</p></div>
-      <div class="pillar-card"><div class="pillar-num">04</div><span class="pillar-tag">Traffic</span><h3>Paid media on Instagram &amp; beyond</h3><p>We create and manage paid campaigns on Instagram, TikTok, and Google that drive players directly to your booking page. You fund the ad spend. We handle everything else.</p></div>
-      <div class="pillar-card"><div class="pillar-num">05</div><span class="pillar-tag">Strategy</span><h3>One-to-one consultation</h3><p>Regular strategy sessions to work through your content direction, session formats, social media approach, and growth opportunities. A thinking partner who knows the grassroots space.</p></div>
-      <div class="pillar-card"><div class="pillar-num">06</div><span class="pillar-tag">Content</span><h3>Content created &amp; posted for you</h3><p>Instagram Reels, stories, carousels, SEO blog posts, landing page copy &mdash; all produced and scheduled by us. You approve. We publish. No briefs, no back-and-forth.</p></div>
+      <div class="pillar-card"><div class="pillar-num">03</div><span class="pillar-tag">Trust</span><h3>Influencer &amp; social proof</h3><p>We identify the right local voices to speak about what you do and remove the ambiguity that stops new players showing up for the first time.</p></div>
+      <div class="pillar-card"><div class="pillar-num">04</div><span class="pillar-tag">Traffic</span><h3>Paid media on Instagram &amp; beyond</h3><p>We create and manage paid campaigns on Instagram, TikTok, and Google. You fund the ad spend. We handle everything else.</p></div>
+      <div class="pillar-card"><div class="pillar-num">05</div><span class="pillar-tag">Strategy</span><h3>One-to-one consultation</h3><p>Regular strategy sessions to work through content direction, session formats, social media approach, and growth opportunities. A thinking partner who knows the grassroots space.</p></div>
+      <div class="pillar-card"><div class="pillar-num">06</div><span class="pillar-tag">Content</span><h3>Content created &amp; posted for you</h3><p>Instagram Reels, stories, carousels, SEO blog posts, landing page copy &mdash; all produced and scheduled by us. You approve. We publish.</p></div>
       <div class="pillar-card"><div class="pillar-num">07</div><span class="pillar-tag">Infrastructure</span><h3>Digital infrastructure that works</h3><p>Booking pages, session listings, club profile pages, and league management hubs &mdash; built and managed so your club runs smoothly in the background.</p></div>
-      <div class="pillar-card"><div class="pillar-num">08</div><span class="pillar-tag">Insights</span><h3>Analytics &amp; AI-powered reporting</h3><p>Monthly reports showing what&rsquo;s working: bookings, views, reach, clicks, and keyword rankings &mdash; powered by analytics tools and AI so there&rsquo;s less guesswork and more clarity.</p></div>
+      <div class="pillar-card"><div class="pillar-num">08</div><span class="pillar-tag">Insights</span><h3>Analytics &amp; AI-powered reporting</h3><p>Monthly reports showing what&rsquo;s working: bookings, views, reach, clicks, and keyword rankings &mdash; so there&rsquo;s less guesswork and more clarity.</p></div>
     </div>
   </div>
 </section>
-<section class="section how-section" id="how-it-works">
-  <div class="wrap">
-    <div class="section-head center reveal">
-      <span class="eyebrow">The process</span>
-      <h2>Live and marketing within two weeks.</h2>
-      <p>We handle the setup so you don&rsquo;t have to. Here&rsquo;s what joining looks like from the moment you sign up.</p>
-    </div>
-    <div class="steps-grid reveal">
-      <div class="steps-connector"></div>
-      <div class="step"><div class="step-num-row"><div class="step-num">1</div><span class="step-timing">Week One</span></div><h3>We audit and set you up</h3><p>We review your existing online presence, build your club profile, configure your booking setup, and identify quick wins. We&rsquo;ll need your sessions, your story, and a few photos. That&rsquo;s it.</p></div>
-      <div class="step"><div class="step-num-row"><div class="step-num">2</div><span class="step-timing">Week Two</span></div><h3>Your marketing goes live</h3><p>First content drops. Outreach begins. Paid campaign launches. Your sessions are discoverable in more places than before &mdash; and the engine starts running.</p></div>
-      <div class="step"><div class="step-num-row"><div class="step-num">3</div><span class="step-timing">Every month</span></div><h3>We report, review &amp; improve</h3><p>At the end of each month you receive a clear performance report. We talk through what&rsquo;s working, what to adjust, and what&rsquo;s next. The longer we work together, the stronger it gets.</p></div>
-    </div>
-  </div>
-</section>
-<section class="section">
+
+<!-- TESTIMONIALS -->
+<section class="section" style="display:none">
   <div class="wrap">
     <div class="section-head center reveal">
       <span class="eyebrow">From the clubs</span>
@@ -401,24 +365,8 @@ footer{border-top:1px solid var(--border)}
     <p class="testi-disclaimer">Quotes reflect real conversations with partner clubs &mdash; replace with verbatim testimonials as you collect them.</p>
   </div>
 </section>
-<section class="section" style="background:var(--surface)">
-  <div class="wrap">
-    <div class="section-head center reveal">
-      <span class="eyebrow">What we measure</span>
-      <h2>Seven KPIs. All tied to real growth.</h2>
-      <p>We don&rsquo;t track vanity metrics. Everything we measure connects to a club that&rsquo;s growing, trusted, and full of players who keep coming back.</p>
-    </div>
-    <div class="kpi-grid reveal">
-      <div class="kpi-card"><span class="kpi-number">01</span><span class="kpi-name">Conversions</span><span class="kpi-metric">Session bookings &mdash; the only number that truly matters</span></div>
-      <div class="kpi-card"><span class="kpi-number">02</span><span class="kpi-name">Awareness</span><span class="kpi-metric">Views &amp; impressions &mdash; how many people are seeing you</span></div>
-      <div class="kpi-card"><span class="kpi-number">03</span><span class="kpi-name">Value</span><span class="kpi-metric">Saves &amp; quality engagement &mdash; is your content useful?</span></div>
-      <div class="kpi-card"><span class="kpi-number">04</span><span class="kpi-name">Reach</span><span class="kpi-metric">Followers &amp; audience &mdash; total potential visibility</span></div>
-      <div class="kpi-card"><span class="kpi-number">05</span><span class="kpi-name">Intention</span><span class="kpi-metric">Click-through rate &mdash; are people moving toward booking?</span></div>
-      <div class="kpi-card"><span class="kpi-number">06</span><span class="kpi-name">Relevance</span><span class="kpi-metric">Engagement rate &mdash; is content landing with the right people?</span></div>
-      <div class="kpi-card"><span class="kpi-number">07</span><span class="kpi-name">Authority</span><span class="kpi-metric">Keyword rankings &mdash; how fast do you appear when people search?</span></div>
-    </div>
-  </div>
-</section>
+
+<!-- PRICING -->
 <section class="section pricing-section" id="pricing">
   <div class="wrap">
     <div class="section-head reveal">
@@ -426,7 +374,7 @@ footer{border-top:1px solid var(--border)}
       <h2>One price. Everything included.</h2>
       <p>No tiers, no hidden fees, no booking commissions. You get the full marketing team for a flat monthly retainer.</p>
     </div>
-    <div class="pricing-layout reveal">
+    <div class="pricing-layout reveal" style="grid-template-columns:1fr">
       <div class="price-main-card">
         <span class="price-main-badge">Club House Retainer</span>
         <div class="price-main-label">Monthly retainer</div>
@@ -448,83 +396,70 @@ footer{border-top:1px solid var(--border)}
             <div class="price-include-item"><i class="check">&#10003;</i> 7 KPIs tracked monthly</div>
           </div>
         </div>
-        <p class="price-note"><strong>A note on ad spend:</strong> For paid social and Google campaigns, you fund the ad budget directly with the platform. We create, manage, and report &mdash; no mark-up, ever.</p>
-      </div>
-      <div class="price-side-card">
-        <div>
-          <div class="price-side-head">Compare the alternatives</div>
-          <div class="price-comparison" style="margin-top:.85rem">
-            <div class="comparison-row"><span class="comparison-label">Junior in-house marketer</span><span class="comparison-val">&pound;25k+/yr</span></div>
-            <div class="comparison-row"><span class="comparison-label">Freelance social media manager</span><span class="comparison-val">&pound;400&ndash;800/mo</span></div>
-            <div class="comparison-row"><span class="comparison-label">Marketing agency retainer</span><span class="comparison-val">&pound;1,500+/mo</span></div>
-            <div style="margin-top:.6rem;padding-top:.75rem;border-top:1px solid var(--border)">
-              <div class="comparison-row"><span class="comparison-label" style="color:var(--text);font-weight:500">Club House</span><span class="comparison-val highlight">&pound;50/mo</span></div>
-            </div>
-          </div>
-        </div>
-        <div class="price-side-divider"></div>
-        <div>
-          <span class="alacarte-label">Just need one thing?</span>
-          <span class="alacarte-price">&pound;30 / job</span>
-          <p class="alacarte-desc">Individual services are available without a retainer at &pound;30 per job. We&rsquo;d always recommend the retainer for consistent results, but if you need something specific, the option&rsquo;s there.</p>
-          <a class="alacarte-link" href="#faq">&rarr; More about &agrave; la carte services</a>
-        </div>
+        <p class="price-note"><strong>Ad spend:</strong> For paid social and Google campaigns, you fund the ad budget directly. We create, manage, and report &mdash; no mark-up, ever.</p>
       </div>
     </div>
   </div>
 </section>
+
+<!-- PILOT -->
 <section class="section" id="pilot">
   <div class="wrap">
     <div class="pilot-layout">
       <div class="pilot-copy reveal">
         <span class="eyebrow">The pilot</span>
         <h2>Try it first. Commit when it makes sense.</h2>
-        <p>We offer a <strong>one-month pilot</strong> so you can see what working with us feels like before signing up long-term. In month one, you&rsquo;ll get a real taste of every part of the Club House service &mdash; real work, real results, real feedback.</p>
-        <p>After the pilot, we encourage clubs to stay on for a <strong>minimum of three months</strong> before judging results. Marketing isn&rsquo;t a sprint. SEO takes time to compound. Content takes time to build an audience. Outreach takes time to warm up.</p>
-        <div class="commitment-note"><p><strong>Our honest advice:</strong> If you want meaningful, sustainable growth, give it at least three months. You can leave at any time &mdash; but leaving before that means leaving before the work has had time to land. We&rsquo;ll always be straight with you about this.</p></div>
+        <p>We offer a <strong>one-month pilot</strong> so you can see what working with us feels like before signing up long-term. Real work, real results, real feedback from week one.</p>
+        <p>After the pilot, we encourage clubs to stay on for a <strong>minimum of three months</strong> before judging results. SEO takes time to compound. Content takes time to build an audience. Outreach takes time to warm up.</p>
+        <div class="commitment-note"><p><strong>Our honest advice:</strong> If you want meaningful, sustainable growth, give it at least three months. You can leave at any time &mdash; but leaving before that means leaving before the work has had time to land.</p></div>
       </div>
       <div class="reveal">
         <div class="pilot-card">
-          <div class="pilot-card-header"><div class="pilot-card-title">1-Month Pilot</div><div class="pilot-card-price">&pound;50</div></div>
+          <div class="pilot-card-header"><div class="pilot-card-title">1-Month Pilot</div></div>
           <span class="pilot-includes-label">What&rsquo;s included in month one</span>
           <div class="pilot-includes-list">
-            <div class="pilot-include"><i class="pilot-include-icon">&#10003;</i><div><strong>Community outreach campaign</strong> &mdash; We reach out to relevant groups, clubs, and communities on your behalf to drive awareness of your sessions.</div></div>
-            <div class="pilot-include"><i class="pilot-include-icon">&#10003;</i><div><strong>Paid Instagram Reel</strong> &mdash; We create and run a promoted Reel targeting players in your area. You fund the ad spend; we handle creative and targeting.</div></div>
-            <div class="pilot-include"><i class="pilot-include-icon">&#10003;</i><div><strong>Strategy session</strong> &mdash; A one-to-one consultation to audit your current marketing, identify your biggest opportunities, and agree a plan going forward.</div></div>
-            <div class="pilot-include"><i class="pilot-include-icon">&#10003;</i><div><strong>Digital infrastructure setup</strong> &mdash; Your club profile, booking page, and session listings on The NBRH &mdash; set up, live, and optimised.</div></div>
+            <div class="pilot-include"><i class="pilot-include-icon">&#10003;</i><div><strong>Community outreach campaign</strong> &mdash; reaching relevant groups and communities on your behalf.</div></div>
+            <div class="pilot-include"><i class="pilot-include-icon">&#10003;</i><div><strong>Paid Instagram Reel</strong> &mdash; created and targeted to players in your area. You fund ad spend.</div></div>
+            <div class="pilot-include"><i class="pilot-include-icon">&#10003;</i><div><strong>Strategy session</strong> &mdash; audit your current marketing and agree the plan going forward.</div></div>
+            <div class="pilot-include"><i class="pilot-include-icon">&#10003;</i><div><strong>Digital infrastructure setup</strong> &mdash; club profile, booking page, and session listings live on The NBRH.</div></div>
+          </div>
+          <div class="pilot-steps">
+            <div class="pilot-step"><div class="pilot-step-num">1</div><div class="pilot-step-text"><strong>Week one</strong> &mdash; we audit your presence, build your profile, and set everything up.</div></div>
+            <div class="pilot-step"><div class="pilot-step-num">2</div><div class="pilot-step-text"><strong>Week two onwards</strong> &mdash; content goes live, outreach begins, paid campaign launches.</div></div>
           </div>
           <div class="pilot-footer">
-            <div class="pilot-cta-block">
-              <button class="btn-primary" onclick="openModal()" style="justify-content:center">Start Your Pilot &rarr;</button>
-              <button class="btn-ghost" onclick="openModal('call')" style="justify-content:center">Book a Discovery Call Instead</button>
-            </div>
-            <p class="pilot-note" style="margin-top:.65rem">&pound;50 flat &nbsp;&middot;&nbsp; No long-term commitment at this stage</p>
+            <button class="btn-primary" onclick="openModal()" style="justify-content:center">Start Your Pilot &rarr;</button>
+            <button class="btn-ghost" onclick="openModal('call')" style="justify-content:center">Book a Discovery Call Instead</button>
+            <p class="pilot-note">&pound;50 flat &nbsp;&middot;&nbsp; No long-term commitment at this stage</p>
           </div>
         </div>
       </div>
     </div>
   </div>
 </section>
+
+<!-- FAQ -->
 <section class="section faq-section" id="faq">
   <div class="wrap">
     <div class="faq-layout">
       <div class="faq-intro reveal">
         <span class="eyebrow">Questions</span>
         <h2>Before you decide.</h2>
-        <p>We want you to sign up because it makes sense for your club &mdash; not because we talked you into it. Here are the things most clubs ask us first.</p>
+        <p>We want you to sign up because it makes sense for your club &mdash; not because we talked you into it.</p>
       </div>
       <div class="faq-list reveal">
         <div class="faq-item"><button class="faq-trigger" onclick="toggleFaq(this)">What exactly is included in &pound;50 a month?<i class="faq-icon">+</i></button><div class="faq-answer"><p class="faq-answer-inner">Everything across all eight pillars: SEO and keyword ranking, PR and community outreach, influencer and trust building, paid media management, strategy consultation, content creation and scheduling, booking page and digital infrastructure, and monthly analytics reporting. It&rsquo;s the full marketing operation &mdash; not a partial service.</p></div></div>
-        <div class="faq-item"><button class="faq-trigger" onclick="toggleFaq(this)">Do I have to pay for ads on top of the &pound;50?<i class="faq-icon">+</i></button><div class="faq-answer"><p class="faq-answer-inner">For paid social and Google campaigns, yes &mdash; you fund the actual ad spend directly with the platform. We&rsquo;ll agree a budget with you in advance. <strong>What you don&rsquo;t pay is an agency mark-up</strong> &mdash; we create the ads, manage the targeting, and report on performance as part of the retainer.</p></div></div>
-        <div class="faq-item"><button class="faq-trigger" onclick="toggleFaq(this)">Who is Club House actually for?<i class="faq-icon">+</i></button><div class="faq-answer"><p class="faq-answer-inner">Small to medium grassroots sports clubs and exercise classes in London &mdash; typically those with 100&ndash;1,000 Instagram followers, running regular sessions without the time, budget, or team to market them properly. If you&rsquo;re coaching or running sessions but growth feels stuck, that&rsquo;s exactly the situation Club House was built for.</p></div></div>
-        <div class="faq-item"><button class="faq-trigger" onclick="toggleFaq(this)">Why do you recommend staying for at least 3 months?<i class="faq-icon">+</i></button><div class="faq-answer"><p class="faq-answer-inner">Marketing compounds. <strong>SEO takes 8&ndash;12 weeks to start showing results.</strong> Content needs time to build an audience. Outreach needs time to warm up. One month tells you what working with us feels like &mdash; three months tells you whether it&rsquo;s working. You can leave at any time, but leaving early means leaving before the work has had time to pay off.</p></div></div>
-        <div class="faq-item"><button class="faq-trigger" onclick="toggleFaq(this)">What are &agrave; la carte services?<i class="faq-icon">+</i></button><div class="faq-answer"><p class="faq-answer-inner">If you just need one specific thing &mdash; an SEO blog, a paid campaign for an event, an outreach push &mdash; you can commission individual services for &pound;30 per job without a retainer. We&rsquo;d always encourage the retainer over ad hoc work: results are consistently better when everything runs together rather than as one-off interventions.</p></div></div>
+        <div class="faq-item"><button class="faq-trigger" onclick="toggleFaq(this)">Do I have to pay for ads on top of the &pound;50?<i class="faq-icon">+</i></button><div class="faq-answer"><p class="faq-answer-inner">For paid social and Google campaigns, yes &mdash; you fund the actual ad spend directly. We&rsquo;ll agree a budget with you in advance. <strong>What you don&rsquo;t pay is an agency mark-up</strong> &mdash; we create the ads, manage the targeting, and report on performance as part of the retainer.</p></div></div>
+        <div class="faq-item"><button class="faq-trigger" onclick="toggleFaq(this)">Why do you recommend staying for at least 3 months?<i class="faq-icon">+</i></button><div class="faq-answer"><p class="faq-answer-inner">Marketing compounds. <strong>SEO takes 8&ndash;12 weeks to start showing results.</strong> Content needs time to build an audience. Outreach needs time to warm up. One month tells you what working with us feels like &mdash; three months tells you whether it&rsquo;s working.</p></div></div>
+        <div class="faq-item"><button class="faq-trigger" onclick="toggleFaq(this)">What are &agrave; la carte services?<i class="faq-icon">+</i></button><div class="faq-answer"><p class="faq-answer-inner">Individual services &mdash; an SEO blog, a paid campaign, an outreach push &mdash; available at &pound;30 per job without a retainer. We&rsquo;d always recommend the retainer for consistent results, but the option&rsquo;s there if you just need one thing.</p></div></div>
         <div class="faq-item"><button class="faq-trigger" onclick="toggleFaq(this)">Do I have to change how I take bookings?<i class="faq-icon">+</i></button><div class="faq-answer"><p class="faq-answer-inner">No. We set up and manage a booking page for you, but we don&rsquo;t sit between you and your players and we never take a cut of bookings. You keep the revenue. We handle setup and maintenance.</p></div></div>
-        <div class="faq-item"><button class="faq-trigger" onclick="toggleFaq(this)">Can I cancel anytime?<i class="faq-icon">+</i></button><div class="faq-answer"><p class="faq-answer-inner">Yes. There are no long-term contracts. We work month-to-month after the pilot. We&rsquo;d strongly encourage you to give it at least three months to see real results, but we won&rsquo;t hold you to anything.</p></div></div>
+        <div class="faq-item"><button class="faq-trigger" onclick="toggleFaq(this)">Can I cancel anytime?<i class="faq-icon">+</i></button><div class="faq-answer"><p class="faq-answer-inner">Yes. No long-term contracts. We work month-to-month after the pilot. We&rsquo;d encourage you to give it at least three months to see real results, but we won&rsquo;t hold you to anything.</p></div></div>
       </div>
     </div>
   </div>
 </section>
+
+<!-- CTA -->
 <section class="cta-section">
   <div class="cta-glow"></div>
   <div class="wrap">
@@ -537,6 +472,7 @@ footer{border-top:1px solid var(--border)}
     <p class="cta-note reveal">&pound;50 flat retainer &nbsp;&middot;&nbsp; No booking fees &nbsp;&middot;&nbsp; No long contracts &nbsp;&middot;&nbsp; Cancel anytime &nbsp;&middot;&nbsp; Limited spaces available</p>
   </div>
 </section>
+
 <footer>
   <div class="footer-inner">
     <img src="https://images.squarespace-cdn.com/content/6718416feaa24175e29324d4/9d6e6464-e1e5-4dde-9ae0-03df420cbd77/NBRH+Logo.png?content-type=image%2Fpng" alt="The NBRH">
@@ -548,6 +484,8 @@ footer{border-top:1px solid var(--border)}
   </div>
   <div class="footer-legal">&copy; 2026 The NBRH (Neighbourhood) &middot; London &middot; Marketing support for grassroots sport.</div>
 </footer>
+
+<!-- MODAL -->
 <div class="modal-overlay" id="modalOverlay" role="dialog" aria-modal="true">
   <div class="modal" id="modal">
     <div id="modalFormWrap">
@@ -597,13 +535,14 @@ footer{border-top:1px solid var(--border)}
     </div>
   </div>
 </div>
+
 <script>
 var bar=document.getElementById('scrollBar');
 window.addEventListener('scroll',function(){var h=document.documentElement;bar.style.width=(window.scrollY/(h.scrollHeight-h.clientHeight)*100)+'%';},{passive:true});
 var ro=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('visible');ro.unobserve(e.target);}});},{threshold:0.06,rootMargin:'0px 0px -4% 0px'});
 document.querySelectorAll('.reveal').forEach(function(el){ro.observe(el);});
 var go=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){Array.from(e.target.children).forEach(function(c,i){c.style.opacity='0';c.style.transform='translateY(16px)';c.style.transition='opacity 0.45s ease '+(i*50)+'ms,transform 0.45s ease '+(i*50)+'ms';setTimeout(function(){c.style.opacity='1';c.style.transform='none';},80+i*50);});go.unobserve(e.target);}});},{threshold:0.05});
-document.querySelectorAll('.pillars-grid,.kpi-grid,.testi-grid').forEach(function(el){go.observe(el);});
+document.querySelectorAll('.pillars-grid,.testi-grid').forEach(function(el){go.observe(el);});
 function toggleFaq(btn){var item=btn.parentElement,answer=item.querySelector('.faq-answer'),icon=btn.querySelector('.faq-icon'),isOpen=item.classList.contains('open');document.querySelectorAll('.faq-item.open').forEach(function(el){el.classList.remove('open');el.querySelector('.faq-answer').style.maxHeight='0';el.querySelector('.faq-icon').textContent='+';});if(!isOpen){item.classList.add('open');answer.style.maxHeight=answer.scrollHeight+'px';icon.textContent='x';}}
 var currentModalType='pilot';
 function openModal(type){currentModalType=type||'pilot';document.getElementById('modalOverlay').classList.add('open');document.body.style.overflow='hidden';if(type==='call'){document.getElementById('modalTitle').textContent='Book a discovery call';document.getElementById('modalSub').textContent="Tell us about your club and we'll schedule a time.";}else{document.getElementById('modalTitle').textContent='Tell us about your club';document.getElementById('modalSub').textContent="Two quick steps and we'll be in touch within 24 hours.";}}
