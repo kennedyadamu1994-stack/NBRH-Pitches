@@ -243,7 +243,18 @@ footer{border-top:1px solid var(--border)}
 /* RESPONSIVE */
 @media(max-width:960px){.pillars-grid{grid-template-columns:repeat(2,1fr)}.pricing-layout{grid-template-columns:1fr}.price-includes-grid{grid-template-columns:1fr}.testi-grid{grid-template-columns:1fr 1fr}}
 @media(max-width:780px){.problem-layout,.pilot-layout,.faq-layout,.for-inner{grid-template-columns:1fr;gap:2.5rem}.section{padding:3.5rem 1.25rem}.nav-badge{display:none}.testi-grid{grid-template-columns:1fr}.form-row,.checkbox-grid{grid-template-columns:1fr}}
-@media(max-width:560px){.pillars-grid{grid-template-columns:1fr}.hero-content{padding:3.75rem 1.25rem 3rem}.hero-stats{flex-direction:column;max-width:280px}.hero-stat{border-right:none;border-bottom:1px solid var(--border)}.hero-stat:last-child{border-bottom:none}}
+@media(max-width:560px){
+  .pillars-grid{display:flex;flex-direction:row;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;background:transparent;gap:0;margin-top:2rem;padding:0 1.25rem 1rem;margin-left:-1.25rem;margin-right:-1.25rem;cursor:grab}
+  .pillars-grid:active{cursor:grabbing}
+  .pillars-grid::-webkit-scrollbar{height:3px}
+  .pillars-grid::-webkit-scrollbar-track{background:var(--surface-2);border-radius:100px}
+  .pillars-grid::-webkit-scrollbar-thumb{background:var(--pink-mid);border-radius:100px}
+  .pillar-card{flex:0 0 78vw;scroll-snap-align:start;border:1px solid var(--border);margin-right:0.75rem}
+  .pillar-card:last-child{margin-right:0}
+  .pillar-carousel-hint{display:block}
+  .hero-content{padding:3.75rem 1.25rem 3rem}.hero-stats{flex-direction:column;max-width:280px}.hero-stat{border-right:none;border-bottom:1px solid var(--border)}.hero-stat:last-child{border-bottom:none}
+}
+.pillar-carousel-hint{display:none;font-size:.7rem;color:var(--faint);font-style:italic;text-align:center;margin-top:1rem}
 </style>
 </head>
 <body>
@@ -290,25 +301,7 @@ footer{border-top:1px solid var(--border)}
   </div>
 </div>
 
-<!-- WHO IT'S FOR -->
-<div class="for-section">
-  <div class="for-inner">
-    <div class="for-copy reveal">
-      <span class="eyebrow">Who it&rsquo;s for</span>
-      <h2 style="font-size:clamp(1.3rem,3.5vw,2rem);margin-bottom:.65rem;">Built for clubs that are running &mdash; but not yet growing.</h2>
-      <p>Club House is for small and medium grassroots sports clubs and exercise classes that have something genuinely good to offer &mdash; but don&rsquo;t have the time, team, or budget to market it properly.</p>
-    </div>
-    <div class="reveal">
-      <div class="for-list">
-        <div class="for-item"><i class="for-check">&#10003;</i><div class="for-item-text"><strong>You&rsquo;re running 1&ndash;5 sessions a week</strong>Regularly enough that growth matters, but small enough that you&rsquo;re doing it mostly alone.</div></div>
-        <div class="for-item"><i class="for-check">&#10003;</i><div class="for-item-text"><strong>You have 100&ndash;1,000 Instagram followers</strong>You have an audience, but it&rsquo;s not growing consistently &mdash; and you&rsquo;re not sure why.</div></div>
-        <div class="for-item"><i class="for-check">&#10003;</i><div class="for-item-text"><strong>You don&rsquo;t have a dedicated marketing person</strong>Marketing is something you squeeze in between running sessions, chasing payments, and keeping things going.</div></div>
-        <div class="for-item"><i class="for-check">&#10003;</i><div class="for-item-text"><strong>You rely on word of mouth and it&rsquo;s not enough</strong>Your regulars love you. Getting new players in consistently is a different problem entirely.</div></div>
-      </div>
-      <div class="not-for"><span class="not-for-label">Not the right fit?</span><p>Large clubs with existing marketing teams, or clubs that haven&rsquo;t started regular sessions yet, probably aren&rsquo;t ready for Club House. Get in touch and we&rsquo;ll be honest with you.</p></div>
-    </div>
-  </div>
-</div>
+
 
 <!-- PROBLEM -->
 <section class="section" style="display:none">
@@ -347,10 +340,9 @@ footer{border-top:1px solid var(--border)}
       <div class="pillar-card"><div class="pillar-num">07</div><span class="pillar-tag">Infrastructure</span><h3>Digital infrastructure that works</h3><p>Booking pages, session listings, club profile pages, and league management hubs &mdash; built and managed so your club runs smoothly in the background.</p></div>
       <div class="pillar-card"><div class="pillar-num">08</div><span class="pillar-tag">Insights</span><h3>Analytics &amp; AI-powered reporting</h3><p>Monthly reports showing what&rsquo;s working: bookings, views, reach, clicks, and keyword rankings &mdash; so there&rsquo;s less guesswork and more clarity.</p></div>
     </div>
+    <p class="pillar-carousel-hint">Swipe to see all 8 pillars &rarr;</p>
   </div>
 </section>
-
-<!-- TESTIMONIALS -->
 <section class="section" style="display:none">
   <div class="wrap">
     <div class="section-head center reveal">
@@ -543,6 +535,8 @@ var ro=new IntersectionObserver(function(entries){entries.forEach(function(e){if
 document.querySelectorAll('.reveal').forEach(function(el){ro.observe(el);});
 var go=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){Array.from(e.target.children).forEach(function(c,i){c.style.opacity='0';c.style.transform='translateY(16px)';c.style.transition='opacity 0.45s ease '+(i*50)+'ms,transform 0.45s ease '+(i*50)+'ms';setTimeout(function(){c.style.opacity='1';c.style.transform='none';},80+i*50);});go.unobserve(e.target);}});},{threshold:0.05});
 document.querySelectorAll('.pillars-grid,.testi-grid').forEach(function(el){go.observe(el);});
+// Drag-to-scroll for pillars carousel
+(function(){var el=document.querySelector('.pillars-grid');if(!el)return;var down=false,startX,scrollLeft;el.addEventListener('mousedown',function(e){down=true;startX=e.pageX-el.offsetLeft;scrollLeft=el.scrollLeft;});el.addEventListener('mouseleave',function(){down=false;});el.addEventListener('mouseup',function(){down=false;});el.addEventListener('mousemove',function(e){if(!down)return;e.preventDefault();el.scrollLeft=scrollLeft-(e.pageX-el.offsetLeft-startX)*1.2;});})();
 function toggleFaq(btn){var item=btn.parentElement,answer=item.querySelector('.faq-answer'),icon=btn.querySelector('.faq-icon'),isOpen=item.classList.contains('open');document.querySelectorAll('.faq-item.open').forEach(function(el){el.classList.remove('open');el.querySelector('.faq-answer').style.maxHeight='0';el.querySelector('.faq-icon').textContent='+';});if(!isOpen){item.classList.add('open');answer.style.maxHeight=answer.scrollHeight+'px';icon.textContent='x';}}
 var currentModalType='pilot';
 function openModal(type){currentModalType=type||'pilot';document.getElementById('modalOverlay').classList.add('open');document.body.style.overflow='hidden';if(type==='call'){document.getElementById('modalTitle').textContent='Book a discovery call';document.getElementById('modalSub').textContent="Tell us about your club and we'll schedule a time.";}else{document.getElementById('modalTitle').textContent='Tell us about your club';document.getElementById('modalSub').textContent="Two quick steps and we'll be in touch within 24 hours.";}}
