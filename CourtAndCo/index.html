@@ -468,6 +468,61 @@
     color: var(--muted);
   }
 
+  /* ── CTA BUTTON ── */
+  .cta-wrap {
+    display: flex;
+    justify-content: center;
+    margin-top: 36px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .cta-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--accent);
+    color: #fff;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13.5px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-decoration: none;
+    padding: 14px 32px;
+    border-radius: 3px;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 4px 24px rgba(255,27,110,0.25);
+  }
+
+  .cta-btn::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(105deg, transparent 30%, rgba(255,255,255,0.1) 50%, transparent 70%);
+    transform: translateX(-100%);
+    animation: shimmer 3s 1.5s ease-in-out infinite;
+  }
+
+  .cta-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 32px rgba(255,27,110,0.38);
+  }
+
+  .cta-btn:active {
+    transform: translateY(0);
+  }
+
+  .cta-arrow {
+    font-size: 16px;
+    transition: transform 0.2s ease;
+  }
+
+  .cta-btn:hover .cta-arrow {
+    transform: translateX(3px);
+  }
+
   @media print {
     body { padding: 40px 48px; }
     .ambient { display: none; }
@@ -592,7 +647,7 @@
   <div class="steps">
     <div class="step reveal reveal-7">
       <div class="step-n">1</div>
-      <p><strong>You confirm you're in</strong>A message is enough — no paperwork, no commitment at this stage.</p>
+      <p><strong>Fill out the confirmation form</strong>Takes two minutes. It gives us everything we need to get started — no commitment beyond that.</p>
     </div>
     <div class="step reveal reveal-8">
       <div class="step-n">2</div>
@@ -607,6 +662,14 @@
       <p><strong>We review together</strong>At the end of the pilot, we look at results and decide if a formal partnership makes sense for both sides.</p>
     </div>
   </div>
+</div>
+
+<!-- CTA BUTTON -->
+<div class="cta-wrap reveal reveal-8">
+  <a href="https://forms.gle/GUMWQnL6QyPaWt1T8" target="_blank" class="cta-btn">
+    Join the Pilot — Fill Out the Form
+    <span class="cta-arrow">→</span>
+  </a>
 </div>
 
 <!-- FOOTER -->
