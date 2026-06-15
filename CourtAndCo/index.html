@@ -196,8 +196,8 @@
   }
 
   .hero p {
-    font-size: 14px;
-    color: var(--muted-hi);
+    font-size: 15.5px;
+    color: var(--white);
     max-width: 540px;
     line-height: 1.72;
   }
@@ -272,8 +272,8 @@
   }
 
   .understood-block p {
-    font-size: 12.5px;
-    color: var(--muted);
+    font-size: 14px;
+    color: var(--white);
     line-height: 1.62;
   }
 
@@ -369,8 +369,8 @@
   }
 
   .deliv p {
-    font-size: 11.5px;
-    color: var(--muted);
+    font-size: 13px;
+    color: var(--white);
     line-height: 1.52;
   }
 
@@ -427,8 +427,8 @@
   }
 
   .step p {
-    font-size: 13px;
-    color: var(--muted);
+    font-size: 14.5px;
+    color: var(--white);
   }
 
   .step p strong {
@@ -528,6 +528,64 @@
     .ambient { display: none; }
     .step::before { transform: scaleY(1); }
   }
+
+  /* ── MOBILE CAROUSEL ── */
+  @media (max-width: 640px) {
+    body { padding: 36px 24px 56px; }
+
+    .understood,
+    .deliverables {
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      gap: 10px;
+      padding-bottom: 4px;
+      /* slight negative margin so first card bleeds to edge hinting more cards */
+      margin-right: -24px;
+      padding-right: 24px;
+    }
+
+    .understood::-webkit-scrollbar,
+    .deliverables::-webkit-scrollbar { display: none; }
+
+    .understood-block,
+    .deliv {
+      flex: 0 0 82%;
+      scroll-snap-align: start;
+      /* disable hover lift on touch */
+    }
+
+    /* carousel pip indicators */
+    .carousel-pip-row {
+      display: flex !important;
+    }
+
+    .hero h1 { font-size: 30px; }
+    .pilot-banner { flex-direction: column; gap: 10px; }
+    .pilot-banner-big { font-size: 36px; }
+  }
+
+  .carousel-pip-row {
+    display: none;
+    justify-content: center;
+    gap: 6px;
+    margin-top: 12px;
+  }
+
+  .carousel-pip-row span {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--border-hi);
+    transition: background 0.2s;
+  }
+
+  .carousel-pip-row span.active {
+    background: var(--accent);
+  }
+
 </style>
 </head>
 <body>
@@ -636,6 +694,10 @@
       </div>
     </div>
   </div>
+
+<div class="carousel-pip-row" id="pips-deliverables">
+  <span class="active"></span><span></span><span></span><span></span><span></span><span></span>
+</div>
 </div>
 
 <!-- NEXT STEPS -->
@@ -677,6 +739,23 @@
   <div class="footer-logo">The <span>NBRH</span></div>
   <div class="footer-sub">thenbrh.com</div>
 </div>
+
+
+<script>
+  function initCarousel(containerId, pipId) {
+    const el = document.querySelector(containerId);
+    const pips = document.querySelectorAll('#' + pipId + ' span');
+    if (!el || !pips.length) return;
+    el.addEventListener('scroll', () => {
+      const idx = Math.round(el.scrollLeft / (el.scrollWidth / pips.length));
+      pips.forEach((p, i) => p.classList.toggle('active', i === idx));
+    }, { passive: true });
+  }
+  window.addEventListener('DOMContentLoaded', () => {
+    initCarousel('.understood', 'pips-understood');
+    initCarousel('.deliverables', 'pips-deliverables');
+  });
+</script>
 
 </body>
 </html>
