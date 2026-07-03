@@ -2,8 +2,8 @@
 <html lang="en-GB">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Club House OS · Concept Explorer</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Club House OS · Guided Deck</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300..700&family=Young+Serif&display=swap" rel="stylesheet">
@@ -25,6 +25,7 @@
   --ease:cubic-bezier(.22,1,.36,1);
   --serif:'Young Serif',Georgia,'Times New Roman',serif;
   --sans:'DM Sans',-apple-system,'Segoe UI',sans-serif;
+  --r:4px; /* single, global corner radius */
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
@@ -32,34 +33,31 @@ body{
   background:var(--bg);color:var(--text);
   font-family:var(--sans);font-size:15px;line-height:1.55;
   -webkit-font-smoothing:antialiased;min-height:100vh;
+  min-height:100dvh;
 }
 ::selection{background:rgba(255,27,110,.35)}
 button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
 input,textarea{font:inherit;color:inherit}
-:focus-visible{outline:2px solid var(--pink);outline-offset:2px;border-radius:6px}
+:focus-visible{outline:2px solid var(--pink);outline-offset:2px;border-radius:var(--r)}
 .grain{position:fixed;inset:0;z-index:300;pointer-events:none;opacity:.045;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E");}
 .i{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;flex:none}
 .i.sm{width:15px;height:15px}
 .i.lg{width:22px;height:22px}
 
-/* ============ VIEW SYSTEM ============ */
-.view{display:none}
-.view.active{display:block;animation:viewIn .55s var(--ease) both}
-@keyframes viewIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+/* ============ SHARED PIECES ============ */
 .rise>*{animation:rise .6s var(--ease) both}
 .rise>*:nth-child(1){animation-delay:.04s}.rise>*:nth-child(2){animation-delay:.09s}
 .rise>*:nth-child(3){animation-delay:.14s}.rise>*:nth-child(4){animation-delay:.19s}
 .rise>*:nth-child(5){animation-delay:.24s}.rise>*:nth-child(6){animation-delay:.29s}
-.rise>*:nth-child(7){animation-delay:.34s}.rise>*:nth-child(8){animation-delay:.39s}
 @keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+@media(prefers-reduced-motion:reduce){ .rise>*{animation:none} }
 
-/* ============ SHARED PIECES ============ */
 .eyebrow{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--faint);font-weight:500}
 .badge{display:inline-flex;align-items:center;gap:6px;font-size:11.5px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;
-  padding:5px 11px;border-radius:999px;border:1px solid var(--pink-line);color:var(--pink);background:var(--pink-soft)}
-.chip{display:inline-flex;align-items:center;font-size:12px;color:var(--dim);border:1px solid var(--line);border-radius:999px;padding:3px 10px;white-space:nowrap}
-.btn{display:inline-flex;align-items:center;gap:8px;border-radius:999px;font-weight:600;font-size:13.5px;
+  padding:5px 11px;border-radius:var(--r);border:1px solid var(--pink-line);color:var(--pink);background:var(--pink-soft)}
+.chip{display:inline-flex;align-items:center;font-size:12px;color:var(--dim);border:1px solid var(--line);border-radius:var(--r);padding:3px 10px;white-space:nowrap}
+.btn{display:inline-flex;align-items:center;gap:8px;border-radius:var(--r);font-weight:600;font-size:13.5px;
   padding:9px 18px;transition:transform .3s var(--ease),background .3s var(--ease),border-color .3s var(--ease),color .3s var(--ease)}
 .btn:active{transform:scale(.97)}
 .btn.primary{background:var(--pink);color:#fff}
@@ -71,71 +69,36 @@ input,textarea{font:inherit;color:inherit}
 .link-act{display:inline-flex;align-items:center;gap:7px;font-weight:600;font-size:13.5px;color:var(--pink);padding:4px 0;transition:gap .3s var(--ease)}
 .link-act:hover{gap:11px}
 .row-list{display:flex;flex-direction:column}
-.li-row{display:flex;align-items:center;gap:16px;padding:15px 4px;border-top:1px solid var(--line)}
+.li-row{display:flex;align-items:center;gap:16px;padding:15px 4px;border-top:1px solid var(--line);flex-wrap:wrap}
 .li-row:first-child{border-top:none}
-.li-main{flex:1;min-width:0}
+.li-main{flex:1;min-width:160px}
 .li-name{font-weight:600;font-size:14.5px}
 .li-note{font-size:13px;color:var(--dim);margin-top:1px}
-.iconbtn{display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:10px;color:var(--dim);
+.iconbtn{display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:var(--r);color:var(--dim);
   transition:color .3s var(--ease),background .3s var(--ease)}
 .iconbtn:hover{color:var(--text);background:var(--surface-2)}
-.field{width:100%;background:var(--sunken);border:1px solid var(--line);border-radius:12px;padding:12px 14px;color:var(--text);
+.field{width:100%;background:var(--sunken);border:1px solid var(--line);border-radius:var(--r);padding:12px 14px;color:var(--text);
   transition:border-color .3s var(--ease)}
 .field::placeholder{color:var(--faint)}
 .field:focus{outline:none;border-color:var(--pink-line);box-shadow:0 0 0 3px var(--pink-soft)}
 
-/* ============ CONCEPT SWITCHER ============ */
-.switch{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);z-index:220;
-  display:flex;gap:2px;padding:5px;background:#242322;border:1px solid var(--line-strong);border-radius:999px;
-  box-shadow:0 14px 40px rgba(0,0,0,.45)}
-.switch button{padding:8px 15px;border-radius:999px;font-size:12.5px;font-weight:600;color:var(--dim);
-  display:inline-flex;align-items:center;gap:7px;transition:color .3s var(--ease),background .3s var(--ease)}
-.switch button:hover{color:var(--text)}
-.switch button.on{color:var(--pink);background:var(--pink-soft)}
-.switch .sw-letter{font-family:var(--serif);font-size:13px}
-body[data-view="chooser"] .switch .sw-home{color:var(--pink);background:var(--pink-soft)}
-
-/* ============ CHOOSER ============ */
-#view-chooser{min-height:100vh;display:grid;place-items:center;padding:64px 24px 120px}
-.chooser-wrap{width:100%;max-width:920px}
-.chooser-head{margin-bottom:52px}
-.chooser-head h1{font-family:var(--serif);font-weight:400;font-size:clamp(38px,6vw,62px);line-height:1.05;margin:14px 0 18px;letter-spacing:-.01em}
-.chooser-head p{color:var(--dim);max-width:56ch;font-size:16px}
-.concept-row{display:grid;grid-template-columns:104px 1fr auto;align-items:center;gap:24px;width:100%;text-align:left;
-  padding:30px 10px;border-top:1px solid var(--line);transition:background .35s var(--ease)}
-.concept-row:last-of-type{border-bottom:1px solid var(--line)}
-.concept-row:hover{background:rgba(255,255,255,.025)}
-.c-letter{font-family:var(--serif);font-size:64px;line-height:1;color:transparent;-webkit-text-stroke:1px var(--pink);
-  transition:transform .45s var(--ease)}
-@supports not (-webkit-text-stroke:1px black){.c-letter{color:var(--pink)}}
-.concept-row:hover .c-letter{transform:translateX(6px)}
-.c-body h2{font-family:var(--serif);font-weight:400;font-size:21px;margin-bottom:5px}
-.c-body p{color:var(--dim);font-size:14px;max-width:52ch}
-.c-fit{margin-top:7px;font-size:12px;color:var(--faint);letter-spacing:.04em}
-.c-fit b{color:var(--dim);font-weight:600}
-.c-arrow{color:var(--faint);transition:color .3s var(--ease),transform .45s var(--ease)}
-.concept-row:hover .c-arrow{color:var(--pink);transform:translateX(5px)}
-.chooser-foot{margin-top:40px;display:flex;flex-wrap:wrap;gap:10px 26px;font-size:12px;color:var(--faint)}
-.chooser-foot .dot{width:10px;height:10px;border-radius:50%;display:inline-block;vertical-align:-1px;margin-right:7px}
-kbd{font-family:var(--sans);font-size:11px;border:1px solid var(--line-strong);border-bottom-width:2px;border-radius:5px;padding:1px 6px;color:var(--dim)}
-
-/* ============ CONCEPT A · COMMAND DECK ============ */
-.deck{display:flex;min-height:100vh}
+/* ============ COMMAND DECK LAYOUT ============ */
+.deck{display:flex;min-height:100vh;min-height:100dvh}
 .deck-side{width:242px;flex:none;border-right:1px solid var(--line);padding:26px 16px 92px;
-  display:flex;flex-direction:column;position:sticky;top:0;height:100vh;overflow-y:auto}
+  display:flex;flex-direction:column;position:sticky;top:0;height:100vh;height:100dvh;overflow-y:auto}
 .brandmark{display:flex;align-items:center;gap:11px;padding:0 10px;margin-bottom:30px}
-.brandmark .mark{width:34px;height:34px;border-radius:10px;background:var(--pink);display:grid;place-items:center;
+.brandmark .mark{width:34px;height:34px;border-radius:var(--r);background:var(--pink);display:grid;place-items:center;
   font-family:var(--serif);font-size:16px;color:#fff}
 .brandmark .t1{font-family:var(--serif);font-size:15px;line-height:1.15}
 .brandmark .t2{font-size:11px;color:var(--faint);letter-spacing:.14em;text-transform:uppercase}
 .navlab{font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--faint);padding:16px 12px 7px}
-.navlink{display:flex;align-items:center;gap:11px;width:100%;text-align:left;padding:9px 12px;border-radius:10px;
+.navlink{display:flex;align-items:center;gap:11px;width:100%;text-align:left;padding:9px 12px;border-radius:var(--r);
   color:var(--dim);font-size:14px;font-weight:500;transition:color .25s var(--ease),background .25s var(--ease)}
 .navlink:hover{color:var(--text)}
 .navlink.on{color:var(--pink);background:var(--pink-soft)}
 .navlink.sub{padding-left:41px;font-size:13.5px}
 .deck-side .sidefoot{margin-top:auto;border-top:1px solid var(--line);padding:16px 10px 0;display:flex;align-items:center;gap:10px}
-.sidefoot .avatar{width:32px;height:32px;border-radius:50%;background:var(--surface-2);border:1px solid var(--line-strong);
+.sidefoot .avatar{width:32px;height:32px;border-radius:var(--r);background:var(--surface-2);border:1px solid var(--line-strong);
   display:grid;place-items:center;font-family:var(--serif);font-size:13px}
 .sidefoot .club{flex:1;min-width:0}
 .sidefoot .club b{display:block;font-size:13.5px;font-weight:600}
@@ -144,35 +107,35 @@ kbd{font-family:var(--sans);font-size:11px;border:1px solid var(--line-strong);b
 .deck-head{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;margin-bottom:26px}
 .deck-title{font-family:var(--serif);font-weight:400;font-size:33px;margin-top:8px;letter-spacing:-.01em}
 .deck-date{font-size:13px;color:var(--faint)}
-.statbar{display:flex;background:var(--surface);border:1px solid var(--line);border-radius:16px;margin-bottom:30px;overflow:hidden}
+.statbar{display:flex;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);margin-bottom:30px;overflow:hidden}
 .stat{flex:1;padding:18px 24px;border-left:1px solid var(--line);min-width:0}
 .stat:first-child{border-left:none}
 .stat .sl{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin-bottom:6px;white-space:nowrap}
 .stat .sv{font-size:24px;font-weight:600;font-variant-numeric:tabular-nums;letter-spacing:-.01em}
 .stat .sd{font-size:12px;color:var(--dim);margin-top:2px}
 .cardgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-.mcard{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:24px;display:flex;flex-direction:column;gap:14px;
+.mcard{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:24px;display:flex;flex-direction:column;gap:14px;
   transition:border-color .35s var(--ease),transform .35s var(--ease)}
 .mcard:hover{border-color:var(--line-strong);transform:translateY(-2px)}
 .mcard .mc-top{display:flex;align-items:center;gap:11px}
-.mcard .mc-ic{width:34px;height:34px;border-radius:10px;background:var(--surface-2);border:1px solid var(--line);display:grid;place-items:center;color:var(--dim)}
+.mcard .mc-ic{width:34px;height:34px;border-radius:var(--r);background:var(--surface-2);border:1px solid var(--line);display:grid;place-items:center;color:var(--dim)}
 .mcard h3{font-family:var(--serif);font-weight:400;font-size:16.5px}
 .mcard .mc-status{color:var(--dim);font-size:13.5px;flex:1}
 .mcard .btn{align-self:flex-start}
 .module{display:none}
 .module.on{display:block}
-.panelcard{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:26px}
+.panelcard{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:26px}
 .panelcard+.panelcard{margin-top:20px}
 .panelcard h3{font-family:var(--serif);font-weight:400;font-size:17px;margin-bottom:4px}
 .panelcard .lede{color:var(--dim);font-size:13.5px;margin-bottom:14px;max-width:64ch}
 .gen-results{display:none;margin-top:18px;gap:14px;flex-direction:column}
 .gen-results.show{display:flex}
-.caption{background:var(--sunken);border:1px solid var(--line);border-radius:12px;padding:16px;display:flex;gap:14px;align-items:flex-start}
-.caption p{flex:1;font-size:14px;color:var(--text)}
-.settingsrow{display:flex;align-items:center;gap:16px;padding:17px 4px;border-top:1px solid var(--line)}
+.caption{background:var(--sunken);border:1px solid var(--line);border-radius:var(--r);padding:16px;display:flex;gap:14px;align-items:flex-start;flex-wrap:wrap}
+.caption p{flex:1;font-size:14px;color:var(--text);min-width:180px}
+.settingsrow{display:flex;align-items:center;gap:16px;padding:17px 4px;border-top:1px solid var(--line);flex-wrap:wrap}
 .settingsrow:first-child{border-top:none}
-.toggle{width:40px;height:22px;border-radius:999px;background:var(--surface-2);border:1px solid var(--line-strong);position:relative;transition:background .3s var(--ease),border-color .3s var(--ease)}
-.toggle::after{content:"";position:absolute;top:2px;left:2px;width:16px;height:16px;border-radius:50%;background:var(--dim);transition:transform .3s var(--ease),background .3s var(--ease)}
+.toggle{width:40px;height:22px;border-radius:11px;background:var(--surface-2);border:1px solid var(--line-strong);position:relative;transition:background .3s var(--ease),border-color .3s var(--ease);flex:none}
+.toggle::after{content:"";position:absolute;top:2px;left:2px;width:16px;height:16px;border-radius:3px;background:var(--dim);transition:transform .3s var(--ease),background .3s var(--ease)}
 .toggle.on{background:var(--pink);border-color:var(--pink)}
 .toggle.on::after{transform:translateX(18px);background:#fff}
 .chartcard svg{width:100%;height:auto;display:block}
@@ -180,159 +143,114 @@ kbd{font-family:var(--sans);font-size:11px;border:1px solid var(--line-strong);b
 .bar{fill:#3A3937;transition:fill .3s}
 .bar.hot{fill:var(--pink)}
 
-/* ============ CONCEPT B · WORKFLOW ASSISTANT ============ */
-.assist{min-height:100vh;display:flex;flex-direction:column}
-.assist-top{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:18px 28px;border-bottom:1px solid var(--line)}
-.assist-top .who{display:flex;align-items:center;gap:10px;font-size:14px}
-.assist-top .who .mark{width:26px;height:26px;border-radius:8px;background:var(--pink);display:grid;place-items:center;font-family:var(--serif);font-size:12px;color:#fff}
-.assist-top .who b{font-weight:600}
-.assist-top .who span{color:var(--faint)}
-.assist-top .right{display:flex;align-items:center;gap:10px}
-.assist-stage{flex:1;display:grid;place-items:center;padding:48px 24px 140px}
-.assist-home{width:100%;max-width:660px;text-align:center}
-.assist-home h1{font-family:var(--serif);font-weight:400;font-size:clamp(26px,4vw,38px);line-height:1.2;margin:14px auto 30px;max-width:20ch}
-.ask{position:relative;max-width:600px;margin:0 auto}
-.ask input{width:100%;height:62px;border-radius:999px;background:var(--surface);border:1px solid var(--line-strong);
-  padding:0 62px 0 26px;font-size:15.5px;color:var(--text);transition:border-color .3s var(--ease),box-shadow .3s var(--ease)}
-.ask input::placeholder{color:var(--faint)}
-.ask input:focus{outline:none;border-color:var(--pink);box-shadow:0 0 0 4px var(--pink-soft)}
-.ask .send{position:absolute;right:8px;top:8px;width:46px;height:46px;border-radius:50%;background:var(--pink);color:#fff;
-  display:grid;place-items:center;transition:transform .3s var(--ease),background .3s var(--ease)}
-.ask .send:hover{background:#ff3f85;transform:scale(1.05)}
-.sugg{margin-top:26px;display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
-.sugg .schip{display:inline-flex;align-items:center;gap:8px;padding:10px 17px;border-radius:999px;font-size:13.5px;font-weight:500;
-  color:var(--pink);border:1px solid var(--pink-line);background:transparent;transition:background .3s var(--ease),transform .3s var(--ease)}
-.sugg .schip:hover{background:var(--pink-soft);transform:translateY(-1px)}
-.assist-ws{width:100%;max-width:760px;align-self:start;justify-self:center}
-.ws-head{display:flex;align-items:center;gap:16px;margin-bottom:22px}
-.ws-head h2{font-family:var(--serif);font-weight:400;font-size:24px}
-.ws-head .ws-tag{margin-left:auto}
-.ws-pane{display:none}
-.ws-pane.on{display:block;animation:rise .5s var(--ease) both}
-.alltools{position:fixed;inset:0;z-index:210;background:rgba(23,23,22,.94);display:grid;place-items:center;padding:24px;
-  opacity:0;pointer-events:none;transition:opacity .35s var(--ease)}
-.alltools.show{opacity:1;pointer-events:auto}
-.alltools .at-wrap{width:100%;max-width:720px}
-.alltools .at-head{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:26px}
-.alltools h2{font-family:var(--serif);font-weight:400;font-size:26px;margin-top:8px}
-.at-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
-.at-item{display:flex;gap:14px;align-items:flex-start;text-align:left;padding:18px;border:1px solid var(--line);border-radius:14px;
-  background:var(--surface);transition:border-color .3s var(--ease),transform .3s var(--ease)}
-.at-item:hover{border-color:var(--pink-line);transform:translateY(-2px)}
-.at-item .mc-ic{width:34px;height:34px;border-radius:10px;background:var(--surface-2);border:1px solid var(--line);display:grid;place-items:center;color:var(--dim);flex:none}
-.at-item b{display:block;font-size:14.5px;font-weight:600;margin-bottom:2px}
-.at-item span{font-size:12.5px;color:var(--dim)}
+/* ============ ASSISTANT BAR ============ */
+.askbar{position:relative;margin-bottom:20px}
+.askbar .ab-ic{position:absolute;left:18px;top:50%;transform:translateY(-50%);color:var(--pink);pointer-events:none}
+.askbar input{width:100%;height:52px;border-radius:var(--r);background:var(--sunken);border:1px solid var(--line-strong);
+  color:var(--text);font:400 15px/1 var(--sans);padding:0 108px 0 48px;transition:border-color .25s var(--ease),box-shadow .25s var(--ease)}
+.askbar input::placeholder{color:var(--faint)}
+.askbar input:focus{outline:none;border-color:var(--pink);box-shadow:0 0 0 4px var(--pink-soft)}
+.askbar .ab-send{position:absolute;right:6px;top:6px;height:40px;padding:0 16px;border-radius:var(--r);background:var(--pink);color:#fff;
+  border:0;font:500 13.5px/1 var(--sans);display:flex;align-items:center;gap:7px;cursor:pointer;transition:background .2s var(--ease),transform .2s var(--ease)}
+.askbar .ab-send:hover{background:#ff3f85;transform:scale(1.03)}
+.askbar .ab-send:focus-visible{outline:2px solid var(--pink);outline-offset:2px}
+.ab-reply{display:none;align-items:flex-start;gap:10px;background:var(--pink-soft);border:1px solid var(--pink-line);
+  border-radius:var(--r);padding:12px 14px;margin:0 0 16px;color:var(--text);font-size:13.5px;line-height:1.5}
+.ab-reply.show{display:flex;animation:reply-in .35s var(--ease)}
+.ab-reply .i{color:var(--pink);flex:none;margin-top:1px}
+.ab-reply .ab-dismiss{margin-left:auto;flex:none;border:0;background:transparent;color:var(--dim);cursor:pointer;padding:2px;border-radius:var(--r)}
+.ab-reply .ab-dismiss:hover{color:var(--text)}
+.ab-reply .ab-dismiss:focus-visible{outline:2px solid var(--pink);outline-offset:2px}
+@keyframes reply-in{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion: reduce){ .ab-reply.show{animation:none} }
 
-/* ============ CONCEPT C · MODULAR BENTO ============ */
-.bento{min-height:100vh;padding:0 0 150px}
-.bento-top{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:18px 34px;border-bottom:1px solid var(--line);margin-bottom:34px}
-.bento-hint{font-size:12.5px;color:var(--faint)}
-.bento-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;max-width:1120px;margin:0 auto;padding:0 34px}
-.tile{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:22px;min-height:196px;
-  display:flex;flex-direction:column;gap:10px;position:relative;cursor:pointer;
-  transition:border-color .35s var(--ease),transform .35s var(--ease),box-shadow .35s var(--ease),opacity .3s var(--ease)}
-.tile:hover{border-color:var(--line-strong);transform:translateY(-3px);box-shadow:0 16px 40px rgba(0,0,0,.35)}
-.tile.dragging{opacity:.35;transform:scale(.98)}
-.tile.new{animation:tileIn .7s var(--ease) both}
-@keyframes tileIn{from{opacity:0;transform:scale(.9)}60%{transform:scale(1.02)}to{opacity:1;transform:none}}
-.tile.wide{grid-column:span 2}
-.tile-top{display:flex;align-items:center;gap:10px}
-.tile-ic{width:32px;height:32px;border-radius:9px;background:var(--surface-2);border:1px solid var(--line);display:grid;place-items:center;color:var(--dim);flex:none}
-.tile-top h3{font-size:14px;font-weight:600;flex:1;min-width:0}
-.tile-ctl{display:flex;gap:2px;opacity:0;transition:opacity .3s var(--ease)}
-.tile:hover .tile-ctl,.tile:focus-within .tile-ctl{opacity:1}
-.ctl{width:28px;height:28px;border-radius:8px;display:grid;place-items:center;color:var(--faint)}
-.ctl:hover{color:var(--text);background:var(--surface-2)}
-.ctl.grab{cursor:grab}
-.ctl.grab:active{cursor:grabbing}
-.tile-mid{flex:1;display:flex;flex-direction:column;justify-content:center;gap:3px;padding:4px 0}
-.tile-stat{font-family:var(--serif);font-size:34px;line-height:1.05;letter-spacing:-.01em}
-.tile-sub{font-size:13px;color:var(--dim);max-width:34ch}
-.tile-spark{margin:2px 0 4px}
-.tile .link-act{font-size:13px}
-.tile.add{border:1.5px dashed var(--pink-line);background:transparent;align-items:center;justify-content:center;text-align:center;gap:8px;color:var(--pink);cursor:pointer}
-.tile.add:hover{background:var(--pink-soft);transform:translateY(-3px)}
-.tile.add .plus{width:40px;height:40px;border-radius:50%;border:1.5px dashed var(--pink-line);display:grid;place-items:center;margin-bottom:2px}
-.tile.add b{font-size:14.5px;font-weight:600}
-.tile.add small{font-size:12px;color:var(--dim);max-width:24ch}
+/* ============ RESPONSIVE / MOBILE-FIRST ============ */
 
-/* slide-over */
-.scrim{position:fixed;inset:0;z-index:230;background:rgba(0,0,0,.55);opacity:0;pointer-events:none;transition:opacity .4s var(--ease)}
-.scrim.show{opacity:1;pointer-events:auto}
-.slideover{position:fixed;top:0;right:0;bottom:0;z-index:240;width:min(470px,94vw);background:#222120;border-left:1px solid var(--line-strong);
-  transform:translateX(105%);transition:transform .5s var(--ease);display:flex;flex-direction:column}
-.slideover.open{transform:none}
-.so-head{display:flex;align-items:center;gap:14px;padding:22px 26px;border-bottom:1px solid var(--line)}
-.so-head h2{font-family:var(--serif);font-weight:400;font-size:20px;flex:1}
-.so-body{padding:26px;overflow-y:auto;flex:1}
-.so-body .lede{color:var(--dim);font-size:13.5px;margin-bottom:16px;max-width:56ch}
-.so-body .btn.primary{margin-top:22px}
-.so-body::-webkit-scrollbar{width:8px}
-.so-body::-webkit-scrollbar-thumb{background:var(--surface-2);border-radius:99px}
-
-/* ============ RESPONSIVE ============ */
+/* Tablet and below: sidebar becomes a horizontal top bar */
 @media(max-width:1020px){
   .cardgrid{grid-template-columns:repeat(2,1fr)}
   .statbar{flex-wrap:wrap}
   .stat{min-width:46%;border-top:1px solid var(--line)}
   .stat:nth-child(-n+2){border-top:none}
   .stat:nth-child(odd){border-left:none}
-  .bento-grid{grid-template-columns:repeat(2,1fr)}
 }
 @media(max-width:840px){
   .deck{flex-direction:column}
   .deck-side{position:static;width:100%;height:auto;flex-direction:row;flex-wrap:wrap;align-items:center;gap:2px;
-    padding:16px;border-right:none;border-bottom:1px solid var(--line)}
+    padding:14px 16px;border-right:none;border-bottom:1px solid var(--line)}
   .brandmark{margin:0 12px 0 0;padding:0}
   .navlab{display:none}
   .navlink{width:auto;padding:8px 12px}
   .navlink.sub{padding-left:12px}
   .deck-side .sidefoot{display:none}
-  .deck-main{padding:26px 20px 130px}
-  .at-grid{grid-template-columns:1fr}
-  .concept-row{grid-template-columns:64px 1fr auto;gap:16px}
-  .c-letter{font-size:44px}
+  .deck-main{padding:22px 18px 100px}
 }
+
+/* Phone: single column, larger tap targets, tighter type */
 @media(max-width:600px){
+  body{font-size:14.5px}
   .cardgrid{grid-template-columns:1fr}
-  .bento-grid{grid-template-columns:1fr;padding:0 20px}
-  .tile.wide{grid-column:span 1}
-  .bento-top{padding:16px 20px}
-  .bento-hint{display:none}
-  .switch button .sw-name{display:none}
+  .deck-side{padding:12px 14px;gap:0}
+  .deck-side{overflow-x:auto;flex-wrap:nowrap;-webkit-overflow-scrolling:touch}
+  .brandmark{flex:none}
+  .navlink{flex:none;white-space:nowrap;padding:9px 12px}
+  .deck-main{padding:18px 14px 90px}
+  .deck-head{flex-wrap:wrap;gap:8px;margin-bottom:18px}
+  .deck-title{font-size:26px}
+  .deck-date{order:3;width:100%}
+  .statbar{border-radius:var(--r)}
+  .stat{min-width:100%;border-left:none!important;padding:14px 16px}
+  .stat:not(:first-child){border-top:1px solid var(--line)}
+  .panelcard{padding:18px}
+  .mcard{padding:18px}
+  .askbar input{height:50px;padding:0 56px 0 44px;font-size:14.5px}
+  .askbar .ab-send span{display:none}
+  .askbar .ab-send{padding:0 12px;height:38px;top:6px;right:6px}
+  .li-row{padding:13px 2px}
+  .li-row .btn{margin-left:auto}
+  .btn{padding:9px 15px;font-size:13px}
 }
 @media(prefers-reduced-motion:reduce){
   *,*::before,*::after{animation:none!important;transition:none!important}
 }
-/* ---------- Concept D: assistant bar ---------- */
-.askbar{position:relative;margin-bottom:14px}
-.askbar .ab-ic{position:absolute;left:18px;top:50%;transform:translateY(-50%);color:var(--pink);pointer-events:none}
-.askbar input{width:100%;height:52px;border-radius:14px;background:var(--sunken);border:1px solid var(--line-strong);
-  color:var(--text);font:400 15px/1 var(--sans);padding:0 108px 0 48px;transition:border-color .25s var(--ease),box-shadow .25s var(--ease)}
-.askbar input::placeholder{color:var(--faint)}
-.askbar input:focus{outline:none;border-color:var(--pink);box-shadow:0 0 0 4px var(--pink-soft)}
-.askbar .ab-send{position:absolute;right:6px;top:6px;height:40px;padding:0 16px;border-radius:10px;background:var(--pink);color:#fff;
-  border:0;font:500 13.5px/1 var(--sans);display:flex;align-items:center;gap:7px;cursor:pointer;transition:background .2s var(--ease),transform .2s var(--ease)}
-.askbar .ab-send:hover{background:#ff3f85;transform:scale(1.03)}
-.askbar .ab-send:focus-visible{outline:2px solid var(--pink);outline-offset:2px}
-.ab-chips{display:flex;flex-wrap:wrap;gap:8px;margin:-4px 0 16px}
-.ab-chips button{border:1px solid var(--line);background:transparent;color:var(--dim);border-radius:999px;padding:7px 13px;
-  font:400 12.5px/1 var(--sans);cursor:pointer;transition:border-color .2s var(--ease),color .2s var(--ease)}
-.ab-chips button:hover{border-color:var(--pink-line);color:var(--text)}
-.ab-chips button:focus-visible{outline:2px solid var(--pink);outline-offset:2px}
-.ab-reply{display:none;align-items:flex-start;gap:10px;background:var(--pink-soft);border:1px solid var(--pink-line);
-  border-radius:12px;padding:12px 14px;margin:0 0 16px;color:var(--text);font-size:13.5px;line-height:1.5}
-.ab-reply.show{display:flex;animation:reply-in .35s var(--ease)}
-.ab-reply .i{color:var(--pink);flex:none;margin-top:1px}
-.ab-reply .ab-dismiss{margin-left:auto;flex:none;border:0;background:transparent;color:var(--dim);cursor:pointer;padding:2px;border-radius:6px}
-.ab-reply .ab-dismiss:hover{color:var(--text)}
-.ab-reply .ab-dismiss:focus-visible{outline:2px solid var(--pink);outline-offset:2px}
-@keyframes reply-in{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
-@media (prefers-reduced-motion: reduce){ .ab-reply.show{animation:none} }
-@media (max-width: 700px){ .askbar .ab-send span{display:none} .askbar .ab-send{padding:0 12px} .askbar input{padding-right:64px} }
+
+/* ============ MOBILE TAB BAR ============ */
+.tabbar{
+  display:none;
+  position:fixed;left:0;right:0;bottom:0;z-index:200;
+  padding:8px 10px calc(8px + env(safe-area-inset-bottom));
+  background:rgba(27,27,27,.88);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border-top:1px solid var(--line-strong);
+  box-shadow:0 -8px 30px rgba(0,0,0,.35);
+}
+.tabbar-inner{display:flex;align-items:center;justify-content:space-between;gap:2px;max-width:520px;margin:0 auto}
+.tab{
+  display:flex;flex-direction:column;align-items:center;gap:3px;
+  flex:1;padding:6px 2px;border-radius:var(--r);color:var(--faint);
+  font-size:10.5px;font-weight:600;letter-spacing:.01em;
+  transition:color .2s var(--ease);
+}
+.tab .i{width:20px;height:20px;transition:transform .2s var(--ease)}
+.tab:active{transform:scale(.94)}
+.tab.on{color:var(--pink)}
+.tab.on .i{transform:translateY(-1px)}
+.tab-ask{
+  flex:none;width:52px;height:52px;margin-top:-22px;border-radius:50%;
+  background:var(--pink);color:#fff;display:flex;align-items:center;justify-content:center;
+  box-shadow:0 8px 20px rgba(255,27,110,.4),0 0 0 4px var(--bg);
+  transition:transform .25s var(--ease),background .25s var(--ease);
+}
+.tab-ask:hover{background:#ff3f85}
+.tab-ask:active{transform:scale(.92)}
+.tab-ask .i{width:22px;height:22px}
+
+@media(max-width:600px){
+  .tabbar{display:block}
+  .deck-main{padding-bottom:96px}
+}
 </style>
 </head>
-<body data-view="chooser">
+<body>
 <div class="grain" aria-hidden="true"></div>
 
 <!-- ============ ICON SPRITE ============ -->
@@ -340,744 +258,273 @@ kbd{font-family:var(--sans);font-size:11px;border:1px solid var(--line-strong);b
   <symbol id="i-home" viewBox="0 0 24 24"><path d="M3 11l9-8 9 8"/><path d="M5 10v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V10"/></symbol>
   <symbol id="i-users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.2"/><path d="M2.8 19c.7-3.1 3.3-4.6 6.2-4.6s5.5 1.5 6.2 4.6"/><circle cx="17" cy="9.2" r="2.4"/><path d="M17.8 14.8c1.9.5 3.1 1.7 3.6 3.7"/></symbol>
   <symbol id="i-mega" viewBox="0 0 24 24"><path d="M3 10.5v3l3 .7v-4.4l-3 .7z"/><path d="M6 9.8 19 4v16L6 14.2z"/><path d="M9 15v4.2h3.2V15.8"/></symbol>
-  <symbol id="i-brief" viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="12" rx="2"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/><path d="M3 13h18"/></symbol>
   <symbol id="i-pen" viewBox="0 0 24 24"><path d="M4 20l4.2-1L20 7.2a2.1 2.1 0 0 0-3-3L5.2 16 4 20z"/><path d="M14.2 5.8l4 4"/></symbol>
   <symbol id="i-book" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></symbol>
   <symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 4v16h16"/><path d="M9 16v-5"/><path d="M13 16V8"/><path d="M17 16v-3"/></symbol>
   <symbol id="i-cog" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.1"/><path d="M12 2.5v3M12 18.5v3M2.5 12h3M18.5 12h3M5.3 5.3l2.1 2.1M16.6 16.6l2.1 2.1M18.7 5.3l-2.1 2.1M7.4 16.6l-2.1 2.1"/></symbol>
-  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
-  <symbol id="i-ar" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></symbol>
-  <symbol id="i-al" viewBox="0 0 24 24"><path d="M19 12H5"/><path d="M11 6l-6 6 6 6"/></symbol>
-  <symbol id="i-grid" viewBox="0 0 24 24"><rect x="4" y="4" width="7" height="7" rx="1.5"/><rect x="13" y="4" width="7" height="7" rx="1.5"/><rect x="4" y="13" width="7" height="7" rx="1.5"/><rect x="13" y="13" width="7" height="7" rx="1.5"/></symbol>
-  <symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></symbol>
-  <symbol id="i-drag" viewBox="0 0 24 24"><circle cx="9" cy="6" r="1.2" fill="currentColor" stroke="none"/><circle cx="15" cy="6" r="1.2" fill="currentColor" stroke="none"/><circle cx="9" cy="12" r="1.2" fill="currentColor" stroke="none"/><circle cx="15" cy="12" r="1.2" fill="currentColor" stroke="none"/><circle cx="9" cy="18" r="1.2" fill="currentColor" stroke="none"/><circle cx="15" cy="18" r="1.2" fill="currentColor" stroke="none"/></symbol>
-  <symbol id="i-expand" viewBox="0 0 24 24"><path d="M9 15l-5 5m0 0v-4m0 4h4"/><path d="M15 9l5-5m0 0v4m0-4h-4"/></symbol>
   <symbol id="i-spark" viewBox="0 0 24 24"><path d="M12 3l1.9 5.4L19.3 10l-5.4 1.9L12 17.3l-1.9-5.4L4.7 10l5.4-1.6L12 3z"/></symbol>
   <symbol id="i-send" viewBox="0 0 24 24"><path d="M21 3L10.5 13.5"/><path d="M21 3l-6.8 18-3.7-8.3L2.2 9 21 3z"/></symbol>
   <symbol id="i-copy" viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v1"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></symbol>
 </svg>
 
-<!-- ============ CONCEPT SWITCHER ============ -->
-<nav class="switch" aria-label="Switch concept">
-  <button class="sw-home" data-go="chooser" aria-label="Back to concept overview"><svg class="i sm"><use href="#i-home"/></svg></button>
-  <button data-go="a"><span class="sw-letter">A</span><span class="sw-name">Command Deck</span></button>
-  <button data-go="b"><span class="sw-letter">B</span><span class="sw-name">Assistant</span></button>
-  <button data-go="c"><span class="sw-letter">C</span><span class="sw-name">Bento</span></button>
-  <button data-go="d"><span class="sw-letter">D</span><span class="sw-name">Guided Deck</span></button>
-</nav>
-
 <!-- ============================================================
-     CHOOSER
+     THE GUIDED DECK
 ============================================================ -->
-<main id="view-chooser" class="view active">
-  <div class="chooser-wrap rise">
-    <header class="chooser-head">
-      <p class="eyebrow">The NBRH · Product concepts</p>
-      <h1>Club House OS</h1>
-      <p>Four interface directions for the self-serve platform. Same toolkit underneath: outreach, content, resources, analytics. Different mental models on top. Explore each one, then pick a lane.</p>
-    </header>
-
-    <button class="concept-row" data-go="a">
-      <span class="c-letter" aria-hidden="true">A</span>
-      <span class="c-body">
-        <h2>The Command Deck</h2>
-        <p>A familiar SaaS dashboard. Sidebar, stat bar, module cards. Structure and reassurance over novelty.</p>
-        <span class="c-fit"><b>Best for:</b> structure-seeking admins · <b>Grows by:</b> adding sidebar items</span>
-      </span>
-      <svg class="i c-arrow"><use href="#i-ar"/></svg>
-    </button>
-
-    <button class="concept-row" data-go="b">
-      <span class="c-letter" aria-hidden="true">B</span>
-      <span class="c-body">
-        <h2>The Workflow Assistant</h2>
-        <p>One guided thread. Ask for what you need and the right tool appears, nothing else on screen.</p>
-        <span class="c-fit"><b>Best for:</b> time-poor, easily overwhelmed admins · <b>Grows by:</b> adding suggested actions</span>
-      </span>
-      <svg class="i c-arrow"><use href="#i-ar"/></svg>
-    </button>
-
-    <button class="concept-row" data-go="c">
-      <span class="c-letter" aria-hidden="true">C</span>
-      <span class="c-body">
-        <h2>The Modular Bento</h2>
-        <p>A rearrangeable widget canvas. Every club shapes its own workspace, and new tools drop in as tiles.</p>
-        <span class="c-fit"><b>Best for:</b> clubs who want ownership · <b>Grows by:</b> adding widget tiles</span>
-      </span>
-      <svg class="i c-arrow"><use href="#i-ar"/></svg>
-    </button>
-
-    <button class="concept-row" data-go="d">
-      <span class="c-letter" aria-hidden="true">D</span>
-      <span class="c-body">
-        <h2>The Guided Deck</h2>
-        <p>A and B combined. The full Command Deck, with an assistant bar on top: click your way around, or just ask.</p>
-        <span class="c-fit"><b>Best for:</b> mixed-confidence admin teams · <b>Grows by:</b> sidebar items + assistant skills</span>
-      </span>
-      <svg class="i c-arrow"><use href="#i-ar"/></svg>
-    </button>
-
-    <footer class="chooser-foot">
-      <span><span class="dot" style="background:#1B1B1B;border:1px solid var(--line-strong)"></span>#1B1B1B</span>
-      <span><span class="dot" style="background:#FF1B6E"></span>#FF1B6E</span>
-      <span style="font-family:var(--serif)">Young Serif</span>
-      <span>DM Sans</span>
-      <span style="margin-left:auto"><kbd>1</kbd> <kbd>2</kbd> <kbd>3</kbd> <kbd>4</kbd> to jump between concepts · <kbd>Esc</kbd> returns here</span>
-    </footer>
-  </div>
-</main>
-
-<!-- ============================================================
-     CONCEPT A · THE COMMAND DECK
-============================================================ -->
-<section id="view-a" class="view" aria-label="Concept A: The Command Deck">
-  <div class="deck">
-    <aside class="deck-side">
-      <div class="brandmark">
-        <span class="mark">N</span>
-        <span><span class="t1">Club House OS</span><br><span class="t2">The NBRH</span></span>
-      </div>
-      <button class="navlink on" data-target="overview"><svg class="i"><use href="#i-home"/></svg>Overview</button>
-      <p class="navlab">Outreach</p>
-      <button class="navlink sub" data-target="players">Players</button>
-      <button class="navlink sub" data-target="brands">Brands</button>
-      <button class="navlink sub" data-target="corporates">Corporates</button>
-      <p class="navlab">Workspace</p>
-      <button class="navlink" data-target="content"><svg class="i"><use href="#i-pen"/></svg>Content Studio</button>
-      <button class="navlink" data-target="library"><svg class="i"><use href="#i-book"/></svg>Resource Library</button>
-      <button class="navlink" data-target="analytics"><svg class="i"><use href="#i-chart"/></svg>Analytics</button>
-      <button class="navlink" data-target="settings"><svg class="i"><use href="#i-cog"/></svg>Settings</button>
-      <div class="sidefoot">
-        <span class="avatar">K</span>
-        <span class="club"><b>Kickerbout</b><span>East London · Football</span></span>
-        <span class="badge">Pro</span>
-      </div>
-    </aside>
-
-    <div class="deck-main">
-      <header class="deck-head">
-        <div>
-          <p class="eyebrow"><span class="js-greet">Good evening</span>, Kickerbout</p>
-          <h1 class="deck-title" id="a-title">Overview</h1>
-        </div>
-        <p class="deck-date js-date"></p>
-      </header>
-
-      <div class="statbar">
-        <div class="stat"><p class="sl">Players reached</p><p class="sv">1,284</p><p class="sd">Up 12% on last week</p></div>
-        <div class="stat"><p class="sl">Content published</p><p class="sv">23</p><p class="sd">This season</p></div>
-        <div class="stat"><p class="sl">Open outreach threads</p><p class="sv">7</p><p class="sd">2 waiting on you</p></div>
-        <div class="stat"><p class="sl">Your plan</p><p class="sv" style="font-size:15px;padding-top:5px"><span class="badge">Club House Pro</span></p></div>
-      </div>
-
-      <div class="deck-body">
-
-        <!-- OVERVIEW -->
-        <div class="module on rise" data-module="overview">
-          <div class="cardgrid">
-            <article class="mcard">
-              <div class="mc-top"><span class="mc-ic"><svg class="i"><use href="#i-users"/></svg></span><h3>Player Outreach</h3></div>
-              <p class="mc-status">38 players searched for football near your venue this week.</p>
-              <button class="btn act js-jump" data-target="players">Start outreach</button>
-            </article>
-            <article class="mcard">
-              <div class="mc-top"><span class="mc-ic"><svg class="i"><use href="#i-mega"/></svg></span><h3>Brand &amp; Corporate</h3></div>
-              <p class="mc-status">2 warm intros waiting on a reply from you.</p>
-              <button class="btn act js-jump" data-target="brands">Review intros</button>
-            </article>
-            <article class="mcard">
-              <div class="mc-top"><span class="mc-ic"><svg class="i"><use href="#i-pen"/></svg></span><h3>Content Studio</h3></div>
-              <p class="mc-status">3 caption drafts ready for this weekend's sessions.</p>
-              <button class="btn act js-jump" data-target="content">Open studio</button>
-            </article>
-            <article class="mcard">
-              <div class="mc-top"><span class="mc-ic"><svg class="i"><use href="#i-book"/></svg></span><h3>Resource Library</h3></div>
-              <p class="mc-status">New guide: sponsorship basics for grassroots clubs.</p>
-              <button class="btn act js-jump" data-target="library">Read guide</button>
-            </article>
-            <article class="mcard">
-              <div class="mc-top"><span class="mc-ic"><svg class="i"><use href="#i-chart"/></svg></span><h3>Analytics</h3></div>
-              <p class="mc-status">Saturday's post drove 46% of the week's reach.</p>
-              <button class="btn act js-jump" data-target="analytics">View analytics</button>
-            </article>
-            <article class="mcard">
-              <div class="mc-top"><span class="mc-ic"><svg class="i"><use href="#i-spark"/></svg></span><h3>Services</h3></div>
-              <p class="mc-status">Want it done for you? Hands-on help from £50/mo.</p>
-              <button class="btn act js-jump" data-target="services">See services</button>
-            </article>
-          </div>
-        </div>
-
-        <!-- PLAYERS -->
-        <div class="module rise" data-module="players">
-          <div class="panelcard">
-            <h3>Players searching near you</h3>
-            <p class="lede">People who searched The NBRH for football within 3 miles of your venue in the last 14 days. One tap sends your standard invite with a booking link.</p>
-            <div class="row-list">
-              <div class="li-row"><div class="li-main"><p class="li-name">Amara O.</p><p class="li-note">Hackney Wick · Looking for weekend 7-a-side</p></div><span class="chip">New</span><button class="btn ghost">Invite</button></div>
-              <div class="li-row"><div class="li-main"><p class="li-name">Dele K.</p><p class="li-note">Homerton · Casual kickabouts, evenings</p></div><span class="chip">New</span><button class="btn ghost">Invite</button></div>
-              <div class="li-row"><div class="li-main"><p class="li-name">Priya S.</p><p class="li-note">Clapton · Returning after injury, wants beginner-friendly</p></div><span class="chip">Seen your page</span><button class="btn ghost">Invite</button></div>
-              <div class="li-row"><div class="li-main"><p class="li-name">Marcus T.</p><p class="li-note">Leyton · Wants a regular Sunday league team</p></div><span class="chip">Seen your page</span><button class="btn ghost">Invite</button></div>
-            </div>
-            <button class="btn primary" style="margin-top:18px">Message all 4</button>
-          </div>
-        </div>
-
-        <!-- BRANDS -->
-        <div class="module rise" data-module="brands">
-          <div class="panelcard">
-            <h3>Warm intros near your venue</h3>
-            <p class="lede">Local businesses within walking distance of Mabley Green whose customers overlap with your players. Drafts are pre-written; you approve before anything sends.</p>
-            <div class="row-list">
-              <div class="li-row"><div class="li-main"><p class="li-name">Marsh Lane Coffee</p><p class="li-note">0.3 mi · Already sponsors two local teams</p></div><span class="chip">Reply waiting</span><button class="btn ghost">Open thread</button></div>
-              <div class="li-row"><div class="li-main"><p class="li-name">East Peak Physio</p><p class="li-note">0.8 mi · Offers member discounts to clubs</p></div><span class="chip">Reply waiting</span><button class="btn ghost">Open thread</button></div>
-              <div class="li-row"><div class="li-main"><p class="li-name">Nine Yards Print</p><p class="li-note">1.1 mi · Kit printing partner potential</p></div><span class="chip">Not contacted</span><button class="btn ghost">Draft intro</button></div>
-            </div>
-          </div>
-        </div>
-
-        <!-- CORPORATES -->
-        <div class="module rise" data-module="corporates">
-          <div class="panelcard">
-            <h3>Corporate leads</h3>
-            <p class="lede">Companies nearby looking for staff five-a-side, wellbeing sessions, or away-day activities. Corporate bookings pay 3 to 4 times a standard session rate.</p>
-            <div class="row-list">
-              <div class="li-row"><div class="li-main"><p class="li-name">Brightside Studio</p><p class="li-note">Design agency, 40 staff · Asked about a monthly five-a-side slot</p></div><span class="chip">New lead</span><button class="btn ghost">Reply</button></div>
-              <div class="li-row"><div class="li-main"><p class="li-name">Fenchurch &amp; Co</p><p class="li-note">Recruitment, 25 staff · Wellbeing budget to spend by Q3</p></div><span class="chip">In conversation</span><button class="btn ghost">Open thread</button></div>
-              <div class="li-row"><div class="li-main"><p class="li-name">Loop Logistics</p><p class="li-note">Ops team, 60 staff · Summer away day, wants a tournament format</p></div><span class="chip">Proposal sent</span><button class="btn ghost">Follow up</button></div>
-            </div>
-          </div>
-        </div>
-
-        <!-- CONTENT STUDIO -->
-        <div class="module rise" data-module="content">
-          <div class="panelcard">
-            <h3>What should we post?</h3>
-            <p class="lede">Describe the session or moment. You'll get three options written in your club's voice, SEO-tuned for local search.</p>
-            <input class="field" type="text" value="Sunday 10am open session at Mabley Green, all levels welcome" aria-label="Describe your post">
-            <button class="btn primary js-generate" style="margin-top:14px">Generate 3 options</button>
-            <div class="gen-results">
-              <div class="caption"><p>Sunday, 10am, Mabley Green. All levels, no trials, just football. Grab your spot through the link in bio ⚽</p><button class="btn ghost js-copy" data-copy="Sunday, 10am, Mabley Green. All levels, no trials, just football. Grab your spot through the link in bio ⚽"><svg class="i sm"><use href="#i-copy"/></svg>Copy</button></div>
-              <div class="caption"><p>New to East London? Your Sunday team already exists. First session's free this weekend, book via the link.</p><button class="btn ghost js-copy" data-copy="New to East London? Your Sunday team already exists. First session's free this weekend, book via the link."><svg class="i sm"><use href="#i-copy"/></svg>Copy</button></div>
-              <div class="caption"><p>The hardest part is turning up once. We'll handle the rest. Sunday 10am, Mabley Green, all levels welcome.</p><button class="btn ghost js-copy" data-copy="The hardest part is turning up once. We'll handle the rest. Sunday 10am, Mabley Green, all levels welcome."><svg class="i sm"><use href="#i-copy"/></svg>Copy</button></div>
-            </div>
-          </div>
-          <div class="panelcard">
-            <h3>Recent drafts</h3>
-            <div class="row-list">
-              <div class="li-row"><div class="li-main"><p class="li-name">Wimbledon week crossover post</p><p class="li-note">Instagram · Written Tuesday</p></div><span class="chip">Scheduled</span></div>
-              <div class="li-row"><div class="li-main"><p class="li-name">Player spotlight: midweek five-a-side</p><p class="li-note">Instagram · Written Monday</p></div><span class="chip">Published</span></div>
-              <div class="li-row"><div class="li-main"><p class="li-name">Corporate five-a-side pitch page copy</p><p class="li-note">Web · Written last week</p></div><span class="chip">Draft</span></div>
-            </div>
-          </div>
-        </div>
-
-        <!-- LIBRARY -->
-        <div class="module rise" data-module="library">
-          <div class="panelcard">
-            <h3>Resource Library</h3>
-            <p class="lede">Short, practical guides written for grassroots club admins. No jargon, no 40-page PDFs.</p>
-            <input class="field" type="search" placeholder="Search guides, e.g. sponsorship, funding, retention" aria-label="Search guides">
-            <div class="row-list" style="margin-top:10px">
-              <div class="li-row"><div class="li-main"><p class="li-name">Sponsorship basics for grassroots clubs</p><p class="li-note">Funding · 6 min read</p></div><span class="chip">New</span><button class="btn ghost">Read</button></div>
-              <div class="li-row"><div class="li-main"><p class="li-name">Writing session posts that fill spots</p><p class="li-note">Content · 4 min read</p></div><button class="btn ghost">Read</button></div>
-              <div class="li-row"><div class="li-main"><p class="li-name">Corporate five-a-side: how to price it</p><p class="li-note">Revenue · 7 min read</p></div><button class="btn ghost">Read</button></div>
-              <div class="li-row"><div class="li-main"><p class="li-name">Keeping new players past week three</p><p class="li-note">Retention · 5 min read</p></div><button class="btn ghost">Read</button></div>
-            </div>
-          </div>
-        </div>
-
-        <!-- ANALYTICS -->
-        <div class="module rise" data-module="analytics">
-          <div class="panelcard chartcard">
-            <h3>Reach this week</h3>
-            <p class="lede">Accounts reached across Instagram and your NBRH club page, by day.</p>
-            <svg viewBox="0 0 640 200" role="img" aria-label="Bar chart of daily reach, peaking Saturday at 320">
-              <g>
-                <rect class="bar" x="30"  y="199" width="52" height="0" rx="6"><animate attributeName="y" to="132" dur="0.6s" fill="freeze"/><animate attributeName="height" to="67" dur="0.6s" fill="freeze"/></rect>
-                <rect class="bar" x="116" y="199" width="52" height="0" rx="6"><animate attributeName="y" to="149" dur="0.6s" begin="0.05s" fill="freeze"/><animate attributeName="height" to="50" dur="0.6s" begin="0.05s" fill="freeze"/></rect>
-                <rect class="bar" x="202" y="199" width="52" height="0" rx="6"><animate attributeName="y" to="110" dur="0.6s" begin="0.1s" fill="freeze"/><animate attributeName="height" to="89" dur="0.6s" begin="0.1s" fill="freeze"/></rect>
-                <rect class="bar" x="288" y="199" width="52" height="0" rx="6"><animate attributeName="y" to="121" dur="0.6s" begin="0.15s" fill="freeze"/><animate attributeName="height" to="78" dur="0.6s" begin="0.15s" fill="freeze"/></rect>
-                <rect class="bar" x="374" y="199" width="52" height="0" rx="6"><animate attributeName="y" to="82"  dur="0.6s" begin="0.2s" fill="freeze"/><animate attributeName="height" to="117" dur="0.6s" begin="0.2s" fill="freeze"/></rect>
-                <rect class="bar hot" x="460" y="199" width="52" height="0" rx="6"><animate attributeName="y" to="21"  dur="0.6s" begin="0.25s" fill="freeze"/><animate attributeName="height" to="178" dur="0.6s" begin="0.25s" fill="freeze"/></rect>
-                <rect class="bar" x="546" y="199" width="52" height="0" rx="6"><animate attributeName="y" to="66"  dur="0.6s" begin="0.3s" fill="freeze"/><animate attributeName="height" to="133" dur="0.6s" begin="0.3s" fill="freeze"/></rect>
-              </g>
-              <text class="axis-lab" x="56"  y="196" text-anchor="middle" dy="14">Mon</text>
-              <text class="axis-lab" x="142" y="196" text-anchor="middle" dy="14">Tue</text>
-              <text class="axis-lab" x="228" y="196" text-anchor="middle" dy="14">Wed</text>
-              <text class="axis-lab" x="314" y="196" text-anchor="middle" dy="14">Thu</text>
-              <text class="axis-lab" x="400" y="196" text-anchor="middle" dy="14">Fri</text>
-              <text class="axis-lab" x="486" y="196" text-anchor="middle" dy="14">Sat</text>
-              <text class="axis-lab" x="572" y="196" text-anchor="middle" dy="14">Sun</text>
-            </svg>
-          </div>
-          <div class="panelcard">
-            <h3>One thing worth doing</h3>
-            <p class="lede" style="margin-bottom:0">Saturday's Reel drove 46% of the week's reach and 12 booking-link taps. Post the next one Friday at 6pm to catch the same weekend-planning window.</p>
-          </div>
-        </div>
-
-        <!-- SETTINGS -->
-        <div class="module rise" data-module="settings">
-          <div class="panelcard">
-            <h3>Settings</h3>
-            <div class="row-list" style="margin-top:8px">
-              <div class="settingsrow"><div class="li-main"><p class="li-name">Club profile</p><p class="li-note">Name, venue, sports, booking link</p></div><button class="btn ghost">Edit</button></div>
-              <div class="settingsrow"><div class="li-main"><p class="li-name">Members &amp; access</p><p class="li-note">2 admins, 1 coach</p></div><button class="btn ghost">Manage</button></div>
-              <div class="settingsrow"><div class="li-main"><p class="li-name">Billing</p><p class="li-note">Club House Pro · renews 1 August</p></div><button class="btn ghost">Manage plan</button></div>
-              <div class="settingsrow"><div class="li-main"><p class="li-name">Weekly digest email</p><p class="li-note">Reach, leads and one suggested action, every Monday</p></div><button class="toggle on js-toggle" role="switch" aria-checked="true" aria-label="Weekly digest email"></button></div>
-              <div class="settingsrow"><div class="li-main"><p class="li-name">Lead alerts</p><p class="li-note">Get pinged when a player or brand matches your club</p></div><button class="toggle on js-toggle" role="switch" aria-checked="true" aria-label="Lead alerts"></button></div>
-            </div>
-          </div>
-        </div>
-
-        <!-- SERVICES -->
-        <div class="module rise" data-module="services">
-          <div class="panelcard">
-            <h3>The service layer</h3>
-            <p class="lede">Everything in Club House OS works self-serve. When you'd rather hand it over, The NBRH team runs it for you.</p>
-            <div class="row-list">
-              <div class="li-row"><div class="li-main"><p class="li-name">Content, done for you</p><p class="li-note">We plan, write and schedule your week · £50/mo</p></div><button class="btn ghost">Add</button></div>
-              <div class="li-row"><div class="li-main"><p class="li-name">Outreach sprint</p><p class="li-note">Two weeks of player and brand outreach · £150 one-off</p></div><button class="btn ghost">Add</button></div>
-              <div class="li-row"><div class="li-main"><p class="li-name">Full Club House service</p><p class="li-note">Your marketing team, on call · from £250/mo</p></div><button class="btn ghost">Add</button></div>
-            </div>
-            <button class="btn primary" style="margin-top:18px">Book a call with The NBRH</button>
-          </div>
-        </div>
-
-      </div>
+<div class="deck">
+  <aside class="deck-side">
+    <div class="brandmark">
+      <span class="mark">N</span>
+      <span><span class="t1">Club House OS</span><br><span class="t2">The NBRH</span></span>
     </div>
-  </div>
-</section>
-
-<!-- ============================================================
-     CONCEPT B · THE WORKFLOW ASSISTANT
-============================================================ -->
-<section id="view-b" class="view" aria-label="Concept B: The Workflow Assistant">
-  <div class="assist">
-    <header class="assist-top">
-      <div class="who"><span class="mark">N</span><b>Kickerbout</b><span>· Club House OS</span></div>
-      <div class="right">
-        <span class="badge">Pro</span>
-        <button class="iconbtn js-tools-open" aria-label="Browse all tools" title="All tools"><svg class="i"><use href="#i-grid"/></svg></button>
-      </div>
-    </header>
-
-    <div class="assist-stage">
-
-      <!-- HOME -->
-      <div class="assist-home rise" id="b-home">
-        <p class="eyebrow"><span class="js-greet">Good evening</span>, Kickerbout</p>
-        <h1>One thread. The right tool shows up when you need it.</h1>
-        <div class="ask">
-          <input id="b-input" type="text" placeholder="What do you need help with today?" aria-label="What do you need help with today?">
-          <button class="send js-ask" aria-label="Send"><svg class="i"><use href="#i-send"/></svg></button>
-        </div>
-        <div class="sugg">
-          <button class="schip js-ws" data-ws="players"><svg class="i sm"><use href="#i-users"/></svg>Find players near you</button>
-          <button class="schip js-ws" data-ws="post"><svg class="i sm"><use href="#i-pen"/></svg>Write a session post</button>
-          <button class="schip js-ws" data-ws="reach"><svg class="i sm"><use href="#i-chart"/></svg>See this week's reach</button>
-          <button class="schip js-ws" data-ws="library"><svg class="i sm"><use href="#i-book"/></svg>Find a funding guide</button>
-        </div>
-      </div>
-
-      <!-- WORKSPACE -->
-      <div class="assist-ws" id="b-ws" hidden>
-        <div class="ws-head">
-          <button class="iconbtn js-ws-back" aria-label="Back to home"><svg class="i"><use href="#i-al"/></svg></button>
-          <div><p class="eyebrow">Workspace</p><h2 id="b-ws-title">Workspace</h2></div>
-          <span class="chip ws-tag" id="b-ws-tag">Tool</span>
-        </div>
-
-        <div class="ws-pane" data-ws="players">
-          <div class="panelcard">
-            <p class="lede">4 players searched The NBRH for football near your venue in the last two weeks. Invites include your booking link and go out from your club profile.</p>
-            <div class="row-list">
-              <div class="li-row"><div class="li-main"><p class="li-name">Amara O.</p><p class="li-note">Hackney Wick · Weekend 7-a-side</p></div><button class="btn ghost">Invite</button></div>
-              <div class="li-row"><div class="li-main"><p class="li-name">Dele K.</p><p class="li-note">Homerton · Casual, evenings</p></div><button class="btn ghost">Invite</button></div>
-              <div class="li-row"><div class="li-main"><p class="li-name">Priya S.</p><p class="li-note">Clapton · Beginner-friendly</p></div><button class="btn ghost">Invite</button></div>
-              <div class="li-row"><div class="li-main"><p class="li-name">Marcus T.</p><p class="li-note">Leyton · Regular Sunday team</p></div><button class="btn ghost">Invite</button></div>
-            </div>
-            <button class="btn primary" style="margin-top:18px">Message all 4</button>
-          </div>
-        </div>
-
-        <div class="ws-pane" data-ws="brands">
-          <div class="panelcard">
-            <p class="lede">Three local businesses match your audience. Here's a draft intro for the closest one. Edit anything, then send.</p>
-            <div class="caption" style="margin-bottom:14px"><p>Hi Marsh Lane Coffee, we're Kickerbout, the Sunday football community that runs 200 metres from your shop. 60-plus locals through our sessions every week, most of them straight past your door at 9.45am. Fancy a chat about a simple partnership? A discount code for our players, a shout-out from us. Ten minutes, your call.</p></div>
-            <div style="display:flex;gap:10px;flex-wrap:wrap">
-              <button class="btn primary">Send intro</button>
-              <button class="btn ghost">Edit first</button>
-              <button class="btn ghost">See the other 2 matches</button>
-            </div>
-          </div>
-        </div>
-
-        <div class="ws-pane" data-ws="post">
-          <div class="panelcard">
-            <p class="lede">Written for Sunday's open session, tuned for local search. Pick one, copy it, done.</p>
-            <div class="gen-results show">
-              <div class="caption"><p>Sunday, 10am, Mabley Green. All levels, no trials, just football. Grab your spot through the link in bio ⚽</p><button class="btn ghost js-copy" data-copy="Sunday, 10am, Mabley Green. All levels, no trials, just football. Grab your spot through the link in bio ⚽"><svg class="i sm"><use href="#i-copy"/></svg>Copy</button></div>
-              <div class="caption"><p>New to East London? Your Sunday team already exists. First session's free this weekend, book via the link.</p><button class="btn ghost js-copy" data-copy="New to East London? Your Sunday team already exists. First session's free this weekend, book via the link."><svg class="i sm"><use href="#i-copy"/></svg>Copy</button></div>
-            </div>
-            <div style="display:flex;gap:10px;margin-top:16px;flex-wrap:wrap">
-              <button class="btn ghost">Regenerate</button>
-              <button class="btn ghost">Make it punchier</button>
-              <button class="btn ghost">Add a Story version</button>
-            </div>
-          </div>
-        </div>
-
-        <div class="ws-pane" data-ws="reach">
-          <div class="panelcard chartcard">
-            <p class="lede">Across Instagram and your NBRH club page, Monday to Sunday.</p>
-            <svg viewBox="0 0 640 170" role="img" aria-label="Bar chart of weekly reach, peaking Saturday">
-              <rect class="bar" x="30"  y="110" width="52" height="59" rx="6"/>
-              <rect class="bar" x="116" y="124" width="52" height="45" rx="6"/>
-              <rect class="bar" x="202" y="92"  width="52" height="77" rx="6"/>
-              <rect class="bar" x="288" y="101" width="52" height="68" rx="6"/>
-              <rect class="bar" x="374" y="68"  width="52" height="101" rx="6"/>
-              <rect class="bar hot" x="460" y="14" width="52" height="155" rx="6"/>
-              <rect class="bar" x="546" y="52"  width="52" height="117" rx="6"/>
-            </svg>
-            <div class="statbar" style="margin:18px 0 0">
-              <div class="stat"><p class="sl">Reached</p><p class="sv">1,284</p></div>
-              <div class="stat"><p class="sl">Profile visits</p><p class="sv">213</p></div>
-              <div class="stat"><p class="sl">Booking taps</p><p class="sv">89</p></div>
-            </div>
-            <p class="lede" style="margin:16px 0 0">Saturday's Reel drove 46% of the week. Post the next one Friday at 6pm to hit the same weekend-planning window.</p>
-          </div>
-        </div>
-
-        <div class="ws-pane" data-ws="library">
-          <div class="panelcard">
-            <p class="lede">Best matches for funding and money questions.</p>
-            <div class="row-list">
-              <div class="li-row"><div class="li-main"><p class="li-name">Sponsorship basics for grassroots clubs</p><p class="li-note">Funding · 6 min read</p></div><span class="chip">New</span><button class="btn ghost">Read</button></div>
-              <div class="li-row"><div class="li-main"><p class="li-name">Small grants your club probably qualifies for</p><p class="li-note">Funding · 8 min read</p></div><button class="btn ghost">Read</button></div>
-              <div class="li-row"><div class="li-main"><p class="li-name">Corporate five-a-side: how to price it</p><p class="li-note">Revenue · 7 min read</p></div><button class="btn ghost">Read</button></div>
-            </div>
-          </div>
-        </div>
-
-        <div class="ws-pane" data-ws="service">
-          <div class="panelcard">
-            <p class="lede">When you'd rather hand it over, The NBRH team runs it for you.</p>
-            <div class="row-list">
-              <div class="li-row"><div class="li-main"><p class="li-name">Content, done for you</p><p class="li-note">£50/mo</p></div><button class="btn ghost">Add</button></div>
-              <div class="li-row"><div class="li-main"><p class="li-name">Outreach sprint</p><p class="li-note">£150 one-off</p></div><button class="btn ghost">Add</button></div>
-              <div class="li-row"><div class="li-main"><p class="li-name">Full Club House service</p><p class="li-note">from £250/mo</p></div><button class="btn ghost">Add</button></div>
-            </div>
-            <button class="btn primary" style="margin-top:18px">Book a call with The NBRH</button>
-          </div>
-        </div>
-
-      </div>
-    </div>
-
-    <!-- ALL TOOLS OVERLAY -->
-    <div class="alltools" id="b-tools" role="dialog" aria-modal="true" aria-label="All tools">
-      <div class="at-wrap">
-        <div class="at-head">
-          <div><p class="eyebrow">For returning users</p><h2>All tools</h2></div>
-          <button class="iconbtn js-tools-close" aria-label="Close"><svg class="i"><use href="#i-x"/></svg></button>
-        </div>
-        <div class="at-grid">
-          <button class="at-item js-ws" data-ws="players"><span class="mc-ic"><svg class="i"><use href="#i-users"/></svg></span><span><b>Player outreach</b><span>Invite people already searching nearby</span></span></button>
-          <button class="at-item js-ws" data-ws="brands"><span class="mc-ic"><svg class="i"><use href="#i-mega"/></svg></span><span><b>Brand &amp; corporate outreach</b><span>Warm intros to local businesses</span></span></button>
-          <button class="at-item js-ws" data-ws="post"><span class="mc-ic"><svg class="i"><use href="#i-pen"/></svg></span><span><b>Content generator</b><span>Posts and captions in your voice</span></span></button>
-          <button class="at-item js-ws" data-ws="reach"><span class="mc-ic"><svg class="i"><use href="#i-chart"/></svg></span><span><b>Analytics</b><span>Reach, visits and booking taps</span></span></button>
-          <button class="at-item js-ws" data-ws="library"><span class="mc-ic"><svg class="i"><use href="#i-book"/></svg></span><span><b>Resource library</b><span>Short, practical club guides</span></span></button>
-          <button class="at-item js-ws" data-ws="service"><span class="mc-ic"><svg class="i"><use href="#i-spark"/></svg></span><span><b>Hands-on services</b><span>The NBRH team does it for you</span></span></button>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============================================================
-     CONCEPT C · THE MODULAR BENTO
-============================================================ -->
-<section id="view-c" class="view" aria-label="Concept C: The Modular Bento">
-  <div class="bento">
-    <header class="bento-top">
-      <div class="who" style="display:flex;align-items:center;gap:10px;font-size:14px">
-        <span class="mark" style="width:26px;height:26px;border-radius:8px;background:var(--pink);display:grid;place-items:center;font-family:var(--serif);font-size:12px;color:#fff">N</span>
-        <b>Kickerbout</b><span style="color:var(--faint)">· Club House OS</span>
-      </div>
-      <p class="bento-hint">Drag tiles to rearrange · hover for controls · click to open</p>
+    <button class="navlink on" data-target="overview"><svg class="i"><use href="#i-home"/></svg>Overview</button>
+    <p class="navlab">Outreach</p>
+    <button class="navlink sub" data-target="players">Players</button>
+    <button class="navlink sub" data-target="brands">Brands</button>
+    <button class="navlink sub" data-target="corporates">Corporates</button>
+    <p class="navlab">Workspace</p>
+    <button class="navlink" data-target="content"><svg class="i"><use href="#i-pen"/></svg>Content Studio</button>
+    <button class="navlink" data-target="library"><svg class="i"><use href="#i-book"/></svg>Resource Library</button>
+    <button class="navlink" data-target="analytics"><svg class="i"><use href="#i-chart"/></svg>Analytics</button>
+    <button class="navlink" data-target="settings"><svg class="i"><use href="#i-cog"/></svg>Settings</button>
+    <div class="sidefoot">
+      <span class="avatar">K</span>
+      <span class="club"><b>Kickerbout</b><span>East London · Football</span></span>
       <span class="badge">Pro</span>
-    </header>
-
-    <div class="bento-grid" id="c-grid">
-
-      <article class="tile" draggable="true" data-key="players" tabindex="0" role="button">
-        <div class="tile-top">
-          <span class="tile-ic"><svg class="i"><use href="#i-users"/></svg></span><h3>Player Outreach</h3>
-          <span class="tile-ctl"><button class="ctl js-size" aria-label="Toggle tile width"><svg class="i sm"><use href="#i-expand"/></svg></button><span class="ctl grab" title="Drag to move"><svg class="i sm"><use href="#i-drag"/></svg></span></span>
-        </div>
-        <div class="tile-mid"><p class="tile-stat">38</p><p class="tile-sub">players searching near your venue this week</p></div>
-        <span class="link-act">Start outreach <svg class="i sm"><use href="#i-ar"/></svg></span>
-      </article>
-
-      <article class="tile" draggable="true" data-key="brands" tabindex="0" role="button">
-        <div class="tile-top">
-          <span class="tile-ic"><svg class="i"><use href="#i-mega"/></svg></span><h3>Brand &amp; Corporate</h3>
-          <span class="tile-ctl"><button class="ctl js-size" aria-label="Toggle tile width"><svg class="i sm"><use href="#i-expand"/></svg></button><span class="ctl grab" title="Drag to move"><svg class="i sm"><use href="#i-drag"/></svg></span></span>
-        </div>
-        <div class="tile-mid"><p class="tile-stat">2</p><p class="tile-sub">warm intros waiting on a reply from you</p></div>
-        <span class="link-act">Review intros <svg class="i sm"><use href="#i-ar"/></svg></span>
-      </article>
-
-      <article class="tile" draggable="true" data-key="content" tabindex="0" role="button">
-        <div class="tile-top">
-          <span class="tile-ic"><svg class="i"><use href="#i-pen"/></svg></span><h3>Content Generator</h3>
-          <span class="tile-ctl"><button class="ctl js-size" aria-label="Toggle tile width"><svg class="i sm"><use href="#i-expand"/></svg></button><span class="ctl grab" title="Drag to move"><svg class="i sm"><use href="#i-drag"/></svg></span></span>
-        </div>
-        <div class="tile-mid"><p class="tile-stat">3</p><p class="tile-sub">caption drafts ready for the weekend</p></div>
-        <span class="link-act">Open studio <svg class="i sm"><use href="#i-ar"/></svg></span>
-      </article>
-
-      <article class="tile" draggable="true" data-key="library" tabindex="0" role="button">
-        <div class="tile-top">
-          <span class="tile-ic"><svg class="i"><use href="#i-book"/></svg></span><h3>Resource Library</h3>
-          <span class="tile-ctl"><button class="ctl js-size" aria-label="Toggle tile width"><svg class="i sm"><use href="#i-expand"/></svg></button><span class="ctl grab" title="Drag to move"><svg class="i sm"><use href="#i-drag"/></svg></span></span>
-        </div>
-        <div class="tile-mid"><p class="tile-stat" style="font-size:19px;line-height:1.3">Sponsorship basics for grassroots clubs</p><p class="tile-sub">New guide · 6 min read</p></div>
-        <span class="link-act">Read guide <svg class="i sm"><use href="#i-ar"/></svg></span>
-      </article>
-
-      <article class="tile" draggable="true" data-key="analytics" tabindex="0" role="button">
-        <div class="tile-top">
-          <span class="tile-ic"><svg class="i"><use href="#i-chart"/></svg></span><h3>Analytics Snapshot</h3>
-          <span class="tile-ctl"><button class="ctl js-size" aria-label="Toggle tile width"><svg class="i sm"><use href="#i-expand"/></svg></button><span class="ctl grab" title="Drag to move"><svg class="i sm"><use href="#i-drag"/></svg></span></span>
-        </div>
-        <div class="tile-mid">
-          <p class="tile-stat">1,284</p><p class="tile-sub">reached this week · up 12%</p>
-          <svg class="tile-spark" viewBox="0 0 150 34" width="150" height="34" aria-hidden="true">
-            <rect class="bar" x="0"   y="18" width="22" height="16" rx="3"/>
-            <rect class="bar" x="30"  y="12" width="22" height="22" rx="3"/>
-            <rect class="bar" x="60"  y="20" width="22" height="14" rx="3"/>
-            <rect class="bar" x="90"  y="8"  width="22" height="26" rx="3"/>
-            <rect class="bar hot" x="120" y="0" width="22" height="34" rx="3"/>
-          </svg>
-        </div>
-        <span class="link-act">View analytics <svg class="i sm"><use href="#i-ar"/></svg></span>
-      </article>
-
-      <article class="tile" draggable="true" data-key="service" tabindex="0" role="button">
-        <div class="tile-top">
-          <span class="tile-ic"><svg class="i"><use href="#i-spark"/></svg></span><h3>Hands-on Services</h3>
-          <span class="tile-ctl"><button class="ctl js-size" aria-label="Toggle tile width"><svg class="i sm"><use href="#i-expand"/></svg></button><span class="ctl grab" title="Drag to move"><svg class="i sm"><use href="#i-drag"/></svg></span></span>
-        </div>
-        <div class="tile-mid"><p class="tile-stat" style="font-size:19px;line-height:1.3">Want it done for you?</p><p class="tile-sub">The NBRH team, from £50/mo</p></div>
-        <span class="link-act">See services <svg class="i sm"><use href="#i-ar"/></svg></span>
-      </article>
-
-      <button class="tile add" id="c-add">
-        <span class="plus"><svg class="i"><use href="#i-plus"/></svg></span>
-        <b>Add tool</b>
-        <small>New modules drop in here as they ship</small>
-      </button>
-
     </div>
-  </div>
-
-  <!-- SLIDE-OVER -->
-  <div class="scrim" id="c-scrim"></div>
-  <aside class="slideover" id="c-panel" role="dialog" aria-modal="true" aria-labelledby="c-panel-title">
-    <header class="so-head">
-      <h2 id="c-panel-title">Tool</h2>
-      <button class="iconbtn js-panel-close" aria-label="Close panel"><svg class="i"><use href="#i-x"/></svg></button>
-    </header>
-    <div class="so-body" id="c-panel-body"></div>
   </aside>
 
-  <!-- SLIDE-OVER TEMPLATES -->
-  <template data-tpl="players">
-    <p class="lede">Players who searched The NBRH for football within 3 miles of your venue in the last 14 days.</p>
-    <div class="row-list">
-      <div class="li-row"><div class="li-main"><p class="li-name">Amara O.</p><p class="li-note">Hackney Wick · Weekend 7-a-side</p></div><button class="btn ghost">Invite</button></div>
-      <div class="li-row"><div class="li-main"><p class="li-name">Dele K.</p><p class="li-note">Homerton · Casual, evenings</p></div><button class="btn ghost">Invite</button></div>
-      <div class="li-row"><div class="li-main"><p class="li-name">Priya S.</p><p class="li-note">Clapton · Beginner-friendly</p></div><button class="btn ghost">Invite</button></div>
-      <div class="li-row"><div class="li-main"><p class="li-name">Marcus T.</p><p class="li-note">Leyton · Regular Sunday team</p></div><button class="btn ghost">Invite</button></div>
+  <div class="deck-main">
+    <header class="deck-head">
+      <div>
+        <p class="eyebrow"><span class="js-greet">Good evening</span>, Kickerbout</p>
+        <h1 class="deck-title" id="d-title">Overview</h1>
+      </div>
+      <p class="deck-date js-date"></p>
+    </header>
+
+    <!-- ASSISTANT BAR -->
+    <div class="askbar">
+      <svg class="i ab-ic"><use href="#i-spark"/></svg>
+      <input id="d-input" type="text" placeholder="Ask Club House anything: find players, write a post, check your reach…" aria-label="Ask the Club House assistant">
+      <button class="ab-send js-d-ask"><span>Ask</span><svg class="i sm"><use href="#i-send"/></svg></button>
     </div>
-    <button class="btn primary">Message all 4</button>
-  </template>
-
-  <template data-tpl="brands">
-    <p class="lede">Local businesses near Mabley Green with an audience match. Drafts are pre-written; you approve before anything sends.</p>
-    <div class="row-list">
-      <div class="li-row"><div class="li-main"><p class="li-name">Marsh Lane Coffee</p><p class="li-note">0.3 mi · Sponsors two local teams</p></div><button class="btn ghost">Open</button></div>
-      <div class="li-row"><div class="li-main"><p class="li-name">East Peak Physio</p><p class="li-note">0.8 mi · Member discounts</p></div><button class="btn ghost">Open</button></div>
-      <div class="li-row"><div class="li-main"><p class="li-name">Brightside Studio</p><p class="li-note">Corporate · Monthly five-a-side ask</p></div><button class="btn ghost">Reply</button></div>
+    <div class="ab-reply" id="d-reply" role="status">
+      <svg class="i sm"><use href="#i-spark"/></svg><span id="d-reply-text"></span>
+      <button class="ab-dismiss" aria-label="Dismiss"><svg class="i sm"><use href="#i-x"/></svg></button>
     </div>
-    <button class="btn primary">Draft all intros</button>
-  </template>
 
-  <template data-tpl="content">
-    <p class="lede">Sunday's open session, three ways. Copy one and post it, or regenerate in a different tone.</p>
-    <div class="gen-results show">
-      <div class="caption"><p>Sunday, 10am, Mabley Green. All levels, no trials, just football. Grab your spot through the link in bio ⚽</p><button class="btn ghost js-copy" data-copy="Sunday, 10am, Mabley Green. All levels, no trials, just football. Grab your spot through the link in bio ⚽"><svg class="i sm"><use href="#i-copy"/></svg>Copy</button></div>
-      <div class="caption"><p>New to East London? Your Sunday team already exists. First session's free this weekend, book via the link.</p><button class="btn ghost js-copy" data-copy="New to East London? Your Sunday team already exists. First session's free this weekend, book via the link."><svg class="i sm"><use href="#i-copy"/></svg>Copy</button></div>
+    <div class="statbar">
+      <div class="stat"><p class="sl">Players reached</p><p class="sv">1,284</p><p class="sd">Up 12% on last week</p></div>
+      <div class="stat"><p class="sl">Content published</p><p class="sv">23</p><p class="sd">This season</p></div>
+      <div class="stat"><p class="sl">Open outreach threads</p><p class="sv">7</p><p class="sd">2 waiting on you</p></div>
+      <div class="stat"><p class="sl">Your plan</p><p class="sv" style="font-size:15px;padding-top:5px"><span class="badge">Club House Pro</span></p></div>
     </div>
-    <button class="btn primary">Regenerate</button>
-  </template>
 
-  <template data-tpl="library">
-    <p class="lede">Short, practical guides for club admins. No jargon, no 40-page PDFs.</p>
-    <div class="row-list">
-      <div class="li-row"><div class="li-main"><p class="li-name">Sponsorship basics for grassroots clubs</p><p class="li-note">Funding · 6 min</p></div><span class="chip">New</span></div>
-      <div class="li-row"><div class="li-main"><p class="li-name">Writing session posts that fill spots</p><p class="li-note">Content · 4 min</p></div></div>
-      <div class="li-row"><div class="li-main"><p class="li-name">Corporate five-a-side: how to price it</p><p class="li-note">Revenue · 7 min</p></div></div>
-      <div class="li-row"><div class="li-main"><p class="li-name">Keeping new players past week three</p><p class="li-note">Retention · 5 min</p></div></div>
+    <div class="deck-body">
+
+      <!-- OVERVIEW -->
+      <div class="module on rise" data-module="overview">
+        <div class="cardgrid">
+          <article class="mcard">
+            <div class="mc-top"><span class="mc-ic"><svg class="i"><use href="#i-users"/></svg></span><h3>Player Outreach</h3></div>
+            <p class="mc-status">38 players searched for football near your venue this week.</p>
+            <button class="btn act js-jump" data-target="players">Start outreach</button>
+          </article>
+          <article class="mcard">
+            <div class="mc-top"><span class="mc-ic"><svg class="i"><use href="#i-mega"/></svg></span><h3>Brand &amp; Corporate</h3></div>
+            <p class="mc-status">2 warm intros waiting on a reply from you.</p>
+            <button class="btn act js-jump" data-target="brands">Review intros</button>
+          </article>
+          <article class="mcard">
+            <div class="mc-top"><span class="mc-ic"><svg class="i"><use href="#i-pen"/></svg></span><h3>Content Studio</h3></div>
+            <p class="mc-status">3 caption drafts ready for this weekend's sessions.</p>
+            <button class="btn act js-jump" data-target="content">Open studio</button>
+          </article>
+          <article class="mcard">
+            <div class="mc-top"><span class="mc-ic"><svg class="i"><use href="#i-book"/></svg></span><h3>Resource Library</h3></div>
+            <p class="mc-status">New guide: sponsorship basics for grassroots clubs.</p>
+            <button class="btn act js-jump" data-target="library">Read guide</button>
+          </article>
+          <article class="mcard">
+            <div class="mc-top"><span class="mc-ic"><svg class="i"><use href="#i-chart"/></svg></span><h3>Analytics</h3></div>
+            <p class="mc-status">Saturday's post drove 46% of the week's reach.</p>
+            <button class="btn act js-jump" data-target="analytics">View analytics</button>
+          </article>
+          <article class="mcard">
+            <div class="mc-top"><span class="mc-ic"><svg class="i"><use href="#i-spark"/></svg></span><h3>Services</h3></div>
+            <p class="mc-status">Want it done for you? Hands-on help from £50/mo.</p>
+            <button class="btn act js-jump" data-target="services">See services</button>
+          </article>
+        </div>
+      </div>
+
+      <!-- PLAYERS -->
+      <div class="module rise" data-module="players">
+        <div class="panelcard">
+          <h3>Players searching near you</h3>
+          <p class="lede">People who searched The NBRH for football within 3 miles of your venue in the last 14 days. One tap sends your standard invite with a booking link.</p>
+          <div class="row-list">
+            <div class="li-row"><div class="li-main"><p class="li-name">Amara O.</p><p class="li-note">Hackney Wick · Looking for weekend 7-a-side</p></div><span class="chip">New</span><button class="btn ghost">Invite</button></div>
+            <div class="li-row"><div class="li-main"><p class="li-name">Dele K.</p><p class="li-note">Homerton · Casual kickabouts, evenings</p></div><span class="chip">New</span><button class="btn ghost">Invite</button></div>
+            <div class="li-row"><div class="li-main"><p class="li-name">Priya S.</p><p class="li-note">Clapton · Returning after injury, wants beginner-friendly</p></div><span class="chip">Seen your page</span><button class="btn ghost">Invite</button></div>
+            <div class="li-row"><div class="li-main"><p class="li-name">Marcus T.</p><p class="li-note">Leyton · Wants a regular Sunday league team</p></div><span class="chip">Seen your page</span><button class="btn ghost">Invite</button></div>
+          </div>
+          <button class="btn primary" style="margin-top:18px">Message all 4</button>
+        </div>
+      </div>
+
+      <!-- BRANDS -->
+      <div class="module rise" data-module="brands">
+        <div class="panelcard">
+          <h3>Warm intros near your venue</h3>
+          <p class="lede">Local businesses within walking distance of Mabley Green whose customers overlap with your players. Drafts are pre-written; you approve before anything sends.</p>
+          <div class="row-list">
+            <div class="li-row"><div class="li-main"><p class="li-name">Marsh Lane Coffee</p><p class="li-note">0.3 mi · Already sponsors two local teams</p></div><span class="chip">Reply waiting</span><button class="btn ghost">Open thread</button></div>
+            <div class="li-row"><div class="li-main"><p class="li-name">East Peak Physio</p><p class="li-note">0.8 mi · Offers member discounts to clubs</p></div><span class="chip">Reply waiting</span><button class="btn ghost">Open thread</button></div>
+            <div class="li-row"><div class="li-main"><p class="li-name">Nine Yards Print</p><p class="li-note">1.1 mi · Kit printing partner potential</p></div><span class="chip">Not contacted</span><button class="btn ghost">Draft intro</button></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CORPORATES -->
+      <div class="module rise" data-module="corporates">
+        <div class="panelcard">
+          <h3>Corporate leads</h3>
+          <p class="lede">Companies nearby looking for staff five-a-side, wellbeing sessions, or away-day activities. Corporate bookings pay 3 to 4 times a standard session rate.</p>
+          <div class="row-list">
+            <div class="li-row"><div class="li-main"><p class="li-name">Brightside Studio</p><p class="li-note">Design agency, 40 staff · Asked about a monthly five-a-side slot</p></div><span class="chip">New lead</span><button class="btn ghost">Reply</button></div>
+            <div class="li-row"><div class="li-main"><p class="li-name">Fenchurch &amp; Co</p><p class="li-note">Recruitment, 25 staff · Wellbeing budget to spend by Q3</p></div><span class="chip">In conversation</span><button class="btn ghost">Open thread</button></div>
+            <div class="li-row"><div class="li-main"><p class="li-name">Loop Logistics</p><p class="li-note">Ops team, 60 staff · Summer away day, wants a tournament format</p></div><span class="chip">Proposal sent</span><button class="btn ghost">Follow up</button></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CONTENT STUDIO -->
+      <div class="module rise" data-module="content">
+        <div class="panelcard">
+          <h3>What should we post?</h3>
+          <p class="lede">Describe the session or moment. You'll get three options written in your club's voice, SEO-tuned for local search.</p>
+          <input class="field" type="text" value="Sunday 10am open session at Mabley Green, all levels welcome" aria-label="Describe your post">
+          <button class="btn primary js-generate" style="margin-top:14px">Generate 3 options</button>
+          <div class="gen-results">
+            <div class="caption"><p>Sunday, 10am, Mabley Green. All levels, no trials, just football. Grab your spot through the link in bio ⚽</p><button class="btn ghost js-copy" data-copy="Sunday, 10am, Mabley Green. All levels, no trials, just football. Grab your spot through the link in bio ⚽"><svg class="i sm"><use href="#i-copy"/></svg>Copy</button></div>
+            <div class="caption"><p>New to East London? Your Sunday team already exists. First session's free this weekend, book via the link.</p><button class="btn ghost js-copy" data-copy="New to East London? Your Sunday team already exists. First session's free this weekend, book via the link."><svg class="i sm"><use href="#i-copy"/></svg>Copy</button></div>
+            <div class="caption"><p>The hardest part is turning up once. We'll handle the rest. Sunday 10am, Mabley Green, all levels welcome.</p><button class="btn ghost js-copy" data-copy="The hardest part is turning up once. We'll handle the rest. Sunday 10am, Mabley Green, all levels welcome."><svg class="i sm"><use href="#i-copy"/></svg>Copy</button></div>
+          </div>
+        </div>
+        <div class="panelcard">
+          <h3>Recent drafts</h3>
+          <div class="row-list">
+            <div class="li-row"><div class="li-main"><p class="li-name">Wimbledon week crossover post</p><p class="li-note">Instagram · Written Tuesday</p></div><span class="chip">Scheduled</span></div>
+            <div class="li-row"><div class="li-main"><p class="li-name">Player spotlight: midweek five-a-side</p><p class="li-note">Instagram · Written Monday</p></div><span class="chip">Published</span></div>
+            <div class="li-row"><div class="li-main"><p class="li-name">Corporate five-a-side pitch page copy</p><p class="li-note">Web · Written last week</p></div><span class="chip">Draft</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- LIBRARY -->
+      <div class="module rise" data-module="library">
+        <div class="panelcard">
+          <h3>Resource Library</h3>
+          <p class="lede">Short, practical guides written for grassroots club admins. No jargon, no 40-page PDFs.</p>
+          <input class="field" type="search" placeholder="Search guides, e.g. sponsorship, funding, retention" aria-label="Search guides">
+          <div class="row-list" style="margin-top:10px">
+            <div class="li-row"><div class="li-main"><p class="li-name">Sponsorship basics for grassroots clubs</p><p class="li-note">Funding · 6 min read</p></div><span class="chip">New</span><button class="btn ghost">Read</button></div>
+            <div class="li-row"><div class="li-main"><p class="li-name">Writing session posts that fill spots</p><p class="li-note">Content · 4 min read</p></div><button class="btn ghost">Read</button></div>
+            <div class="li-row"><div class="li-main"><p class="li-name">Corporate five-a-side: how to price it</p><p class="li-note">Revenue · 7 min read</p></div><button class="btn ghost">Read</button></div>
+            <div class="li-row"><div class="li-main"><p class="li-name">Keeping new players past week three</p><p class="li-note">Retention · 5 min read</p></div><button class="btn ghost">Read</button></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ANALYTICS -->
+      <div class="module rise" data-module="analytics">
+        <div class="panelcard chartcard">
+          <h3>Reach this week</h3>
+          <p class="lede">Accounts reached across Instagram and your NBRH club page, by day.</p>
+          <svg viewBox="0 0 640 200" role="img" aria-label="Bar chart of daily reach, peaking Saturday at 320">
+            <g>
+              <rect class="bar" x="30"  y="199" width="52" height="0" rx="4"><animate attributeName="y" to="132" dur="0.6s" fill="freeze"/><animate attributeName="height" to="67" dur="0.6s" fill="freeze"/></rect>
+              <rect class="bar" x="116" y="199" width="52" height="0" rx="4"><animate attributeName="y" to="149" dur="0.6s" begin="0.05s" fill="freeze"/><animate attributeName="height" to="50" dur="0.6s" begin="0.05s" fill="freeze"/></rect>
+              <rect class="bar" x="202" y="199" width="52" height="0" rx="4"><animate attributeName="y" to="110" dur="0.6s" begin="0.1s" fill="freeze"/><animate attributeName="height" to="89" dur="0.6s" begin="0.1s" fill="freeze"/></rect>
+              <rect class="bar" x="288" y="199" width="52" height="0" rx="4"><animate attributeName="y" to="121" dur="0.6s" begin="0.15s" fill="freeze"/><animate attributeName="height" to="78" dur="0.6s" begin="0.15s" fill="freeze"/></rect>
+              <rect class="bar" x="374" y="199" width="52" height="0" rx="4"><animate attributeName="y" to="82"  dur="0.6s" begin="0.2s" fill="freeze"/><animate attributeName="height" to="117" dur="0.6s" begin="0.2s" fill="freeze"/></rect>
+              <rect class="bar hot" x="460" y="199" width="52" height="0" rx="4"><animate attributeName="y" to="21"  dur="0.6s" begin="0.25s" fill="freeze"/><animate attributeName="height" to="178" dur="0.6s" begin="0.25s" fill="freeze"/></rect>
+              <rect class="bar" x="546" y="199" width="52" height="0" rx="4"><animate attributeName="y" to="66"  dur="0.6s" begin="0.3s" fill="freeze"/><animate attributeName="height" to="133" dur="0.6s" begin="0.3s" fill="freeze"/></rect>
+            </g>
+            <text class="axis-lab" x="56"  y="196" text-anchor="middle" dy="14">Mon</text>
+            <text class="axis-lab" x="142" y="196" text-anchor="middle" dy="14">Tue</text>
+            <text class="axis-lab" x="228" y="196" text-anchor="middle" dy="14">Wed</text>
+            <text class="axis-lab" x="314" y="196" text-anchor="middle" dy="14">Thu</text>
+            <text class="axis-lab" x="400" y="196" text-anchor="middle" dy="14">Fri</text>
+            <text class="axis-lab" x="486" y="196" text-anchor="middle" dy="14">Sat</text>
+            <text class="axis-lab" x="572" y="196" text-anchor="middle" dy="14">Sun</text>
+          </svg>
+        </div>
+        <div class="panelcard">
+          <h3>One thing worth doing</h3>
+          <p class="lede" style="margin-bottom:0">Saturday's Reel drove 46% of the week's reach and 12 booking-link taps. Post the next one Friday at 6pm to catch the same weekend-planning window.</p>
+        </div>
+      </div>
+
+      <!-- SETTINGS -->
+      <div class="module rise" data-module="settings">
+        <div class="panelcard">
+          <h3>Settings</h3>
+          <div class="row-list" style="margin-top:8px">
+            <div class="settingsrow"><div class="li-main"><p class="li-name">Club profile</p><p class="li-note">Name, venue, sports, booking link</p></div><button class="btn ghost">Edit</button></div>
+            <div class="settingsrow"><div class="li-main"><p class="li-name">Members &amp; access</p><p class="li-note">2 admins, 1 coach</p></div><button class="btn ghost">Manage</button></div>
+            <div class="settingsrow"><div class="li-main"><p class="li-name">Billing</p><p class="li-note">Club House Pro · renews 1 August</p></div><button class="btn ghost">Manage plan</button></div>
+            <div class="settingsrow"><div class="li-main"><p class="li-name">Weekly digest email</p><p class="li-note">Reach, leads and one suggested action, every Monday</p></div><button class="toggle on js-toggle" role="switch" aria-checked="true" aria-label="Weekly digest email"></button></div>
+            <div class="settingsrow"><div class="li-main"><p class="li-name">Lead alerts</p><p class="li-note">Get pinged when a player or brand matches your club</p></div><button class="toggle on js-toggle" role="switch" aria-checked="true" aria-label="Lead alerts"></button></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SERVICES -->
+      <div class="module rise" data-module="services">
+        <div class="panelcard">
+          <h3>The service layer</h3>
+          <p class="lede">Everything in Club House OS works self-serve. When you'd rather hand it over, The NBRH team runs it for you.</p>
+          <div class="row-list">
+            <div class="li-row"><div class="li-main"><p class="li-name">Content, done for you</p><p class="li-note">We plan, write and schedule your week · £50/mo</p></div><button class="btn ghost">Add</button></div>
+            <div class="li-row"><div class="li-main"><p class="li-name">Outreach sprint</p><p class="li-note">Two weeks of player and brand outreach · £150 one-off</p></div><button class="btn ghost">Add</button></div>
+            <div class="li-row"><div class="li-main"><p class="li-name">Full Club House service</p><p class="li-note">Your marketing team, on call · from £250/mo</p></div><button class="btn ghost">Add</button></div>
+          </div>
+          <button class="btn primary" style="margin-top:18px">Book a call with The NBRH</button>
+        </div>
+      </div>
+
     </div>
-    <button class="btn primary">Open the library</button>
-  </template>
+  </div>
+</div>
 
-  <template data-tpl="analytics">
-    <p class="lede">Accounts reached this week, by day.</p>
-    <svg viewBox="0 0 640 170" style="width:100%;height:auto" role="img" aria-label="Weekly reach chart, peaking Saturday">
-      <rect class="bar" x="30"  y="110" width="52" height="59" rx="6"/>
-      <rect class="bar" x="116" y="124" width="52" height="45" rx="6"/>
-      <rect class="bar" x="202" y="92"  width="52" height="77" rx="6"/>
-      <rect class="bar" x="288" y="101" width="52" height="68" rx="6"/>
-      <rect class="bar" x="374" y="68"  width="52" height="101" rx="6"/>
-      <rect class="bar hot" x="460" y="14" width="52" height="155" rx="6"/>
-      <rect class="bar" x="546" y="52"  width="52" height="117" rx="6"/>
-    </svg>
-    <p class="lede" style="margin-top:14px">Saturday's Reel drove 46% of the week and 12 booking-link taps. Post the next one Friday at 6pm.</p>
-    <button class="btn primary">Open full analytics</button>
-  </template>
-
-  <template data-tpl="service">
-    <p class="lede">Everything here works self-serve. When you'd rather hand it over, The NBRH team runs it for you.</p>
-    <div class="row-list">
-      <div class="li-row"><div class="li-main"><p class="li-name">Content, done for you</p><p class="li-note">£50/mo</p></div><button class="btn ghost">Add</button></div>
-      <div class="li-row"><div class="li-main"><p class="li-name">Outreach sprint</p><p class="li-note">£150 one-off</p></div><button class="btn ghost">Add</button></div>
-      <div class="li-row"><div class="li-main"><p class="li-name">Full Club House service</p><p class="li-note">from £250/mo</p></div><button class="btn ghost">Add</button></div>
-    </div>
-    <button class="btn primary">Book a call with The NBRH</button>
-  </template>
-
-  <template data-tpl="soon">
-    <p class="lede">This module is on the roadmap. It joins your grid the day it ships. No redesign, no migration, no relearning the layout.</p>
-    <p class="lede">You'll get a nudge in your weekly digest when it goes live.</p>
-    <button class="btn ghost js-remove-tile">Remove from my grid</button>
-  </template>
-
-  <template data-tpl="add">
-    <p class="lede">Coming to Club House OS. Add one now and it holds a place in your grid until launch.</p>
-    <div class="row-list">
-      <div class="li-row"><div class="li-main"><p class="li-name">Grant Finder</p><p class="li-note">Matched funding opportunities for your postcode</p></div><button class="btn ghost js-add-mod" data-name="Grant Finder" data-desc="Matched funding for your postcode">Add</button></div>
-      <div class="li-row"><div class="li-main"><p class="li-name">Volunteer Rota</p><p class="li-note">Fill matchday roles without the group-chat chaos</p></div><button class="btn ghost js-add-mod" data-name="Volunteer Rota" data-desc="Matchday roles, sorted">Add</button></div>
-      <div class="li-row"><div class="li-main"><p class="li-name">Sponsor CRM</p><p class="li-note">Track every brand conversation in one place</p></div><button class="btn ghost js-add-mod" data-name="Sponsor CRM" data-desc="Every brand conversation, tracked">Add</button></div>
-    </div>
-  </template>
-
-</section>
-
-<!-- ============================================================
-     CONCEPT D · THE GUIDED DECK (A + B combined)
-     Built at runtime by cloning Concept A's deck, then inserting
-     the assistant bar. Keeps the two decks perfectly in sync.
-============================================================ -->
-<section id="view-d" class="view" aria-label="Concept D: The Guided Deck"></section>
+<!-- ============ MOBILE TAB BAR ============ -->
+<nav class="tabbar" aria-label="Quick navigation">
+  <div class="tabbar-inner">
+    <button class="tab js-tab on" data-target="overview" aria-current="page">
+      <svg class="i"><use href="#i-home"/></svg>Overview
+    </button>
+    <button class="tab js-tab" data-target="players">
+      <svg class="i"><use href="#i-users"/></svg>Players
+    </button>
+    <button class="tab-ask js-tab-ask" aria-label="Ask Club House">
+      <svg class="i"><use href="#i-spark"/></svg>
+    </button>
+    <button class="tab js-tab" data-target="content">
+      <svg class="i"><use href="#i-pen"/></svg>Content
+    </button>
+    <button class="tab js-tab" data-target="analytics">
+      <svg class="i"><use href="#i-chart"/></svg>Analytics
+    </button>
+  </div>
+</nav>
 
 <script>
 (function(){
   const $  = (s, el=document) => el.querySelector(s);
   const $$ = (s, el=document) => Array.from(el.querySelectorAll(s));
-
-  /* ---------- View switching ---------- */
-  const VIEWS = { chooser: $('#view-chooser'), a: $('#view-a'), b: $('#view-b'), c: $('#view-c'), d: $('#view-d') };
-  function go(key){
-    Object.values(VIEWS).forEach(v => v.classList.remove('active'));
-    VIEWS[key].classList.add('active');
-    document.body.dataset.view = key;
-    $$('.switch button[data-go]').forEach(b => b.classList.toggle('on', b.dataset.go === key && key !== 'chooser'));
-    window.scrollTo({ top: 0, behavior: 'instant' in window ? 'instant' : 'auto' });
-    closePanel(); closeTools();
-  }
-  $$('[data-go]').forEach(b => b.addEventListener('click', () => go(b.dataset.go)));
-
-  /* ---------- Concept D: build by cloning Concept A ---------- */
-  (function buildD(){
-    const host = $('#view-d');
-    const deck = $('#view-a .deck').cloneNode(true);
-    const title = deck.querySelector('#a-title'); if (title) title.id = 'd-title';
-    host.appendChild(deck);
-
-    /* Assistant bar sits between the header and the stat bar */
-    const bar = document.createElement('div');
-    bar.innerHTML =
-      '<div class="askbar">' +
-        '<svg class="i ab-ic"><use href="#i-spark"/></svg>' +
-        '<input id="d-input" type="text" placeholder="Ask Club House anything: find players, write a post, check your reach\u2026" aria-label="Ask the Club House assistant">' +
-        '<button class="ab-send js-d-ask"><span>Ask</span><svg class="i sm"><use href="#i-send"/></svg></button>' +
-      '</div>' +
-      '<div class="ab-chips" aria-label="Suggested asks">' +
-        '<button data-ask="players">Find players near us</button>' +
-        '<button data-ask="content">Write a session post</button>' +
-        '<button data-ask="brands">Reach out to a local brand</button>' +
-        '<button data-ask="analytics">How did we do this week?</button>' +
-      '</div>' +
-      '<div class="ab-reply" id="d-reply" role="status">' +
-        '<svg class="i sm"><use href="#i-spark"/></svg><span id="d-reply-text"></span>' +
-        '<button class="ab-dismiss" aria-label="Dismiss"><svg class="i sm"><use href="#i-x"/></svg></button>' +
-      '</div>';
-    const head = deck.querySelector('.deck-head');
-    while (bar.firstChild) head.insertAdjacentElement('afterend', bar.lastChild);
-
-    /* Scoped module nav (same behaviour as A) */
-    function setModuleD(key){
-      $$('#view-d .module').forEach(m => m.classList.toggle('on', m.dataset.module === key));
-      $$('#view-d .navlink').forEach(n => n.classList.toggle('on', n.dataset.target === key));
-      $('#d-title').textContent = A_TITLES[key] || key;
-    }
-    $$('#view-d .navlink').forEach(n => n.addEventListener('click', () => { setModuleD(n.dataset.target); hideReply(); }));
-    $$('#view-d .js-jump').forEach(b => b.addEventListener('click', () => { setModuleD(b.dataset.target); hideReply(); }));
-
-    /* Assistant replies per destination */
-    const D_REPLIES = {
-      players: "On it. 38 players searched for football near your venue this week. Here's your shortlist.",
-      brands: "Here are your warm brand intros. Two are waiting on a reply from you.",
-      corporates: "These local companies fit corporate five-a-side. Pick one and I'll draft the outreach.",
-      content: "Opening the Content Studio. Tell it about your session and it'll draft three options.",
-      analytics: "Here's the week. Saturday's post did most of the heavy lifting.",
-      library: "The library's newest guide covers sponsorship basics. Good place to start.",
-      services: "If you'd rather it was done for you, here's the hands-on service menu.",
-      settings: "Settings, coming right up."
-    };
-    const reply = $('#d-reply'), replyText = $('#d-reply-text');
-    function showReply(msg){ replyText.textContent = msg; reply.classList.add('show'); }
-    function hideReply(){ reply.classList.remove('show'); }
-    reply.querySelector('.ab-dismiss').addEventListener('click', hideReply);
-
-    function routeD(key, msg){
-      setModuleD(key);
-      showReply(msg || D_REPLIES[key] || '');
-      const inp = $('#d-input'); if (inp) inp.value = '';
-    }
-
-    function askD(){
-      const q = ($('#d-input').value || '').toLowerCase().trim();
-      if (!q) return;
-      if (/(corporate|company|office|five.a.side|workplace)/.test(q)) return routeD('corporates');
-      if (/(player|invite|join|member|recruit|find people)/.test(q)) return routeD('players');
-      if (/(brand|sponsor|business|partner|shop|cafe|coffee)/.test(q)) return routeD('brands');
-      if (/(post|caption|content|write|reel|story|instagram|social)/.test(q)) return routeD('content');
-      if (/(reach|analytic|stat|week|number|performance|insight|how did we)/.test(q)) return routeD('analytics');
-      if (/(guide|resource|library|grant|fund|money|learn|how do i)/.test(q)) return routeD('library');
-      if (/(service|help|done for|hands.on|team|do it for)/.test(q)) return routeD('services');
-      if (/(setting|profile|account|plan|billing)/.test(q)) return routeD('settings');
-      routeD('overview', "Not sure I caught that. Here's everything in one place. Try \u201Cfind players\u201D or \u201Cwrite a post\u201D.");
-    }
-    $('#view-d .js-d-ask').addEventListener('click', askD);
-    $('#d-input').addEventListener('keydown', e => { if (e.key === 'Enter') askD(); });
-    $$('#view-d .ab-chips button').forEach(ch => ch.addEventListener('click', () => routeD(ch.dataset.ask)));
-  })();
 
   /* ---------- Greeting + date ---------- */
   const h = new Date().getHours();
@@ -1086,18 +533,34 @@ kbd{font-family:var(--sans);font-size:11px;border:1px solid var(--line-strong);b
   const dateStr = new Date().toLocaleDateString('en-GB', { weekday:'long', day:'numeric', month:'long' });
   $$('.js-date').forEach(el => el.textContent = dateStr);
 
-  /* ---------- Concept A: module nav ---------- */
-  const A_TITLES = { overview:'Overview', players:'Player outreach', brands:'Brand outreach', corporates:'Corporate outreach',
+  /* ---------- Module nav ---------- */
+  const TITLES = { overview:'Overview', players:'Player outreach', brands:'Brand outreach', corporates:'Corporate outreach',
     content:'Content Studio', library:'Resource Library', analytics:'Analytics', settings:'Settings', services:'Services' };
   function setModule(key){
-    $$('#view-a .module').forEach(m => m.classList.toggle('on', m.dataset.module === key));
-    $$('#view-a .navlink').forEach(n => n.classList.toggle('on', n.dataset.target === key));
-    $('#a-title').textContent = A_TITLES[key] || key;
+    $$('.module').forEach(m => m.classList.toggle('on', m.dataset.module === key));
+    $$('.navlink').forEach(n => n.classList.toggle('on', n.dataset.target === key));
+    $$('.js-tab').forEach(t => {
+      const active = t.dataset.target === key;
+      t.classList.toggle('on', active);
+      if (active) t.setAttribute('aria-current', 'page'); else t.removeAttribute('aria-current');
+    });
+    $('#d-title').textContent = TITLES[key] || key;
   }
-  $$('#view-a .navlink').forEach(n => n.addEventListener('click', () => setModule(n.dataset.target)));
-  $$('#view-a .js-jump').forEach(b => b.addEventListener('click', () => setModule(b.dataset.target)));
+  $$('.navlink').forEach(n => n.addEventListener('click', () => { setModule(n.dataset.target); hideReply(); }));
+  $$('.js-jump').forEach(b => b.addEventListener('click', () => { setModule(b.dataset.target); hideReply(); }));
+  $$('.js-tab').forEach(t => t.addEventListener('click', () => {
+    setModule(t.dataset.target); hideReply();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }));
 
-  /* ---------- Concept A: generate + toggles ---------- */
+  /* ---------- Tab bar: Ask shortcut ---------- */
+  $('.js-tab-ask').addEventListener('click', () => {
+    const input = $('#d-input');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    setTimeout(() => input.focus(), 350);
+  });
+
+  /* ---------- Generate + toggles ---------- */
   $$('.js-generate').forEach(b => b.addEventListener('click', () => {
     const res = b.parentElement.querySelector('.gen-results');
     if (res) res.classList.add('show');
@@ -1108,7 +571,7 @@ kbd{font-family:var(--sans);font-size:11px;border:1px solid var(--line-strong);b
     t.setAttribute('aria-checked', t.classList.contains('on') ? 'true' : 'false');
   }));
 
-  /* ---------- Copy buttons (event delegation, works in templates too) ---------- */
+  /* ---------- Copy buttons ---------- */
   document.addEventListener('click', e => {
     const btn = e.target.closest('.js-copy');
     if (!btn) return;
@@ -1130,158 +593,43 @@ kbd{font-family:var(--sans);font-size:11px;border:1px solid var(--line-strong);b
     document.body.removeChild(ta);
   }
 
-  /* ---------- Concept B: workspaces ---------- */
-  const B_META = {
-    players:{ title:'Find players near you', tag:'Player outreach' },
-    brands:{ title:'Reach out to a local brand', tag:'Brand outreach' },
-    post:{ title:'Write a session post', tag:'Content generator' },
-    reach:{ title:"This week's reach", tag:'Analytics' },
-    library:{ title:'Find a funding guide', tag:'Resource library' },
-    service:{ title:'Hands-on services', tag:'Service layer' }
+  /* ---------- Assistant bar ---------- */
+  const REPLIES = {
+    players: "On it. 38 players searched for football near your venue this week. Here's your shortlist.",
+    brands: "Here are your warm brand intros. Two are waiting on a reply from you.",
+    corporates: "These local companies fit corporate five-a-side. Pick one and I'll draft the outreach.",
+    content: "Opening the Content Studio. Tell it about your session and it'll draft three options.",
+    analytics: "Here's the week. Saturday's post did most of the heavy lifting.",
+    library: "The library's newest guide covers sponsorship basics. Good place to start.",
+    services: "If you'd rather it was done for you, here's the hands-on service menu.",
+    settings: "Settings, coming right up."
   };
-  const bHome = $('#b-home'), bWs = $('#b-ws');
-  function openWs(key){
-    const meta = B_META[key]; if (!meta) return;
-    $('#b-ws-title').textContent = meta.title;
-    $('#b-ws-tag').textContent = meta.tag;
-    $$('#b-ws .ws-pane').forEach(p => p.classList.toggle('on', p.dataset.ws === key));
-    bHome.hidden = true; bWs.hidden = false;
-    closeTools();
-  }
-  function closeWs(){
-    bWs.hidden = true; bHome.hidden = false;
-    const inp = $('#b-input'); if (inp) inp.value = '';
-  }
-  document.addEventListener('click', e => {
-    const chip = e.target.closest('.js-ws');
-    if (chip) openWs(chip.dataset.ws);
-  });
-  $('.js-ws-back').addEventListener('click', closeWs);
+  const reply = $('#d-reply'), replyText = $('#d-reply-text');
+  function showReply(msg){ replyText.textContent = msg; reply.classList.add('show'); }
+  function hideReply(){ reply.classList.remove('show'); }
+  reply.querySelector('.ab-dismiss').addEventListener('click', hideReply);
 
-  function routeAsk(){
-    const q = ($('#b-input').value || '').toLowerCase().trim();
-    if (!q) { openTools(); return; }
-    if (/(player|invite|join|member|recruit)/.test(q)) return openWs('players');
-    if (/(brand|sponsor|corporate|business|partner)/.test(q)) return openWs('brands');
-    if (/(post|caption|content|write|reel|story|instagram)/.test(q)) return openWs('post');
-    if (/(reach|analytic|stat|week|number|performance|insight)/.test(q)) return openWs('reach');
-    if (/(guide|resource|library|grant|fund|money|learn)/.test(q)) return openWs('library');
-    if (/(service|help|done for|hands.on|team)/.test(q)) return openWs('service');
-    openTools();
-  }
-  $('.js-ask').addEventListener('click', routeAsk);
-  $('#b-input').addEventListener('keydown', e => { if (e.key === 'Enter') routeAsk(); });
-
-  /* ---------- Concept B: all tools overlay ---------- */
-  const tools = $('#b-tools');
-  function openTools(){ tools.classList.add('show'); }
-  function closeTools(){ tools.classList.remove('show'); }
-  $('.js-tools-open').addEventListener('click', openTools);
-  $('.js-tools-close').addEventListener('click', closeTools);
-  tools.addEventListener('click', e => { if (e.target === tools) closeTools(); });
-
-  /* ---------- Concept C: drag and drop ---------- */
-  const grid = $('#c-grid');
-  const addTile = $('#c-add');
-  let dragged = null;
-
-  function wireTile(tile){
-    tile.addEventListener('dragstart', () => { dragged = tile; requestAnimationFrame(() => tile.classList.add('dragging')); });
-    tile.addEventListener('dragend', () => {
-      tile.classList.remove('dragging'); dragged = null;
-      grid.appendChild(addTile); /* keep Add tool last */
-    });
-    tile.addEventListener('dragover', e => {
-      e.preventDefault();
-      if (!dragged || dragged === tile || tile === addTile) return;
-      const rect = tile.getBoundingClientRect();
-      const after = (e.clientX - rect.left) / rect.width > .5;
-      grid.insertBefore(dragged, after ? tile.nextSibling : tile);
-    });
-    tile.addEventListener('click', e => {
-      if (e.target.closest('.js-size') || e.target.closest('.grab')) return;
-      openPanel(tile.dataset.key, tile);
-    });
-    tile.addEventListener('keydown', e => {
-      if ((e.key === 'Enter' || e.key === ' ') && e.target === tile){ e.preventDefault(); openPanel(tile.dataset.key, tile); }
-    });
-    const sizer = tile.querySelector('.js-size');
-    if (sizer) sizer.addEventListener('click', e => { e.stopPropagation(); tile.classList.toggle('wide'); });
-  }
-  $$('#c-grid .tile[draggable]').forEach(wireTile);
-  grid.addEventListener('dragover', e => e.preventDefault());
-  grid.addEventListener('drop', e => e.preventDefault());
-
-  /* ---------- Concept C: slide-over ---------- */
-  const panel = $('#c-panel'), scrim = $('#c-scrim'), panelBody = $('#c-panel-body'), panelTitle = $('#c-panel-title');
-  const C_TITLES = { players:'Player Outreach', brands:'Brand & Corporate', content:'Content Generator',
-    library:'Resource Library', analytics:'Analytics Snapshot', service:'Hands-on Services',
-    soon:'Coming soon', add:'Add a tool' };
-  let currentTile = null;
-
-  function openPanel(key, tileEl){
-    const tpl = document.querySelector('template[data-tpl="' + key + '"]');
-    if (!tpl) return;
-    currentTile = tileEl || null;
-    panelTitle.textContent = (tileEl && key === 'soon' && tileEl.dataset.name) ? tileEl.dataset.name : (C_TITLES[key] || 'Tool');
-    panelBody.innerHTML = '';
-    panelBody.appendChild(tpl.content.cloneNode(true));
-    panel.classList.add('open'); scrim.classList.add('show');
-  }
-  function closePanel(){ panel.classList.remove('open'); scrim.classList.remove('show'); }
-  $('.js-panel-close').addEventListener('click', closePanel);
-  scrim.addEventListener('click', closePanel);
-  addTile.addEventListener('click', () => openPanel('add'));
-
-  /* Add-a-module + remove, via delegation inside panel */
-  panelBody.addEventListener('click', e => {
-    const add = e.target.closest('.js-add-mod');
-    if (add){
-      createModuleTile(add.dataset.name, add.dataset.desc);
-      closePanel();
-      return;
-    }
-    const rm = e.target.closest('.js-remove-tile');
-    if (rm && currentTile){
-      currentTile.remove(); currentTile = null; closePanel();
-    }
-  });
-
-  function createModuleTile(name, desc){
-    const tile = document.createElement('article');
-    tile.className = 'tile new';
-    tile.setAttribute('draggable', 'true');
-    tile.setAttribute('tabindex', '0');
-    tile.setAttribute('role', 'button');
-    tile.dataset.key = 'soon';
-    tile.dataset.name = name;
-    tile.innerHTML =
-      '<div class="tile-top">' +
-        '<span class="tile-ic"><svg class="i"><use href="#i-spark"/></svg></span><h3>' + name + '</h3>' +
-        '<span class="tile-ctl"><button class="ctl js-size" aria-label="Toggle tile width"><svg class="i sm"><use href="#i-expand"/></svg></button><span class="ctl grab" title="Drag to move"><svg class="i sm"><use href="#i-drag"/></svg></span></span>' +
-      '</div>' +
-      '<div class="tile-mid"><p class="tile-stat" style="font-size:19px;line-height:1.3">Coming soon</p><p class="tile-sub">' + desc + '</p></div>' +
-      '<span class="link-act">Preview <svg class="i sm"><use href="#i-ar"/></svg></span>';
-    grid.insertBefore(tile, addTile);
-    wireTile(tile);
+  function route(key, msg){
+    setModule(key);
+    showReply(msg || REPLIES[key] || '');
+    const inp = $('#d-input'); if (inp) inp.value = '';
   }
 
-  /* ---------- Global keyboard ---------- */
-  document.addEventListener('keydown', e => {
-    const typing = /^(INPUT|TEXTAREA)$/.test(e.target.tagName);
-    if (e.key === 'Escape'){
-      if (panel.classList.contains('open')) return closePanel();
-      if (tools.classList.contains('show')) return closeTools();
-      if (!bWs.hidden && document.body.dataset.view === 'b') return closeWs();
-      if (document.body.dataset.view !== 'chooser') return go('chooser');
-    }
-    if (typing) return;
-    if (e.key === '1') go('a');
-    if (e.key === '2') go('b');
-    if (e.key === '3') go('c');
-    if (e.key === '4') go('d');
-    if (e.key === '0') go('chooser');
-  });
+  function ask(){
+    const q = ($('#d-input').value || '').toLowerCase().trim();
+    if (!q) return;
+    if (/(corporate|company|office|five.a.side|workplace)/.test(q)) return route('corporates');
+    if (/(player|invite|join|member|recruit|find people)/.test(q)) return route('players');
+    if (/(brand|sponsor|business|partner|shop|cafe|coffee)/.test(q)) return route('brands');
+    if (/(post|caption|content|write|reel|story|instagram|social)/.test(q)) return route('content');
+    if (/(reach|analytic|stat|week|number|performance|insight|how did we)/.test(q)) return route('analytics');
+    if (/(guide|resource|library|grant|fund|money|learn|how do i)/.test(q)) return route('library');
+    if (/(service|help|done for|hands.on|team|do it for)/.test(q)) return route('services');
+    if (/(setting|profile|account|plan|billing)/.test(q)) return route('settings');
+    route('overview', "Not sure I caught that. Here's everything in one place. Try \u201Cfind players\u201D or \u201Cwrite a post\u201D.");
+  }
+  $('.js-d-ask').addEventListener('click', ask);
+  $('#d-input').addEventListener('keydown', e => { if (e.key === 'Enter') ask(); });
 })();
 </script>
 </body>
