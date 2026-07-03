@@ -304,6 +304,32 @@ kbd{font-family:var(--sans);font-size:11px;border:1px solid var(--line-strong);b
 @media(prefers-reduced-motion:reduce){
   *,*::before,*::after{animation:none!important;transition:none!important}
 }
+/* ---------- Concept D: assistant bar ---------- */
+.askbar{position:relative;margin-bottom:14px}
+.askbar .ab-ic{position:absolute;left:18px;top:50%;transform:translateY(-50%);color:var(--pink);pointer-events:none}
+.askbar input{width:100%;height:52px;border-radius:14px;background:var(--sunken);border:1px solid var(--line-strong);
+  color:var(--text);font:400 15px/1 var(--sans);padding:0 108px 0 48px;transition:border-color .25s var(--ease),box-shadow .25s var(--ease)}
+.askbar input::placeholder{color:var(--faint)}
+.askbar input:focus{outline:none;border-color:var(--pink);box-shadow:0 0 0 4px var(--pink-soft)}
+.askbar .ab-send{position:absolute;right:6px;top:6px;height:40px;padding:0 16px;border-radius:10px;background:var(--pink);color:#fff;
+  border:0;font:500 13.5px/1 var(--sans);display:flex;align-items:center;gap:7px;cursor:pointer;transition:background .2s var(--ease),transform .2s var(--ease)}
+.askbar .ab-send:hover{background:#ff3f85;transform:scale(1.03)}
+.askbar .ab-send:focus-visible{outline:2px solid var(--pink);outline-offset:2px}
+.ab-chips{display:flex;flex-wrap:wrap;gap:8px;margin:-4px 0 16px}
+.ab-chips button{border:1px solid var(--line);background:transparent;color:var(--dim);border-radius:999px;padding:7px 13px;
+  font:400 12.5px/1 var(--sans);cursor:pointer;transition:border-color .2s var(--ease),color .2s var(--ease)}
+.ab-chips button:hover{border-color:var(--pink-line);color:var(--text)}
+.ab-chips button:focus-visible{outline:2px solid var(--pink);outline-offset:2px}
+.ab-reply{display:none;align-items:flex-start;gap:10px;background:var(--pink-soft);border:1px solid var(--pink-line);
+  border-radius:12px;padding:12px 14px;margin:0 0 16px;color:var(--text);font-size:13.5px;line-height:1.5}
+.ab-reply.show{display:flex;animation:reply-in .35s var(--ease)}
+.ab-reply .i{color:var(--pink);flex:none;margin-top:1px}
+.ab-reply .ab-dismiss{margin-left:auto;flex:none;border:0;background:transparent;color:var(--dim);cursor:pointer;padding:2px;border-radius:6px}
+.ab-reply .ab-dismiss:hover{color:var(--text)}
+.ab-reply .ab-dismiss:focus-visible{outline:2px solid var(--pink);outline-offset:2px}
+@keyframes reply-in{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion: reduce){ .ab-reply.show{animation:none} }
+@media (max-width: 700px){ .askbar .ab-send span{display:none} .askbar .ab-send{padding:0 12px} .askbar input{padding-right:64px} }
 </style>
 </head>
 <body data-view="chooser">
@@ -337,6 +363,7 @@ kbd{font-family:var(--sans);font-size:11px;border:1px solid var(--line-strong);b
   <button data-go="a"><span class="sw-letter">A</span><span class="sw-name">Command Deck</span></button>
   <button data-go="b"><span class="sw-letter">B</span><span class="sw-name">Assistant</span></button>
   <button data-go="c"><span class="sw-letter">C</span><span class="sw-name">Bento</span></button>
+  <button data-go="d"><span class="sw-letter">D</span><span class="sw-name">Guided Deck</span></button>
 </nav>
 
 <!-- ============================================================
@@ -347,7 +374,7 @@ kbd{font-family:var(--sans);font-size:11px;border:1px solid var(--line-strong);b
     <header class="chooser-head">
       <p class="eyebrow">The NBRH · Product concepts</p>
       <h1>Club House OS</h1>
-      <p>Three interface directions for the self-serve platform. Same toolkit underneath: outreach, content, resources, analytics. Three different mental models on top. Explore each one, then pick a lane.</p>
+      <p>Four interface directions for the self-serve platform. Same toolkit underneath: outreach, content, resources, analytics. Different mental models on top. Explore each one, then pick a lane.</p>
     </header>
 
     <button class="concept-row" data-go="a">
@@ -380,12 +407,22 @@ kbd{font-family:var(--sans);font-size:11px;border:1px solid var(--line-strong);b
       <svg class="i c-arrow"><use href="#i-ar"/></svg>
     </button>
 
+    <button class="concept-row" data-go="d">
+      <span class="c-letter" aria-hidden="true">D</span>
+      <span class="c-body">
+        <h2>The Guided Deck</h2>
+        <p>A and B combined. The full Command Deck, with an assistant bar on top: click your way around, or just ask.</p>
+        <span class="c-fit"><b>Best for:</b> mixed-confidence admin teams · <b>Grows by:</b> sidebar items + assistant skills</span>
+      </span>
+      <svg class="i c-arrow"><use href="#i-ar"/></svg>
+    </button>
+
     <footer class="chooser-foot">
       <span><span class="dot" style="background:#1B1B1B;border:1px solid var(--line-strong)"></span>#1B1B1B</span>
       <span><span class="dot" style="background:#FF1B6E"></span>#FF1B6E</span>
       <span style="font-family:var(--serif)">Young Serif</span>
       <span>DM Sans</span>
-      <span style="margin-left:auto"><kbd>1</kbd> <kbd>2</kbd> <kbd>3</kbd> to jump between concepts · <kbd>Esc</kbd> returns here</span>
+      <span style="margin-left:auto"><kbd>1</kbd> <kbd>2</kbd> <kbd>3</kbd> <kbd>4</kbd> to jump between concepts · <kbd>Esc</kbd> returns here</span>
     </footer>
   </div>
 </main>
@@ -941,13 +978,20 @@ kbd{font-family:var(--sans);font-size:11px;border:1px solid var(--line-strong);b
 
 </section>
 
+<!-- ============================================================
+     CONCEPT D · THE GUIDED DECK (A + B combined)
+     Built at runtime by cloning Concept A's deck, then inserting
+     the assistant bar. Keeps the two decks perfectly in sync.
+============================================================ -->
+<section id="view-d" class="view" aria-label="Concept D: The Guided Deck"></section>
+
 <script>
 (function(){
   const $  = (s, el=document) => el.querySelector(s);
   const $$ = (s, el=document) => Array.from(el.querySelectorAll(s));
 
   /* ---------- View switching ---------- */
-  const VIEWS = { chooser: $('#view-chooser'), a: $('#view-a'), b: $('#view-b'), c: $('#view-c') };
+  const VIEWS = { chooser: $('#view-chooser'), a: $('#view-a'), b: $('#view-b'), c: $('#view-c'), d: $('#view-d') };
   function go(key){
     Object.values(VIEWS).forEach(v => v.classList.remove('active'));
     VIEWS[key].classList.add('active');
@@ -957,6 +1001,83 @@ kbd{font-family:var(--sans);font-size:11px;border:1px solid var(--line-strong);b
     closePanel(); closeTools();
   }
   $$('[data-go]').forEach(b => b.addEventListener('click', () => go(b.dataset.go)));
+
+  /* ---------- Concept D: build by cloning Concept A ---------- */
+  (function buildD(){
+    const host = $('#view-d');
+    const deck = $('#view-a .deck').cloneNode(true);
+    const title = deck.querySelector('#a-title'); if (title) title.id = 'd-title';
+    host.appendChild(deck);
+
+    /* Assistant bar sits between the header and the stat bar */
+    const bar = document.createElement('div');
+    bar.innerHTML =
+      '<div class="askbar">' +
+        '<svg class="i ab-ic"><use href="#i-spark"/></svg>' +
+        '<input id="d-input" type="text" placeholder="Ask Club House anything: find players, write a post, check your reach\u2026" aria-label="Ask the Club House assistant">' +
+        '<button class="ab-send js-d-ask"><span>Ask</span><svg class="i sm"><use href="#i-send"/></svg></button>' +
+      '</div>' +
+      '<div class="ab-chips" aria-label="Suggested asks">' +
+        '<button data-ask="players">Find players near us</button>' +
+        '<button data-ask="content">Write a session post</button>' +
+        '<button data-ask="brands">Reach out to a local brand</button>' +
+        '<button data-ask="analytics">How did we do this week?</button>' +
+      '</div>' +
+      '<div class="ab-reply" id="d-reply" role="status">' +
+        '<svg class="i sm"><use href="#i-spark"/></svg><span id="d-reply-text"></span>' +
+        '<button class="ab-dismiss" aria-label="Dismiss"><svg class="i sm"><use href="#i-x"/></svg></button>' +
+      '</div>';
+    const head = deck.querySelector('.deck-head');
+    while (bar.firstChild) head.insertAdjacentElement('afterend', bar.lastChild);
+
+    /* Scoped module nav (same behaviour as A) */
+    function setModuleD(key){
+      $$('#view-d .module').forEach(m => m.classList.toggle('on', m.dataset.module === key));
+      $$('#view-d .navlink').forEach(n => n.classList.toggle('on', n.dataset.target === key));
+      $('#d-title').textContent = A_TITLES[key] || key;
+    }
+    $$('#view-d .navlink').forEach(n => n.addEventListener('click', () => { setModuleD(n.dataset.target); hideReply(); }));
+    $$('#view-d .js-jump').forEach(b => b.addEventListener('click', () => { setModuleD(b.dataset.target); hideReply(); }));
+
+    /* Assistant replies per destination */
+    const D_REPLIES = {
+      players: "On it. 38 players searched for football near your venue this week. Here's your shortlist.",
+      brands: "Here are your warm brand intros. Two are waiting on a reply from you.",
+      corporates: "These local companies fit corporate five-a-side. Pick one and I'll draft the outreach.",
+      content: "Opening the Content Studio. Tell it about your session and it'll draft three options.",
+      analytics: "Here's the week. Saturday's post did most of the heavy lifting.",
+      library: "The library's newest guide covers sponsorship basics. Good place to start.",
+      services: "If you'd rather it was done for you, here's the hands-on service menu.",
+      settings: "Settings, coming right up."
+    };
+    const reply = $('#d-reply'), replyText = $('#d-reply-text');
+    function showReply(msg){ replyText.textContent = msg; reply.classList.add('show'); }
+    function hideReply(){ reply.classList.remove('show'); }
+    reply.querySelector('.ab-dismiss').addEventListener('click', hideReply);
+
+    function routeD(key, msg){
+      setModuleD(key);
+      showReply(msg || D_REPLIES[key] || '');
+      const inp = $('#d-input'); if (inp) inp.value = '';
+    }
+
+    function askD(){
+      const q = ($('#d-input').value || '').toLowerCase().trim();
+      if (!q) return;
+      if (/(corporate|company|office|five.a.side|workplace)/.test(q)) return routeD('corporates');
+      if (/(player|invite|join|member|recruit|find people)/.test(q)) return routeD('players');
+      if (/(brand|sponsor|business|partner|shop|cafe|coffee)/.test(q)) return routeD('brands');
+      if (/(post|caption|content|write|reel|story|instagram|social)/.test(q)) return routeD('content');
+      if (/(reach|analytic|stat|week|number|performance|insight|how did we)/.test(q)) return routeD('analytics');
+      if (/(guide|resource|library|grant|fund|money|learn|how do i)/.test(q)) return routeD('library');
+      if (/(service|help|done for|hands.on|team|do it for)/.test(q)) return routeD('services');
+      if (/(setting|profile|account|plan|billing)/.test(q)) return routeD('settings');
+      routeD('overview', "Not sure I caught that. Here's everything in one place. Try \u201Cfind players\u201D or \u201Cwrite a post\u201D.");
+    }
+    $('#view-d .js-d-ask').addEventListener('click', askD);
+    $('#d-input').addEventListener('keydown', e => { if (e.key === 'Enter') askD(); });
+    $$('#view-d .ab-chips button').forEach(ch => ch.addEventListener('click', () => routeD(ch.dataset.ask)));
+  })();
 
   /* ---------- Greeting + date ---------- */
   const h = new Date().getHours();
@@ -1158,6 +1279,7 @@ kbd{font-family:var(--sans);font-size:11px;border:1px solid var(--line-strong);b
     if (e.key === '1') go('a');
     if (e.key === '2') go('b');
     if (e.key === '3') go('c');
+    if (e.key === '4') go('d');
     if (e.key === '0') go('chooser');
   });
 })();
