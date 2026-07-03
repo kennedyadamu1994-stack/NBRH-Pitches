@@ -247,6 +247,8 @@ input,textarea{font:inherit;color:inherit}
 @media(max-width:600px){
   .tabbar{display:block}
   .deck-main{padding-bottom:96px}
+  .ov-top{display:none}
+  .ov-top.on{display:block}
 }
 </style>
 </head>
@@ -303,22 +305,24 @@ input,textarea{font:inherit;color:inherit}
       <p class="deck-date js-date"></p>
     </header>
 
-    <!-- ASSISTANT BAR -->
-    <div class="askbar">
-      <svg class="i ab-ic"><use href="#i-spark"/></svg>
-      <input id="d-input" type="text" placeholder="Ask Club House anything: find players, write a post, check your reach…" aria-label="Ask the Club House assistant">
-      <button class="ab-send js-d-ask"><span>Ask</span><svg class="i sm"><use href="#i-send"/></svg></button>
-    </div>
-    <div class="ab-reply" id="d-reply" role="status">
-      <svg class="i sm"><use href="#i-spark"/></svg><span id="d-reply-text"></span>
-      <button class="ab-dismiss" aria-label="Dismiss"><svg class="i sm"><use href="#i-x"/></svg></button>
-    </div>
+    <!-- OVERVIEW-ONLY ON MOBILE: assistant + stats. Always visible on desktop. -->
+    <div class="ov-top on" id="ov-top">
+      <div class="askbar">
+        <svg class="i ab-ic"><use href="#i-spark"/></svg>
+        <input id="d-input" type="text" placeholder="Ask Club House anything: find players, write a post, check your reach…" aria-label="Ask the Club House assistant">
+        <button class="ab-send js-d-ask"><span>Ask</span><svg class="i sm"><use href="#i-send"/></svg></button>
+      </div>
+      <div class="ab-reply" id="d-reply" role="status">
+        <svg class="i sm"><use href="#i-spark"/></svg><span id="d-reply-text"></span>
+        <button class="ab-dismiss" aria-label="Dismiss"><svg class="i sm"><use href="#i-x"/></svg></button>
+      </div>
 
-    <div class="statbar">
-      <div class="stat"><p class="sl">Players reached</p><p class="sv">1,284</p><p class="sd">Up 12% on last week</p></div>
-      <div class="stat"><p class="sl">Content published</p><p class="sv">23</p><p class="sd">This season</p></div>
-      <div class="stat"><p class="sl">Open outreach threads</p><p class="sv">7</p><p class="sd">2 waiting on you</p></div>
-      <div class="stat"><p class="sl">Your plan</p><p class="sv" style="font-size:15px;padding-top:5px"><span class="badge">Club House Pro</span></p></div>
+      <div class="statbar">
+        <div class="stat"><p class="sl">Players reached</p><p class="sv">1,284</p><p class="sd">Up 12% on last week</p></div>
+        <div class="stat"><p class="sl">Content published</p><p class="sv">23</p><p class="sd">This season</p></div>
+        <div class="stat"><p class="sl">Open outreach threads</p><p class="sv">7</p><p class="sd">2 waiting on you</p></div>
+        <div class="stat"><p class="sl">Your plan</p><p class="sv" style="font-size:15px;padding-top:5px"><span class="badge">Club House Pro</span></p></div>
+      </div>
     </div>
 
     <div class="deck-body">
@@ -536,6 +540,7 @@ input,textarea{font:inherit;color:inherit}
   /* ---------- Module nav ---------- */
   const TITLES = { overview:'Overview', players:'Player outreach', brands:'Brand outreach', corporates:'Corporate outreach',
     content:'Content Studio', library:'Resource Library', analytics:'Analytics', settings:'Settings', services:'Services' };
+  const ovTop = $('#ov-top');
   function setModule(key){
     $$('.module').forEach(m => m.classList.toggle('on', m.dataset.module === key));
     $$('.navlink').forEach(n => n.classList.toggle('on', n.dataset.target === key));
@@ -545,6 +550,7 @@ input,textarea{font:inherit;color:inherit}
       if (active) t.setAttribute('aria-current', 'page'); else t.removeAttribute('aria-current');
     });
     $('#d-title').textContent = TITLES[key] || key;
+    ovTop.classList.toggle('on', key === 'overview');
   }
   $$('.navlink').forEach(n => n.addEventListener('click', () => { setModule(n.dataset.target); hideReply(); }));
   $$('.js-jump').forEach(b => b.addEventListener('click', () => { setModule(b.dataset.target); hideReply(); }));
@@ -555,6 +561,7 @@ input,textarea{font:inherit;color:inherit}
 
   /* ---------- Tab bar: Ask shortcut ---------- */
   $('.js-tab-ask').addEventListener('click', () => {
+    ovTop.classList.add('on'); /* the ask input lives here, so reveal it even off-overview */
     const input = $('#d-input');
     window.scrollTo({ top: 0, behavior: 'smooth' });
     setTimeout(() => input.focus(), 350);
@@ -605,8 +612,13 @@ input,textarea{font:inherit;color:inherit}
     settings: "Settings, coming right up."
   };
   const reply = $('#d-reply'), replyText = $('#d-reply-text');
-  function showReply(msg){ replyText.textContent = msg; reply.classList.add('show'); }
-  function hideReply(){ reply.classList.remove('show'); }
+  function showReply(msg){ replyText.textContent = msg; reply.classList.add('show'); ovTop.classList.add('on'); }
+  function hideReply(){
+    reply.classList.remove('show');
+    /* off overview on mobile, the assistant block should tuck away again once its reply is dismissed */
+    const activeModule = $('.module.on');
+    ovTop.classList.toggle('on', !activeModule || activeModule.dataset.module === 'overview');
+  }
   reply.querySelector('.ab-dismiss').addEventListener('click', hideReply);
 
   function route(key, msg){
